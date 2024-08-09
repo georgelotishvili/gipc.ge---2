@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build",
+			"detail": "vite build"
+		},
+
+		{
+			"label": "Start PHP Server",
+			"type": "shell",
+			"command": "php",
+			"args": [
+			  "artisan",
+			  "serve"
+			],
+			"group": {
+			  "kind": "build",
+			  "isDefault": true
+			}
+		},
+
+		{
+			"label": "Run NPM Dev",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+			  "run",
+			  "dev"
+			],
+			"group": {
+			  "kind": "build",
+			  "isDefault": true
+			}
+		}
+	]
+}
