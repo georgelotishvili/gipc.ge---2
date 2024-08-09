@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('speciality_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Speciality::class)->constrained();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Speciality::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
         });
 
     }

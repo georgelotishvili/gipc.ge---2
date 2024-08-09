@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Speciality::class);
             $table->text('text');
-            $table->string('weight');
+            $table->integer('weight');
             $table->timestamps();
         });
     }
