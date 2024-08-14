@@ -5,16 +5,19 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class SpecialitySeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('specialities')->insert([
-            'name' => 'არქიტექტორი',
+        DB::table('users')->insert([
+            'name' => 'Giorgi',
+            'email' => 'giorgibekurashvili@gmail.com',
+            'password' => Hash::make('archfix123'),
         ]);
     }
 }

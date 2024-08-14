@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Speciality;
+use App\Models\Group;
+use App\Models\Question;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,12 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('group_question', function (Blueprint $table) {
             $table->id();
-            // $table->foreignIdFor(Speciality::class);
-            $table->integer('q_id');
-            $table->text('text');
-            $table->integer('weight');
+            $table->foreignIdFor(Question::class);
+            $table->foreignIdFor(Group::class);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('group_question');
     }
 };
