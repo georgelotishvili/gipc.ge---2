@@ -25,6 +25,21 @@
 		},
 
 		{
+			"label": "Migrate and Seed",
+			"type": "shell",
+			"command": "php",
+			"args": [
+			  "artisan",
+			  "migrate:fresh",
+			  "--seed"
+			],
+			"group": {
+			  "kind": "build",
+			  "isDefault": true
+			}
+		},
+
+		{
 			"label": "Run NPM Dev",
 			"type": "shell",
 			"command": "npm",

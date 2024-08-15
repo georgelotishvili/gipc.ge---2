@@ -14,8 +14,10 @@ class StaticSeeder extends Seeder
      */
     public function run(): void
     {
-        Artisan::call('db:wipe --database=mysql2');
-        $path = database_path('/archfix_boq_static.sql');
+        Artisan::call('db:wipe', [
+            '--database' => 'mysql2',
+        ]);
+        $path = database_path('/abecert_static.sql');
 
         $contextOptions = [
             'http' => [

@@ -17,7 +17,7 @@ class AnswerSeeder extends Seeder
     {
         $this->seedAnswers('255', '255');
         $this->seedAnswers('256', '256');
-        $this->seedAnswers('261', '261');
+        // $this->seedAnswers('261', '261');
         $this->seedAnswers('garemo', 'გარემო მიკროკლიმატი მდგრადობა');
         $this->seedAnswers('kanoni', 'კანონი არქიტექტურული საქმიანობის შესახებ');
         $this->seedAnswers('kodexi', 'კოდექსი');
@@ -30,16 +30,24 @@ class AnswerSeeder extends Seeder
         $answers = Helper::getBase('table_'.$table_name);
         foreach($answers as $answer)
         {
+            if($answer->text == '') continue;
+            
             if($answer->type == 'ANSWER')
             {
                 $text = preg_replace('/^[\d\·]\.\s*|^[\·]\s*[ა-ჰ]\)\s*/u', '', $answer->text);
+                $group = Group::where('name', $group_name)->first();
+                // $question = Question::wherePivot('group_id', $group->id)->where('q_id', $answer->q_id)->first();
 
-                $question = Question::where('name', $group_name)->where('q_id', $answer->q_id)->first();
+                $question = Question::whereHas('groups', function ($query) use ($group) {
+                    $query->where('group_id', $group->id);
+                })->where('q_id', $answer->q_id)->first();
     
+                if($question == null) continue;
+
                 $question->answers()->create([
                     'text' => $text,
                     'q_id' => $answer->q_id,
-                    'is_true' => $answer->if_true,
+                    'is_true' => $answer->if_true == '' ? false : true,
                 ]);
             }
         }

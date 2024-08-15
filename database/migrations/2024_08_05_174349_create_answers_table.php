@@ -15,8 +15,9 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Question::class)->constrained();
-            $table->boolean('is_true')->default(false);
-            $table->text('text');
+            $table->boolean('is_true')->default(false)->nullable();
+            $table->integer('q_id')->nullable();
+            $table->text('text')->nullable();
             $table->timestamps();
         });
     }

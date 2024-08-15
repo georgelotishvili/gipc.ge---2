@@ -17,7 +17,7 @@ class QuestionSeeder extends Seeder
     {
         $this->seedQuestions('255', '255');
         $this->seedQuestions('256', '256');
-        $this->seedQuestions('261', '261');
+        // $this->seedQuestions('261', '261');
         $this->seedQuestions('garemo', 'გარემო მიკროკლიმატი მდგრადობა');
         $this->seedQuestions('kanoni', 'კანონი არქიტექტურული საქმიანობის შესახებ');
         $this->seedQuestions('kodexi', 'კოდექსი');
@@ -30,6 +30,10 @@ class QuestionSeeder extends Seeder
         $questions = Helper::getBase('table_'.$table_name);
         foreach($questions as $question)
         {
+            if($question->text == '')
+            {
+                continue;
+            }
             if($question->type == 'QUESTION')
             {
                 $text = preg_replace('/^[\d\·]\.\s*|^[\·]\s*[ა-ჰ]\)\s*/u', '', $question->text);
