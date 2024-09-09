@@ -37,6 +37,10 @@ class QuestionSeeder extends Seeder
             if($question->type == 'QUESTION')
             {
                 $text = preg_replace('/^[\d\·]\.\s*|^[\·]\s*[ა-ჰ]\)\s*/u', '', $question->text);
+                if (strpos($text, 'კითხვა: ') !== false)
+                {
+                    $text = explode('კითხვა: ', $text)[1];
+                }
 
                 $group = Group::where('name', $group_name)->first();
     
