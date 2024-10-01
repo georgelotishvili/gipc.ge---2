@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Exam;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('index');
@@ -15,6 +16,7 @@ Route::get('/questions', function () {
 });
 
 Route::get('/exam', Exam::class)->name('exam');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -24,3 +26,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+//     ->name('logout');

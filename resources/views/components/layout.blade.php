@@ -117,14 +117,29 @@
                             </span>
                         </label>
                         <div class="hidden sm:flex">
-                            <a href="signin.html"
-                                class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
-                                შესვლა
-                            </a>
-                            <a href="signup.html"
-                                class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                რეგისტრაცია
-                            </a>
+                            @if (Route::has('login'))
+                                @auth
+                                    <a href="{{ route('profile.show') }}" class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
+                                        Profile
+                                    </a>
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                        <button type="submit"
+                                           class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
+                                            Log Out
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('login') }}" class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
+                                        შესვლა
+                                    </a>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
+                                            რეგისტრაცია
+                                        </a>
+                                    @endif
+                                @endauth
+                            @endif
                         </div>
                     </div>
                 </div>

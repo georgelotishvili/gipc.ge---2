@@ -117,11 +117,11 @@
                             </span>
                         </label>
                         <div class="hidden sm:flex">
-                            <a href="signin.html"
+                            <a href="{{ route('login') }}"
                                 class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
                                 შესვლა
                             </a>
-                            <a href="signup.html"
+                            <a href="{{ route('register') }}"
                                 class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
                                 რეგისტრაცია
                             </a>
