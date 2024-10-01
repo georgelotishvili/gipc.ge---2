@@ -25,7 +25,7 @@ class QuestionSeeder extends Seeder
         $this->seedQuestions('sert', 'სერტიფიცირების წესი');
     }
 
-    public function seedQuestions($table_name, $group_name)
+    public function seedQuestions($table_name, $group_title)
     {
         $questions = Helper::getBase('table_'.$table_name);
         foreach($questions as $question)
@@ -42,7 +42,7 @@ class QuestionSeeder extends Seeder
                     $text = explode('კითხვა: ', $text)[1];
                 }
 
-                $group = Group::where('name', $group_name)->first();
+                $group = Group::where('title', $group_title)->first();
     
                 $group->questions()->create([
                     'text' => $text,

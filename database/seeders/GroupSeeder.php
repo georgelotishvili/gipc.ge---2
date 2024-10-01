@@ -15,27 +15,35 @@ class GroupSeeder extends Seeder
     {
         DB::table('groups')->insert([
             'name' => '255',
+            'title' => '255',
         ]);
         DB::table('groups')->insert([
             'name' => '256',
+            'title' => '256',
         ]);
         DB::table('groups')->insert([
             'name' => '261',
+            'title' => '261',
         ]);
         DB::table('groups')->insert([
-            'name' => 'გარემო მიკროკლიმატი მდგრადობა',
+            'name' => 'garemo',
+            'title' => 'გარემო მიკროკლიმატი მდგრადობა',
         ]);
         DB::table('groups')->insert([
-            'name' => 'კანონი არქიტექტურული საქმიანობის შესახებ',
+            'name' => 'kanoni',
+            'title' => 'კანონი არქიტექტურული საქმიანობის შესახებ',
         ]);
         DB::table('groups')->insert([
-            'name' => 'კოდექსი',
+            'name' => 'kodexi',
+            'title' => 'კოდექსი',
         ]);
         DB::table('groups')->insert([
-            'name' => 'კონსტრუქციები',
+            'name' => 'konstruqciebi',
+            'title' => 'კონსტრუქციები',
         ]);
         DB::table('groups')->insert([
-            'name' => 'სერტიფიცირების წესი',
+            'name' => 'sert',
+            'title' => 'სერტიფიცირების წესი',
         ]);
     }
 }

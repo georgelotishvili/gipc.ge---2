@@ -25,7 +25,7 @@ class AnswerSeeder extends Seeder
         $this->seedAnswers('sert', 'სერტიფიცირების წესი');
     }
 
-    public function seedAnswers($table_name, $group_name)
+    public function seedAnswers($table_name, $group_title)
     {
         $answers = Helper::getBase('table_'.$table_name);
         foreach($answers as $answer)
@@ -35,7 +35,7 @@ class AnswerSeeder extends Seeder
             if($answer->type == 'ANSWER')
             {
                 $text = preg_replace('/^[\d\·]\.\s*|^[\·]\s*[ა-ჰ]\)\s*/u', '', $answer->text);
-                $group = Group::where('name', $group_name)->first();
+                $group = Group::where('title', $group_title)->first();
                 // $question = Question::wherePivot('group_id', $group->id)->where('q_id', $answer->q_id)->first();
 
                 $question = Question::whereHas('groups', function ($query) use ($group) {

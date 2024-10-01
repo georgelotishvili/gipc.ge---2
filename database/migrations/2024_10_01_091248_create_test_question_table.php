@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Question;
+use App\Models\Test;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('test_question', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('title')->nullable();
+            $table->foreignIdFor(Test::class);
+            $table->foreignIdFor(Question::class);
+            $table->integer('answer')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('test_question');
     }
 };
