@@ -28,32 +28,34 @@ class Exam extends Component
         $this->initializeFirstQuestion();
     }
 
+    public function goToQuestion($questionId)
+    {
+        $this->question = Question::findOrFail($questionId);
+        $this->updateProgress();
+    }
+
     public function setActiveTest()
     {
-        $this->test = Test::where('active', true)->first();
-        if ($this->test) 
-        {
-            $this->validateTestActive($this->test);
-        }
-        else 
-        {
-            $this->test = Test::create([
-                'name' => 'Test',
-                'active' => false,
-                'duration' => 240,
-                'started_at' => now(),
-            ]);
+        // First deactivate any existing active tests
+        Test::where('active', true)->update(['active' => false]);
 
-            $this->test->questions()->attach(Group::where('name', '255')->first()->questions()->select('questions.id')->inRandomOrder()->limit(8)->pluck('questions.id'));
-            $this->test->questions()->attach(Group::where('name', '261')->first()->questions()->select('questions.id')->inRandomOrder()->limit(10)->pluck('questions.id'));
-            $this->test->questions()->attach(Group::where('name', 'sert')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
-            $this->test->questions()->attach(Group::where('name', 'konstruqciebi')->first()->questions()->select('questions.id')->inRandomOrder()->limit(3)->pluck('questions.id'));
-            $this->test->questions()->attach(Group::where('name', 'kanoni')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
-            $this->test->questions()->attach(Group::where('name', 'kodexi')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
-    
-            $this->test->active = true;
-            $this->test->save();
-        }
+        // Create a new test
+        $this->test = Test::create([
+            'name' => 'Test',
+            'active' => true,
+            'duration' => 240,
+            'started_at' => now(),
+        ]);
+
+        // Attach random questions from each group
+        $this->test->questions()->attach(Group::where('name', '255')->first()->questions()->select('questions.id')->inRandomOrder()->limit(8)->pluck('questions.id'));
+        $this->test->questions()->attach(Group::where('name', '261')->first()->questions()->select('questions.id')->inRandomOrder()->limit(10)->pluck('questions.id'));
+        $this->test->questions()->attach(Group::where('name', 'sert')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
+        $this->test->questions()->attach(Group::where('name', 'konstruqciebi')->first()->questions()->select('questions.id')->inRandomOrder()->limit(3)->pluck('questions.id'));
+        $this->test->questions()->attach(Group::where('name', 'kanoni')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
+        $this->test->questions()->attach(Group::where('name', 'kodexi')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
+
+        $this->test->save();
     }
 
     public function validateTestActive($test)
@@ -74,13 +76,18 @@ class Exam extends Component
 
     public function initializeFirstQuestion()
     {
-        if($this->current_question_index)
+        if($this->current_question_index) {
             $this->question = $this->test->questions()->where('questions.id', $this->current_question_index)->withPivot('answer')->first();
-        else
+        }
+        
+        if(!$this->question) {
             $this->question = $this->test->questions()->withPivot('answer')->first();
+        }
 
-        $this->current_question_index = $this->question->id;
-        $this->saveCurrentQuestionIndex();
+        if($this->question) {
+            $this->current_question_index = $this->question->id;
+            $this->saveCurrentQuestionIndex();
+        }
 
         $this->updateProgress();
     }

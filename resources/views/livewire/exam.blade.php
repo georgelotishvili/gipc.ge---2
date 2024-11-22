@@ -17,9 +17,9 @@
                                         class="w-full font-semibold py-3 px-6 mb-4 border border-gray-300 rounded-lg shadow-lg text-left transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white
                                         @if($testQuestion->where('test_id', $test->id)->where('question_id', $question->id)->first()->answer == $answer->id)
                                             @if($answer->is_true)
-                                                bg-emerald-500 text-white
+                                                bg-emerald-500 text-white hover:bg-emerald-600
                                             @else
-                                                bg-red-500 text-white
+                                                bg-red-500 text-white hover:bg-red-600
                                             @endif
                                         @endif">
                                         {{ $answer->text }}
@@ -31,25 +31,41 @@
                                     class="text-white bg-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                     <i class="fa-solid fa-chevron-left fa-lg"></i>
                                 </button>
-                                <div wire:poll.1s class="w-3/4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                    <div class="bg-primary h-2.5 rounded-full dark:bg-primary transition-all duration-300 ease-in-out" style="width: {{ $test->getCache('progress') }}%"></div>
+                                <div class="w-3/4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div x-data="{ width: 0 }" 
+                                         x-init="width = {{ $progress }}"
+                                         x-bind:style="`width: ${width}%`"
+                                         x-effect="width = {{ $progress }}"
+                                         class="bg-primary h-2.5 rounded-full dark:bg-primary transition-all duration-300 ease-in-out">
+                                    </div>
                                 </div>
-                                <button type="button" wire:click="nextQuestion"
-                                    class="text-white bg-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                    <i class="fa-solid fa-chevron-right fa-lg"></i>
-                                </button>
+                                    @if ($progress == 100)
+                                        <a href="{{ route('result') }}"
+                                            class="text-white bg-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                            <i class="fa-solid fa-chevron-right fa-lg"></i>
+                                        </a>
+                                    @else
+                                        <button type="button" wire:click="nextQuestion"
+                                            class="text-white bg-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                            <i class="fa-solid fa-chevron-right fa-lg"></i>
+                                        </button>
+                                    @endif
                             </div>
                             <span class="text-sm font-medium dark:text-white">პროგრესი: {{ number_format($progress, 0) }}%</span>
                             <div class="flex justify-center">
                                 @foreach($test->questions()->orderBy('id')->get() as $q)
-                                    <span class="w-3 h-3 mx-1 rounded-full 
-                                        @if($q->id == $question->id)
-                                            bg-primary
-                                        @elseif($testQuestion->where('test_id', $test->id)->where('question_id', $q->id)->first()->answer)
-                                            bg-orange-500
+                                    <span wire:click="goToQuestion({{ $q->id }})" id="{{ $q->id }}" class="w-3 h-3 mx-1 rounded-full cursor-pointer @if($q->id == $question->id)
+                                         bg-primary 
+                                    @elseif($testQuestion->where('test_id', $test->id)->where('question_id', $q->id)->first()?->answer)
+                                        @if($q->answers->find($testQuestion->where('test_id', $test->id)->where('question_id', $q->id)->first()?->answer)?->is_true)
+                                            bg-emerald-500
                                         @else
-                                            bg-gray-500
-                                        @endif"></span>
+                                            bg-red-500
+                                        @endif
+                                    @else
+                                        bg-gray-500
+                                    @endif">
+                                    </span>
                                 @endforeach
                             </div>
                         </div>
