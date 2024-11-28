@@ -45,5 +45,13 @@ class GroupSeeder extends Seeder
             'name' => 'sert',
             'title' => 'სერტიფიცირების წესი',
         ]);
+        DB::table('groups')->insert([
+            'name' => '41',
+            'title' => '41 - ე დადგენილება',
+        ]);
+        DB::table('groups')->insert([
+            'name' => '10',
+            'title' => '10 - ე დადგენილება',
+        ]);
     }
 }
