@@ -15,11 +15,17 @@ Route::get('/home', function () {
 });
 Route::get('/questions', function () {
     return view('questions');
-});
+})->name('questions');
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+Route::get('/specialists', function () {
+    return view('specialists');
+})->name('specialists');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
-Route::get('/result', [ResultController::class, 'index'])->name('result'); 
-
-Route::get('/exam', Exam::class)->name('exam');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
@@ -43,8 +49,23 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('user.workspace');
     })->name('dashboard');
+    Route::get('/workspace', function () {
+        return view('user.workspace');
+    })->name('workspace');
+    Route::get('/certificates', function () {
+        return view('user.certificates');
+    })->name('certificates');
+    Route::get('/video', function () {
+        return view('user.video');
+    })->name('video');
+
+    Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
+
+    Route::get('/exam', Exam::class)->name('exam');
+
+    Route::get('/test', Exam::class)->name('test');
 });
 
 // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
