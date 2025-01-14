@@ -19,10 +19,10 @@ class Question extends Model
     }
 
     /**
-     * Get the material that owns this bim material.
+     * Get the groups that this question belongs to.
      */
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class, 'group_question')->withPivot('group_question')->withTimestamps();
+        return $this->belongsToMany(Group::class, 'group_question')->withPivot('question_id')->withTimestamps();
     }
 }
