@@ -65,12 +65,14 @@
                                         კონტაქტი
                                     </a>
                                 </li>
-                                <li class="group relative">
-                                    <a href="{{ route('workspace') }}"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium bg-white text-primary rounded-lg px-6 hover:bg-opacity-90 lg:ml-7 lg:mr-0 lg:inline-flex lg:py-3">
-                                        სამუშაო სივრცე
-                                    </a>
-                                </li>
+                                @auth
+                                    <li class="group relative">
+                                        <a href="{{ route('workspace') }}"
+                                            class="ud-menu-scroll mx-8 flex py-2 text-base font-medium bg-white text-primary rounded-lg px-6 hover:bg-opacity-90 lg:ml-7 lg:mr-0 lg:inline-flex lg:py-3">
+                                            სამუშაო სივრცე
+                                        </a>
+                                    </li>
+                                @endauth
                             </ul>
                         </nav>
                     </div>
