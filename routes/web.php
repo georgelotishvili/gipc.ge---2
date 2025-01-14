@@ -44,7 +44,7 @@ Route::middleware(['admin'])->group(function () {
     
     Route::patch('/admin/questions/update/{question}', [AdminController::class, 'update'])->name('admin.questions.update');
     
-    Route::get('/admin/questions/destroy/{question}', [AdminController::class, 'destroy'])->name('admin.questions.destroy');
+    Route::delete('/admin/questions/destroy/{question}', [AdminController::class, 'destroy'])->name('admin.questions.destroy');
 });
 
 Route::middleware([

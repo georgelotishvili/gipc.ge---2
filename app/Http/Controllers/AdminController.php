@@ -112,10 +112,20 @@ class AdminController extends Controller
     }
 
 
-    public function destroy(Question $question)
+    public function destroy($question)
     {
-        $question->answers()->delete();
-        $question->delete();
+        if($question === 'bulk') {   
+            $questionIds = request('selected_questions', []);
+            Question::whereIn('id', $questionIds)->each(function($question) {
+                $question->answers()->delete();
+                $question->delete();
+            });
+        } else {
+            $question = Question::findOrFail($question);
+            $question->answers()->delete();
+            $question->delete();
+        }
+        
         return redirect()->back();
     }
 }
