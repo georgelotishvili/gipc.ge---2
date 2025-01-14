@@ -34,48 +34,48 @@
                         </button>
                         <nav id="navbarCollapse"
                             class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-primary py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none xl:px-6">
-                            <ul class="blcok lg:flex 2xl:ml-20">
+                            <ul class="blcok lg:flex lg:justify-between lg:items-center 2xl:ml-20">
                                 <li class="group relative">
-                                    <a href="#home"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
-                                        GIPC
-                                    </a>
-                                </li>
-                                <li class="group relative">
-                                    <a href="#about"
+                                    <a href="{{ route('services') }}"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                         სერვისები
                                     </a>
                                 </li>
                                 <li class="group relative">
-                                    <a href="#pricing"
+                                    <a href="{{ route('specialists') }}"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                         სპეციალისტები
                                     </a>
                                 </li>
-                                <li class="group relative">
+                                {{-- <li class="group relative">
                                     <a href="#team"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                         სიახლე
                                     </a>
-                                </li>
-                                <li class="group relative">
+                                </li> --}}
+                                {{-- <li class="group relative">
                                     <a href="#contact"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                         ვაკანსიები
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="group relative">
-                                    <a href="blog-grids.html"
+                                    <a href="{{ route('contact') }}"
                                         class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                         კონტაქტი
+                                    </a>
+                                </li>
+                                <li class="group relative">
+                                    <a href="{{ route('workspace') }}"
+                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium bg-white text-primary rounded-lg px-6 hover:bg-opacity-90 lg:ml-7 lg:mr-0 lg:inline-flex lg:py-3">
+                                        სამუშაო სივრცე
                                     </a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                     <div class="flex items-center justify-end pr-16 lg:pr-0">
-                        <label for="themeSwitcher" class="inline-flex cursor-pointer items-center"
+                        {{-- <label for="themeSwitcher" class="inline-flex cursor-pointer items-center"
                             aria-label="themeSwitcher" name="themeSwitcher">
                             <input type="checkbox" name="themeSwitcher" id="themeSwitcher" class="sr-only" />
                             <span class="block text-white">
@@ -115,7 +115,7 @@
                                     </defs>
                                 </svg>
                             </span>
-                        </label>
+                        </label> --}}
                         <div class="hidden sm:flex">
                             @if (Route::has('login'))
                                 @auth
@@ -151,17 +151,17 @@
         {{ $slot }}
     </main>
     <!-- ====== Footer Section Start -->
-    <footer class="wow fadeInUp relative z-10 bg-[#090E34] pt-20 lg:pt-[100px]" data-wow-delay=".15s">
+    <footer class="wow fadeInUp relative z-10 bg-dark pt-20 lg:pt-[100px]" data-wow-delay=".15s">
         <div class="container">
             <div class="-mx-4 flex flex-wrap">
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
                     <div class="mb-10 w-full">
                         <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
-                            <img src="assets/images/logo/logo-white.svg" alt="logo" class="max-w-full" />
+                            <span class="font-bold text-white">GIPC</span>
                         </a>
                         <p class="mb-8 max-w-[270px] text-base text-gray-7">
-                            We create digital experiences for brands and companies by using
-                            technology.
+                            საქართველოს პროფესიული სერთიფიცირების ინსტიტუტი (GIPC)
+
                         </p>
                         <div class="-mx-3 flex items-center">
                             <a href="javascript:void(0)" class="px-3 text-gray-7 hover:text-white">
@@ -201,30 +201,30 @@
                 </div>
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
                     <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">About Us</h4>
+                        <h4 class="mb-9 text-lg font-semibold text-white">ჩვენს შესახებ</h4>
                         <ul>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Home
+                                    მთავარი
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Features
+                                    ფუნქციები
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    About
+                                    შესახებ
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Testimonial
+                                    გამოხმაურება
                                 </a>
                             </li>
                         </ul>
@@ -232,30 +232,30 @@
                 </div>
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
                     <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">Features</h4>
+                        <h4 class="mb-9 text-lg font-semibold text-white">ფუნქციები</h4>
                         <ul>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    How it works
+                                    როგორ მუშაობს
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Privacy policy
+                                    კონფიდენციალურობის პოლიტიკა
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Terms of Service
+                                    მომსახურების პირობები
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Refund policy
+                                    დაბრუნების პოლიტიკა
                                 </a>
                             </li>
                         </ul>
@@ -264,31 +264,19 @@
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
                     <div class="mb-10 w-full">
                         <h4 class="mb-9 text-lg font-semibold text-white">
-                            Our Products
+                            ჩვენი პროდუქტები
                         </h4>
                         <ul>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    LineIcons
+                                    საგამოცდო სერთიფიცირება
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"
                                     class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    Ecommerce HTML
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    TailAdmin
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    PlainAdmin
+                                    ვიდეოგაკვეთილები
                                 </a>
                             </li>
                         </ul>
@@ -296,22 +284,22 @@
                 </div>
                 <div class="w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12">
                     <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">Latest blog</h4>
+                        <h4 class="mb-9 text-lg font-semibold text-white">შეფასებები</h4>
                         <div class="flex flex-col gap-8">
-                            <a href="blog-details.html" class="group flex items-center gap-[22px]">
+                            <a href="" class="group flex items-center gap-[22px]">
                                 <div class="overflow-hidden rounded">
-                                    <img src="./assets/images/blog/blog-footer-01.jpg" alt="blog" />
+                                    {{-- ICON HERE --}}
                                 </div>
                                 <span class="max-w-[180px] text-base text-gray-7 group-hover:text-white">
-                                    I think really important to design with...
+                                    ...
                                 </span>
                             </a>
-                            <a href="blog-details.html" class="group flex items-center gap-[22px]">
+                            <a href="" class="group flex items-center gap-[22px]">
                                 <div class="overflow-hidden rounded">
-                                    <img src="./assets/images/blog/blog-footer-02.jpg" alt="blog" />
+                                    {{-- ICON HERE --}}
                                 </div>
                                 <span class="max-w-[180px] text-base text-gray-7 group-hover:text-white">
-                                    Recognizing the need is the primary...
+                                    ...
                                 </span>
                             </a>
                         </div>
@@ -328,15 +316,15 @@
                             <div class="-mx-3 flex items-center justify-center md:justify-start">
                                 <a href="javascript:void(0)"
                                     class="px-3 text-base text-gray-7 hover:text-white hover:underline">
-                                    Privacy policy
+                                    კონფიდენციალურობის პოლიტიკა
                                 </a>
                                 <a href="javascript:void(0)"
                                     class="px-3 text-base text-gray-7 hover:text-white hover:underline">
-                                    Legal notice
+                                    იურიდიული შეტყობინება
                                 </a>
                                 <a href="javascript:void(0)"
                                     class="px-3 text-base text-gray-7 hover:text-white hover:underline">
-                                    Terms of service
+                                    მომსახურების პირობები
                                 </a>
                             </div>
                         </div>
@@ -344,10 +332,10 @@
                     <div class="w-full px-4 md:w-1/3 lg:w-1/2">
                         <div class="my-1 flex justify-center md:justify-end">
                             <p class="text-base text-gray-7">
-                                Designed and Developed by
+                                ...
                                 <a href="https://tailgrids.com" rel="nofollow noopner" target="_blank"
                                     class="text-gray-1 hover:underline">
-                                    TailGrids and UIdeck
+                                    ...
                                 </a>
                             </p>
                         </div>

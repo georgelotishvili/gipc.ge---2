@@ -10,23 +10,24 @@ class ResultController extends Controller
 {
     public function index(Request $request)
     {
+        
         // Get the active test with questions and answers
-        $test = Test::where('active', true)
-            ->with(['questions.answers'])
-            ->firstOrFail();
+        $test = Test::with(['questions.answers', 'examRequest'])
+            ->findOrFail($request->route('test'));
 
+        if ($test->examRequest->user_id !== auth()->user()->id) {
+            abort(403);
+        }
+        
         // Calculate total questions
-        $totalQuestions = $test->questions->count();
+        $totalQuestions = $test->questions_count;
 
         // Calculate correct answers
-        $correctAnswers = $test->questions->filter(function ($question) {
-            return $question->answers->where('id', $question->pivot->answer)->first()?->is_true ?? false;
-        })->count();
+        $correctAnswers = $test->correct_answers_count;
 
         // Calculate score percentage
-        $score = $totalQuestions > 0 
-            ? round(($correctAnswers / $totalQuestions) * 100) 
-            : 0;
+        $score = $test->score;
+
 
         return view('result', [
             'questions' => $test->questions,

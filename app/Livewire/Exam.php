@@ -18,11 +18,14 @@ class Exam extends Component
     public $progress;
     public $current_question_index;
     public $testQuestion;
+    public $currentExamRequest;
 
     public function mount(TestQuestion $testQuestion)
     {
+
         $this->user = auth()->user();
         $this->testQuestion = $testQuestion;
+        $this->currentExamRequest = $this->user->examRequests->where('approved', true)->where('closed', false)->first();
         $this->setActiveTest();
         $this->loadCurrentQuestionIndex();
         $this->initializeFirstQuestion();
@@ -42,6 +45,7 @@ class Exam extends Component
         // Create a new test
         $this->test = Test::create([
             'name' => 'Test',
+            'exam_request_id' => $this->currentExamRequest->id,
             'active' => true,
             'duration' => 240,
             'started_at' => now(),
@@ -148,6 +152,11 @@ class Exam extends Component
         $totalCount = $this->test->questions()->count();
         $this->progress = ($totalCount > 0) ? ($answeredCount / $totalCount) * 100 : 1;
         $this->test->putCache('progress', $this->progress, 600);
+        if($this->progress == 100) 
+        {
+            $this->finalizeExam();
+            return redirect()->route('result', $this->test->id);
+        }
     }
 
     public function saveCurrentQuestionIndex()
@@ -158,6 +167,33 @@ class Exam extends Component
     public function loadCurrentQuestionIndex()
     {
         $this->current_question_index = session('current_question_index', 0);
+    }
+
+    public function finalizeExam()
+    {
+        $totalQuestions = $this->test->questions->count();
+
+        // Calculate correct answers
+        $correctAnswers = $this->test->questions->filter(function ($question) {
+            return $question->answers->where('id', $question->pivot->answer)->first()?->is_true ?? false;
+        })->count();
+
+        // Calculate score percentage
+        $score = $totalQuestions > 0 
+            ? round(($correctAnswers / $totalQuestions) * 100) 
+            : 0;
+        
+        $this->test->update([
+            'questions_count' => $totalQuestions,
+            'correct_answers_count' => $correctAnswers,
+            'incorrect_answers_count' => $totalQuestions - $correctAnswers,
+            'score' => $score
+        ]);
+
+        $this->test->save();
+
+        $this->currentExamRequest->closed = true;
+        $this->currentExamRequest->save();
     }
 
     public function render()

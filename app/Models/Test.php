@@ -18,4 +18,14 @@ class Test extends Model
     {
         return $this->belongsToMany(Question::class, 'test_question')->withPivot('answer')->withTimestamps();
     }
+
+    /**
+     * Get the exam request that owns the test.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function examRequest(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ExamRequest::class);
+    }
 }
