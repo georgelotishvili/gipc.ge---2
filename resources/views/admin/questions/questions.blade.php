@@ -1,7 +1,33 @@
 <x-admin.layout>
     <div class="bg-white rounded-2xl shadow-lg p-8">
-        <div class="flex justify-between items-center mb-6">
+        <div class="flex justify-between items-center mb-6 gap-6">
             <h2 class="text-2xl font-bold text-gray-800">კითხვები</h2>
+            <div class="relative inline-block text-left">
+                <button onclick="document.getElementById('filter-dropdown').classList.toggle('hidden')" 
+                    class="px-4 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3 shadow-sm">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                    </svg>
+                    <span class="font-medium">ფილტრი</span>
+                </button>
+                <div id="filter-dropdown" class="hidden absolute right-0 mt-2 w-64 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 border border-gray-100 overflow-hidden">
+                    <div class="py-2">
+                        <div class="px-4 py-2 bg-gray-50 border-b border-gray-100">
+                            <span class="text-sm font-semibold text-gray-600">აირჩიეთ ჯგუფი</span>
+                        </div>
+                        @foreach ($groups as $group)
+                            <a href="{{ route('admin.questions', ['g' => $group->name]) }}" 
+                                class="px-4 py-2.5 text-sm {{ request('g') == $group->name ? 'bg-blue-500 text-white hover:bg-blue-600' : 'text-gray-700 hover:bg-gray-50' }} transition-colors duration-150 flex items-center justify-between group">
+                                <span>{{$group->title}}</span>
+                                <svg class="w-4 h-4 {{ request('g') == $group->name ? 'text-white' : 'text-gray-400 opacity-0 group-hover:opacity-100' }} transition-opacity duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <livewire:question-search />
             <a href="{{route('admin.questions.create')}}" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200">
                 კითხვის დამატება
             </a>

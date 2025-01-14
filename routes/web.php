@@ -42,7 +42,7 @@ Route::middleware(['admin'])->group(function () {
     
     Route::get('/admin/questions/{question}/edit/', [AdminController::class, 'edit'])->name('admin.questions.edit');
     
-    Route::put('/admin/questions/update/{question}', [AdminController::class, 'update'])->name('admin.questions.update');
+    Route::patch('/admin/questions/update/{question}', [AdminController::class, 'update'])->name('admin.questions.update');
     
     Route::get('/admin/questions/destroy/{question}', [AdminController::class, 'destroy'])->name('admin.questions.destroy');
 });

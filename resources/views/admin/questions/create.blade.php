@@ -13,6 +13,15 @@
                 <textarea id="text" name="text" rows="3" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary transition duration-200"></textarea>
             </div>
 
+            {{-- group section --}}
+            <div>
+                <label for="group" class="block text-sm font-medium text-gray-700 mb-2">ჯგუფი</label>
+                <select id="group" name="group" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary transition duration-200">
+                    @foreach($groups as $group)
+                        <option value="{{$group->id}}">{{$group->title}}</option>
+                    @endforeach
+                </select>
+            </div>
             <!-- Answers Section -->
             <div class="space-y-4">
                 <label class="block text-sm font-medium text-gray-700 mb-2">პასუხები</label>

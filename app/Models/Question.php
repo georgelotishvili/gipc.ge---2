@@ -25,4 +25,15 @@ class Question extends Model
     {
         return $this->belongsToMany(Group::class, 'group_question')->withPivot('question_id')->withTimestamps();
     }
+
+    public function scopeFilterByGroup($query, $groupName)
+    {
+        if (!$groupName) {
+            return $query;
+        }
+
+        return $query->whereHas('groups', function ($query) use ($groupName) {
+            $query->where('name', $groupName);
+        });
+    }
 }
