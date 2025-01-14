@@ -14,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Speciality::class);
-            $table->text('text');
-            $table->string('weight');
+            // $table->foreignIdFor(Speciality::class);
+            $table->integer('q_id')->nullable();
+            $table->text('text')->nullable();
+            $table->integer('weight')->nullable();
             $table->timestamps();
         });
     }

@@ -5,26 +5,26 @@
             class="mb-4 text-2xl text-center font-bold text-dark dark:text-white sm:text-xl md:text-[24px] md:leading-[1.2]">
             რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე ნახალოვკაში?
         </h1>
-        <p class="timer text-center mb-4 text-lg"></p>
+        <p class="timer text-center mb-4 text-lg dark:text-white"></p>
         <div class="container flex justify-center">
             <div class="-mx-4">
                 <div class="px-4 flex flex-col gap-4 justify-center">
                     <button
-                        class="wrong-answer  font-semibold py-2 px-4 border border-gray-300 rounded shadow-lg text-left max-w-md">
+                        class="wrong-answer font-semibold py-2 px-4 border border-gray-300 rounded shadow-lg text-left max-w-md dark:text-white">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი
                         ვიდრე ნახალოვკაში
                     </button>
                     <button
-                        class="answer  font-semibold py-2 px-4 border border-gray-300 rounded shadow-lg text-left max-w-md">
+                        class="answer font-semibold py-2 px-4 border border-gray-300 rounded shadow-lg text-left max-w-md dark:text-white">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში
                     </button>
-                    <button class=" font-semibold py-2 px-4 border border-gray-300 rounded shadow-md text-left max-w-md">
+                    <button class="font-semibold py-2 px-4 border border-gray-300 rounded shadow-md text-left max-w-md dark:text-white">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში
                     </button>
-                    <button class=" font-semibold py-2 px-4 border border-gray-300 rounded shadow-md text-left max-w-md">
+                    <button class="font-semibold py-2 px-4 border border-gray-300 rounded shadow-md text-left max-w-md dark:text-white">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში
                     </button>
@@ -42,7 +42,7 @@
                         <i class="fa-solid fa-chevron-right fa-lg"></i>
                     </button>
                 </div>
-                <span class="absolute top-0">23:14</span>
+                <span class="absolute top-0 dark:text-white">23:14</span>
             </div>
         </div>
     </div>

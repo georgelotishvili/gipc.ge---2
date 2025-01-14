@@ -11,11 +11,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(Blueprint $table): void
+    public function up(): void
     {
-        $table->id();
-        $table->foreignIdFor(Speciality::class)->constrained();
-        $table->foreignIdFor(User::class)->constrained();
+        Schema::create('speciality_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Speciality::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+        });
+
     }
 
     /**

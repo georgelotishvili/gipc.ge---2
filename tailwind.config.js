@@ -1,7 +1,16 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: "media",
     content: [
         "./resources/**/*.blade.php",
+        "./vendor/laravel/jetstream/**/*.blade.php",
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
@@ -61,7 +70,10 @@ export default {
                 1: "0px 1px 3px 0px rgba(166, 175, 195, 0.40)",
                 2: "0px 5px 12px 0px rgba(0, 0, 0, 0.10)",
             },
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
         },
-        plugins: [],
+        plugins: [forms, typography],
     },
 };
