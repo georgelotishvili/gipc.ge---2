@@ -5,17 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Test;
+use App\Models\User;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $users = User::count();
+        $tests = Test::count();
+        $questions = Question::count();
+        $average_score = Test::avg('score');
+        return view('admin.index', [
+            'users' => $users,
+            'tests' => $tests,
+            'questions' => $questions,
+            'average_score' => $average_score
+        ]);
     }
 
     public function questions()
     {
-        $questions = Question::with(['answers'])->latest()->paginate(50);
+        $questions = Question::with(['answers'])->latest()->paginate(15);
         return view('admin.questions.questions', [
             'questions' => $questions
         ]);
@@ -69,6 +80,19 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin.questions');
+    }
+
+    public function users()
+    {
+        $users = User::latest()->paginate(15);
+        return view('admin.users', [
+            'users' => $users
+        ]);
+    }
+
+    public function videos()
+    {
+        return view('admin.videos');
     }
 
 

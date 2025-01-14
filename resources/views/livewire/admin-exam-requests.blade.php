@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-                @foreach($examRequests as $request)
+                @foreach($examRequests->sortByDesc('created_at') as $request)
                     <tr class="hover:bg-gray-50">
                         <td class="py-3 px-4">{{ $request->user->name }}</td>
                         <td class="py-3 px-4">არქიტექტურული</td>

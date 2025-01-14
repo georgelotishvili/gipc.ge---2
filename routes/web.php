@@ -31,6 +31,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     
     Route::get('/admin/questions', [AdminController::class, 'questions'])->name('admin.questions');
+
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+
+    Route::get('/admin/videos', [AdminController::class, 'videos'])->name('admin.videos');
     
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
     

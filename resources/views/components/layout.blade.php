@@ -75,7 +75,7 @@
                         </nav>
                     </div>
                     <div class="flex items-center justify-end pr-16 lg:pr-0">
-                        {{-- <label for="themeSwitcher" class="inline-flex cursor-pointer items-center"
+                        <label for="themeSwitcher" class="inline-flex cursor-pointer items-center"
                             aria-label="themeSwitcher" name="themeSwitcher">
                             <input type="checkbox" name="themeSwitcher" id="themeSwitcher" class="sr-only" />
                             <span class="block text-white">
@@ -134,7 +134,7 @@
                                         @csrf
                                         <button type="submit"
                                            class="signUpBtn rounded-md bg-white bg-opacity-20 w-24 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                            Log Out
+                                            გამოსვლა
                                         </button>
                                     </form>
                                 @else

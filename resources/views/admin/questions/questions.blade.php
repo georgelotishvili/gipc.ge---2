@@ -14,6 +14,7 @@
                          onclick="document.getElementById('answers-{{$question->id}}').classList.toggle('hidden')">
                         <div class="flex items-center space-x-4">
                             <span class="text-gray-500 text-sm">#{{$question->id}}</span>
+                            <span class="text-gray-500 text-sm">@foreach($question->groups as $group) {{$group->name}} @endforeach</span>
                             <p class="text-gray-900">{{$question->text}}</p>
                         </div>
                         <div class="flex items-center space-x-2">
@@ -45,6 +46,10 @@
                     </div>
                 </div>
             @endforeach
+            
+            <div class="mt-4">
+                {{ $questions->links() }}
+            </div>
         </div>
     </div>
 </x-admin.layout>

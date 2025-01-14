@@ -11,7 +11,7 @@
                             </div>
                             <div class="ml-6">
                                 <h2 class="font-semibold text-gray-600 text-lg">მომხმარებლები</h2>
-                                <p class="text-3xl font-bold text-gray-900">2,453</p>
+                                <p class="text-3xl font-bold text-gray-900">{{$users}}</p>
                             </div>
                         </div>
                         <div class="mt-6 flex justify-between">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="ml-6">
                     <h2 class="font-semibold text-gray-600 text-lg">ტესტები</h2>
-                    <p class="text-3xl font-bold text-gray-900">156</p>
+                    <p class="text-3xl font-bold text-gray-900">{{$tests}}</p>
                 </div>
             </div>
             <div class="mt-6 flex justify-end">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="ml-6">
                     <h2 class="font-semibold text-gray-600 text-lg">კითხვები</h2>
-                    <p class="text-3xl font-bold text-gray-900">3,872</p>
+                    <p class="text-3xl font-bold text-gray-900">{{$questions}}</p>
                 </div>
             </div>
             <div class="mt-6 flex justify-end gap-2">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="ml-6">
                     <h2 class="font-semibold text-gray-600 text-lg">საშუალო ქულა</h2>
-                    <p class="text-3xl font-bold text-gray-900">76%</p>
+                    <p class="text-3xl font-bold text-gray-900">{{number_format($average_score, 0)}}%</p>
                 </div>
             </div>
             <div class="mt-6 flex justify-end">
