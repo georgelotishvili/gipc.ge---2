@@ -31,7 +31,7 @@ class QuestionSearch extends Component
         }
 
         $searchTerm = preg_quote($search, '/');
-        return preg_replace("/($searchTerm)/iu", '<span class="bg-yellow-200">$1</span>', $text);
+        return preg_replace("/($searchTerm)/iu", '<span class="bg-red-500 text-white">$1</span>', $text);
     }
 
     public function render()

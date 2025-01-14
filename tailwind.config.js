@@ -66,8 +66,5 @@ export default {
         },
     },
     plugins: [forms, typography],
-    safelist: [
-        'bg-yellow-200'
-    ],
 };
 
