@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     public function questions()
     {
-        $questions = Question::with(['answers'])->latest()->paginate(15);
+        $questions = Question::with(['answers'])->orderBy('id')->paginate(15);
         return view('admin.questions.questions', [
             'questions' => $questions
         ]);
