@@ -10,6 +10,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>GIPC</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 
 </head>
 
