@@ -28,7 +28,7 @@ Route::get('/contact', function () {
 
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     
     Route::get('/admin/questions', [AdminController::class, 'questions'])->name('admin.questions');
     

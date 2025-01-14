@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 
 <head>
     <meta charset="UTF-8" />
@@ -115,17 +115,25 @@
                                     </defs>
                                 </svg>
                             </span>
-                        </label> --}}
-                        <div class="hidden sm:flex">
+                        </label>
+                        <div class="hidden sm:flex gap-4 ml-2">
+
                             @if (Route::has('login'))
                                 @auth
-                                    <a href="{{ route('profile.show') }}" class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
-                                        Profile
-                                    </a>
+                                    @if (Auth::user()->is_admin)
+                                        <a href="{{ route('admin.index') }}" class="w-24 py-2 text-center font-bold text-primary bg-white rounded-lg hover:opacity-90">
+                                            <span>ადმინი</span>
+                                        </a>
+                                        @else
+                                        <a href="{{ route('profile.show') }}" class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
+                                            Profile
+                                        </a>
+                                    @endif
+                                    
                                     <form method="POST" action="{{ route('logout') }}" x-data>
                                         @csrf
                                         <button type="submit"
-                                           class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
+                                           class="signUpBtn rounded-md bg-white bg-opacity-20 w-24 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
                                             Log Out
                                         </button>
                                     </form>

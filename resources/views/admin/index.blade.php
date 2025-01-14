@@ -1,24 +1,25 @@
 <x-admin.layout>
-    <!-- Stats Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 mt-4">
-        <!-- Users Stats -->
-        <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-            <div class="flex items-center">
-                <div class="p-4 rounded-full bg-blue-100">
-                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                </div>
-                <div class="ml-6">
-                    <h2 class="font-semibold text-gray-600 text-lg">მომხმარებლები</h2>
-                    <p class="text-3xl font-bold text-gray-900">2,453</p>
-                </div>
-            </div>
-            <div class="mt-6 flex justify-between">
-                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">დამატება</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">დეტალურად</button>
-            </div>
-        </div>
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 mt-4">
+                    <!-- Users Stats -->
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex items-center">
+                            <div class="p-4 rounded-full bg-blue-100">
+                                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-6">
+                                <h2 class="font-semibold text-gray-600 text-lg">მომხმარებლები</h2>
+                                <p class="text-3xl font-bold text-gray-900">2,453</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between">
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">დამატება</button>
+                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">დეტალურად</button>
+                        </div>
+                    </div>
+
 
         <!-- Tests Stats -->
         <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
