@@ -32,7 +32,7 @@
                     <div id="answers-{{$question->id}}" class="hidden">
                         <div class="p-4 bg-gray-50 space-y-2">
                             @foreach($question->answers as $answer)
-                                <div class="flex items-center space-x-3 p-2 rounded {{ $answer->is_true ? 'bg-green-700 text-white-700' : 'bg-white text-gray-700' }}">
+                                <div class="flex items-center space-x-3 p-2 rounded {{ $answer->is_true ? 'bg-green-700 text-white' : 'bg-white text-gray-700' }}">
                                     @if($answer->is_true)
                                         <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>

@@ -52,7 +52,23 @@ class AdminController extends Controller
 
     public function update(Request $request, Question $question)
     {
-        dd($request->all());
+        $question->update([
+            'text' => $request->input('text')
+        ]);
+
+        // Delete existing answers
+        $question->answers()->delete();
+
+        // Create new answers
+        foreach($request->input('answers') as $index => $answer) {
+            Answer::create([
+                'text' => $answer['text'],
+                'is_true' => $request->input('correct_answer') == $index,
+                'question_id' => $question->id,
+            ]);
+        }
+
+        return redirect()->route('admin.questions');
     }
 
 
