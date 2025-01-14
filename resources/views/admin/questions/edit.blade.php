@@ -7,12 +7,24 @@
 
         <form action="{{ route('admin.questions.update', $question->id) }}" method="POST" class="space-y-6">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             
             <!-- Question Text -->
             <div>
                 <label for="text" class="block text-sm font-medium text-gray-700 mb-2">კითხვის ტექსტი</label>
                 <textarea id="text" name="text" rows="3" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary transition duration-200">{{$question->text}}</textarea>
+            </div>
+
+            <!-- Group Section -->
+            <div>
+                <label for="group" class="block text-sm font-medium text-gray-700 mb-2">ჯგუფი</label>
+                <select id="group" name="group" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary transition duration-200">
+                    @foreach($groups as $group)
+                        <option value="{{$group->id}}" {{ $question->groups->contains($group->id) ? 'selected class=bg-blue-100' : '' }}>
+                            {{$group->title}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Answers Section -->
