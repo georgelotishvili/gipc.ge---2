@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Test;
 use App\Models\User;
+use App\Models\Group;
 
 class AdminController extends Controller
 {
@@ -16,25 +17,34 @@ class AdminController extends Controller
         $tests = Test::count();
         $questions = Question::count();
         $average_score = Test::avg('score');
+
         return view('admin.index', [
             'users' => $users,
             'tests' => $tests,
             'questions' => $questions,
-            'average_score' => $average_score
+            'average_score' => $average_score,
         ]);
     }
 
     public function questions()
     {
-        $questions = Question::with(['answers'])->latest()->paginate(15);
+        $questions = Question::with(['answers'])->orderBy('id')->filterByGroup(request('g'))->paginate(30)->withQueryString();
+        $groups = Group::all();
+
         return view('admin.questions.questions', [
-            'questions' => $questions
+            'questions' => $questions,
+            'groups' => $groups
+
         ]);
     }
 
     public function create()
     {
-        return view('admin.questions.create');
+        $groups = Group::all();
+
+        return view('admin.questions.create', [
+            'groups' => $groups
+        ]);
     }
 
     public function store(Request $request)
@@ -56,8 +66,10 @@ class AdminController extends Controller
 
     public function edit(Question $question)
     {
+        $groups = Group::all();
         return view('admin.questions.edit', [
-            'question' => $question
+            'question' => $question,
+            'groups' => $groups
         ]);
     }
 
@@ -77,7 +89,11 @@ class AdminController extends Controller
                 'is_true' => $request->input('correct_answer') == $index,
                 'question_id' => $question->id,
             ]);
+            
         }
+        
+        $question->groups()->detach();
+        $question->groups()->attach($request->input('group'));
 
         return redirect()->route('admin.questions');
     }
@@ -96,10 +112,20 @@ class AdminController extends Controller
     }
 
 
-    public function destroy(Question $question)
+    public function destroy($question)
     {
-        $question->answers()->delete();
-        $question->delete();
-        return redirect()->route('admin.questions');
+        if($question === 'bulk') {   
+            $questionIds = request('selected_questions', []);
+            Question::whereIn('id', $questionIds)->each(function($question) {
+                $question->answers()->delete();
+                $question->delete();
+            });
+        } else {
+            $question = Question::findOrFail($question);
+            $question->answers()->delete();
+            $question->delete();
+        }
+        
+        return redirect()->back();
     }
 }
