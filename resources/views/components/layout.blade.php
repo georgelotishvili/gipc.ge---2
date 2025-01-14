@@ -10,7 +10,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>GIPC</title>
     @vite('resources/css/app.css')
-    {{--  --}}
 
 </head>
 
