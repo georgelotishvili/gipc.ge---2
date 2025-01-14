@@ -1,5 +1,5 @@
-<x-layout>
-    <div class="min-h-screen bg-gray-100 py-8 mt-16">
+<x-user.layout>
+    <div class="min-h-screen py-8 mt-16">
         <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="bg-blue-600 px-6 py-4">
                 <h1 class="text-2xl font-bold text-white">ტესტის შედეგი</h1>
@@ -18,7 +18,7 @@
 
                 <div class="space-y-6">
                     @foreach($questions as $question)
-                        <div class="border rounded-lg p-4 shadow-md">
+                        <div class="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow cursor-pointer">
                             <div class="flex items-start space-x-3">
                                 <div class="flex-shrink-0">
                                     @if($question->answers->where('id', $question->pivot->answer)->first()?->is_true)
@@ -55,11 +55,11 @@
                 </div>
 
                 <div class="mt-8 text-center">
-                    <a href="{{ route('exam') }}" class="inline-block bg-blue-600 text-white px-6 py-2 text-lg rounded-lg hover:bg-blue-700 transition-all transform hover:scale-102 font-medium">
-                        ახალი ტესტი დაწყება
+                    <a href="{{ route('workspace') }}" class="inline-block bg-blue-600 text-white px-6 py-2 text-lg rounded-lg hover:bg-blue-700 transition-all transform hover:scale-102 font-medium">
+                        სამუშაო სივრცე
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</x-layout>
+</x-user.layout>
