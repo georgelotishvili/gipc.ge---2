@@ -22,7 +22,7 @@ Route::get('/result', [ResultController::class, 'index'])->name('result');
 Route::get('/exam', Exam::class)->name('exam');
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     
     Route::get('/admin/questions', [AdminController::class, 'questions'])->name('admin.questions');
     
