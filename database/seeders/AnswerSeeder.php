@@ -68,6 +68,15 @@ class AnswerSeeder extends Seeder
         $answers = Helper::getBase('table_'.$table_name);
         foreach($answers as $answer)
         {
+            if($answer->question != '')
+            {
+                $text = preg_replace('/^[\d\·]\.\s*|^[\·]\s*[ა-ჰ]\)\s*/u', '', $answer->question);
+                if (strpos($text, 'კითხვა: ') !== false)
+                {
+                    $text = explode('კითხვა: ', $text)[1];
+                }
+                $temp_question = $text;
+            }
             if($answer->answer == '') continue;
             
             if($answer->type == 'ANSWER')
@@ -78,7 +87,7 @@ class AnswerSeeder extends Seeder
 
                 $question = Question::whereHas('groups', function ($query) use ($group) {
                     $query->where('group_id', $group->id);
-                })->where('q_id', $answer->q_id)->first();
+                })->where('text', 'like', '%' . $temp_question . '%')->first();
     
                 if($question == null) continue;
 
