@@ -60,7 +60,9 @@ class AdminController extends Controller
                 'question_id' => $question->id,
             ]);
         }
-        
+
+        $question->groups()->attach($request->input('group'));
+
         return redirect()->route('admin.questions');
     }
 
@@ -94,6 +96,9 @@ class AdminController extends Controller
         
         $question->groups()->detach();
         $question->groups()->attach($request->input('group'));
+        //$question->save();
+
+        //dd($request->input('group'));
 
         return redirect()->route('admin.questions');
     }
