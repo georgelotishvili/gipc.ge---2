@@ -96,9 +96,6 @@ class AdminController extends Controller
         
         $question->groups()->detach();
         $question->groups()->attach($request->input('group'));
-        //$question->save();
-
-        //dd($request->input('group'));
 
         return redirect()->route('admin.questions');
     }
