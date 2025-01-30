@@ -137,7 +137,8 @@ class AdminController extends Controller
     {
         $group->update([
             'name' => $request->input('name'),
-            'title' => $request->input('title')
+            'title' => $request->input('title'),
+            'question_count_in_exam' => $request->input('question_count_in_exam')
         ]);
         return redirect()->route('admin.codes')->with('success', 'დადგენილება წარმატებით განახლდა');
     }
@@ -151,7 +152,8 @@ class AdminController extends Controller
     {
         Group::create([
             'name' => $request->input('name'),
-            'title' => $request->input('title')
+            'title' => $request->input('title'),
+            'question_count_in_exam' => $request->input('question_count_in_exam')
         ]);
         return redirect()->route('admin.codes')->with('success', 'დადგენილება წარმატებით დამატებულია');
     }

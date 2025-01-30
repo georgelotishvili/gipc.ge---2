@@ -44,7 +44,23 @@
             @foreach($groups as $group)
                 <div class="bg-gray-50 rounded-xl p-6 shadow hover:bg-gray-100 transition-colors duration-200">
                     <div class="flex justify-between items-start">
-                        <h3 class="text-lg font-semibold text-gray-800">{{ $group->title }} - კითხვები: {{ $group->questions->count() }}</h3>
+                        <div class="space-y-2">
+                            <h3 class="text-lg font-semibold text-gray-800">{{ $group->title }}</h3>
+                            <div class="flex space-x-4 text-sm text-gray-600">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                    კითხვები სულ: {{ $group->questions->count() }}
+                                </span>
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                    კითხვების ლიმიტი გამოცდაში: {{ $group->question_count_in_exam }}
+                                </span>
+                            </div>
+                        </div>
                         <div class="flex space-x-2">
                             <a href="{{ route('admin.codes.edit', $group) }}" class="p-2 text-indigo-600 hover:text-indigo-900 rounded-full hover:bg-indigo-50">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
