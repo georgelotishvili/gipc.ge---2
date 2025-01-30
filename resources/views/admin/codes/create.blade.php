@@ -32,6 +32,11 @@
                 <input type="text" name="title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
             </div>
 
+            <div>
+                <label for="question_count_in_exam" class="block text-sm font-medium text-gray-700">კითხვების რაოდენობა გამოცდაში</label>
+                <input type="number" name="question_count_in_exam" id="question_count_in_exam" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+            </div>
+
             <div class="flex justify-end space-x-3">
                 <a href="{{ route('admin.codes') }}" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                     გაუქმება

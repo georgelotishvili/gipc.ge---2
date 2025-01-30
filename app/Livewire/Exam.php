@@ -52,12 +52,10 @@ class Exam extends Component
         ]);
 
         // Attach random questions from each group
-        $this->test->questions()->attach(Group::where('name', '255')->first()->questions()->select('questions.id')->inRandomOrder()->limit(8)->pluck('questions.id'));
-        $this->test->questions()->attach(Group::where('name', '261')->first()->questions()->select('questions.id')->inRandomOrder()->limit(10)->pluck('questions.id'));
-        $this->test->questions()->attach(Group::where('name', 'sert')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
-        $this->test->questions()->attach(Group::where('name', 'konstruqciebi')->first()->questions()->select('questions.id')->inRandomOrder()->limit(3)->pluck('questions.id'));
-        $this->test->questions()->attach(Group::where('name', 'kanoni')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
-        $this->test->questions()->attach(Group::where('name', 'kodexi')->first()->questions()->select('questions.id')->inRandomOrder()->limit(2)->pluck('questions.id'));
+        foreach(Group::all() as $group) 
+        {
+            $this->test->questions()->attach($group->questions()->select('questions.id')->inRandomOrder()->limit($group->question_count_in_exam)->pluck('questions.id'));
+        }
 
         $this->test->save();
     }

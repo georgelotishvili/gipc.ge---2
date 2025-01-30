@@ -8,6 +8,7 @@
                         <h1 class="mb-6 text-2xl text-center font-bold text-dark sm:text-xl md:text-[24px] md:leading-[1.2] max-w-3xl mx-auto">
                             {{ $question->text }}
                         </h1>
+                        <p class="text-center text-sm text-gray-500 mb-2">{{ $question->groups->first()->title }}</p>
                         <p class="timer text-center mb-8 text-lg"></p>
                         <div class="flex flex-col items-center">
                             <div class="w-full max-w-2xl mb-8">
