@@ -108,6 +108,54 @@ class AdminController extends Controller
         ]);
     }
 
+    public function codes()
+    {
+        $groups = Group::all();
+        return view('admin.codes.codes', [
+            'groups' => $groups
+        ]);
+    }
+
+    public function destroyGroup(Group $group)
+    {
+        if($group->questions()->exists()) 
+        {
+            return redirect()->back()->with('error', 'კანონმდებლობაში არსებობს კითხვები, გთხოვთ წაშალოთ კანონმდებლობის კითხვები მისი წაშლის წინ.');
+        }
+        $group->delete();
+        return redirect()->back()->with('success', 'დადგენილება წარმატებით წაიშალა');
+    }
+
+    public function editGroup(Group $group)
+    {
+        return view('admin.codes.edit', [
+            'group' => $group
+        ]);
+    }
+
+    public function updateGroup(Request $request, Group $group)
+    {
+        $group->update([
+            'name' => $request->input('name'),
+            'title' => $request->input('title')
+        ]);
+        return redirect()->route('admin.codes')->with('success', 'დადგენილება წარმატებით განახლდა');
+    }
+
+    public function createGroup()
+    {
+        return view('admin.codes.create');
+    }
+
+    public function storeGroup(Request $request)
+    {
+        Group::create([
+            'name' => $request->input('name'),
+            'title' => $request->input('title')
+        ]);
+        return redirect()->route('admin.codes')->with('success', 'დადგენილება წარმატებით დამატებულია');
+    }
+
     public function videos()
     {
         return view('admin.videos');

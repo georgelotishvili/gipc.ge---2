@@ -34,6 +34,8 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
 
+    Route::get('/admin/codes', [AdminController::class, 'codes'])->name('admin.codes');
+
     Route::get('/admin/videos', [AdminController::class, 'videos'])->name('admin.videos');
     
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
@@ -45,6 +47,16 @@ Route::middleware(['admin'])->group(function () {
     Route::patch('/admin/questions/update/{question}', [AdminController::class, 'update'])->name('admin.questions.update');
     
     Route::delete('/admin/questions/destroy/{question}', [AdminController::class, 'destroy'])->name('admin.questions.destroy');
+
+    Route::delete('/admin/codes/destroy/{group}', [AdminController::class, 'destroyGroup'])->name('admin.codes.destroy');
+
+    Route::get('/admin/codes/edit/{group}', [AdminController::class, 'editGroup'])->name('admin.codes.edit');
+
+    Route::patch('/admin/codes/update/{group}', [AdminController::class, 'updateGroup'])->name('admin.codes.update');
+
+    Route::get('/admin/codes/create', [AdminController::class, 'createGroup'])->name('admin.codes.create');
+
+    Route::post('/admin/codes/store', [AdminController::class, 'storeGroup'])->name('admin.codes.store');
 });
 
 Route::middleware([
