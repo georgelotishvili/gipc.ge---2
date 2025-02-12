@@ -57,6 +57,14 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/codes/create', [AdminController::class, 'createGroup'])->name('admin.codes.create');
 
     Route::post('/admin/codes/store', [AdminController::class, 'storeGroup'])->name('admin.codes.store');
+
+    // Route::get('/admin/courses', [AdminController::class, 'courses'])->name('admin.courses');
+
+    // Route::get('/admin/courses/create', [AdminController::class, 'createCourse'])->name('admin.courses.create');
+
+    // Route::post('/admin/courses/store', [AdminController::class, 'storeCourse'])->name('admin.courses.store');
+    
+    
 });
 
 Route::middleware([
