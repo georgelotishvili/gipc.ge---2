@@ -4,7 +4,7 @@ import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: "selector",
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
@@ -26,20 +26,54 @@ export default {
         },
         extend: {
             fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                'body': [
+                    'Inter',
+                    'ui-sans-serif',
+                    'system-ui',
+                    '-apple-system',
+                    'system-ui',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica Neue',
+                    'Arial',
+                    'Noto Sans',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
+                    'Noto Color Emoji'
+                ],
+                'sans': [
+                    'Inter',
+                    'ui-sans-serif',
+                    'system-ui',
+                    '-apple-system',
+                    'system-ui',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica Neue',
+                    'Arial',
+                    'Noto Sans',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
+                    'Noto Color Emoji'
+                ]
             },
             colors: {
                 primary: {
-                    50: '#eff6ff',
-                    100: '#E6F0FF',
-                    200: '#bfdbfe',
-                    300: '#93c5fd',
-                    400: '#60a5fa',
-                    500: '#3b82f6',
-                    600: '#0066FF',
-                    700: '#1d4ed8',
-                    800: '#1e40af',
-                    900: '#1e3a8a',
+                    "50": "#eff6ff",
+                    "100": "#dbeafe",
+                    "200": "#bfdbfe",
+                    "300": "#93c5fd",
+                    "400": "#60a5fa",
+                    "500": "#3b82f6",
+                    "600": "#2563eb",
+                    "700": "#1d4ed8",
+                    "800": "#1e40af",
+                    "900": "#1e3a8a",
+                    "950": "#172554"
                 },
                 gray: {
                     50: '#F9FAFB',
@@ -56,7 +90,9 @@ export default {
                 black: "#212b36",
                 "dark-700": "#090e34b3",
                 dark: {
-                    DEFAULT: "#111928",
+                    DEFAULT: '#0F172A',
+                    lighter: '#1E293B',
+                    darker: '#0A1120',
                     2: "#1F2A37",
                     3: "#374151",
                     4: "#4B5563",
