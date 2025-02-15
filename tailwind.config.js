@@ -10,14 +10,15 @@ export default {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/js/**/*.js',
     ],
     theme: {
         screens: {
-            sm: "540px",
-            md: "720px",
-            lg: "960px",
-            xl: "1140px",
-            "2xl": "1320px",
+            'sm': '540px',
+            'md': '720px',
+            'lg': '960px',
+            'xl': '1140px',
+            '2xl': '1320px',
         },
         container: {
             center: true,
@@ -25,9 +26,33 @@ export default {
         },
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                primary: {
+                    50: '#eff6ff',
+                    100: '#E6F0FF',
+                    200: '#bfdbfe',
+                    300: '#93c5fd',
+                    400: '#60a5fa',
+                    500: '#3b82f6',
+                    600: '#0066FF',
+                    700: '#1d4ed8',
+                    800: '#1e40af',
+                    900: '#1e3a8a',
+                },
+                gray: {
+                    50: '#F9FAFB',
+                    100: '#F3F4F6',
+                    200: '#E5E7EB',
+                    300: '#D1D5DB',
+                    400: '#9CA3AF',
+                    500: '#6B7280',
+                    600: '#4B5563',
+                    700: '#374151',
+                    800: '#1F2A37',
+                    900: '#111928',
+                },
                 black: "#212b36",
                 "dark-700": "#090e34b3",
                 dark: {
@@ -40,15 +65,12 @@ export default {
                     7: "#D1D5DB",
                     8: "#E5E7EB",
                 },
-                primary: "#3758F9",
                 "blue-dark": "#1B44C8",
                 secondary: "#13C296",
                 "body-color": "#637381",
                 "body-secondary": "#8899A8",
                 warning: "#FBBF24",
                 stroke: "#DFE4EA",
-                "gray-1": "#F9FAFB",
-                "gray-2": "#F3F4F6",
                 "gray-7": "#CED4DA",
             },
             keyframes: {
@@ -61,7 +83,19 @@ export default {
                         'background-size': '200% 200%',
                         'background-position': 'right center'
                     }
+                },
+                'fade-in': {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                'slide-up': {
+                    '0%': { transform: 'translateY(20px)', opacity: '0' },
+                    '100%': { transform: 'translateY(0)', opacity: '1' },
                 }
+            },
+            animation: {
+                'fade-in': 'fade-in 0.5s ease-in-out',
+                'slide-up': 'slide-up 0.5s ease-out',
             }
         },
     },
