@@ -31,9 +31,9 @@
                         <a href="/" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                             მთავარი
                         </a>
-                        <a href="/features" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
-                            სერვისები
-                        </a>
+                        <a href="/tutorials" class="block px-4 py-2.5 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg">
+                    ვიდეო გაკვეთილები
+                </a>
                         <a href="/pricing" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                             ფასები
                         </a>
@@ -78,8 +78,8 @@
                 <a href="/" class="block px-4 py-2.5 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg">
                     მთავარი
                 </a>
-                <a href="/features" class="block px-4 py-2.5 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg">
-                    სერვისები
+                <a href="/tutorials" class="block px-4 py-2.5 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg">
+                    ვიდეო გაკვეთილები
                 </a>
                 <a href="/pricing" class="block px-4 py-2.5 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg">
                     ფასები
