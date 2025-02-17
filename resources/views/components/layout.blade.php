@@ -21,8 +21,7 @@
             <div class="flex justify-between h-20 items-center">
                 <div class="flex-shrink-0">
                     <a href="/" class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
-                        <i class="fas fa-chart-bar h-8 w-8"></i>
-                        <span>GIPC</span>
+                        <x-application-logo />
                     </a>
                 </div>
 

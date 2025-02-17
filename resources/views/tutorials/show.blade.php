@@ -7,7 +7,7 @@
                     <div class="max-w-6xl mx-auto py-8">
                         <!-- Full Width Video Player -->
                         <div class="w-full rounded-lg overflow-hidden shadow-lg">
-                            <video controls class="w-full aspect-video">
+                            <video controls controlsList="nodownload" class="w-full aspect-video">
                                 <source src="https://gipc.b-cdn.net/%E1%83%96%E1%83%9D%E1%83%92%E1%83%90%E1%83%93%E1%83%98%20%E1%83%9B%E1%83%98%E1%83%9B%E1%83%9D%E1%83%AE%E1%83%98%E1%83%9A%E1%83%95%E1%83%90.mp4" type="video/mp4">
                                 <source src="movie.ogg" type="video/ogg">
                                 Your browser does not support the video tag.
