@@ -1,7 +1,7 @@
 <x-layout>
     <!-- Hero Section Start -->
-    <section class="relative overflow-hidden pt-36 dark:bg-gray-900">
-        <div class="absolute inset-0 bg-white dark:bg-gray-900 -z-10"></div>
+    <section class="relative overflow-hidden pt-36 dark:bg-dark">
+        <div class="absolute inset-0 bg-white dark:bg-dark -z-10"></div>
         <div class="absolute inset-0 opacity-30 -z-10 bg-pattern dark:opacity-10"></div>
         <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
             <div class="text-center relative">
@@ -28,7 +28,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-6 bg-white dark:bg-dark border-t border-gray-100 dark:border-gray-800/10">
+    <section class="py-6 bg-white dark:bg-dark border-t border-gray-100 dark:border-gray-800/10" x-cloak>
         <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="group relative">

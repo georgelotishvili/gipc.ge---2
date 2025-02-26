@@ -1,7 +1,7 @@
 <x-admin.layout>
-    <div class="bg-white rounded-2xl shadow-lg p-8">
+    <div class="bg-white dark:bg-dark-2 rounded-2xl shadow-lg p-8">
         @if(session('error'))
-            <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+            <div class="mb-6 bg-red-50 dark:bg-red-500/10 border-l-4 border-red-500 p-4 rounded-lg">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -9,14 +9,14 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <p class="text-sm text-red-700">{{ session('error') }}</p>
+                        <p class="text-sm text-red-700 dark:text-red-300">{{ session('error') }}</p>
                     </div>
                 </div>
             </div>
         @endif
 
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-800">დადგენილების რედაქტირება</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">დადგენილების რედაქტირება</h2>
         </div>
 
         <form action="{{ route('admin.codes.update', $group) }}" method="POST" class="space-y-6">
@@ -24,22 +24,22 @@
             @method('PATCH')
             
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">დადგენილების კოდი</label>
-                <input type="text" name="name" id="name" value="{{ $group->name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200">დადგენილების კოდი</label>
+                <input type="text" name="name" id="name" value="{{ $group->name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-dark-4 dark:bg-dark-2 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
             </div>
 
             <div>
-                <label for="title" class="block text-sm font-medium text-gray-700">დადგენილების სახელი</label>
-                <input type="text" name="title" id="title" value="{{ $group->title }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">დადგენილების სახელი</label>
+                <input type="text" name="title" id="title" value="{{ $group->title }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-dark-4 dark:bg-dark-2 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
             </div>
 
             <div>
-                <label for="question_count_in_exam" class="block text-sm font-medium text-gray-700">კითხვების რაოდენობა გამოცდაზე</label>
-                <input type="number" name="question_count_in_exam" id="question_count_in_exam" value="{{ $group->question_count_in_exam }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                <label for="question_count_in_exam" class="block text-sm font-medium text-gray-700 dark:text-gray-200">კითხვების რაოდენობა გამოცდაზე</label>
+                <input type="number" name="question_count_in_exam" id="question_count_in_exam" value="{{ $group->question_count_in_exam }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-dark-4 dark:bg-dark-2 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
             </div>
 
             <div class="flex justify-end space-x-3">
-                <a href="{{ route('admin.codes') }}" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                <a href="{{ route('admin.codes') }}" class="px-4 py-2 bg-gray-100 dark:bg-dark-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-dark-4 transition-colors duration-200">
                     გაუქმება
                 </a>
                 <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200">
