@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Chapter::class)->constrained()->nullable()->cascadeOnDelete();
             $table->foreignIdFor(Course::class)->constrained()->nullable()->cascadeOnDelete();
             $table->string('name');
-            $table->string('image');
-            $table->string('description');
+            $table->string('image')->nullable();
+            $table->string('description')->nullable();
             $table->string('video');
             $table->timestamps();
         });

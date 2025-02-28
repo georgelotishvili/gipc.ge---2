@@ -51,8 +51,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
 
     Route::get('/admin/codes', [AdminController::class, 'codes'])->name('admin.codes');
-
-    Route::get('/admin/videos', [AdminController::class, 'videos'])->name('admin.videos');
     
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
     
@@ -74,12 +72,42 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post('/admin/codes/store', [AdminController::class, 'storeGroup'])->name('admin.codes.store');
 
-    // Route::get('/admin/courses', [AdminController::class, 'courses'])->name('admin.courses');
+    Route::get('/admin/courses', [AdminController::class, 'courses'])->name('admin.courses');
 
-    // Route::get('/admin/courses/create', [AdminController::class, 'createCourse'])->name('admin.courses.create');
+    Route::get('/admin/courses/create', [AdminController::class, 'createCourse'])->name('admin.courses.create');
 
-    // Route::post('/admin/courses/store', [AdminController::class, 'storeCourse'])->name('admin.courses.store');
-    
+    Route::post('/admin/courses/store', [AdminController::class, 'storeCourse'])->name('admin.courses.store');
+
+    Route::get('/admin/courses/{course}/edit', [AdminController::class, 'editCourse'])->name('admin.courses.edit');
+
+    Route::patch('/admin/courses/{course}/update', [AdminController::class, 'updateCourse'])->name('admin.courses.update');
+
+    Route::delete('/admin/courses/{course}', [AdminController::class, 'destroyCourse'])->name('admin.courses.destroy');
+
+    Route::get('/admin/courses/{course}/chapters', [AdminController::class, 'chapters'])->name('admin.courses.chapters');
+
+    Route::get('/admin/courses/{course}/chapters/create', [AdminController::class, 'createChapter'])->name('admin.courses.chapters.create');
+
+    Route::post('/admin/courses/{course}/chapters/store', [AdminController::class, 'storeChapter'])->name('admin.courses.chapters.store');
+
+    Route::get('/admin/courses/{course}/chapters/{chapter}/edit', [AdminController::class, 'editChapter'])->name('admin.courses.chapters.edit');
+
+    Route::patch('/admin/courses/{course}/chapters/{chapter}/update', [AdminController::class, 'updateChapter'])->name('admin.courses.chapters.update');
+
+    Route::delete('/admin/courses/{course}/chapters/{chapter}', [AdminController::class, 'destroyChapter'])->name('admin.courses.chapters.destroy');
+
+    Route::get('/admin/courses/{course}/chapters/{chapter}/videos', [AdminController::class, 'videos'])->name('admin.courses.chapters.videos');
+
+    Route::get('/admin/courses/{course}/chapters/{chapter}/videos/create', [AdminController::class, 'createVideo'])->name('admin.courses.chapters.videos.create');
+
+    Route::post('/admin/courses/{course}/chapters/{chapter}/videos/store', [AdminController::class, 'storeVideo'])->name('admin.courses.chapters.videos.store');
+
+    Route::get('/admin/courses/{course}/chapters/{chapter}/videos/{video}/edit', [AdminController::class, 'editVideo'])->name('admin.courses.chapters.videos.edit');
+
+    Route::patch('/admin/courses/{course}/chapters/{chapter}/videos/{video}/update', [AdminController::class, 'updateVideo'])->name('admin.courses.chapters.videos.update');
+
+    Route::delete('/admin/courses/{course}/chapters/{chapter}/videos/{video}', [AdminController::class, 'destroyVideo'])->name('admin.courses.chapters.videos.destroy');
+
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
 

@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'bunny' => [
+        'video_library_id' => '382670',
+        'cdn_hostname' => 'vz-b6104acb-6e4.b-cdn.net',
+        'pull_zone' => 'vz-b6104acb-6e4',
+        'api_key' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+        'storage_zone_name' => env('BUNNY_STORAGE_ZONE_NAME'),
+    ],
+
 ];
