@@ -1,6 +1,6 @@
-<x-admin.layout>
-    <div class="min-h-screen bg-white dark:bg-dark relative overflow-hidden">
-        <div class="relative z-10 max-w-[1920px] mx-auto px-6 py-8">
+<x-layout>
+    <div class="min-h-screen bg-white dark:bg-dark relative overflow-hidden pt-16">
+        <div class="relative z-10 container mx-auto px-6 py-16">
             <!-- Header -->
             <div class="text-center mb-16">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
@@ -12,10 +12,10 @@
             </div>
 
             <!-- Video Grid -->
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            <div class="grid place-items-center">
                 <!-- Video Card -->
-                <a href="{{ route('tutorials.show', 'zogadi-mimoxilva') }}" class="group h-full w-full">
-                    <div class="bg-white dark:bg-dark-2 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
+                <a href="{{ route('tutorials.show', 'zogadi-mimoxilva') }}" class="group h-full max-w-2xl">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
                         <div class="aspect-video relative">
                             <video class="w-full h-full object-cover">
                                 <source src="https://gipc.b-cdn.net/ზოგადი%20მიმოხილვა.mp4" type="video/mp4">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
                             <div class="flex-grow">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-500 transition-colors line-clamp-2">
                                     სერტიფიცირების პროცესის მიმოხილვა
                                 </h3>
                                 <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
@@ -69,4 +69,4 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="{{ asset('js/video-player.js') }}"></script>
     @endpush
-</x-admin.layout>
+</x-layout>

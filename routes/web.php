@@ -26,6 +26,22 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');
+
+Route::get('/tutorials', function () {
+    return view('tutorials');
+})->name('tutorials');
+
+Route::get('/tutorials/{video}', function ($video) {
+    // You might want to validate the video ID here
+    return view('tutorials.show', compact('video'));
+})->name('tutorials.show');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -64,7 +80,7 @@ Route::middleware(['admin'])->group(function () {
 
     // Route::post('/admin/courses/store', [AdminController::class, 'storeCourse'])->name('admin.courses.store');
     
-    
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
 
 Route::middleware([

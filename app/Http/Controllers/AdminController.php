@@ -180,4 +180,9 @@ class AdminController extends Controller
         
         return redirect()->back();
     }
+
+    public function settings()
+    {
+        return redirect()->back();
+    }
 }
