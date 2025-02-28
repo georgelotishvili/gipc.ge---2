@@ -73,6 +73,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/codes/create', [AdminController::class, 'createGroup'])->name('admin.codes.create');
 
     Route::post('/admin/codes/store', [AdminController::class, 'storeGroup'])->name('admin.codes.store');
+
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
 
 Route::middleware([
