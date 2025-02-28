@@ -1,5 +1,14 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth dark"
+    x-data="{ 
+        sidebarOpen: localStorage.getItem('sidebarOpen') === 'true',
+        toggleSidebar() {
+            this.sidebarOpen = !this.sidebarOpen;
+            localStorage.setItem('sidebarOpen', this.sidebarOpen);
+        },
+        mobileMenuOpen: false
+    }" 
+    x-cloak>
 
 <head>
     <meta charset="UTF-8" />
@@ -10,351 +19,326 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>GIPC</title>
     @vite('resources/css/app.css')
-
+    @vite('resources/js/app.js')
 </head>
 
-<body>
-
+<body class="dark:bg-dark">
     <!-- ====== Navbar Section Start -->
-    <div class="ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-primary">
-        <div class="container">
-            <div class="relative -mx-4 flex items-center justify-between">
-                <div class="w-60 max-w-full">
-                    <a href="/" class="text-3xl text-white font-semibold block w-full py-5">
-                        GIPC
+    <nav class="fixed w-full bg-white/80 dark:bg-dark top-0 z-50 border-b border-gray-100 dark:border-gray-800">
+        <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <a href="/" wire:navigate class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
+                        <x-application-logo />
                     </a>
                 </div>
-                <div class="flex w-full items-center justify-between px-4">
-                    <div>
-                        <button id="navbarToggler"
-                            class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
-                            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                        </button>
-                        <nav id="navbarCollapse"
-                            class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-primary py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none xl:px-6">
-                            <ul class="blcok lg:flex lg:justify-between lg:items-center 2xl:ml-20">
-                                <li class="group relative">
-                                    <a href="{{ route('services') }}"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                        სერვისები
-                                    </a>
-                                </li>
-                                <li class="group relative">
-                                    <a href="{{ route('specialists') }}"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                        სპეციალისტები
-                                    </a>
-                                </li>
-                                {{-- <li class="group relative">
-                                    <a href="#team"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                        სიახლე
-                                    </a>
-                                </li> --}}
-                                {{-- <li class="group relative">
-                                    <a href="#contact"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                        ვაკანსიები
-                                    </a>
-                                </li> --}}
-                                <li class="group relative">
-                                    <a href="{{ route('contact') }}"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
-                                        კონტაქტი
-                                    </a>
-                                </li>
-                                @auth
-                                    <li class="group relative">
-                                        <a href="{{ route('workspace') }}"
-                                            class="ud-menu-scroll mx-8 flex py-2 text-base font-medium bg-white text-primary rounded-lg px-6 hover:bg-opacity-90 lg:ml-7 lg:mr-0 lg:inline-flex lg:py-3">
-                                            სამუშაო სივრცე
-                                        </a>
-                                    </li>
-                                @endauth
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="flex items-center justify-end pr-16 lg:pr-0">
-                        <label for="themeSwitcher" class="inline-flex cursor-pointer items-center"
-                            aria-label="themeSwitcher" name="themeSwitcher">
-                            <input type="checkbox" name="themeSwitcher" id="themeSwitcher" class="sr-only" />
-                            <span class="block text-white">
-                                <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M13.3125 1.50001C12.675 1.31251 12.0375 1.16251 11.3625 1.05001C10.875 0.975006 10.35 1.23751 10.1625 1.68751C9.93751 2.13751 10.05 2.70001 10.425 3.00001C13.0875 5.47501 14.0625 9.11251 12.975 12.525C11.775 16.3125 8.25001 18.975 4.16251 19.0875C3.63751 19.0875 3.22501 19.425 3.07501 19.9125C2.92501 20.4 3.15001 20.925 3.56251 21.1875C4.50001 21.75 5.43751 22.2 6.37501 22.5C7.46251 22.8375 8.58751 22.9875 9.71251 22.9875C11.625 22.9875 13.5 22.5 15.1875 21.5625C17.85 20.1 19.725 17.7375 20.55 14.8875C22.1625 9.26251 18.975 3.37501 13.3125 1.50001ZM18.9375 14.4C18.2625 16.8375 16.6125 18.825 14.4 20.0625C12.075 21.3375 9.41251 21.6 6.90001 20.85C6.63751 20.775 6.33751 20.6625 6.07501 20.55C10.05 19.7625 13.35 16.9125 14.5875 13.0125C15.675 9.56251 15 5.92501 12.7875 3.07501C17.5875 4.68751 20.2875 9.67501 18.9375 14.4Z" />
-                                </svg>
-                            </span>
-                            <span class="hidden text-white">
-                                <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_2172_3070)">
-                                        <path
-                                            d="M12 6.89999C9.18752 6.89999 6.90002 9.18749 6.90002 12C6.90002 14.8125 9.18752 17.1 12 17.1C14.8125 17.1 17.1 14.8125 17.1 12C17.1 9.18749 14.8125 6.89999 12 6.89999ZM12 15.4125C10.125 15.4125 8.58752 13.875 8.58752 12C8.58752 10.125 10.125 8.58749 12 8.58749C13.875 8.58749 15.4125 10.125 15.4125 12C15.4125 13.875 13.875 15.4125 12 15.4125Z" />
-                                        <path
-                                            d="M12 4.2375C12.45 4.2375 12.8625 3.8625 12.8625 3.375V1.5C12.8625 1.05 12.4875 0.637497 12 0.637497C11.55 0.637497 11.1375 1.0125 11.1375 1.5V3.4125C11.175 3.8625 11.55 4.2375 12 4.2375Z" />
-                                        <path
-                                            d="M12 19.7625C11.55 19.7625 11.1375 20.1375 11.1375 20.625V22.5C11.1375 22.95 11.5125 23.3625 12 23.3625C12.45 23.3625 12.8625 22.9875 12.8625 22.5V20.5875C12.8625 20.1375 12.45 19.7625 12 19.7625Z" />
-                                        <path
-                                            d="M18.1125 6.74999C18.3375 6.74999 18.5625 6.67499 18.7125 6.48749L19.9125 5.28749C20.25 4.94999 20.25 4.42499 19.9125 4.08749C19.575 3.74999 19.05 3.74999 18.7125 4.08749L17.5125 5.28749C17.175 5.62499 17.175 6.14999 17.5125 6.48749C17.6625 6.67499 17.8875 6.74999 18.1125 6.74999Z" />
-                                        <path
-                                            d="M5.32501 17.5125L4.12501 18.675C3.78751 19.0125 3.78751 19.5375 4.12501 19.875C4.27501 20.025 4.50001 20.1375 4.72501 20.1375C4.95001 20.1375 5.17501 20.0625 5.32501 19.875L6.52501 18.675C6.86251 18.3375 6.86251 17.8125 6.52501 17.475C6.18751 17.175 5.62501 17.175 5.32501 17.5125Z" />
-                                        <path
-                                            d="M22.5 11.175H20.5875C20.1375 11.175 19.725 11.55 19.725 12.0375C19.725 12.4875 20.1 12.9 20.5875 12.9H22.5C22.95 12.9 23.3625 12.525 23.3625 12.0375C23.3625 11.55 22.95 11.175 22.5 11.175Z" />
-                                        <path
-                                            d="M4.23751 12C4.23751 11.55 3.86251 11.1375 3.37501 11.1375H1.50001C1.05001 11.1375 0.637512 11.5125 0.637512 12C0.637512 12.45 1.01251 12.8625 1.50001 12.8625H3.41251C3.86251 12.8625 4.23751 12.45 4.23751 12Z" />
-                                        <path
-                                            d="M18.675 17.5125C18.3375 17.175 17.8125 17.175 17.475 17.5125C17.1375 17.85 17.1375 18.375 17.475 18.7125L18.675 19.9125C18.825 20.0625 19.05 20.175 19.275 20.175C19.5 20.175 19.725 20.1 19.875 19.9125C20.2125 19.575 20.2125 19.05 19.875 18.7125L18.675 17.5125Z" />
-                                        <path
-                                            d="M5.32501 4.125C4.98751 3.7875 4.46251 3.7875 4.12501 4.125C3.78751 4.4625 3.78751 4.9875 4.12501 5.325L5.32501 6.525C5.47501 6.675 5.70001 6.7875 5.92501 6.7875C6.15001 6.7875 6.37501 6.7125 6.52501 6.525C6.86251 6.1875 6.86251 5.6625 6.52501 5.325L5.32501 4.125Z" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_2172_3070">
-                                            <rect width="24" height="24" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </span>
-                        </label>
-                        <div class="hidden sm:flex gap-4 ml-2">
 
-                            @if (Route::has('login'))
-                                @auth
-                                    @if (Auth::user()->is_admin)
-                                        <a href="{{ route('admin.index') }}" class="w-24 py-2 text-center font-bold text-primary bg-white rounded-lg hover:opacity-90">
-                                            <span>ადმინი</span>
-                                        </a>
-                                        @else
-                                        <a href="{{ route('profile.show') }}" class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
-                                            Profile
-                                        </a>
-                                    @endif
-                                    
-                                    <form method="POST" action="{{ route('logout') }}" x-data>
-                                        @csrf
-                                        <button type="submit"
-                                           class="signUpBtn rounded-md bg-white bg-opacity-20 w-24 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                            გამოსვლა
-                                        </button>
-                                    </form>
-                                @else
-                                    <a href="{{ route('login') }}" class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
-                                        შესვლა
-                                    </a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                            რეგისტრაცია
-                                        </a>
-                                    @endif
-                                @endauth
-                            @endif
-                        </div>
+                <div class="hidden lg:flex items-center justify-between flex-grow">
+                    <div class="flex items-center space-x-8 mx-auto">
+                        <a href="/" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                            მთავარი
+                        </a>
+                        <a href="/tutorials" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                            ვიდეო გაკვეთილები
+                        </a>
+                        <a href="/pricing" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                            ფასები
+                        </a>
+                        <a href="/about" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                            ჩვენს შესახებ
+                        </a>
                     </div>
+
+                    @auth
+                        <div class="flex items-center gap-2 sm:gap-3 2xsm:gap-7">
+                            <!-- Desktop Notifications and Dark Mode (xl and up) -->
+                            <ul class="hidden xl:flex items-center gap-2 2xsm:gap-4">
+                                <!-- Theme Toggle -->
+                                <li>
+                                    <button class="darkswitcher flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
+                                        <svg class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                                        </svg>
+                                        <svg class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                        </svg>
+                                    </button>
+                                </li>
+
+                                <!-- Notifications -->
+                                <li>
+                                    <button class="relative flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
+                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                        </svg>
+                                        <span class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[8px] font-medium text-white">
+                                            4
+                                        </span>
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <!-- User Menu -->
+                            <div x-data="{ dropdownOpen: false }" class="relative">
+                                <button @click="dropdownOpen = !dropdownOpen" 
+                                        class="flex items-center gap-2 sm:gap-4">
+                                    <span class="h-9 w-9 sm:h-10 sm:w-10 rounded-xl">
+                                        <img src="{{ auth()->user()->profile_photo_url }}"
+                                             alt="{{ auth()->user()->name }}"
+                                             class="rounded-xl object-cover object-center">
+                                    </span>
+                                    <span class="hidden text-right xl:block">
+                                        <span class="block text-sm font-medium text-black dark:text-white">{{ auth()->user()->name }}</span>
+                                        <span class="block text-xs text-gray-500 dark:text-dark-6">{{ auth()->user()->role }}</span>
+                                    </span>
+                                    <svg :class="dropdownOpen && 'rotate-180'" class="hidden fill-current sm:block" width="12" height="8" viewBox="0 0 12 8">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"/>
+                                    </svg>
+                                </button>
+
+                                <!-- Dropdown Menu -->
+                                <div x-show="dropdownOpen"
+                                     x-transition:enter="transition ease-out duration-200"
+                                     x-transition:enter-start="opacity-0 scale-95"
+                                     x-transition:enter-end="opacity-100 scale-100"
+                                     x-transition:leave="transition ease-in duration-100"
+                                     x-transition:leave-start="opacity-100 scale-100"
+                                     x-transition:leave-end="opacity-0 scale-95"
+                                     @click.outside="dropdownOpen = false"
+                                     class="absolute right-0 mt-4 flex w-62.5 flex-col rounded-xl border border-gray-200/50 bg-white shadow-lg dark:border-dark-4 dark:bg-dark-2">
+                                    <ul class="flex flex-col gap-4 px-6 py-5 dark:border-dark-4">
+                                        <!-- Mobile/Tablet Notifications and Dark Mode (md to xl) -->
+                                        <div class="flex items-center justify-between gap-4 xl:hidden pb-4 border-b border-gray-200/50 dark:border-dark-4">
+                                            <button class="flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
+                                                <svg class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                                                </svg>
+                                                <svg class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="relative flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
+                                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                                </svg>
+                                                <span class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[8px] font-medium text-white">
+                                                    4
+                                                </span>
+                                            </button>
+                                        </div>
+                                        @auth
+                                            <li>
+                                                <a href="{{ route('workspace') }}" wire:navigate
+                                                   class="flex items-center gap-3.5 text-sm font-medium text-gray-700 duration-300 ease-in-out hover:text-primary dark:text-dark-6 dark:hover:text-primary">
+                                                    <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22">
+                                                        <path d="M11 9.62499C8.42188 9.62499 6.35938 7.59687 6.35938 5.12187C6.35938 2.64687 8.42188 0.618744 11 0.618744C13.5781 0.618744 15.6406 2.64687 15.6406 5.12187C15.6406 7.59687 13.5781 9.62499 11 9.62499ZM11 2.16562C9.28125 2.16562 7.90625 3.50624 7.90625 5.12187C7.90625 6.73749 9.28125 8.07812 11 8.07812C12.7188 8.07812 14.0938 6.73749 14.0938 5.12187C14.0938 3.50624 12.7188 2.16562 11 2.16562Z"/>
+                                                        <path d="M17.7719 21.4156H4.2281C3.5406 21.4156 2.9906 20.8656 2.9906 20.1781V17.0844C2.9906 13.7156 5.7406 10.9656 9.1094 10.9656H12.925C16.2937 10.9656 19.0437 13.7156 19.0437 17.0844V20.1781C19.0094 20.8312 18.4594 21.4156 17.7719 21.4156ZM4.53748 19.8687H17.4969V17.0844C17.4969 14.575 15.4344 12.5125 12.925 12.5125H9.07498C6.5656 12.5125 4.5031 14.575 4.5031 17.0844V19.8687H4.53748Z"/>
+                                                    </svg>
+                                                    სამუშაო გვერდი
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button type="submit"
+                                                           class="flex w-full items-center gap-3.5 text-sm font-medium text-gray-700 duration-300 ease-in-out hover:text-primary dark:text-dark-6 dark:hover:text-primary">
+                                                        <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22">
+                                                            <path d="M17.6687 1.44374C17.1187 0.893744 16.4312 0.618744 15.675 0.618744H7.42498C6.25623 0.618744 5.25935 1.58124 5.25935 2.78437V4.12499H4.29685C3.88435 4.12499 3.50623 4.46874 3.50623 4.91562C3.50623 5.36249 3.84998 5.70624 4.29685 5.70624H5.25935V10.2781H4.29685C3.88435 10.2781 3.50623 10.6219 3.50623 11.0687C3.50623 11.4812 3.84998 11.8594 4.29685 11.8594H5.25935V16.4312H4.29685C3.88435 16.4312 3.50623 16.775 3.50623 17.2219C3.50623 17.6687 3.84998 18.0125 4.29685 18.0125H5.25935V19.25C5.25935 20.4187 6.22185 21.4156 7.42498 21.4156H15.675C17.2218 21.4156 18.4937 20.1437 18.5281 18.5969V3.47187C18.4937 2.68124 18.2187 1.95937 17.6687 1.44374Z"/>
+                                                        </svg>
+                                                        გასვლა
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        @endauth
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="flex items-center gap-2 sm:gap-4">
+                            <a href="{{ route('login') }}" wire:navigate class="bg-primary-600 dark:bg-primary-500 text-white px-5 py-2.5 rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors shadow-lg shadow-primary-500/20 dark:shadow-primary-500/10">
+                                დაწყება
+                            </a>
+                        </div>
+                    @endauth
+
                 </div>
+
+                <div class="lg:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300">
+                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg x-show="mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (md and down) -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-4"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-4"
+         class="lg:hidden fixed inset-0 z-40 bg-white dark:bg-dark pt-20">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col space-y-6">
+                <a href="/" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                    მთავარი
+                </a>
+                <a href="/tutorials" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                    ვიდეო გაკვეთილები
+                </a>
+                <a href="/pricing" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                    ფასები
+                </a>
+                <a href="/about" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                    ჩვენს შესახებ
+                </a>
+                @guest
+                    <a href="{{ route('login') }}" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                        შესვლა
+                    </a>
+                @else
+                    <a href="{{ route('workspace') }}" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                        სამუშაო გვერდი
+                    </a>
+                    <a href="{{ route('logout') }}" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium text-lg">
+                        გასვლა
+                    </a>
+                @endguest
+                <button class="flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
+                    <svg class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                    </svg>
+                    <svg class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
-    <!-- ====== Navbar Section End -->
-    <main>
+
+    <!-- Rest of your layout -->
+    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 dark:bg-dark">
         {{ $slot }}
     </main>
-    <!-- ====== Footer Section Start -->
-    <footer class="wow fadeInUp relative z-10 bg-dark pt-20 lg:pt-[100px]" data-wow-delay=".15s">
-        <div class="container">
-            <div class="-mx-4 flex flex-wrap">
-                <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
-                    <div class="mb-10 w-full">
-                        <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
-                            <span class="font-bold text-white">GIPC</span>
+
+    <!-- Footer Section -->
+    <footer class="bg-white dark:bg-dark border-t border-gray-100 dark:border-gray-800 py-12">
+        <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-8">
+                    <a href="/" wire:navigate class="text-xl font-bold text-gray-900 dark:text-white">GIPC</a>
+                    <a href="/about" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ჩვენს შესახებ</a>
+                    <a href="/contact" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონტაქტი</a>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-4">
+                        <a href="#" wire:navigate class="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
-                        <p class="mb-8 max-w-[270px] text-base text-gray-7">
-                            საქართველოს პროფესიული სერთიფიცირების ინსტიტუტი (GIPC)
-
-                        </p>
-                        <div class="-mx-3 flex items-center">
-                            <a href="javascript:void(0)" class="px-3 text-gray-7 hover:text-white">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="fill-current">
-                                    <path
-                                        d="M16.294 8.86875H14.369H13.6815V8.18125V6.05V5.3625H14.369H15.8128C16.1909 5.3625 16.5003 5.0875 16.5003 4.675V1.03125C16.5003 0.653125 16.2253 0.34375 15.8128 0.34375H13.3034C10.5878 0.34375 8.69714 2.26875 8.69714 5.12187V8.1125V8.8H8.00964H5.67214C5.19089 8.8 4.74402 9.17812 4.74402 9.72812V12.2031C4.74402 12.6844 5.12214 13.1313 5.67214 13.1313H7.94089H8.62839V13.8188V20.7281C8.62839 21.2094 9.00652 21.6562 9.55652 21.6562H12.7878C12.994 21.6562 13.1659 21.5531 13.3034 21.4156C13.4409 21.2781 13.544 21.0375 13.544 20.8312V13.8531V13.1656H14.2659H15.8128C16.2596 13.1656 16.6034 12.8906 16.6721 12.4781V12.4438V12.4094L17.1534 10.0375C17.1878 9.79688 17.1534 9.52187 16.9471 9.24687C16.8784 9.075 16.569 8.90312 16.294 8.86875Z" />
-                                </svg>
-                            </a>
-                            <a href="javascript:void(0)" class="px-3 text-gray-7 hover:text-white">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="fill-current">
-                                    <path
-                                        d="M20.1236 5.91236C20.2461 5.76952 20.0863 5.58286 19.905 5.64972C19.5004 5.79896 19.1306 5.8974 18.5837 5.95817C19.2564 5.58362 19.5693 5.04828 19.8237 4.39259C19.885 4.23443 19.7 4.09092 19.5406 4.16647C18.8931 4.47345 18.1945 4.70121 17.4599 4.83578C16.7338 4.11617 15.6988 3.6665 14.5539 3.6665C12.3554 3.6665 10.5725 5.32454 10.5725 7.36908C10.5725 7.65933 10.6081 7.94206 10.6752 8.21276C7.51486 8.06551 4.6968 6.71359 2.73896 4.64056C2.60477 4.49848 2.36128 4.51734 2.27772 4.69063C2.05482 5.15296 1.93056 5.66584 1.93056 6.20582C1.93056 7.49014 2.6332 8.62331 3.70132 9.28732C3.22241 9.27293 2.76441 9.17961 2.34234 9.02125C2.13684 8.94416 1.90127 9.07964 1.92888 9.28686C2.14084 10.8781 3.42915 12.1909 5.09205 12.5011C4.75811 12.586 4.40639 12.6311 4.04253 12.6311C3.95431 12.6311 3.86685 12.6284 3.78019 12.6231C3.55967 12.6094 3.38044 12.8067 3.47499 12.9954C4.09879 14.2404 5.44575 15.1096 7.0132 15.1367C5.65077 16.13 3.93418 16.7218 2.06882 16.7218C1.83882 16.7218 1.74015 17.0175 1.9442 17.1178C3.52016 17.8924 5.31487 18.3332 7.22182 18.3332C14.545 18.3332 18.549 12.6914 18.549 7.79843C18.549 7.63827 18.545 7.47811 18.5377 7.31945C19.1321 6.92012 19.6664 6.44528 20.1236 5.91236Z" />
-                                </svg>
-                            </a>
-                            <a href="javascript:void(0)" class="px-3 text-gray-7 hover:text-white">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="fill-current">
-                                    <path
-                                        d="M11.0297 14.4305C12.9241 14.4305 14.4598 12.8948 14.4598 11.0004C14.4598 9.10602 12.9241 7.57031 11.0297 7.57031C9.13529 7.57031 7.59958 9.10602 7.59958 11.0004C7.59958 12.8948 9.13529 14.4305 11.0297 14.4305Z" />
-                                    <path
-                                        d="M14.7554 1.8335H7.24463C4.25807 1.8335 1.83334 4.25823 1.83334 7.24479V14.6964C1.83334 17.7421 4.25807 20.1668 7.24463 20.1668H14.6962C17.7419 20.1668 20.1667 17.7421 20.1667 14.7555V7.24479C20.1667 4.25823 17.7419 1.8335 14.7554 1.8335ZM11.0296 15.4948C8.51614 15.4948 6.53496 13.4545 6.53496 11.0002C6.53496 8.54586 8.54571 6.50554 11.0296 6.50554C13.4839 6.50554 15.4946 8.54586 15.4946 11.0002C15.4946 13.4545 13.5134 15.4948 11.0296 15.4948ZM17.2393 6.91952C16.9436 7.24479 16.5 7.42221 15.9973 7.42221C15.5538 7.42221 15.1102 7.24479 14.7554 6.91952C14.4301 6.59425 14.2527 6.18027 14.2527 5.67758C14.2527 5.17489 14.4301 4.79049 14.7554 4.43565C15.0807 4.08081 15.4946 3.90339 15.9973 3.90339C16.4409 3.90339 16.914 4.08081 17.2393 4.40608C17.535 4.79049 17.7419 5.23403 17.7419 5.70715C17.7124 6.18027 17.535 6.59425 17.2393 6.91952Z" />
-                                    <path
-                                        d="M16.0276 4.96777C15.6432 4.96777 15.318 5.29304 15.318 5.67745C15.318 6.06186 15.6432 6.38713 16.0276 6.38713C16.412 6.38713 16.7373 6.06186 16.7373 5.67745C16.7373 5.29304 16.4416 4.96777 16.0276 4.96777Z" />
-                                </svg>
-                            </a>
-                            <a href="javascript:void(0)" class="px-3 text-gray-7 hover:text-white">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="fill-current">
-                                    <path
-                                        d="M18.8065 1.8335H3.16399C2.42474 1.8335 1.83334 2.42489 1.83334 3.16414V18.8362C1.83334 19.5459 2.42474 20.1668 3.16399 20.1668H18.7473C19.4866 20.1668 20.078 19.5754 20.078 18.8362V3.13457C20.1371 2.42489 19.5457 1.8335 18.8065 1.8335ZM7.24464 17.4168H4.55379V8.69371H7.24464V17.4168ZM5.88443 7.48135C4.99733 7.48135 4.31721 6.77167 4.31721 5.91414C4.31721 5.05661 5.0269 4.34694 5.88443 4.34694C6.74196 4.34694 7.45163 5.05661 7.45163 5.91414C7.45163 6.77167 6.8011 7.48135 5.88443 7.48135ZM17.4463 17.4168H14.7554V13.1883C14.7554 12.183 14.7258 10.8523 13.336 10.8523C11.9167 10.8523 11.7097 11.976 11.7097 13.0996V17.4168H9.01884V8.69371H11.6506V9.90608H11.6801C12.0645 9.1964 12.9221 8.48672 14.2527 8.48672C17.0027 8.48672 17.5054 10.2609 17.5054 12.6856V17.4168H17.4463Z" />
-                                </svg>
-                            </a>
-                        </div>
+                        <a href="#" wire:navigate class="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" wire:navigate class="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
-                </div>
-                <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
-                    <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">ჩვენს შესახებ</h4>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    მთავარი
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    ფუნქციები
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    შესახებ
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    გამოხმაურება
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
-                    <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">ფუნქციები</h4>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    როგორ მუშაობს
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    კონფიდენციალურობის პოლიტიკა
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    მომსახურების პირობები
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    დაბრუნების პოლიტიკა
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
-                    <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">
-                            ჩვენი პროდუქტები
-                        </h4>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    საგამოცდო სერთიფიცირება
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"
-                                    class="mb-3 inline-block text-base text-gray-7 hover:text-primary">
-                                    ვიდეოგაკვეთილები
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12">
-                    <div class="mb-10 w-full">
-                        <h4 class="mb-9 text-lg font-semibold text-white">შეფასებები</h4>
-                        <div class="flex flex-col gap-8">
-                            <a href="" class="group flex items-center gap-[22px]">
-                                <div class="overflow-hidden rounded">
-                                    {{-- ICON HERE --}}
-                                </div>
-                                <span class="max-w-[180px] text-base text-gray-7 group-hover:text-white">
-                                    ...
-                                </span>
-                            </a>
-                            <a href="" class="group flex items-center gap-[22px]">
-                                <div class="overflow-hidden rounded">
-                                    {{-- ICON HERE --}}
-                                </div>
-                                <span class="max-w-[180px] text-base text-gray-7 group-hover:text-white">
-                                    ...
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-12 border-t border-[#8890A4] border-opacity-40 py-8 lg:mt-[60px]">
-            <div class="container">
-                <div class="-mx-4 flex flex-wrap">
-                    <div class="w-full px-4 md:w-2/3 lg:w-1/2">
-                        <div class="my-1">
-                            <div class="-mx-3 flex items-center justify-center md:justify-start">
-                                <a href="javascript:void(0)"
-                                    class="px-3 text-base text-gray-7 hover:text-white hover:underline">
-                                    კონფიდენციალურობის პოლიტიკა
-                                </a>
-                                <a href="javascript:void(0)"
-                                    class="px-3 text-base text-gray-7 hover:text-white hover:underline">
-                                    იურიდიული შეტყობინება
-                                </a>
-                                <a href="javascript:void(0)"
-                                    class="px-3 text-base text-gray-7 hover:text-white hover:underline">
-                                    მომსახურების პირობები
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full px-4 md:w-1/3 lg:w-1/2">
-                        <div class="my-1 flex justify-center md:justify-end">
-                            <p class="text-base text-gray-7">
-                                ...
-                                <a href="https://tailgrids.com" rel="nofollow noopner" target="_blank"
-                                    class="text-gray-1 hover:underline">
-                                    ...
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+                    <span class="text-gray-400 dark:text-gray-500">|</span>
+                    <span class="text-gray-600 dark:text-gray-400">© 2024 GIPC</span>
                 </div>
             </div>
         </div>
     </footer>
-    <!-- ====== Footer Section End -->
+
 </body>
+
+<script>
+    // Initialize dark mode on page load
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const darkModeToggle = document.querySelector(".darkswitcher");
+        const html = document.documentElement;
+        
+        // Check localStorage for dark mode preference
+        if (localStorage.getItem("theme") === "dark") {
+            html.classList.add("dark");
+        }
+    
+        // Toggle dark mode on button click
+        darkModeToggle.addEventListener("click", () => {
+            if (html.classList.contains("dark")) {
+                html.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+            } else {
+                html.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+            }
+        });
+    });
+</script>
+
+<script>
+    // Theme toggle functionality
+    const html = document.documentElement;
+    const themeToggles = document.querySelectorAll('[name="themeSwitcher"], [name="mobileThemeSwitcher"]');
+    
+    // Function to set theme
+    function setTheme(isDark) {
+        if (isDark) {
+            html.classList.add('dark');
+            localStorage.theme = 'dark';
+            themeToggles.forEach(toggle => toggle.checked = true);
+        } else {
+            html.classList.remove('dark');
+            localStorage.theme = 'light';
+            themeToggles.forEach(toggle => toggle.checked = false);
+        }
+    }
+
+    // Check initial theme
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        setTheme(true);
+    } else {
+        setTheme(false);
+    }
+
+    // Handle toggle clicks
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('change', (e) => {
+            setTheme(e.target.checked);
+        });
+    });
+
+    // Mobile menu functionality
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    mobileMenuButton?.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+    });
+</script>
+
+<style>
+    [x-cloak] {
+        display: block !important;
+    }
+</style>
 
 </html>

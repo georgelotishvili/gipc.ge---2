@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Abecert\DeleteImageAction;
+use App\Actions\Abecert\SaveImageAction;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Chapter;
+use App\Models\Course;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Video;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class AdminController extends Controller
 {
@@ -158,12 +166,6 @@ class AdminController extends Controller
         return redirect()->route('admin.codes')->with('success', 'დადგენილება წარმატებით დამატებულია');
     }
 
-    public function videos()
-    {
-        return view('admin.videos');
-    }
-
-
     public function destroy($question)
     {
         if($question === 'bulk') {   
@@ -180,4 +182,206 @@ class AdminController extends Controller
         
         return redirect()->back();
     }
+
+    public function settings()
+    {
+        return redirect()->back();
+    }
+
+    public function courses()
+    {
+        $courses = Course::all();
+        return view('admin.courses', compact('courses'));
+    }
+
+    public function createCourse()
+    {
+        return view('admin.courses.create');
+    }
+
+    public function storeCourse(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $course = Course::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ]);
+            
+            if ($request->hasFile('image')) {
+                $saveImage = new SaveImageAction();
+                $image = $saveImage->execute($request->file('image'));
+                
+                $course->image()->save($image);
+            }
+            DB::commit();
+            return redirect()->route('admin.courses')->with('success', 'კურსი წარმატებით დამატებულია');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
+        }
+    }
+
+    public function editCourse(Course $course)
+    {
+        return view('admin.courses.edit', compact('course'));
+    }
+
+    public function updateCourse(Request $request, Course $course)
+    {
+        DB::beginTransaction();
+        try {
+            $course->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ]);
+
+            if ($request->hasFile('image')) {
+                // Delete old image if exists
+                if ($course->image) {
+                    Storage::disk('public')->delete($course->image->path);
+                    $course->image->delete();
+                }
+
+                // Save new image
+                $saveImage = new SaveImageAction();
+                $image = $saveImage->execute($request->file('image'));
+                $course->image()->save($image);
+            }
+
+            DB::commit();
+            return redirect()->route('admin.courses')->with('success', 'კურსი წარმატებით განახლდა');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
+        }
+    }
+
+    public function destroyCourse(Course $course)
+    {
+        DB::beginTransaction();
+        try {
+            $course->delete();
+            
+            if ($course->image) {
+                $deleteImage = new DeleteImageAction();
+                $deleteImage->execute($course->image);
+            }
+
+            DB::commit();
+            return redirect()->route('admin.courses')->with('success', 'კურსი წარმატებით წაიშალა');
+        }
+        catch (\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
+        }
+    }
+
+    public function chapters(Course $course)
+    {
+        return view('admin.courses.chapters', compact('course'));
+    }
+
+    public function createChapter(Course $course)
+    {
+        return view('admin.courses.chapters.create', compact('course'));
+    }
+
+    public function storeChapter(Request $request, Course $course)
+    {
+        DB::beginTransaction();
+        try {
+            $chapter = Chapter::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'course_id' => $course->id
+            ]);
+            
+            if ($request->hasFile('image')) {
+                $saveImage = new SaveImageAction();
+                $image = $saveImage->execute($request->file('image'));
+                
+                $chapter->image()->save($image);
+            }
+            DB::commit();
+            return redirect()->route('admin.courses.chapters', $course)->with('success', 'თავი წარმატებით დამატებულია');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
+        }
+    }
+    
+    public function editChapter(Course $course, Chapter $chapter)
+    {
+        return view('admin.courses.chapters.edit', compact('course', 'chapter'));
+    }
+
+    public function updateChapter(Request $request, Course $course, Chapter $chapter)
+    {
+        return redirect()->back();
+    }
+
+    public function destroyChapter(Course $course, Chapter $chapter)
+    {
+        $chapter->videos()->delete();
+        $chapter->delete();
+        return redirect()->back();
+    }
+
+    public function createVideo(Request $request, Course $course, Chapter $chapter)
+    {
+        // // Get bunny.net credentials from config
+        // $bunnyConfig = config('services.bunny');
+
+        // // Create Guzzle client for Bunny API
+        // $client = new \GuzzleHttp\Client();
+
+        // // Make request to create video in Bunny library
+        // $response = $client->request('PUT', 
+        //     "https://video.bunnycdn.com/library/{$bunnyConfig['video_library_id']}/videos", [
+        //     'headers' => [
+        //         'accept' => 'application/json',
+        //         'AccessKey' => $bunnyConfig['api_key']
+        //     ],
+        //     'json' => [
+        //         'title' => $request->input('name')
+        //     ]
+        // ]);
+
+        // $responseData = json_decode($response->getBody(), true);
+        // $videoId = $responseData['guid'];
+
+        // return view('admin.courses.chapters.videos.create', [
+        //     'course' => $course,
+        //     'chapter' => $chapter,
+        //     'uploadUrl' => "https://video.bunnycdn.com/library/{$bunnyConfig['video_library_id']}/videos/{$videoId}"
+        // ]);
+    }
+
+    public function storeVideo(Request $request, Course $course, Chapter $chapter)
+    {
+        return redirect()->back();
+    }
+
+    public function editVideo(Course $course, Chapter $chapter, Video $video)
+    {
+        return view('admin.courses.chapters.videos.edit', compact('course', 'chapter', 'video'));
+    }
+
+    public function updateVideo(Request $request, Course $course, Chapter $chapter, Video $video)
+    {
+        return redirect()->back();
+    }
+
+    public function destroyVideo(Course $course, Chapter $chapter, Video $video)
+    {
+        return redirect()->back();
+    }
+
+    public function videos(Course $course, Chapter $chapter)
+    {
+        return view('admin.courses.chapters.videos', compact('course', 'chapter'));
+    }
+
 }
