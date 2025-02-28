@@ -1,52 +1,78 @@
 <x-layout>
-    <!-- ====== Hero Section Start -->
-    <div id="home" class="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]">
+    <!-- ====== Services Section Start -->
+    <div class="relative overflow-hidden pt-[120px] md:pt-[130px] lg:pt-[160px]">
         <div class="container">
             <div class="-mx-4 flex flex-wrap items-center">
-                
                 <div class="w-full px-4 py-10">
-                    <div class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center" data-wow-delay=".2s">
-                        <h1 class="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
-                            მალე დაემატება
+                    <div class="wow fadeInUp mx-auto max-w-[780px] text-center" data-wow-delay=".2s">
+                        <h1 class="mb-6 text-3xl font-bold leading-snug text-gray-900 dark:text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
+                            ჩვენი სერვისები
                         </h1>
-                        <p class="mx-auto mb-9 max-w-[600px] text-base font-medium text-white sm:text-lg sm:leading-[1.44]">
-                            გვერდი მზადების პროცესშია
+                        <p class="mx-auto mb-9 max-w-[600px] text-base font-medium text-gray-600 dark:text-gray-300 sm:text-lg sm:leading-[1.44]">
+                            აირჩიეთ თქვენთვის სასურველი სერვისი
                         </p>
-                        
-                        <!-- Animated Gears -->
-                        <div class="flex justify-center items-center gap-4">
-                            <div class="animate-spin">
-                                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="animate-spin-slow">
-                                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <style>
-                            @keyframes spin-slow {
-                                from {
-                                    transform: rotate(0deg);
-                                }
-                                to {
-                                    transform: rotate(-360deg);
-                                }
-                            }
-                            .animate-spin-slow {
-                                animation: spin-slow 3s linear infinite;
-                            }
-                        </style>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
-    <!-- ====== Hero Section End -->
+    <!-- ====== Services Section End -->
+
+    <!-- ====== Services Cards Section Start -->
+    <div class="py-20">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Practice Tests Card -->
+                <div class="bg-white dark:bg-dark-2 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://daily.jstor.org/wp-content/uploads/2015/05/standardizedtests.jpg" alt="Practice Tests" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">ტესტები</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            მოემზადეთ გამოცდისთვის ჩვენი მრავალფეროვანი ტესტების საშუალებით. პრაქტიკული ტესტები შექმნილია რეალური გამოცდის მსგავსად და მოიცავს ყველა საჭირო თემას.
+                        </p>
+                        <a href="/questions" wire:navigate class="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors">
+                            დაწყება
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Exam Simulation Card -->
+                <div class="bg-white dark:bg-dark-2 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://admissions.rochester.edu/blog/wp-content/uploads/2015/08/test.png" alt="Exam Simulation" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">გამოცდის სიმულაცია</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            გაიარეთ სრული გამოცდის სიმულაცია რეალური გამოცდის იდენტურ გარემოში. დროის ლიმიტი, კითხვების რაოდენობა და სირთულე შეესაბამება რეალურ გამოცდას.
+                        </p>
+                        <a href="/exam" wire:navigate class="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors">
+                            სიმულაცია
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Video Tutorials Card -->
+                <div class="bg-white dark:bg-dark-2 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://www.thedvigroup.com/wp-content/uploads/2023/08/Benefits-of-Video-Tutorials-Distance-Learner-Watching-Video-166191408_m_normal_none-1.jpg" alt="Video Tutorials" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">ვიდეო გაკვეთილები</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            უყურეთ დეტალურ ვიდეო გაკვეთილებს ნებისმიერ დროს. ჩვენი ექსპერტები გაგიზიარებენ თავიანთ ცოდნას და გამოცდილებას ყველა მნიშვნელოვან თემაზე.
+                        </p>
+                        <a href="/tutorials" wire:navigate class="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors">
+                            ნახვა
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ====== Services Cards Section End -->
 </x-layout>

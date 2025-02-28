@@ -38,8 +38,8 @@
                         <a href="/" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                             მთავარი
                         </a>
-                        <a href="/tutorials" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
-                            ვიდეო გაკვეთილები
+                        <a href="/services" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                            სერვისები
                         </a>
                         <a href="/pricing" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                             ფასები
@@ -54,6 +54,13 @@
                             <!-- Desktop Notifications and Dark Mode (xl and up) -->
                             <ul class="hidden xl:flex items-center gap-2 2xsm:gap-4">
                                 <!-- Theme Toggle -->
+                                @if (auth()->user()->is_admin)
+                                    <li>
+                                        <a href="/admin" wire:navigate class="flex h-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 px-4 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
+                                            ადმინ პანელი
+                                        </a>
+                                    </li>
+                                @endif
                                 <li>
                                     <button class="darkswitcher flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4">
                                         <svg class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
