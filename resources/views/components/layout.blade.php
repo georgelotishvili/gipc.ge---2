@@ -184,12 +184,18 @@ x-data="{
                 
                 <div class="lg:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300">
-                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                        <svg x-show="mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            class="fixed top-4 right-4 z-50 lg:hidden p-2 rounded-lg bg-white dark:bg-dark-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-4 focus:outline-none border border-gray-200 dark:border-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round" 
+                                  stroke-width="2" 
+                                  d="M4 6h16M4 12h16M4 18h16"/>
+                            <path x-show="mobileMenuOpen" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round" 
+                                  stroke-width="2" 
+                                  d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
