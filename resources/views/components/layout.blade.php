@@ -251,7 +251,68 @@ x-data="{
             </div>
         </div>
     </div>
+  <!-- Hero Section Start -->
+  <section class="relative overflow-hidden pt-24 px-12 dark:bg-dark">
+        <div class="absolute inset-0 bg-white dark:bg-dark -z-10"></div>
+        <div class="absolute inset-0 opacity-30 -z-10 bg-pattern dark:opacity-10"></div>
+        
+        <!-- Banner Slider -->
+        <div x-data="{ 
+            currentSlide: parseInt(localStorage.getItem('currentSlide')) || 0,
+            slides: [
+                { image: 'https://picsum.photos/1600/900?random=1', title: 'პროფესიული სერტიფიცირება', subtitle: 'საერთაშორისო სტანდარტებით' },
+                { image: 'https://picsum.photos/1600/900?random=2', title: 'ISO სტანდარტების შესაბამისად', subtitle: 'კვალიფიკაციის ამაღლება' },
+                { image: 'https://picsum.photos/1600/900?random=3', title: 'საერთაშორისო გამოცდილება', subtitle: 'პროფესიონალთა გუნდი' },
+                { image: 'https://picsum.photos/1600/900?random=4', title: 'სერტიფიცირების პროგრამები', subtitle: 'თანამედროვე მიდგომები' },
+                { image: 'https://picsum.photos/1600/900?random=5', title: 'უწყვეტი განათლება', subtitle: 'პროფესიული ზრდა' },
+                { image: 'https://picsum.photos/1600/900?random=6', title: 'ხარისხის გარანტია', subtitle: 'საერთაშორისო აღიარება' },
+                { image: 'https://picsum.photos/1600/900?random=7', title: 'ინოვაციური სწავლება', subtitle: 'თანამედროვე მეთოდები' },
+                { image: 'https://picsum.photos/1600/900?random=8', title: 'პრაქტიკული გამოცდილება', subtitle: 'რეალური პროექტები' },
+                { image: 'https://picsum.photos/1600/900?random=9', title: 'კარიერული წინსვლა', subtitle: 'პროფესიული განვითარება' },
+                { image: 'https://picsum.photos/1600/900?random=10', title: 'გლობალური სტანდარტები', subtitle: 'ლოკალური ექსპერტიზა' }
+            ]
+         }"
+         x-init="
+            setInterval(() => { 
+                currentSlide = (currentSlide + 1) % slides.length;
+                localStorage.setItem('currentSlide', currentSlide);
+            }, 4000);
+            $watch('currentSlide', value => localStorage.setItem('currentSlide', value));"
+         class="relative max-w-[120rem] mx-auto mb-16">
+            
+            <!-- Slides Container -->
+            <div class="relative h-[300px] overflow-hidden rounded-3xl">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <div x-show="currentSlide === index"
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 transform translate-x-full"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform -translate-x-full"
+                         class="absolute inset-0">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30"></div>
+                        <img :src="slide.image" :alt="slide.title" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-12 text-white">
+                            <h2 class="text-4xl font-bold mb-4" x-text="slide.title"></h2>
+                            <p class="text-xl" x-text="slide.subtitle"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
 
+            <!-- Navigation Dots -->
+            <!-- <div class="flex justify-center gap-3 mt-6">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <button @click="currentSlide = index"
+                            :class="{ 'bg-primary-600': currentSlide === index, 'bg-gray-300 dark:bg-gray-700': currentSlide !== index }"
+                            class="w-3 h-3 rounded-full transition-colors duration-200">
+                    </button>
+                </template>
+            </div> -->
+        </div>
+    </section>
     <!-- Rest of your layout -->
     <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 dark:bg-dark">
         {{ $slot }}

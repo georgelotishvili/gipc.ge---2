@@ -100,5 +100,13 @@ Route::middleware([
     Route::get('/test', Exam::class)->name('test');
 });
 
+Route::get('/certificated-specialists', function () {
+    return view('certificated-specialists');
+})->name('certificated-specialists');
+
+Route::get('/jobs', function () {
+    return view('jobs.jobs-listings');
+})->name('jobs');
+
 // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 //     ->name('logout');
