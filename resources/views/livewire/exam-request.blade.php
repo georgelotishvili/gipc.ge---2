@@ -8,7 +8,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                 </svg>
             </div>
-            <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90 mb-6">გამოცდა</h2>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90 mb-6">წინასაგამოცდო ტესტი</h2>
             
             <!-- Action Buttons -->
             <div class="flex flex-col items-center space-y-4 w-full max-w-sm">
@@ -18,7 +18,7 @@
                                    focus:ring-4 focus:ring-primary-100 dark:focus:ring-primary-400/20
                                    transform active:scale-[0.98] transition-all duration-200
                                    disabled:opacity-70 disabled:cursor-not-allowed">
-                        გამოცდის მოთხოვნა
+                        წინასაგამოცდო ტესტის მოთხოვნა
                     </button>
                 @endif
                 
@@ -26,7 +26,7 @@
                     <button wire:click="startExam" 
                             class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-medium 
                                    disabled:opacity-70 disabled:cursor-not-allowed">
-                        გამოცდის დაწყება
+                        წინასაგამოცდო ტესტის დაწყება
                     </button>
                 @endif
                 

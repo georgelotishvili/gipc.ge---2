@@ -209,8 +209,7 @@ class AdminController extends Controller
             ]);
             
             if ($request->hasFile('image')) {
-                $saveImage = new SaveImageAction();
-                $image = $saveImage->execute($request->file('image'));
+                $image = SaveImageAction::execute($request->file('image'));
                 
                 $course->image()->save($image);
             }
@@ -238,21 +237,22 @@ class AdminController extends Controller
 
             if ($request->hasFile('image')) {
                 // Delete old image if exists
-                if ($course->image) {
-                    Storage::disk('public')->delete($course->image->path);
-                    $course->image->delete();
+                if ($course->image()->exists()) {
+                    Storage::disk('public')->delete($course->image()->first()->path);
+                    $course->image()->delete();
                 }
 
                 // Save new image
-                $saveImage = new SaveImageAction();
-                $image = $saveImage->execute($request->file('image'));
+                $image = SaveImageAction::execute($request->file('image'));
                 $course->image()->save($image);
+                $course->save();
             }
 
             DB::commit();
             return redirect()->route('admin.courses')->with('success', 'კურსი წარმატებით განახლდა');
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e);
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
     }
@@ -319,7 +319,34 @@ class AdminController extends Controller
 
     public function updateChapter(Request $request, Course $course, Chapter $chapter)
     {
-        return redirect()->back();
+        DB::beginTransaction();
+        try {
+            $chapter->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ]);
+
+            if ($request->hasFile('image')) {
+                // Delete old image if exists
+                if ($chapter->image()->exists()) {
+                    Storage::disk('public')->delete($chapter->image()->first()->path);
+                    $chapter->image()->delete();
+                }
+
+                // Save new image
+                $image = SaveImageAction::execute($request->file('image'));
+                $chapter->image()->save($image);
+                $chapter->save();
+            }
+
+            DB::commit();
+            return redirect()->route('admin.courses.chapters', $course)->with('success', 'თავი წარმატებით განახლდა');
+        }
+        catch (\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
+        }
     }
 
     public function destroyChapter(Course $course, Chapter $chapter)

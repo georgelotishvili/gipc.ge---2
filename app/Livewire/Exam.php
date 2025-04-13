@@ -8,6 +8,7 @@ use App\Models\Test;
 use App\Models\TestQuestion;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\ExamRequest as ExamRequestModel;
 
 class Exam extends Component
 {
@@ -20,47 +21,33 @@ class Exam extends Component
     public $testQuestion;
     public $currentExamRequest;
 
-    public function mount(TestQuestion $testQuestion)
+    public function mount(TestQuestion $testQuestion, $examRequest)
     {
 
         $this->user = auth()->user();
+        $this->currentExamRequest = ExamRequestModel::findOrFail($examRequest);
+        // Check if the exam request belongs to the authenticated user
+        if ($this->currentExamRequest->user_id !== $this->user->id)
+        {
+            session()->flash('error', 'You do not have permission to access this exam.');
+            return redirect(null, 500);
+        }
+        $this->test = $this->currentExamRequest->test;
+        // dd($this->currentExamRequest);
+        $this->validateTestActive($this->test);
         $this->testQuestion = $testQuestion;
-        $this->currentExamRequest = $this->user->examRequests->where('approved', true)->where('closed', false)->first();
-        $this->setActiveTest();
+        $this->current_question_index = $this->test->questions()->orderBy('id', 'asc')->first()->id;
         $this->loadCurrentQuestionIndex();
         $this->initializeFirstQuestion();
     }
 
-    public function goToQuestion($questionId)
+    public function goToQuestion($questionId): void
     {
         $this->question = Question::findOrFail($questionId);
         $this->updateProgress();
     }
 
-    public function setActiveTest()
-    {
-        // First deactivate any existing active tests
-        Test::where('active', true)->update(['active' => false]);
-
-        // Create a new test
-        $this->test = Test::create([
-            'name' => 'Test',
-            'exam_request_id' => $this->currentExamRequest->id,
-            'active' => true,
-            'duration' => 240,
-            'started_at' => now(),
-        ]);
-
-        // Attach random questions from each group
-        foreach(Group::all() as $group) 
-        {
-            $this->test->questions()->attach($group->questions()->select('questions.id')->inRandomOrder()->limit($group->question_count_in_exam)->pluck('questions.id'));
-        }
-
-        $this->test->save();
-    }
-
-    public function validateTestActive($test)
+    public function validateTestActive(Test $test): void
     {
         if (!$test->active) 
         {
@@ -76,7 +63,7 @@ class Exam extends Component
         }
     }
 
-    public function initializeFirstQuestion()
+    public function initializeFirstQuestion(): void
     {
         if($this->current_question_index) {
             $this->question = $this->test->questions()->where('questions.id', $this->current_question_index)->withPivot('answer')->first();
@@ -102,7 +89,7 @@ class Exam extends Component
         $this->question = $this->test->questions()->where('questions.id', $this->question->id)->withPivot('answer')->first();
     }
 
-    public function nextQuestion()
+    public function nextQuestion(): void
     {
         $currentQuestionId = $this->question->id;
         $nextQuestion = $this->test->questions()
@@ -123,7 +110,7 @@ class Exam extends Component
         $this->updateProgress();
     }
 
-    public function previousQuestion()
+    public function previousQuestion(): void
     {
         $currentQuestionId = $this->question->id;
         $previousQuestion = $this->test->questions()

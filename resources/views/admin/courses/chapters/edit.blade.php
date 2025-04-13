@@ -58,7 +58,7 @@
 
             <!-- Chapter Edit Form -->
             <div class="max-w-2xl mx-auto">
-                <form action="{{ route('admin.courses.chapters.update', [$course, $chapter]) }}" method="POST" class="space-y-6">
+                <form action="{{ route('admin.courses.chapters.update', [$course, $chapter]) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PATCH')
                     
@@ -88,6 +88,23 @@
                                       rows="4" 
                                       class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-2 focus:border-primary-500 focus:ring-primary-500"
                                       placeholder="შეიყვანეთ თავის აღწერა">{{ $chapter->description }}</textarea>
+                        </div>
+
+                        <!-- Chapter Image -->
+                        <div class="mb-6">
+                            <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                თავის სურათი
+                            </label>
+                            @if($chapter->image)
+                                <div class="mb-4">
+                                    <img src="{{ Storage::url($chapter->image->path) }}" alt="Current chapter image" class="w-32 h-32 object-cover rounded-lg">
+                                </div>
+                            @endif
+                            <input type="file" 
+                                   name="image" 
+                                   id="image"
+                                   accept="image/*"
+                                   class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-2 focus:border-primary-500 focus:ring-primary-500">
                         </div>
 
                         <!-- Submit Button -->

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SaveImageAction
 {
-    public function execute(UploadedFile $image, string $path = 'images', int $maxWidth = 1920, int $maxHeight = 1080): Image 
+    public static function execute(UploadedFile $image, string $path = 'images', int $maxWidth = 1920, int $maxHeight = 1080): Image 
     {
         try {
             $manager = ImageManager::gd();

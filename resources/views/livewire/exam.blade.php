@@ -55,6 +55,7 @@
                             <span class="text-sm font-medium dark:text-white">პროგრესი: {{ number_format($progress, 0) }}%</span>
                             <div class="flex justify-center">
                                 @foreach($test->questions()->orderBy('id')->get() as $q)
+                                    
                                     <span wire:click="goToQuestion({{ $q->id }})" id="{{ $q->id }}" class="w-3 h-3 mx-1 rounded-full cursor-pointer @if($q->id == $question->id)
                                          bg-primary dark:bg-primary-600
                                     @elseif($testQuestion->where('test_id', $test->id)->where('question_id', $q->id)->first()?->answer)

@@ -38,13 +38,13 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('certificates') }}" wire:navigate
+                    <a href="{{ route('test_results') }}" wire:navigate
                        class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
-                       {{ Route::is('certificates') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
+                       {{ Route::is('test_results') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
-                        <span :class="{ 'opacity-0 hidden': !sidebarOpen }">ჩემი სერტიფიკატები</span>
+                        <span :class="{ 'opacity-0 hidden': !sidebarOpen }">ტესტების შედეგები</span>
                     </a>
                 </li>
                 <li>

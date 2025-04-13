@@ -122,16 +122,16 @@ Route::middleware([
     Route::get('/workspace', function () {
         return view('user.workspace');
     })->name('workspace');
-    Route::get('/certificates', function () {
-        return view('user.certificates');
-    })->name('certificates');
+    Route::get('/test_results', function () {
+        return view('user.test_results');
+    })->name('test_results');
     Route::get('/video', function () {
         return view('user.video');
     })->name('video');
 
     Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
 
-    Route::get('/exam', Exam::class)->name('exam');
+    Route::get('/exam/{examRequest}', Exam::class)->name('exam');
 
     Route::get('/test', Exam::class)->name('test');
 });
