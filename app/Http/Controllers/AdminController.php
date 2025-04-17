@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
@@ -358,37 +360,53 @@ class AdminController extends Controller
 
     public function createVideo(Request $request, Course $course, Chapter $chapter)
     {
-        // // Get bunny.net credentials from config
-        // $bunnyConfig = config('services.bunny');
-
-        // // Create Guzzle client for Bunny API
-        // $client = new \GuzzleHttp\Client();
-
-        // // Make request to create video in Bunny library
-        // $response = $client->request('PUT', 
-        //     "https://video.bunnycdn.com/library/{$bunnyConfig['video_library_id']}/videos", [
-        //     'headers' => [
-        //         'accept' => 'application/json',
-        //         'AccessKey' => $bunnyConfig['api_key']
-        //     ],
-        //     'json' => [
-        //         'title' => $request->input('name')
-        //     ]
-        // ]);
-
-        // $responseData = json_decode($response->getBody(), true);
-        // $videoId = $responseData['guid'];
-
-        // return view('admin.courses.chapters.videos.create', [
-        //     'course' => $course,
-        //     'chapter' => $chapter,
-        //     'uploadUrl' => "https://video.bunnycdn.com/library/{$bunnyConfig['video_library_id']}/videos/{$videoId}"
-        // ]);
+        return view('admin.courses.chapters.videos.create', compact('course', 'chapter'));
     }
 
     public function storeVideo(Request $request, Course $course, Chapter $chapter)
     {
-        return redirect()->back();
+        // Get bunny.net credentials
+        $apiKey = '389ab102-2f80-4aff-9fed5d887804-31ef-4caf';
+        $libraryId = '382670';
+        $cdnHostname = 'vz-b6104acb-6e4.b-cdn.net';
+        
+        try {
+            $response = Http::withHeaders([
+                'AccessKey' => $apiKey,
+            ])->post("https://video.bunnycdn.com/library/{$libraryId}/videos", [
+                'title' => $request->input('name'),
+            ]);
+            
+            if (!$response->successful()) {
+                throw new \Exception('Failed to create video on Bunny.net: ' . $response->body());
+            }
+            Log::info("create video response: " . $response->body());
+
+            $videoId = $response['guid'];
+            
+            if (empty($videoId)) {
+                throw new \Exception('Invalid video ID received from Bunny.net');
+            }
+
+            $videoFile = $request->file('video');
+            $videoPath = $videoFile->getRealPath();
+            Log::info("video path: " . $videoPath);
+            Log::info("original path: " . $videoFile->getClientOriginalPath());
+            Log::info("file size: " . $videoFile->getSize() . " bytes");
+            
+            $uploadResponse = Http::withHeaders([
+                'AccessKey' => $apiKey,
+                'Content-Type' => 'application/octet-stream',
+            ])->put("https://video.bunnycdn.com/library/{$libraryId}/videos/{$videoId}", file_get_contents($videoPath));
+            Log::info("upload response: " . $uploadResponse->body());
+            if (!$uploadResponse->successful()) {
+                throw new \Exception('Failed to upload video to Bunny.net: ' . $uploadResponse->body());
+            }
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'ვიდეოს ატვირთვა ვერ მოხერხდა: ' . $e->getMessage());
+        }
+
     }
 
     public function editVideo(Course $course, Chapter $chapter, Video $video)
