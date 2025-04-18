@@ -30,6 +30,18 @@
                 <!-- Videos List -->
                 <div class="max-w-4xl mx-auto space-y-4">
                     @foreach($chapter->videos as $video)
+                    @php
+                    $client = new \GuzzleHttp\Client();
+
+                    $response = $client->request('GET', $video->video_url, [
+                        'headers' => [
+                            'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                            'accept' => 'application/json',
+                        ],
+                    ]);
+
+                    dd($response);
+                    @endphp
                     <div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
                         <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
                             @if($video->thumbnail)

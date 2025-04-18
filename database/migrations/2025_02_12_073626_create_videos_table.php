@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('description')->nullable();
-            $table->string('video');
+            $table->string('video_id')->nullable();
+            $table->string('video_url')->nullable();
             $table->timestamps();
         });
     }

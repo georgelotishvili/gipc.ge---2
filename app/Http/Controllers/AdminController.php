@@ -365,48 +365,58 @@ class AdminController extends Controller
 
     public function storeVideo(Request $request, Course $course, Chapter $chapter)
     {
-        // Get bunny.net credentials
-        $apiKey = '389ab102-2f80-4aff-9fed5d887804-31ef-4caf';
-        $libraryId = '382670';
-        $cdnHostname = 'vz-b6104acb-6e4.b-cdn.net';
-        
+        Log::info($request->all());
         try {
-            $response = Http::withHeaders([
-                'AccessKey' => $apiKey,
-            ])->post("https://video.bunnycdn.com/library/{$libraryId}/videos", [
-                'title' => $request->input('name'),
+            Log::info('inside try');
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('POST', 'https://video.bunnycdn.com/library/382670/videos', [
+                'headers' => [
+                    'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                    'accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+                'json' => [
+                    'title' => $request->input('name')
+                ]
             ]);
-            
-            if (!$response->successful()) {
-                throw new \Exception('Failed to create video on Bunny.net: ' . $response->body());
-            }
-            Log::info("create video response: " . $response->body());
 
-            $videoId = $response['guid'];
-            
-            if (empty($videoId)) {
-                throw new \Exception('Invalid video ID received from Bunny.net');
-            }
+            $body = json_decode($response->getBody(), true);
+            $videoId = $body['guid']; // This is your video ID
 
-            $videoFile = $request->file('video');
-            $videoPath = $videoFile->getRealPath();
-            Log::info("video path: " . $videoPath);
-            Log::info("original path: " . $videoFile->getClientOriginalPath());
-            Log::info("file size: " . $videoFile->getSize() . " bytes");
-            
-            $uploadResponse = Http::withHeaders([
-                'AccessKey' => $apiKey,
-                'Content-Type' => 'application/octet-stream',
-            ])->put("https://video.bunnycdn.com/library/{$libraryId}/videos/{$videoId}", file_get_contents($videoPath));
-            Log::info("upload response: " . $uploadResponse->body());
-            if (!$uploadResponse->successful()) {
-                throw new \Exception('Failed to upload video to Bunny.net: ' . $uploadResponse->body());
-            }
-            
-        } catch (\Exception $e) {
+            $videoPath = $request->file('video')->getRealPath();
+            $videoData = fopen($videoPath, 'r'); // open file for reading
+
+            $video = $chapter->videos()->create([
+                'name' => $request->input('name'),
+                'course_id' => $course->id,
+                'video_id' => $videoId,
+                'video_url' => "https://video.bunnycdn.com/library/382670/videos/$videoId"
+            ]);
+
+            Log::info('video created'. $video);
+
+            $response = $client->request('PUT', "https://video.bunnycdn.com/library/382670/videos/$videoId", [
+                'headers' => [
+                    'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                    'Content-Type' => 'application/octet-stream',
+                ],
+                'body' => $videoData
+            ]);
+
+            Log::info('video uploaded Status: '. $response->getStatusCode());
+
+
+
+            // dd($video);
+
+            // echo $response->getStatusCode(); // Should be 200
+        } 
+        catch (\Exception $e)
+        {
+            throw $e;
             return redirect()->back()->with('error', 'ვიდეოს ატვირთვა ვერ მოხერხდა: ' . $e->getMessage());
         }
-
     }
 
     public function editVideo(Course $course, Chapter $chapter, Video $video)
@@ -421,6 +431,20 @@ class AdminController extends Controller
 
     public function destroyVideo(Course $course, Chapter $chapter, Video $video)
     {
+        try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('DELETE', $video->video_url, [
+                'headers' => [
+                    'accept' => 'application/json',
+                    'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                ],
+            ]);
+            Log::info('video deleted Status: ' . $response->getStatusCode());
+        } catch (\Exception $e) {
+            Log::error('video deletion error: ' . $e->getMessage());
+        }
+        
+        $video->delete();
         return redirect()->back();
     }
 
