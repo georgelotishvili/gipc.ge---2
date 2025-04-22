@@ -30,24 +30,24 @@
                 <!-- Videos List -->
                 <div class="max-w-4xl mx-auto space-y-4">
                     @foreach($chapter->videos as $video)
-                    @php
+                        @php
 
-                    $client = new \GuzzleHttp\Client();
+                            $client = new \GuzzleHttp\Client();
 
-                    $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
-                    'headers' => [
-                        'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
-                        'accept' => 'application/json',
-                    ],
-                    ]);
+                            $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/'.$video->video_id, [
+                            'headers' => [
+                                'AccessKey' => config('video.api_key'),
+                                'accept' => 'application/json',
+                            ],
+                            ]);
 
-                    // Convert the response body to a JSON object
-                    $responseData = json_decode($response->getBody(), true);
+                            // Convert the response body to a JSON object
+                            $responseData = json_decode($response->getBody(), true);
 
-                    // echo $response->getBody();
+                            // echo $response->getBody();
 
-                    // dd($response);
-                    @endphp
+                            // dd($response);
+                        @endphp
                     <div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
                         <a href="{{ route('admin.courses.chapters.videos.show', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" target="_blank">
                         <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
@@ -72,7 +72,7 @@
                                     </p>
                                 </div>
                                 <div class="text-sm text-gray-500">
-                                    <span>{{ isset($responseData['length']) ? sprintf('%02d:%02d:%02d', floor($responseData['length']/3600), floor(($responseData['length']/60)%60), $responseData['length']%60) : '00:00:00' }} წუთი</span>
+                                    <span>{{ isset($video->duration) ? sprintf('%02d:%02d:%02d', floor($video->duration/3600), floor(($video->duration/60)%60), $video->duration%60) : '00:00:00' }} წუთი</span>
                                 </div>
                             </div>
                             

@@ -407,8 +407,18 @@ class AdminController extends Controller
 
             Log::info('video uploaded Status: '. $response->getStatusCode());
 
+            $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
+                'headers' => [
+                    'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                    'accept' => 'application/json',
+                ],
+                ]);
 
+            // Convert the response body to a JSON object
+            $responseData = json_decode($response->getBody(), true);
 
+            $video->duration = $responseData['length'];
+            $video->save();
             // dd($video);
 
             // echo $response->getStatusCode(); // Should be 200

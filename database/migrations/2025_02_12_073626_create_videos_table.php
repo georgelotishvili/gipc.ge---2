@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('description')->nullable();
+            $table->integer('duration')->nullable();
+            $table->integer('views')->default(0);
             $table->string('video_id')->nullable();
             $table->string('library_id')->nullable();
             $table->string('pull_zone_id')->nullable();

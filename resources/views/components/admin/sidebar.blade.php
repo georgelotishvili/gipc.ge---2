@@ -10,7 +10,7 @@
         <template x-if="sidebarOpen">
             <x-application-logo/>
         </template>
-        <template x-if="!sidebarOpen">
+        <template x-if="!sidebarOpen">image.png
             <x-admin.sidebar-logo/>
         </template>
     </div>

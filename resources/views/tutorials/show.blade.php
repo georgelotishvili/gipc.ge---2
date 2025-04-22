@@ -1,4 +1,19 @@
 <x-layout>
+    @php
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/'.$video->video_id, [
+        'headers' => [
+            'AccessKey' => config('video.api_key'),
+            'accept' => 'application/json',
+        ],
+        ]);
+
+        // Convert the response body to a JSON object
+        $responseData = json_decode($response->getBody(), true);
+
+        // dd($responseData);
+    @endphp
     <div class="min-h-screen bg-white dark:bg-dark relative overflow-hidden pt-24">
         <div class="relative z-10">
             <!-- Video Section -->
@@ -7,27 +22,24 @@
                     <div class="max-w-6xl mx-auto py-8">
                         <!-- Full Width Video Player -->
                         <div class="w-full rounded-lg overflow-hidden shadow-lg">
-                            <video controls controlsList="nodownload" class="w-full aspect-video">
-                                <source src="https://gipc.b-cdn.net/%E1%83%96%E1%83%9D%E1%83%92%E1%83%90%E1%83%93%E1%83%98%20%E1%83%9B%E1%83%98%E1%83%9B%E1%83%9D%E1%83%AE%E1%83%98%E1%83%9A%E1%83%95%E1%83%90.mp4" type="video/mp4">
-                                <source src="movie.ogg" type="video/ogg">
-                                Your browser does not support the video tag.
-                            </video>
+                            <div style="position:relative;padding-top:56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/{{$video->library_id}}/{{$video->video_id}}?autoplay=true&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+
                         </div>
 
                         <!-- Video Info -->
                         <div class="p-6 bg-white dark:bg-gray-800 rounded-b-lg">
-                            <h5 class="text-gray-900 dark:text-white text-2xl font-medium mb-2">სერტიფიცირების პროცესის მიმოხილვა</h5>
+                            <h5 class="text-gray-900 dark:text-white text-2xl font-medium mb-2">{{ $video->name }}</h5>
                             <p class="text-gray-700 dark:text-gray-300 text-base mb-4">
-                                დეტალური ინფორმაცია სერტიფიცირების პროცესის შესახებ
+                                {{ $video->description }}
                             </p>
                             <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
                                 <span class="flex items-center gap-2">
                                     <i class="far fa-eye"></i>
-                                    1,234 ნახვა
+                                    {{ $responseData['views'] }} ნახვა
                                 </span>
                                 <span class="flex items-center gap-2">
                                     <i class="far fa-calendar"></i>
-                                    15 მარტი, 2024
+                                    {{ $responseData['dateUploaded'] }}
                                 </span>
                             </div>
                         </div>
@@ -41,24 +53,24 @@
                     <!-- Video Info with Glass Effect -->
                     <div class="mb-12 p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200/10 dark:border-gray-700/30 shadow-lg">
                         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
-                            სერტიფიცირების პროცესის <span class="bg-gradient-to-r from-primary-400 to-blue-400 bg-clip-text text-transparent">მიმოხილვა</span>
+                            {{ $video->name }}
                         </h1>
                         <div class="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-400 mb-6">
                             <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800/50 px-3 py-1 rounded-full">
                                 <i class="far fa-clock"></i>
-                                15:30
+                                {{ isset($video->duration) ? sprintf('%02d:%02d:%02d', floor($video->duration/3600), floor(($video->duration/60)%60), $video->duration%60) : '00:00:00' }}
                             </span>
                             <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800/50 px-3 py-1 rounded-full">
                                 <i class="far fa-calendar"></i>
-                                2024 წლის 15 მარტი
+                                {{ $video->created_at->format('d მარტი, Y') }}
                             </span>
                             <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800/50 px-3 py-1 rounded-full">
                                 <i class="far fa-eye"></i>
-                                1,234 ნახვა
+                                {{ $responseData['views'] }} ნახვა
                             </span>
                         </div>
                         <div class="prose prose-lg dark:prose-invert max-w-none">
-                            <p class="text-gray-600 dark:text-gray-300">დეტალური ინფორმაცია სერტიფიცირების პროცესის შესახებ. აქ შეგიძლიათ გაეცნოთ ყველა საჭირო ეტაპს და მოთხოვნას.</p>
+                            <p class="text-gray-600 dark:text-gray-300">{{ $video->description }}</p>
                         </div>
                     </div>
 

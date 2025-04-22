@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Exam;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
+use App\Models\Course;
+use App\Models\Video;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', function () {
@@ -35,11 +37,17 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 Route::get('/tutorials', function () {
-    return view('tutorials');
+    $courses = Course::all();
+    return view('tutorials', compact('courses'));
 })->name('tutorials');
 
-Route::get('/tutorials/{video}', function ($video) {
-    // You might want to validate the video ID here
+Route::get('/tutorials/course/{course}', function ($course) {
+    $course = Course::find($course);
+    return view('tutorials.chapters', compact('course'));
+})->name('tutorials.chapters');
+
+Route::get('/tutorials/video/{video}', function ($video) {
+    $video = Video::find($video);
     return view('tutorials.show', compact('video'));
 })->name('tutorials.show');
 
