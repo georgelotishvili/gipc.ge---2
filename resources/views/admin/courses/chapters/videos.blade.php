@@ -33,16 +33,35 @@
                     @php
                     $client = new \GuzzleHttp\Client();
 
-                    $response = $client->request('GET', $video->video_url, [
-                        'headers' => [
-                            'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
-                            'accept' => 'application/json',
-                        ],
-                    ]);
+                    // $response = $client->request('GET', $video->video_url, [
+                    //     'headers' => [
+                    //         'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                    //         'accept' => 'application/json',
+                    //     ],
+                    // ]);
 
-                    dd($response);
+                    // $response = $client->request('GET', 'https://vz-b6104acb-6e4.b-cdn.net/9d566441-ae03-4b17-ac16-30fd0a2fcdaf/thumbnail.jpg', [
+                    //     'headers' => [
+                    //         'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                    //         'accept' => 'application/json',
+                    //     ],
+                    // ]);
+
+                    // $client = new \GuzzleHttp\Client();
+
+                    // $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
+                    // 'headers' => [
+                    //     'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                    //     'accept' => 'application/json',
+                    // ],
+                    // ]);
+
+                    // echo $response->getBody();
+
+                    // dd($response);
                     @endphp
                     <div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
+                        <a href="{{ route('admin.courses.chapters.videos.show', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" target="_blank">
                         <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
                             @if($video->thumbnail)
                                 <img src="{{ Storage::url($video->thumbnail) }}" alt="{{ $video->title }}" class="absolute inset-0 w-full h-full object-cover rounded-l-lg">
@@ -52,6 +71,7 @@
                                 </div>
                             @endif
                         </div>
+                        </a>
                         
                         <div class="p-4 flex-grow flex justify-between">
                             <div class="flex flex-col justify-between">

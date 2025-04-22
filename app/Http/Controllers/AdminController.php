@@ -391,7 +391,8 @@ class AdminController extends Controller
                 'name' => $request->input('name'),
                 'course_id' => $course->id,
                 'video_id' => $videoId,
-                'video_url' => "https://video.bunnycdn.com/library/382670/videos/$videoId"
+                'video_url' => "https://video.bunnycdn.com/library/382670/videos/$videoId",
+                'library_id' => 382670
             ]);
 
             Log::info('video created'. $video);
@@ -427,6 +428,11 @@ class AdminController extends Controller
     public function updateVideo(Request $request, Course $course, Chapter $chapter, Video $video)
     {
         return redirect()->back();
+    }
+
+    public function showVideo(Course $course, Chapter $chapter, Video $video)
+    {
+        return view('admin.courses.chapters.videos.show', compact('course', 'chapter', 'video'));
     }
 
     public function destroyVideo(Course $course, Chapter $chapter, Video $video)

@@ -21,7 +21,10 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->string('video_id')->nullable();
+            $table->string('library_id')->nullable();
+            $table->string('pull_zone_id')->nullable();
             $table->string('video_url')->nullable();
+            $table->string('thumbnail_url')->nullable();
             $table->timestamps();
         });
     }

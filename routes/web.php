@@ -108,6 +108,8 @@ Route::middleware(['admin'])->group(function () {
 
     Route::delete('/admin/courses/{course}/chapters/{chapter}/videos/{video}', [AdminController::class, 'destroyVideo'])->name('admin.courses.chapters.videos.destroy');
 
+    Route::get('/admin/courses/{course}/chapters/{chapter}/videos/{video}', [AdminController::class, 'showVideo'])->name('admin.courses.chapters.videos.show');
+    
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
 
