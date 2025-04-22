@@ -31,30 +31,18 @@
                 <div class="max-w-4xl mx-auto space-y-4">
                     @foreach($chapter->videos as $video)
                     @php
+
                     $client = new \GuzzleHttp\Client();
 
-                    // $response = $client->request('GET', $video->video_url, [
-                    //     'headers' => [
-                    //         'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
-                    //         'accept' => 'application/json',
-                    //     ],
-                    // ]);
+                    $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
+                    'headers' => [
+                        'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
+                        'accept' => 'application/json',
+                    ],
+                    ]);
 
-                    // $response = $client->request('GET', 'https://vz-b6104acb-6e4.b-cdn.net/9d566441-ae03-4b17-ac16-30fd0a2fcdaf/thumbnail.jpg', [
-                    //     'headers' => [
-                    //         'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
-                    //         'accept' => 'application/json',
-                    //     ],
-                    // ]);
-
-                    // $client = new \GuzzleHttp\Client();
-
-                    // $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
-                    // 'headers' => [
-                    //     'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
-                    //     'accept' => 'application/json',
-                    // ],
-                    // ]);
+                    // Convert the response body to a JSON object
+                    $responseData = json_decode($response->getBody(), true);
 
                     // echo $response->getBody();
 
@@ -63,8 +51,8 @@
                     <div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
                         <a href="{{ route('admin.courses.chapters.videos.show', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" target="_blank">
                         <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
-                            @if($video->thumbnail)
-                                <img src="{{ Storage::url($video->thumbnail) }}" alt="{{ $video->title }}" class="absolute inset-0 w-full h-full object-cover rounded-l-lg">
+                            @if($video->imageUrl())
+                                <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="absolute inset-0 w-full h-full object-cover rounded-l-lg">
                             @else
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <i class="fas fa-video text-gray-400 text-3xl"></i>
@@ -77,14 +65,14 @@
                             <div class="flex flex-col justify-between">
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                        {{ $video->title }}
+                                        {{ $video->name }}
                                     </h3>
                                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                                         {{ $video->description }}
                                     </p>
                                 </div>
                                 <div class="text-sm text-gray-500">
-                                    <span>{{ $video->duration ?? '00:00' }} წუთი</span>
+                                    <span>{{ isset($responseData['length']) ? sprintf('%02d:%02d:%02d', floor($responseData['length']/3600), floor(($responseData['length']/60)%60), $responseData['length']%60) : '00:00:00' }} წუთი</span>
                                 </div>
                             </div>
                             

@@ -37,4 +37,16 @@ class Video extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function imageUrl(): string
+    {
+        if($this->image)
+        {
+            if($this->image->url)
+            {
+                return asset('storage/' . $this->image->path);
+            }
+        }
+        return asset('https://'. config('video.cdn_hostname') .'/'. $this->video_id .'/'. config('video.default_thumbnail_filename'));
+    }
 }
