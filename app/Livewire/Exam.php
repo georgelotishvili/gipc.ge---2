@@ -20,6 +20,7 @@ class Exam extends Component
     public $current_question_index;
     public $testQuestion;
     public $currentExamRequest;
+    public $timer;
 
     public function mount(TestQuestion $testQuestion, $examRequest)
     {
@@ -45,6 +46,24 @@ class Exam extends Component
     {
         $this->question = Question::findOrFail($questionId);
         $this->updateProgress();
+    }
+
+    public function updateTimer()
+    {
+        $timer = now()->diffInSeconds($this->test->started_at) + 3600; // Adding 1 hour (3600 seconds)
+        // Calculate hours, minutes, and seconds from total seconds
+        $hours = floor($timer / 3600);
+        $minutes = floor(($timer % 3600) / 60);
+        $seconds = $timer % 60;
+        
+        // Format the time as HH:MM:SS
+        $this->timer = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+
+        // Check if timer is in negative (time has expired)
+        if (strpos($this->timer, '-') === 0) {
+            $this->finalizeExam();
+            return redirect()->route('result', $this->test->id);
+        }
     }
 
     public function validateTestActive(Test $test): void

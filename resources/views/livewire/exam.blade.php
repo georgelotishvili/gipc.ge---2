@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <span class="absolute top-4 right-4 text-lg font-bold dark:text-white">23:14</span>
+                    <span wire:poll.1000ms="updateTimer" class="absolute top-4 right-4 text-lg font-bold dark:text-white">{{ $timer }}</span>
                 </div>
                 <!-- ====== Questions Section End -->
             @endif
