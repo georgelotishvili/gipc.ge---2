@@ -50,7 +50,7 @@ class Exam extends Component
 
     public function updateTimer()
     {
-        $timer = now()->diffInSeconds($this->test->started_at) + 3600; // Adding 1 hour (3600 seconds)
+        $timer = now()->diffInSeconds($this->test->started_at) + 7200; // Adding 1 hour (3600 seconds)
         // Calculate hours, minutes, and seconds from total seconds
         $hours = floor($timer / 3600);
         $minutes = floor(($timer % 3600) / 60);
