@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Exam;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
 use App\Models\Course;
@@ -117,6 +118,12 @@ Route::middleware(['admin'])->group(function () {
 
     // Settings
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+
+    Route::get('/admin/certificates/create', [CertificateController::class, 'create'])->name('admin.certificates.create');
+    Route::post('/admin/certificates/store', [CertificateController::class, 'store'])->name('admin.certificates.store');
+    Route::get('/admin/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->name('admin.certificates.edit');
+    Route::patch('/admin/certificates/{certificate}/update', [CertificateController::class, 'update'])->name('admin.certificates.update');
+    Route::delete('/admin/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('admin.certificates.destroy');
 });
 
 Route::middleware([
@@ -160,10 +167,8 @@ Route::middleware([
     Route::get('/test', Exam::class)->name('test');
 });
 
-Route::get('/certificated-specialists', function () {
-    return view('certificated-specialists');
-})->name('certificated-specialists');
-
+Route::get('/certificated-specialists', [CertificateController::class, 'index'])->name('certificated-specialists');
+Route::get('/certificated-specialists/{certificate}', [CertificateController::class, 'show'])->name('certificated-specialists.show');
 Route::get('/jobs', function () {
     $employers = Employer::all();
     $employees = Employee::all();
