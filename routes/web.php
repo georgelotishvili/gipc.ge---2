@@ -5,6 +5,7 @@ use App\Livewire\Exam;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
 use App\Models\Course;
@@ -165,6 +166,9 @@ Route::middleware([
     Route::get('/exam/{examRequest}', Exam::class)->name('exam');
 
     Route::get('/test', Exam::class)->name('test');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 Route::get('/certificated-specialists', [CertificateController::class, 'index'])->name('certificated-specialists');

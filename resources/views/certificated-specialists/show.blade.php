@@ -1,4 +1,14 @@
 <x-layout>
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center mb-6">
+            <a href="{{ route('certificated-specialists') }}" wire:navigate class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-800 dark:text-white uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                უკან დაბრუნება
+            </a>
+        </div>
+    </div>
     <div class="min-h-screen pb-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
@@ -114,9 +124,9 @@
                                 <div>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">სტატუსი</p>
                                     <div class="flex items-center">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $certificate->is_active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' }}">
-                                            <span class="w-2 h-2 mr-1 rounded-full {{ $certificate->is_active ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                                            {{ $certificate->is_active ? 'აქტიური' : 'არააქტიური' }}
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-{{$certificate->getColorAttribute()}}-100 text-white dark:bg-{{$certificate->getColorAttribute()}}-900 dark:text-white-200}}">
+                                            <span class="w-2 h-2 mr-1 rounded-full bg-{{$certificate->getColorAttribute()}}-500 }}"></span>
+                                            {{ $certificate->status->label() }}
                                         </span>
                                     </div>
                                 </div>
@@ -137,21 +147,17 @@
                             </div>
 
                             <div class="flex items-center space-x-1 mb-2">
-                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $certificate->stars)
+                                        <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                    @else
+                                        <svg class="w-5 h-5 text-gray-300 dark:text-gray-600" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                    @endif
+                                @endfor
                                 <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">({{$certificate->stars}}/5 საშუალო შეფასება)</span>
                             </div>
                         </div>
@@ -178,14 +184,46 @@
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                                                         </svg>
                                                     </div>
-                                                    <div class="flex items-center space-x-4 mb-4 pt-2">
-                                                        <img src="{{ $comment->user->profile_photo_path ? asset('storage/' . $comment->user->image->path) : 'https://ui-avatars.com/api/?name=' . urlencode($comment->user->name) . '&color=7F9CF5&background=EBF4FF' }}" alt="{{ $comment->user->name }}" class="w-12 h-12 rounded-full -mr-2">
-                                                        <div>
-                                                            <h4 class="font-semibold text-gray-800 dark:text-white">{{$comment->user->name}}</h4>
-                                                            <p class="text-sm text-gray-600 dark:text-gray-400">{{$comment->user->position}}, {{$comment->user->company}}</p>
+                                                    <div class="flex items-center justify-between mb-4 pt-2">
+                                                        <div class="flex items-center space-x-4">
+                                                            <img src="{{ $comment->user->profile_photo_path ? asset('storage/' . $comment->user->image->path) : 'https://ui-avatars.com/api/?name=' . urlencode($comment->user->name) . '&color=7F9CF5&background=EBF4FF' }}" alt="{{ $comment->user->name }}" class="w-12 h-12 rounded-full -mr-2">
+                                                            <div>
+                                                                <h4 class="font-semibold text-gray-800 dark:text-white">{{$comment->user->name}}</h4>
+                                                                <p class="text-sm text-gray-600 dark:text-gray-400">{{$comment->user->position}}, {{$comment->user->company}}</p>
+                                                            </div>
                                                         </div>
+                                                        @auth
+                                                            @if(auth()->id() === $comment->user_id)
+                                                                <form action="{{ route('comments.destroy', $comment) }}" method="POST" class="inline">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('დარწმუნებული ხართ, რომ გსურთ კომენტარის წაშლა?')">
+                                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+                                                        @endauth
                                                     </div>
                                                     <p class="text-gray-600 dark:text-gray-400">{{$comment->content}}</p>
+                                                    
+                                                    @php
+                                                        $rating = App\Models\Rating::where('certificate_id', $certificate->id)
+                                                            ->where('user_id', $comment->user_id)
+                                                            ->first();
+                                                    @endphp
+                                                    
+                                                    @if($rating)
+                                                        <div class="flex items-center mt-3">
+                                                            @for($i = 1; $i <= 5; $i++)
+                                                                <svg class="w-4 h-4 {{ $i <= $rating->stars ? 'text-yellow-400 fill-current' : 'text-gray-300' }}" viewBox="0 0 20 20">
+                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                                                </svg>
+                                                            @endfor
+                                                            <span class="ml-1 text-xs text-gray-500 dark:text-gray-400">({{$rating->stars}}/5)</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @empty
@@ -197,12 +235,63 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <!-- Add Comment Section -->
+                        @auth
+                            @php
+                                $existingComment = $certificate->comments->where('user_id', auth()->id())->first();
+                            @endphp
+                            @if(!$existingComment)
+                                <div class="mt-8 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                                    <h3 class="text-xl font-bold text-gray-800 dark:text-white flex items-center mb-4">
+                                        <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                        </svg>
+                                        დაამატეთ კომენტარი
+                                    </h3>
+                                    
+                                    @auth
+                                        <form action="{{ route('comments.store') }}" method="POST" class="space-y-4">
+                                            @csrf
+                                            <input type="hidden" name="commentable_id" value="{{ $certificate->id }}">
+                                            <input type="hidden" name="commentable_type" value="App\Models\Certificate">
+                                            
+                                            <div>
+                                                <textarea name="content" rows="4" class="w-full px-3 py-2 text-gray-700 dark:text-gray-300 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600" placeholder="თქვენი კომენტარი..."></textarea>
+                                            </div>
+                                            
+                                            <div class="flex items-center space-x-4">
+                                                <div class="flex items-center">
+                                                    <span class="mr-2 text-gray-700 dark:text-gray-300">შეფასება:</span>
+                                                    <div class="flex space-x-1">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            <label class="cursor-pointer">
+                                                                <input type="radio" name="rating" value="{{ $i }}" class="hidden peer">
+                                                                <svg class="w-6 h-6 text-gray-300 peer-checked:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                                                </svg>
+                                                            </label>
+                                                        @endfor
+                                                    </div>
+                                                </div>
+                                                
+                                                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 shadow-md">
+                                                    გაგზავნა
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @else
+                                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                                            <p class="text-gray-600 dark:text-gray-400">კომენტარის დასატოვებლად გთხოვთ <a href="{{ route('login') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">შეხვიდეთ</a> სისტემაში</p>
+                                        </div>
+                                    @endauth
+                                </div>
+                            @endif
+                        @endauth
                         <!-- Action Buttons Section -->
                         <div class="mt-8 space-y-4">
                             @if(auth()->user() && auth()->user()->is_admin)
                                 <div class="grid grid-cols-2 gap-3">
-                                    <a href="{{ route('admin.certificates.edit', $certificate) }}" class="flex items-center justify-center px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg transition-colors duration-200 shadow-md">
+                                    <a href="{{ route('admin.certificates.edit', $certificate) }}" wire:navigate class="flex items-center justify-center px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg transition-colors duration-200 shadow-md">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>

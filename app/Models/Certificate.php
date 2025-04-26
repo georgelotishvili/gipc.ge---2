@@ -6,6 +6,7 @@ use App\Enums\CertificateStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Certificate extends Model
@@ -82,6 +83,16 @@ class Certificate extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    /**
+     * Get the ratings for the certificate.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class);
+    }
+
     public function getSpecializationsAttribute()
     {
         return explode(',', $this->description);
@@ -124,5 +135,7 @@ class Certificate extends Model
         // This is a placeholder. In a real application, you would calculate this from actual ratings
         return 4.5;
     }
+
+
 }
 

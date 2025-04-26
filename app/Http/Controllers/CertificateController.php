@@ -49,7 +49,9 @@ class CertificateController extends Controller
      */
     public function edit(Certificate $certificate)
     {
-        //
+        $users = User::all();
+        $specialities = Speciality::all();
+        return view('certificated-specialists.edit', compact('certificate', 'users', 'specialities'));
     }
 
     /**
