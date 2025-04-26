@@ -14,37 +14,88 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        $createUser = new \App\Actions\Fortify\CreateNewUser();
+        
+        // Create admin user - Giorgi Bekurashvili
+        $user = $createUser->create([
             'name' => 'Giorgi Bekurashvili',
             'email' => 'giorgibekurashvili@gmail.com',
-            'password' => Hash::make('archfix123'),
+            'password' => 'archfix123',
+            'password_confirmation' => 'archfix123',
+            'terms' => true,
+        ]);
+        $user->forceFill([
             'is_admin' => 1,
             'position' => 'Architect',
             'company' => 'Arch Studio',
+        ])->save();
+        $user->subscription()->update([
+            'is_active' => true,
+            'type' => \App\Enums\SubscriptionType::UNLIMITED->value
         ]);
-        DB::table('users')->insert([
+        
+        // Create admin user - Giorgi Lotishvili
+        $user = $createUser->create([
             'name' => 'Giorgi Lotishvili',
-            'email' => 'naormala@gmail.com@gmail.com',
-            'password' => Hash::make('fixfix123'),
+            'email' => 'naormala@gmail.com',
+            'password' => 'fixfix123',
+            'password_confirmation' => 'fixfix123',
+            'terms' => true,
+        ]);
+        $user->forceFill([
             'is_admin' => 1,
             'position' => 'Architect',
             'company' => 'Arch Studio',
+        ])->save();
+        $user->subscription()->update([
+            'is_active' => true,
+            'type' => \App\Enums\SubscriptionType::UNLIMITED->value
         ]);
-        DB::table('users')->insert([
+
+        // Create admin user - Nika Jimshitashvili
+        $user = $createUser->create([
+            'name' => 'Nika Jimshitashvili',
+            'email' => 'jimshitashvilinika742@gmail.com',
+            'password' => 'archfix123',
+            'password_confirmation' => 'archfix123',
+            'terms' => true,
+        ]);
+        $user->forceFill([
+            'is_admin' => 1,
+            'position' => 'Architect',
+            'company' => 'Arch Studio',
+        ])->save();
+        $user->subscription()->update([
+            'is_active' => true,
+            'type' => \App\Enums\SubscriptionType::UNLIMITED->value
+        ]);
+        
+        // Create regular user - Sarah Johnson
+        $user = $createUser->create([
             'name' => 'Sarah Johnson',
             'email' => 'sarah@archstudio.com',
-            'password' => Hash::make('password123'),
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'terms' => true,
+        ]);
+        $user->forceFill([
             'is_admin' => 0,
             'position' => 'Architect',
             'company' => 'Arch Studio',
-        ]);
-        DB::table('users')->insert([
+        ])->save();
+        
+        // Create regular user - David Chen
+        $user = $createUser->create([
             'name' => 'David Chen',
             'email' => 'david.chen@example.com',
-            'password' => Hash::make('secure456'),
+            'password' => 'secure456',
+            'password_confirmation' => 'secure456',
+            'terms' => true,
+        ]);
+        $user->forceFill([
             'is_admin' => 0,
             'position' => 'Civil Engineer',
             'company' => 'Civil Engineering Firm',
-        ]);
+        ])->save();
     }
 }

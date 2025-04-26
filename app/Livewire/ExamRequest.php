@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Actions\Abecert\CreateTestAction;
+use App\Actions\Abecert\FinalizeExamAction;
 use Livewire\Component;
 
 class ExamRequest extends Component
@@ -56,6 +57,15 @@ class ExamRequest extends Component
             return;
         }
         return redirect()->route('exam', $this->approvedExamRequest);
+    }
+
+    public function cancelExam()
+    {
+        if(!$this->approvedExamRequest) {
+            return;
+        }
+        FinalizeExamAction::execute($this->approvedExamRequest->test, $this->approvedExamRequest);
+        $this->fetchExamRequests();
     }
 
     public function render()

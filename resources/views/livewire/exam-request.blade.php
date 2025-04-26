@@ -27,6 +27,15 @@
                                 disabled:opacity-70 disabled:cursor-not-allowed">
                     წინასაგამოცდო ტესტის @if($approvedExamRequest) გაგრძელება @else დაწყება @endif
                 </button>
+                @if($approvedExamRequest)
+                    <button wire:click="cancelExam" 
+                            class="w-full px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-2xl font-medium 
+                                   focus:ring-4 focus:ring-red-100 dark:focus:ring-red-400/20
+                                   transform active:scale-[0.98] transition-all duration-200
+                                   disabled:opacity-70 disabled:cursor-not-allowed">
+                        გამოცდის გაუქმება
+                    </button>
+                @endif
                 
                 @if($nonApprovedExamRequest)
                     <div class="w-full p-4 bg-yellow-50 dark:bg-yellow-400/10 border border-yellow-100 dark:border-yellow-400/20 rounded-2xl">

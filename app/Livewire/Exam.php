@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Actions\Abecert\FinalizeExamAction;
 use App\Models\Group;
 use App\Models\Question;
 use App\Models\Test;
@@ -175,29 +176,7 @@ class Exam extends Component
 
     public function finalizeExam()
     {
-        $totalQuestions = $this->test->questions->count();
-
-        // Calculate correct answers
-        $correctAnswers = $this->test->questions->filter(function ($question) {
-            return $question->answers->where('id', $question->pivot->answer)->first()?->is_true ?? false;
-        })->count();
-
-        // Calculate score percentage
-        $score = $totalQuestions > 0 
-            ? round(($correctAnswers / $totalQuestions) * 100) 
-            : 0;
-        
-        $this->test->update([
-            'questions_count' => $totalQuestions,
-            'correct_answers_count' => $correctAnswers,
-            'incorrect_answers_count' => $totalQuestions - $correctAnswers,
-            'score' => $score
-        ]);
-
-        $this->test->save();
-
-        $this->currentExamRequest->closed = true;
-        $this->currentExamRequest->save();
+        FinalizeExamAction::execute($this->test, $this->currentExamRequest);
     }
 
     public function render()
