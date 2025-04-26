@@ -6,7 +6,13 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
 // Uncomment when you need the email functionality
 // use App\Http\Controllers\EmailTestController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployerController;
 use App\Models\Course;
+use App\Models\Employee;
+use App\Models\Employer;
 use App\Models\Regulation;
 use App\Models\Video;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -115,6 +121,12 @@ Route::middleware(['admin'])->group(function () {
 
     // Settings
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+
+    Route::get('/admin/certificates/create', [CertificateController::class, 'create'])->name('admin.certificates.create');
+    Route::post('/admin/certificates/store', [CertificateController::class, 'store'])->name('admin.certificates.store');
+    Route::get('/admin/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->name('admin.certificates.edit');
+    Route::patch('/admin/certificates/{certificate}/update', [CertificateController::class, 'update'])->name('admin.certificates.update');
+    Route::delete('/admin/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('admin.certificates.destroy');
 });
 
 Route::middleware([
@@ -135,19 +147,38 @@ Route::middleware([
         return view('user.video');
     })->name('video');
 
+    // Employer routes
+    Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
+    Route::post('/employers', [EmployerController::class, 'store'])->name('employers.store');
+    Route::get('/employers/{employer}', [EmployerController::class, 'show'])->name('employers.show');
+    Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
+    Route::patch('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
+    Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
+    
+    // Employee routes
+    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+    Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::patch('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+
     Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
 
     Route::get('/exam/{examRequest}', Exam::class)->name('exam');
 
     Route::get('/test', Exam::class)->name('test');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
-Route::get('/certificated-specialists', function () {
-    return view('certificated-specialists');
-})->name('certificated-specialists');
-
+Route::get('/certificated-specialists', [CertificateController::class, 'index'])->name('certificated-specialists');
+Route::get('/certificated-specialists/{certificate}', [CertificateController::class, 'show'])->name('certificated-specialists.show');
 Route::get('/jobs', function () {
-    return view('jobs.jobs-listings');
+    $employers = Employer::all();
+    $employees = Employee::all();
+    return view('jobs.jobs-listings', compact('employers', 'employees'));
 })->name('jobs');
 
 // Commented out email testing routes - Uncomment to test email functionality
