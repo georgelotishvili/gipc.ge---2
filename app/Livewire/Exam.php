@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Actions\Abecert\FinalizeExamAction;
 use App\Models\Group;
 use App\Models\Question;
 use App\Models\Test;
@@ -9,6 +10,7 @@ use App\Models\TestQuestion;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\ExamRequest as ExamRequestModel;
+use App\Models\SystemSetting;
 
 class Exam extends Component
 {
@@ -21,10 +23,12 @@ class Exam extends Component
     public $testQuestion;
     public $currentExamRequest;
     public $timer;
+    public $examDuration;
 
     public function mount(TestQuestion $testQuestion, $examRequest)
     {
-
+        if(SystemSetting::where('key', 'exam_duration')->first()) $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
+        else $this->examDuration = 72000;
         $this->user = auth()->user();
         $this->currentExamRequest = ExamRequestModel::findOrFail($examRequest);
         // Check if the exam request belongs to the authenticated user
@@ -40,6 +44,7 @@ class Exam extends Component
         $this->current_question_index = $this->test->questions()->orderBy('id', 'asc')->first()->id;
         $this->loadCurrentQuestionIndex();
         $this->initializeFirstQuestion();
+        $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
     }
 
     public function goToQuestion($questionId): void
@@ -50,7 +55,7 @@ class Exam extends Component
 
     public function updateTimer()
     {
-        $timer = now()->diffInSeconds($this->test->started_at) + 7200; // Adding 1 hour (3600 seconds)
+        $timer = now()->diffInSeconds($this->test->started_at) + $this->examDuration; // Adding 1 hour (3600 seconds)
         // Calculate hours, minutes, and seconds from total seconds
         $hours = floor($timer / 3600);
         $minutes = floor(($timer % 3600) / 60);
@@ -76,7 +81,7 @@ class Exam extends Component
         {
             abort(404, 'Test is finished');
         }
-        if ($test->started_at && now()->diffInMinutes($test->started_at) > $test->duration) 
+        if ($test->started_at && now()->diffInMinutes($test->started_at) > $this->examDuration) 
         {
             abort(404, 'Test time has expired');
         }
@@ -175,29 +180,7 @@ class Exam extends Component
 
     public function finalizeExam()
     {
-        $totalQuestions = $this->test->questions->count();
-
-        // Calculate correct answers
-        $correctAnswers = $this->test->questions->filter(function ($question) {
-            return $question->answers->where('id', $question->pivot->answer)->first()?->is_true ?? false;
-        })->count();
-
-        // Calculate score percentage
-        $score = $totalQuestions > 0 
-            ? round(($correctAnswers / $totalQuestions) * 100) 
-            : 0;
-        
-        $this->test->update([
-            'questions_count' => $totalQuestions,
-            'correct_answers_count' => $correctAnswers,
-            'incorrect_answers_count' => $totalQuestions - $correctAnswers,
-            'score' => $score
-        ]);
-
-        $this->test->save();
-
-        $this->currentExamRequest->closed = true;
-        $this->currentExamRequest->save();
+        FinalizeExamAction::execute($this->test, $this->currentExamRequest);
     }
 
     public function render()

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('certificate_number')->unique();
             $table->date('release_date')->default(now());
             $table->integer('lifetime_years')->default(5);
-            $table->enum('status', array_column(CertificateStatus::cases(), 'value'))->default(CertificateStatus::PENDING->value);
+            $table->enum('status', array_column(CertificateStatus::cases(), 'value'))->default(CertificateStatus::SUSPENDED->value);
             $table->string('location')->nullable();
             $table->string('education')->nullable();
             $table->string('experience')->nullable();

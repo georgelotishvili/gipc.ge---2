@@ -38,12 +38,18 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => ['required', 'accepted'],
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'terms_accepted' => true,
             'terms_accepted_at' => Carbon::now(),
         ]);
+
+        $user->subscription()->create([
+            'is_active' => false
+        ]);
+
+        return $user;
     }
 }

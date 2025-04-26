@@ -10,6 +10,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\QuestionController;
 use App\Models\Course;
 use App\Models\Employee;
 use App\Models\Employer;
@@ -25,9 +26,6 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('index');
 });
-Route::get('/questions', function () {
-    return view('questions');
-})->name('questions');
 Route::get('/regulations', function () {
     $regulations = Regulation::all();
     return view('regulations', compact('regulations'));
@@ -70,20 +68,6 @@ Route::get('/pricing', function () {
     return view('pricing');
 })->name('pricing');
 
-Route::get('/tutorials', function () {
-    $courses = Course::all();
-    return view('tutorials', compact('courses'));
-})->name('tutorials');
-
-Route::get('/tutorials/course/{course}', function ($course) {
-    $course = Course::find($course);
-    return view('tutorials.chapters', compact('course'));
-})->name('tutorials.chapters');
-
-Route::get('/tutorials/video/{video}', function ($video) {
-    $video = Video::find($video);
-    return view('tutorials.show', compact('video'));
-})->name('tutorials.show');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -145,6 +129,42 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::middleware([
+    'auth:sanctum', 
+    config('jetstream.auth_session'),
+    'verified',
+    'subscription',
+])->group(function () {
+
+
+    Route::get('/tutorials', function () {
+        $courses = Course::all();
+        return view('tutorials', compact('courses'));
+    })->name('tutorials');
+    
+    Route::get('/tutorials/course/{course}', function ($course) {
+        $course = Course::find($course);
+        return view('tutorials.chapters', compact('course'));
+    })->name('tutorials.chapters');
+    
+    Route::get('/tutorials/video/{video}', function ($video) {
+        $video = Video::find($video);
+        return view('tutorials.show', compact('video'));
+    })->name('tutorials.show');
+
+    Route::get('/test_results', function () {
+        return view('user.test_results');
+    })->name('test_results');
+    Route::get('/video', function () {
+        return view('user.video');
+    })->name('video');
+
+    Route::get('/questions', [QuestionController::class, 'indexToUser'])->name('questions');
+    Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
+    Route::get('/exam/{examRequest}', Exam::class)->name('exam');
+    Route::get('/test', Exam::class)->name('test');
+});
+
+Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
@@ -155,12 +175,9 @@ Route::middleware([
     Route::get('/workspace', function () {
         return view('user.workspace');
     })->name('workspace');
-    Route::get('/test_results', function () {
-        return view('user.test_results');
-    })->name('test_results');
-    Route::get('/video', function () {
-        return view('user.video');
-    })->name('video');
+
+
+    
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -177,12 +194,6 @@ Route::middleware([
     Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
     Route::patch('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
-
-    Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
-
-    Route::get('/exam/{examRequest}', Exam::class)->name('exam');
-
-    Route::get('/test', Exam::class)->name('test');
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');

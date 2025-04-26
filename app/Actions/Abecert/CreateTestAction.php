@@ -19,7 +19,6 @@ class CreateTestAction
             'name' => 'Test',
             'exam_request_id' => $examRequest->id,
             'active' => true,
-            'duration' => 240,
             'started_at' => now(),
         ]);
 

@@ -1,5 +1,5 @@
 <div class="col-span-1 md:col-span-2 lg:col-span-4">
-    <div wire:poll.5s="fetchExamRequests" 
+    <div 
          class="bg-white dark:bg-dark-2 rounded-3xl border border-gray-100 dark:border-gray-800 p-8">
         <!-- Header -->
         <div class="flex flex-col items-center">
@@ -12,7 +12,7 @@
             
             <!-- Action Buttons -->
             <div class="flex flex-col items-center space-y-4 w-full max-w-sm">
-                @if(!$examRequests)
+                {{-- @if(!$examRequests)
                     <button wire:click="requestExam" 
                             class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-medium 
                                    focus:ring-4 focus:ring-primary-100 dark:focus:ring-primary-400/20
@@ -20,13 +20,20 @@
                                    disabled:opacity-70 disabled:cursor-not-allowed">
                         წინასაგამოცდო ტესტის მოთხოვნა
                     </button>
-                @endif
+                @endif --}}
                 
+                <button wire:click="startExam" 
+                        class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-medium 
+                                disabled:opacity-70 disabled:cursor-not-allowed">
+                    წინასაგამოცდო ტესტის @if($approvedExamRequest) გაგრძელება @else დაწყება @endif
+                </button>
                 @if($approvedExamRequest)
-                    <button wire:click="startExam" 
-                            class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-medium 
+                    <button wire:click="cancelExam" 
+                            class="w-full px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-2xl font-medium 
+                                   focus:ring-4 focus:ring-red-100 dark:focus:ring-red-400/20
+                                   transform active:scale-[0.98] transition-all duration-200
                                    disabled:opacity-70 disabled:cursor-not-allowed">
-                        წინასაგამოცდო ტესტის დაწყება
+                        გამოცდის გაუქმება
                     </button>
                 @endif
                 
@@ -46,5 +53,28 @@
                 @endif
             </div>
         </div>
+    <!-- Exam Instructions -->
+    <div class="mt-6 p-5 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-2xl">
+        <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 p-2 mt-1 rounded-xl bg-blue-100 dark:bg-blue-800/30">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <div class="space-y-2">
+                <p class="text-sm text-blue-800 dark:text-blue-300 font-medium">
+                    გამოცდისთვის თქვენ გეძლევათ 2 საათი
+                </p>
+                <p class="text-sm text-blue-800 dark:text-blue-300">
+                    თქვენი გამოცდის შედეგები იქნება ნაჩვენებ 
+                    <a href="{{route('test_results')}}" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+                        ამ გვერდზე
+                    </a>
+                    <br><br>
+                    სერტიფიცირებისთვის რეალური გამოცდის ჩასაბარებლად გთხოვთ <a href="{{ route('contact') }}" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">დაგვიკავშირდეთ</a>.
+                </p>
+            </div>
+        </div>
+    </div>
     </div>
 </div>

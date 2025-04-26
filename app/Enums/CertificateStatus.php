@@ -4,31 +4,28 @@ namespace App\Enums;
 
 enum CertificateStatus: string
 {
-    case PENDING = 'pending';
-    case APPROVED = 'approved';
-    case REJECTED = 'rejected';
+    case ACTIVE = 'active';
+    case SUSPENDED = 'suspended';
+    case TERMINATED = 'terminated';
     case EXPIRED = 'expired';
-    case REVOKED = 'revoked';
 
     public function label(): string
     {
         return match($this) {
-            self::PENDING => 'მიმდინარე',
-            self::APPROVED => 'დადასტურებული',
-            self::REJECTED => 'უარყოფილი',
-            self::EXPIRED => 'ვადა გასული',
-            self::REVOKED => 'გაუქმებული',
+            self::ACTIVE => 'მოქმედი',
+            self::SUSPENDED => 'შეჩერებული',
+            self::TERMINATED => 'შეწყვეტილი',
+            self::EXPIRED => 'ვადაგასული',
         };
     }
 
     public function color(): string
     {
         return match($this) {
-            self::PENDING => 'yellow',
-            self::APPROVED => 'green',
-            self::REJECTED => 'red',
+            self::ACTIVE => 'green',
+            self::SUSPENDED => 'yellow',
+            self::TERMINATED => 'red',
             self::EXPIRED => 'gray',
-            self::REVOKED => 'red',
         };
     }
-} 
+}

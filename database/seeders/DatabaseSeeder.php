@@ -14,16 +14,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            SystemSettingSeeder::class,
             // StaticSeeder::class,
             UserSeeder::class,
             SpecialitySeeder::class,
-            GroupSeeder::class,
-            QuestionSeeder::class,
-            AnswerSeeder::class,
+            // GroupSeeder::class,
+            // QuestionSeeder::class,
+            // AnswerSeeder::class,
+            DumpSeeder::class,
             RegulationSeeder::class,
             EmployeeSeeder::class,
             EmployerSeeder::class,
             CertificateSeeder::class,
+            SeederCleaner::class,
         ]);
         // User::factory(10)->create();
 
