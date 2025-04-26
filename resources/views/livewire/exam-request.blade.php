@@ -12,7 +12,7 @@
             
             <!-- Action Buttons -->
             <div class="flex flex-col items-center space-y-4 w-full max-w-sm">
-                @if(!$examRequests)
+                {{-- @if(!$examRequests)
                     <button wire:click="requestExam" 
                             class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-medium 
                                    focus:ring-4 focus:ring-primary-100 dark:focus:ring-primary-400/20
@@ -20,15 +20,13 @@
                                    disabled:opacity-70 disabled:cursor-not-allowed">
                         წინასაგამოცდო ტესტის მოთხოვნა
                     </button>
-                @endif
+                @endif --}}
                 
-                @if($approvedExamRequest)
-                    <button wire:click="startExam" 
-                            class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-medium 
-                                   disabled:opacity-70 disabled:cursor-not-allowed">
-                        წინასაგამოცდო ტესტის დაწყება
-                    </button>
-                @endif
+                <button wire:click="startExam" 
+                        class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-medium 
+                                disabled:opacity-70 disabled:cursor-not-allowed">
+                    წინასაგამოცდო ტესტის @if($approvedExamRequest) გაგრძელება @else დაწყება @endif
+                </button>
                 
                 @if($nonApprovedExamRequest)
                     <div class="w-full p-4 bg-yellow-50 dark:bg-yellow-400/10 border border-yellow-100 dark:border-yellow-400/20 rounded-2xl">

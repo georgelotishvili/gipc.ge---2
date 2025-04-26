@@ -42,6 +42,16 @@ class ExamRequest extends Component
 
     public function startExam()
     {
+        if(!$this->examRequests)
+        {
+            $examRequest = $this->user->examRequests()->create([
+                'approved' => true,
+                'closed' => false,
+            ]);
+            CreateTestAction::execute($examRequest);
+            $this->fetchExamRequests();
+        }
+        
         if(!$this->approvedExamRequest) {
             return;
         }
