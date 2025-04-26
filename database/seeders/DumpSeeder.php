@@ -17,9 +17,13 @@ class DumpSeeder extends Seeder
         $files = glob($dumpPath . '/*.sql');
         
         foreach ($files as $file) {
-            $sql = file_get_contents($file);
-            DB::unprepared($sql);
-            $this->command->info('Seeded: ' . basename($file));
+            try {
+                $sql = file_get_contents($file);
+                DB::unprepared($sql);
+                $this->command->info('Seeded: ' . basename($file));
+            } catch (\Exception $e) {
+                $this->command->error('Failed to seed: ' . basename($file) . ' - ' . $e->getMessage());
+            }
         }
     }
 }
