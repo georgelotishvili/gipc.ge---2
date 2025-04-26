@@ -24,6 +24,9 @@ Route::get('/regulations', function () {
 Route::get('/terms-and-conditions', function () {
     return view('terms_and_conditions');
 })->name('terms-and-conditions');
+Route::get('/privacy-policy', function () {
+    return view('privacy_policy');
+})->name('privacy-policy');
 Route::get('/services', function () {
     return view('services');
 })->name('services');
