@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-<<<<<<< HEAD
     public function index()
     {
         $posts = Post::all();
@@ -82,18 +81,6 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-=======
-    //
 
-    /**
-     * Show the form for creating a new post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('posts.create');
-    }
->>>>>>> e8279331af1235efffdca9f57c2a2163e2916e51
 }
 
