@@ -1,5 +1,5 @@
 <x-layout>
-    <div  class="flex min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:bg-dark">
+    <div  class="flex min-h-screen dark:bg-dark">
         @auth
         <x-workspace-sidebar />
         @endauth

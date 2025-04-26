@@ -15,6 +15,7 @@ use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Regulation;
 use App\Models\Video;
+use App\Http\Controllers\PostController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', function () {
@@ -46,6 +47,20 @@ Route::get('/specialists', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+
+Route::get('admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create');
+
+Route::post('admin/posts', [PostController::class, 'store'])->name('admin.posts.store');
+
+Route::get('admin/posts/{post:slug}/edit', [PostController::class, 'edit'])->name('admin.posts.edit');
+
+Route::patch('admin/posts/{post:slug}', [PostController::class, 'update'])->name('admin.posts.update');
+
+Route::delete('admin/posts/{post:slug}', [PostController::class, 'destroy'])->name('admin.posts.destroy');
 
 Route::get('/about', function () {
     return view('about');
