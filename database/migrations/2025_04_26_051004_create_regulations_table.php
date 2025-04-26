@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('link')->nullable();
+            $table->longText('link')->nullable();
             $table->date('date_applied')->nullable();
             $table->timestamps();
         });
