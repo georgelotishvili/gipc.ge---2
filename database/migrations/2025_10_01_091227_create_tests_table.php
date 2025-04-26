@@ -14,16 +14,10 @@ return new class extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('exam_request_id')->constrained()->onDelete('cascade');
-
             $table->string('name');
-
             $table->timestamp('started_at')->nullable();
             $table->timestamp('finished_at')->nullable();
-
             $table->boolean('active')->default(true);
-
-            $table->integer('duration')->default(240)->comment('Test duration in minutes');
-
             $table->integer('questions_count')->default(0)->comment('Number of questions in the test');
             $table->integer('correct_answers_count')->default(0)->comment('Number of correct answers in the test');
             $table->integer('incorrect_answers_count')->default(0)->comment('Number of incorrect answers in the test');

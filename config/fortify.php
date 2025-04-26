@@ -146,6 +146,7 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
+        // Uncomment the following line when you want to enable email verification
         // Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),

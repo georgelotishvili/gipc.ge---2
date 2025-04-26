@@ -2,12 +2,15 @@
 
 namespace App\Livewire;
 
+use App\Actions\Abecert\FinalizeExamAction;
 use App\Models\Group;
 use App\Models\Question;
 use App\Models\Test;
 use App\Models\TestQuestion;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\ExamRequest as ExamRequestModel;
+use App\Models\SystemSetting;
 
 class Exam extends Component
 {
@@ -19,48 +22,56 @@ class Exam extends Component
     public $current_question_index;
     public $testQuestion;
     public $currentExamRequest;
+    public $timer;
+    public $examDuration;
 
-    public function mount(TestQuestion $testQuestion)
+    public function mount(TestQuestion $testQuestion, $examRequest)
     {
-
+        if(SystemSetting::where('key', 'exam_duration')->first()) $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
+        else $this->examDuration = 72000;
         $this->user = auth()->user();
+        $this->currentExamRequest = ExamRequestModel::findOrFail($examRequest);
+        // Check if the exam request belongs to the authenticated user
+        if ($this->currentExamRequest->user_id !== $this->user->id)
+        {
+            session()->flash('error', 'You do not have permission to access this exam.');
+            return redirect(null, 500);
+        }
+        $this->test = $this->currentExamRequest->test;
+        // dd($this->currentExamRequest);
+        $this->validateTestActive($this->test);
         $this->testQuestion = $testQuestion;
-        $this->currentExamRequest = $this->user->examRequests->where('approved', true)->where('closed', false)->first();
-        $this->setActiveTest();
+        $this->current_question_index = $this->test->questions()->orderBy('id', 'asc')->first()->id;
         $this->loadCurrentQuestionIndex();
         $this->initializeFirstQuestion();
+        $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
     }
 
-    public function goToQuestion($questionId)
+    public function goToQuestion($questionId): void
     {
         $this->question = Question::findOrFail($questionId);
         $this->updateProgress();
     }
 
-    public function setActiveTest()
+    public function updateTimer()
     {
-        // First deactivate any existing active tests
-        Test::where('active', true)->update(['active' => false]);
+        $timer = now()->diffInSeconds($this->test->started_at) + $this->examDuration; // Adding 1 hour (3600 seconds)
+        // Calculate hours, minutes, and seconds from total seconds
+        $hours = floor($timer / 3600);
+        $minutes = floor(($timer % 3600) / 60);
+        $seconds = $timer % 60;
+        
+        // Format the time as HH:MM:SS
+        $this->timer = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 
-        // Create a new test
-        $this->test = Test::create([
-            'name' => 'Test',
-            'exam_request_id' => $this->currentExamRequest->id,
-            'active' => true,
-            'duration' => 240,
-            'started_at' => now(),
-        ]);
-
-        // Attach random questions from each group
-        foreach(Group::all() as $group) 
-        {
-            $this->test->questions()->attach($group->questions()->select('questions.id')->inRandomOrder()->limit($group->question_count_in_exam)->pluck('questions.id'));
+        // Check if timer is in negative (time has expired)
+        if (strpos($this->timer, '-') === 0) {
+            $this->finalizeExam();
+            return redirect()->route('result', $this->test->id);
         }
-
-        $this->test->save();
     }
 
-    public function validateTestActive($test)
+    public function validateTestActive(Test $test): void
     {
         if (!$test->active) 
         {
@@ -70,13 +81,13 @@ class Exam extends Component
         {
             abort(404, 'Test is finished');
         }
-        if ($test->started_at && now()->diffInMinutes($test->started_at) > $test->duration) 
+        if ($test->started_at && now()->diffInMinutes($test->started_at) > $this->examDuration) 
         {
             abort(404, 'Test time has expired');
         }
     }
 
-    public function initializeFirstQuestion()
+    public function initializeFirstQuestion(): void
     {
         if($this->current_question_index) {
             $this->question = $this->test->questions()->where('questions.id', $this->current_question_index)->withPivot('answer')->first();
@@ -102,7 +113,7 @@ class Exam extends Component
         $this->question = $this->test->questions()->where('questions.id', $this->question->id)->withPivot('answer')->first();
     }
 
-    public function nextQuestion()
+    public function nextQuestion(): void
     {
         $currentQuestionId = $this->question->id;
         $nextQuestion = $this->test->questions()
@@ -123,7 +134,7 @@ class Exam extends Component
         $this->updateProgress();
     }
 
-    public function previousQuestion()
+    public function previousQuestion(): void
     {
         $currentQuestionId = $this->question->id;
         $previousQuestion = $this->test->questions()
@@ -169,29 +180,7 @@ class Exam extends Component
 
     public function finalizeExam()
     {
-        $totalQuestions = $this->test->questions->count();
-
-        // Calculate correct answers
-        $correctAnswers = $this->test->questions->filter(function ($question) {
-            return $question->answers->where('id', $question->pivot->answer)->first()?->is_true ?? false;
-        })->count();
-
-        // Calculate score percentage
-        $score = $totalQuestions > 0 
-            ? round(($correctAnswers / $totalQuestions) * 100) 
-            : 0;
-        
-        $this->test->update([
-            'questions_count' => $totalQuestions,
-            'correct_answers_count' => $correctAnswers,
-            'incorrect_answers_count' => $totalQuestions - $correctAnswers,
-            'score' => $score
-        ]);
-
-        $this->test->save();
-
-        $this->currentExamRequest->closed = true;
-        $this->currentExamRequest->save();
+        FinalizeExamAction::execute($this->test, $this->currentExamRequest);
     }
 
     public function render()

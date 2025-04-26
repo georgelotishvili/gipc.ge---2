@@ -1,80 +1,131 @@
 <x-layout>
-    <!-- ====== Hero Section Start -->
-    <div id="home" class="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]">
-        <div class="container">
-            <div class="-mx-4 flex flex-wrap items-center">
-                <div class="w-full px-4">
-                    <div class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center" data-wow-delay=".2s">
-                        <h1
-                            class="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
-                            <span class="text-7xl font-extrabold">GIPC</span>, თქვენი
-                            პარტნიორი პროფესიული განვითარების გზაზე
-                        </h1>
-                        <p
-                            class="mx-auto mb-9 max-w-[600px] text-base font-medium text-white sm:text-lg sm:leading-[1.44]">
-                            საქართველოს პროფესიული სერთიფიცირების ინსტიტუტი (GIPC)
-                        </p>
+    <!-- Features Section -->
+    <section class="py-6 md:py-16 bg-white dark:bg-gray-900">
+        <div class="max-w-[120rem] mx-auto px-3 sm:px-6 lg:px-12">
+            <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-white mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-4 sm:px-6 lg:px-8">
+                <!-- Jobs Card -->
+                <a href="{{ route('jobs') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-briefcase text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">ვაკანსიები არქიტექტორებისთვის</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">შეგიძლიათ მოიძიოთ ან შესთავაზოთ სამუშაო სამშენებლო სფეროს სხვადასხვა დარგის სპეციალისტებს</p>
                     </div>
-                    <ul class="mb-8 flex flex-wrap items-center justify-center gap-5 hero-content wow fadeInUp"
-                        data-wow-delay=".1.5s">
-                        <li>
-                            <a href=""
-                                class="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 px-4 py-[10px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                ინსტიტუტის შესახებ
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""
-                                class="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 text-w px-4 py-[10px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                ინსტიტუტის დებულება
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""
-                                class="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 text-w px-4 py-[10px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                დადებითი გავლენა
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""
-                                class="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 text-w px-4 py-[10px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                134 დადგენილება
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""
-                                class="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 text-w px-4 py-[10px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark">
-                                წესები და პირობები
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="flex justify-start flex-col mt-5 gap-2 p-6 hero-content wow fadeInUp"
-                        data-wow-delay=".1.5s">
-                        <h1 class="text-white text-4xl mb-1">
-                            საქართველოს პროფესიული სერთიფიცირების ინსტიტუტი (GIPC)
-                        </h1>
-                        <p class="text-white text-xl mb-2">მისია და მიზნები</p>
-                        <p class="text-white text-md mb-10">
-                            საქართველოს პროფესიული სერთიფიცირების ინსტიტუტი (GIPC) დაარსდა
-                            საქართველოს მთარობის დადგენილების &numero;134 (2024 წლის 10
-                            აპრილი) შესაბამისად, არქიტექტორებისა და ინჟინერ-მშენებლების
-                            სერთიფიცირების სისტემის მართვის მიზნით. ჩვენი ინსტიტუტის მთავარი
-                            მიზანია, უზრუნველვყოთ სამშენებლო სექტორში მოღვაწე
-                            პროფესიონალების მაღალი კვალიფიკაცია და პროფესიული სტანდარტების
-                            დაცვა. საქართველოს პროფესიული სერთიფიცირების ინსტიტუტი (GIPC)
-                            დაარსდა საქართველოს მთარობის დადგენილების &numero;134 (2024 წლის
-                            10 აპრილი) შესაბამისად, არქიტექტორებისა და ინჟინერ-მშენებლების
-                            სერთიფიცირების სისტემის მართვის მიზნით. ჩვენი ინსტიტუტის მთავარი
-                            მიზანია, უზრუნველვყოთ სამშენებლო სექტორში მოღვაწე
-                            პროფესიონალების მაღალი კვალიფიკაცია და პროფესიული სტანდარტების
-                            დაცვა.
-                        </p>
+                </a>
+
+                <!-- Exam Tests Card -->
+                <div class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-newspaper text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სიახლე</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სამშენებლო სექტორში არსებული სიახლეების, რეგულაციებში შეტანილი ცვლილებებისა და განახლებების საინფორმაციო ბაზა</p>
                     </div>
                 </div>
 
-                <div class="w-full px-4"></div>
+                <!-- Simulation Exam Card -->
+                <a href="{{ route('regulations') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-book text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სამშენებლო რეგულაციები</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სერტიფიკატის მიღებისთვის საჭირო სამშენებლო რეგულაციების, კანონების დადგენილებებისა და კოდექსების ბაზა</p>
+                    </div>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="{{ route('terms-and-conditions') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-file-contract text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">წესები და პირობები</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სერტიფიკატის მიღების წესებისა და პირობების დეტალური განმარტებები და საგამოცდო პირობების აღწერა</p>
+                    </div>
+                </a>
+
+                <!-- Card 6 -->
+                <a href="{{ route('certificated-specialists') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-users text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სერტიფიცირებული სპეციალისტები</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სპეციალისტების მონაცემთა ბაზა გაძლევთ საშუალებას მოიძიოთ და დაუკავშირდეთ სერტიფიცირებულ არქიტექტორებს</p>
+                    </div>
+                </a>
+
+                <!-- Video Lessons Card -->
+                <a href="{{ route('tutorials') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <!-- Premium Badge -->
+                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
+                        <i class="fas fa-crown"></i>
+                        <span>ფასიაინი</span>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-video text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">ვიდეო გაკვეთილები</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც წარმოადგენს აუდიო/ვიდეო მასალის კრებულს, არქიტექტორების გადასამზადებლად</p>
+                    </div>
+                </a>
+
+                <!-- Card 7 -->
+                <a href="{{ route('questions') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <!-- Premium Badge -->
+                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
+                        <i class="fas fa-crown"></i>
+                        <span>ფასიაინი</span>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-clipboard-list text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">საგამოცდო ტესტები</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც იძლევა საგამოცდო საკითხების შესწავლის საშუალებას, რათა შეძლოთ საგამოცდო ტესტების წარმატებით ჩაბარება</p>
+                    </div>
+                </a>
+
+                <!-- Card 8 -->
+                <a href="{{ route('dashboard') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <!-- Premium Badge -->
+                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
+                        <i class="fas fa-crown"></i>
+                        <span>ფასიაინი</span>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-user-graduate text-lg md:text-2xl"></i>
+                        </div>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სიმულაციური გამოცდა</h3>
+                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, სადაც შეგიძლიათ განსაზღვროთ თქვენი ცოდნის ხარისხი და შესაძლებლობა ოფიციალური გამოცდის ჩაბარებისა</p>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
-    <!-- ====== Hero Section End -->
+    </section>
 </x-layout>

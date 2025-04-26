@@ -12,7 +12,9 @@ class ExamRequest extends Model
 
     protected $fillable = [
         'user_id',
-        'status'
+        'status',
+        'approved',
+        'closed',
     ];
 
 

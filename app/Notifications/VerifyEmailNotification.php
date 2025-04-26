@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Notifications;
+
+use App\Services\MailgunService;
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
+
+class VerifyEmailNotification extends Notification
+{
+    use Queueable;
+
+    /**
+     * Mailgun service instance
+     */
+    protected $mailgun;
+
+    /**
+     * Create a new notification instance.
+     */
+    public function __construct(MailgunService $mailgun = null)
+    {
+        $this->mailgun = $mailgun ?: app(MailgunService::class);
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @return array<int, string>
+     */
+    public function via(object $notifiable): array
+    {
+        return ['mail'];
+    }
+
+    /**
+     * Build the mail representation of the notification.
+     */
+    public function toMail(object $notifiable)
+    {
+        $verificationUrl = $this->verificationUrl($notifiable);
+        
+        // Send the email via Mailgun service
+        $this->mailgun->sendVerificationEmail($notifiable, $verificationUrl);
+        
+        // Return empty array since we've handled the sending
+        return [];
+    }
+
+    /**
+     * Get the verification URL for the given notifiable.
+     *
+     * @param  mixed  $notifiable
+     * @return string
+     */
+    protected function verificationUrl($notifiable)
+    {
+        return URL::temporarySignedRoute(
+            'verification.verify',
+            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+            [
+                'id' => $notifiable->getKey(),
+                'hash' => sha1($notifiable->getEmailForVerification()),
+            ]
+        );
+    }
+} 

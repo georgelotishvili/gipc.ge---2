@@ -1,2 +1,5 @@
-<span class="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-[gradient_3s_ease-in-out_infinite] hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500 transition duration-500">GIPC</span>
+<!-- Option 1: Modern Architectural Logo -->
 
+<a href="/" wire:navigate>
+    <img src="{{ asset('svg/axali logo.svg') }}" alt="Logo" class="h-9 w-auto">
+</a>
