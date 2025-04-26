@@ -89,18 +89,24 @@
                 <div class="space-y-2">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">საკონტაქტო ინფორმაცია</label>
                     <div class="space-y-3">
-                        @php
-                            $contact = $employer->contact ? json_decode($employer->contact, true) : [];
-                        @endphp
-                        <input type="email" name="email" id="email" placeholder="ელ-ფოსტა" value="{{ old('email', $contact['email'] ?? '') }}" 
+                        <input type="email" name="email" id="email" placeholder="ელ-ფოსტა" value="{{ old('email', $employer->email) }}" 
                             class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-transparent shadow-sm transition-all duration-200 text-gray-900 dark:text-white" required>
                         
-                        <input type="text" name="phone" id="phone" placeholder="ტელეფონი" value="{{ old('phone', $contact['phone'] ?? '') }}" 
+                        <input type="text" name="phone" id="phone" placeholder="ტელეფონი" value="{{ old('phone', $employer->phone) }}" 
                             class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-transparent shadow-sm transition-all duration-200 text-gray-900 dark:text-white" required>
                         
-                        <input type="url" name="website" id="website" placeholder="ვებსაიტი (არასავალდებულო)" value="{{ old('website', $contact['website'] ?? '') }}" 
+                        <input type="url" name="website" id="website" placeholder="ვებსაიტი (არასავალდებულო)" value="{{ old('website', $employer->website) }}" 
                             class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-transparent shadow-sm transition-all duration-200 text-gray-900 dark:text-white">
                     </div>
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                    @error('phone')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                    @error('website')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <div class="space-y-2">

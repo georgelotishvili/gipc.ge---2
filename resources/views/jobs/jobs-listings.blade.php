@@ -90,7 +90,7 @@
                 <button @click="activeFilter = 'seeking'"
                         :class="{ 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400': activeFilter === 'seeking' }"
                         class="px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200">
-                    ვეძებთ თანამშრომელს
+                        ვეძებ სამსახურს
                     <span class="ml-2 px-2.5 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700" x-text="{{$employees->count()}}"></span>
                 </button>
             </div>
@@ -184,8 +184,8 @@
                             '{{ $employee->salary }}'.includes(searchQuery)">
                     <div class="flex flex-col h-full">
                         <div class="flex items-center gap-4 mb-4">
-                            @if(file_exists(public_path('images/avatar-placeholder.png')))
-                                <img src="{{ asset('images/avatar-placeholder.png') }}" alt="{{ $employee->name }}" class="w-16 h-16 object-cover rounded-full">
+                            @if($employee->image)
+                                <img src="{{ asset('storage/' . $employee->image->path) }}" alt="{{ $employee->name }}" class="w-16 h-16 object-contain rounded-lg">
                             @else
                                 <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
                                     <i class="fas fa-user text-white text-2xl"></i>
@@ -223,9 +223,23 @@
 
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100 dark:border-gray-700/50">
                             <span class="text-sm text-gray-500 dark:text-gray-400">{{ $employee->created_at->diffForHumans() }}</span>
-                            <button class="w-full sm:w-auto px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
-                                დეტალურად
-                            </button>
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                @if(Auth::check() && (Auth::user()->id == $employee->user_id || Auth::user()->is_admin))
+                                    <a href="{{ route('employees.edit', $employee) }}" class="w-full sm:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-center">
+                                        <i class="fas fa-edit mr-1"></i> რედაქტირება
+                                    </a>
+                                    <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="w-full sm:w-auto px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
+                                            <i class="fas fa-trash-alt mr-1"></i> წაშლა
+                                        </button>
+                                    </form>
+                                @endif
+                                <a href="{{ route('employees.show', $employee) }}" class="w-full sm:w-auto px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-center">
+                                    დეტალურად
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

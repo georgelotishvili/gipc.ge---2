@@ -18,29 +18,29 @@
         <div class="bg-white dark:bg-gray-800/50 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm overflow-hidden">
             <!-- Name and Position -->
             <div class="p-6 border-b border-gray-100 dark:border-gray-700/50">
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $employer->position }}</h1>
-                <p class="text-lg text-gray-600 dark:text-gray-400">{{ $employer->name }}</p>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $employee->position }}</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">{{ $employee->name }}</p>
             </div>
 
-            <!-- Company Logo/Image -->
+            <!-- Profile Image -->
             <div class="p-6">
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-2 shadow-lg border border-gray-100 dark:border-gray-700 inline-block">
-                    @if($employer->image)
-                        <img src="{{ asset('storage/' . $employer->image->path) }}" alt="{{ $employer->name }}" class="w-24 h-24 object-cover rounded-lg">
+                    @if($employee->image)
+                        <img src="{{ asset('storage/' . $employee->image->path) }}" alt="{{ $employee->name }}" class="w-24 h-24 object-cover rounded-lg">
                     @else
                         <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-building text-gray-400 dark:text-gray-500 text-4xl"></i>
+                            <i class="fas fa-user text-gray-400 dark:text-gray-500 text-4xl"></i>
                         </div>
                     @endif
                 </div>
 
                 <!-- Action Buttons -->
-                @if(Auth::check() && (Auth::user()->id == $employer->user_id || Auth::user()->is_admin))
+                @if(Auth::check() && (Auth::user()->id == $employee->user_id || Auth::user()->is_admin))
                 <div class="flex gap-2 mt-4">
-                    <a href="{{ route('employers.edit', $employer) }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
+                    <a href="{{ route('employees.edit', $employee) }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
                         <i class="fas fa-edit mr-1"></i> რედაქტირება
                     </a>
-                    <form action="{{ route('employers.destroy', $employer) }}" method="POST" class="inline">
+                    <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
@@ -51,9 +51,9 @@
                 @endif
             </div>
 
-            <!-- Job Details -->
+            <!-- Resume Details -->
             <div class="p-6">
-                <!-- Job Highlights -->
+                <!-- Resume Highlights -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
                         <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">ლოკაცია</p>
-                                <p class="font-medium text-gray-900 dark:text-gray-100">{{ $employer->city ?? 'არ არის მითითებული' }}</p>
+                                <p class="font-medium text-gray-900 dark:text-gray-100">{{ $employee->city ?? 'არ არის მითითებული' }}</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">სამუშაო დრო</p>
-                                <p class="font-medium text-gray-900 dark:text-gray-100">{{ $employer->worktime->label() }}</p>
+                                <p class="font-medium text-gray-900 dark:text-gray-100">{{ $employee->worktime->label() }}</p>
                             </div>
                         </div>
                     </div>
@@ -83,18 +83,18 @@
                                 <i class="fas fa-money-bill text-xl"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">ანაზღაურება</p>
-                                <p class="font-medium text-gray-900 dark:text-gray-100">{{ $employer->salary }} ₾</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">სასურველი ანაზღაურება</p>
+                                <p class="font-medium text-gray-900 dark:text-gray-100">{{ $employee->salary }} ₾</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Job Description -->
+                <!-- Experience and Qualifications -->
                 <div class="mb-8">
-                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">აღწერა</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">გამოცდილება და კვალიფიკაცია</h2>
                     <div class="prose prose-blue max-w-none dark:prose-invert">
-                        {!! nl2br(e($employer->description)) !!}
+                        {!! nl2br(e($employee->description)) !!}
                     </div>
                 </div>
 
@@ -102,7 +102,7 @@
                 <div class="mb-8">
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">უნარები</h2>
                     <div class="flex flex-wrap gap-2">
-                        @foreach(explode(',', $employer->skills) as $skill)
+                        @foreach(explode(',', $employee->skills) as $skill)
                             <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium">
                                 {{ trim($skill) }}
                             </span>
@@ -120,42 +120,43 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">ელ-ფოსტა</p>
-                                <a href="mailto:{{ $employer->email }}" class="font-medium text-primary-600 dark:text-primary-400 hover:underline">{{ $employer->email }}</a>
+                                <a href="mailto:{{ $employee->email }}" class="font-medium text-primary-600 dark:text-primary-400 hover:underline">{{ $employee->email }}</a>
                             </div>
                         </div>
-                        @if($employer->phone)
+                        @if($employee->phone)
                         <div class="flex items-center gap-3">
                             <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
                                 <i class="fas fa-phone text-xl"></i>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">ტელეფონი</p>
-                                <a href="tel:{{ $employer->phone }}" class="font-medium text-primary-600 dark:text-primary-400 hover:underline">{{ $employer->phone }}</a>
+                                <a href="tel:{{ $employee->phone }}" class="font-medium text-primary-600 dark:text-primary-400 hover:underline">{{ $employee->phone }}</a>
                             </div>
                         </div>
                         @endif
-                        @if($employer->website)
+                        @if($employee->website)
                         <div class="flex items-center gap-3">
                             <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
                                 <i class="fas fa-globe text-xl"></i>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">ვებსაიტი</p>
-                                <a href="{{ $employer->website }}" target="_blank" class="font-medium text-primary-600 dark:text-primary-400 hover:underline">{{ $employer->website }}</a>
+                                <a href="{{ $employee->website }}" target="_blank" class="font-medium text-primary-600 dark:text-primary-400 hover:underline">{{ $employee->website }}</a>
                             </div>
                         </div>
                         @endif
-                        @if($employer->social)
+                        @if($employee->social)
                         <div class="flex items-center gap-3">
                             <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
                                 <i class="fas fa-share-nodes text-xl"></i>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">სოციალური ქსელები</p>
-                                <div class="flex gap-2 mt-1">
-                                    @foreach(explode(',', $employer->social) as $socialLink)
-                                        <a href="{{ trim($socialLink) }}" target="_blank" class="text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-                                            <i class="fab fa-link text-xl"></i>
+                                <div class="flex flex-col gap-2 mt-1">
+                                    @foreach(explode(',', $employee->social) as $socialLink)
+                                        <a href="{{ trim($socialLink) }}" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+                                            <i class="fa-solid fa-globe"></i>
+                                            <span>{{ trim($socialLink) }}</span>
                                         </a>
                                     @endforeach
                                 </div>
@@ -167,7 +168,7 @@
 
                 <!-- Posted Date -->
                 <div class="mt-8 text-sm text-gray-500 dark:text-gray-400">
-                    <p>გამოქვეყნებულია: {{ $employer->created_at->format('Y-m-d H:i') }} ({{ $employer->created_at->diffForHumans() }})</p>
+                    <p>გამოქვეყნებულია: {{ $employee->created_at->format('Y-m-d H:i') }} ({{ $employee->created_at->diffForHumans() }})</p>
                 </div>
             </div>
         </div>

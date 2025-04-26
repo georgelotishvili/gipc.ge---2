@@ -23,17 +23,17 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Show the form for creating a new employee profile.
+     * Show the form for creating a new employee job listing.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('employees.create');
+        return view('jobs.create-employee');
     }
 
     /**
-     * Store a newly created employee profile in storage.
+     * Store a newly created employee job listing in storage.
      *
      * @param  \App\Http\Requests\EmployeeRequest  $request
      * @return \Illuminate\Http\Response
@@ -53,39 +53,39 @@ class EmployeeController extends Controller
             $employee->image()->save($image);
         }
         
-        return redirect()->route('employees')
+        return redirect()->route('jobs')
             ->with('success', 'თანამშრომელი წარმატებით დაემატა');
     }
 
     /**
-     * Display the specified employee profile.
+     * Display the specified employee job listing.
      *
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function show(Employee $employee)
     {
-        return view('employees.show', compact('employee'));
+        return view('jobs.show-employee', compact('employee'));
     }
 
     /**
-     * Show the form for editing the specified employee profile.
+     * Show the form for editing the specified employee job listing.
      *
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function edit(Employee $employee)
     {
-        // Check if the current user is the owner of this profile
+        // Check if the current user is the owner of this job listing
         if (Auth::user()->id !== $employee->user_id) {
-            return redirect()->route('employees')->with('error', 'Unauthorized action.');
+            return redirect()->route('jobs')->with('error', 'Unauthorized action.');
         }
 
-        return view('employees.edit', compact('employee'));
+        return view('jobs.edit-employee', compact('employee'));
     }
 
     /**
-     * Update the specified employee profile in storage.
+     * Update the specified employee job listing in storage.
      *
      * @param  \App\Http\Requests\EmployeeRequest  $request
      * @param  \App\Models\Employee  $employee
@@ -106,21 +106,21 @@ class EmployeeController extends Controller
             $employee->image()->save($image);
         }
         
-        return redirect()->route('employees')
+        return redirect()->route('jobs')
             ->with('success', 'თანამშრომელი წარმატებით განახლდა');
     }
 
     /**
-     * Remove the specified employee profile from storage.
+     * Remove the specified employee job listing from storage.
      *
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function destroy(Employee $employee)
     {
-        // Check if the current user is the owner of this profile
+        // Check if the current user is the owner of this job listing
         if (Auth::user()->id !== $employee->user_id) {
-            return redirect()->route('employees')->with('error', 'Unauthorized action.');
+            return redirect()->route('jobs')->with('error', 'Unauthorized action.');
         }
 
         // Delete image if exists
@@ -129,6 +129,6 @@ class EmployeeController extends Controller
         }
 
         $employee->delete();
-        return redirect()->route('employees')->with('success', 'Employee profile deleted successfully!');
+        return redirect()->route('jobs')->with('success', 'Job listing deleted successfully!');
     }
 }
