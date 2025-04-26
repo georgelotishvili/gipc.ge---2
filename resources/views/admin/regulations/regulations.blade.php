@@ -31,7 +31,7 @@
         @endif
 
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">დადგენილებები საგამოცდო საკითხებისთვის</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">რეგულაციები</h2>
             <a href="{{ route('admin.regulations.create') }}" class="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center shadow-md hover:shadow-lg transform">
                 <svg class="w-5 h-5 mr-2 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
