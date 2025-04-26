@@ -45,6 +45,11 @@ class EmployeeController extends Controller
         
         // Create employee
         $user = Auth::user();
+        // Check if the user already has 5 or more employees
+        if ($user->employees()->count() >= 5) {
+            return redirect()->route('jobs')
+                ->with('error', 'თქვენ უკვე გაქვთ 5 ან მეტი რეზიუმე. გთხოვთ წაშალოთ ძველი რეზიუმე ახლის დამატებამდე.');
+        }
         $employee = $user->employees()->create($validated);
 
         if ($request->hasFile('image')) {

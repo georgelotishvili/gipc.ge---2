@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EmployerRequest;
+use App\Models\Employee;
 
 class EmployerController extends Controller
 {
@@ -19,7 +20,8 @@ class EmployerController extends Controller
     public function index()
     {
         $employers = Employer::all();
-        return view('employers.index', compact('employers'));
+        $employees = Employee::all();
+        return view('jobs', compact('employers', 'employees'));
     }
 
     /**
@@ -45,6 +47,11 @@ class EmployerController extends Controller
         
         // Create employer
         $user = Auth::user();
+        // Check if the user already has 5 or more employers
+        if ($user->employers()->count() >= 5) {
+            return redirect()->route('jobs')
+                ->with('error', 'თქვენ უკვე გაქვთ 5 ან მეტი ვაკანსია. გთხოვთ წაშალოთ ძველი ვაკანსია ახლის დამატებამდე.');
+        }
         $employer = $user->employers()->create($validated);
 
         if ($request->hasFile('image')) {
