@@ -27,7 +27,8 @@ class Exam extends Component
 
     public function mount(TestQuestion $testQuestion, $examRequest)
     {
-        $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
+        if(SystemSetting::where('key', 'exam_duration')->first()) $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
+        else $this->examDuration = 72000;
         $this->user = auth()->user();
         $this->currentExamRequest = ExamRequestModel::findOrFail($examRequest);
         // Check if the exam request belongs to the authenticated user
