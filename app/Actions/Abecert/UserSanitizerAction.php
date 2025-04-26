@@ -17,7 +17,7 @@ class UserSanitizerAction
         }
     }
 
-    private static function sanitize(User $user): void
+    public static function sanitize(User $user): void
     {
         // If the user doesn't have a subscription, return false
         if (!$user->subscription)
@@ -57,7 +57,7 @@ class UserSanitizerAction
                 $endDate = $startDate->copy()->addYear();
                 break;
         }
-
+        // dd($user);
         $now = now();
         $isActive = $now->greaterThanOrEqualTo($startDate) && $now->lessThan($endDate);
         $user->subscription->is_active = $isActive;

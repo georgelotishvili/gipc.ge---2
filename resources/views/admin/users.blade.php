@@ -1,4 +1,5 @@
 <x-admin.layout>
+    <livewire:user-subscription-modal />
     <div class="bg-white dark:bg-dark-2 rounded-2xl shadow-lg p-8">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-white">მომხმარებლები</h2>
