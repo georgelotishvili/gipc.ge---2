@@ -1,6 +1,6 @@
 <x-layout>
     <section class="bg-white py-12 dark:bg-dark relative overflow-hidden min-h-screen">
-        <div class="relative z-10 px-6 py-16 md:py-24">
+        <div class="relative z-10 px-6 ">
             <!-- Hero Section -->
             <div class="text-center mb-16">
                 <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">

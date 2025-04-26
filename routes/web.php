@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Exam;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
+// Uncomment when you need the email functionality
+// use App\Http\Controllers\EmailTestController;
 use App\Models\Course;
 use App\Models\Regulation;
 use App\Models\Video;
@@ -147,6 +149,16 @@ Route::get('/certificated-specialists', function () {
 Route::get('/jobs', function () {
     return view('jobs.jobs-listings');
 })->name('jobs');
+
+// Commented out email testing routes - Uncomment to test email functionality
+/*
+// Test Email Routes
+Route::get('/send-test-email', [EmailTestController::class, 'sendTestEmail']);
+Route::get('/email-form', function() {
+    return view('emails.form');
+});
+Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
+*/
 
 // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 //     ->name('logout');

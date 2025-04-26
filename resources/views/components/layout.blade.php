@@ -1,19 +1,29 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth dark"
+<html lang="en" style="font-family: 'DejaVu Sans Condensed', sans-serif;" class="scroll-smooth dark"
     x-data="{ 
-        sidebarOpen: localStorage.getItem('sidebarOpen') === 'true',
+        sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' && window.innerWidth >= 1024,
         toggleSidebar() {
             this.sidebarOpen = !this.sidebarOpen;
             localStorage.setItem('sidebarOpen', this.sidebarOpen);
         },
-        mobileMenuOpen: false
-    }" 
+        mobileMenuOpen: false,
+        isMobile: window.innerWidth < 1024
+    }"
+    x-init="
+        window.addEventListener('resize', () => {
+            isMobile = window.innerWidth < 1024;
+            if (isMobile && sidebarOpen) {
+                sidebarOpen = false;
+            }
+        })
+    "
     x-cloak>
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/node_modules/dejavu-sans-condensed/css/dejavu-sans-condensed.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -306,33 +316,34 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-white dark:bg-dark border-t border-gray-100 dark:border-gray-800 py-12">
-        <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-8">
-                    <a href="/" wire:navigate class="text-xl font-bold text-gray-900 dark:text-white">GIPC</a>
-                    <a href="/about" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ჩვენს შესახებ</a>
-                    <a href="/contact" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონტაქტი</a>
-                    <a href="{{ route('regulations') }}" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">სამშენებლო რეგულაციები</a>
-                    <a href="{{ route('terms-and-conditions') }}" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">წესები და პირობები</a>
-                    <a href="{{ route('privacy-policy') }}" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონფიდენციალობის პოლიტიკა
-                    </a>
-                </div>
+    <footer class="bg-white dark:bg-dark border-t border-gray-100 dark:border-gray-800 py-8 md:py-12">
+        <div class="max-w-[120rem] mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex flex-col items-center space-y-6 md:space-y-8">
+                <!-- Navigation Links -->
+                <nav class="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-row gap-4 md:gap-8 text-center md:text-left w-full md:w-auto md:justify-center">
+                    <a href="/" wire:navigate class="text-lg md:text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">GIPC</a>
+                    <a href="/about" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ჩვენს შესახებ</a>
+                    <a href="/contact" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონტაქტი</a>
+                    <a href="{{ route('regulations') }}" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">სამშენებლო რეგულაციები</a>
+                    <a href="{{ route('terms-and-conditions') }}" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">წესები და პირობები</a>
+                    <a href="{{ route('privacy-policy') }}" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონფიდენციალობის პოლიტიკა</a>
+                </nav>
                 
-                <div class="flex items-center gap-6">
-                    <div class="flex items-center gap-4">
-                        <a href="#" wire:navigate class="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                <!-- Social Links and Copyright -->
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 w-full justify-center">
+                    <div class="flex items-center gap-6 md:gap-4">
+                        <a href="#" wire:navigate class="text-xl md:text-lg text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" wire:navigate class="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <a href="#" wire:navigate class="text-xl md:text-lg text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="#" wire:navigate class="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <a href="#" wire:navigate class="text-xl md:text-lg text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
-                    <span class="text-gray-400 dark:text-gray-500">|</span>
-                    <span class="text-gray-600 dark:text-gray-400">© 2025 GIPC</span>
+                    <span class="hidden md:block text-gray-400 dark:text-gray-500">|</span>
+                    <span class="text-sm md:text-base text-gray-600 dark:text-gray-400">© 2025 GIPC</span>
                 </div>
             </div>
         </div>

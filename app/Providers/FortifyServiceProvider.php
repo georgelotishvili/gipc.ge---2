@@ -33,6 +33,14 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
+        // Uncomment the following lines when you want to enable email verification
+        /*
+        // Register the email verification view
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
+        });
+        */
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 

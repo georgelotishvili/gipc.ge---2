@@ -1,6 +1,6 @@
 <x-layout>
     <!-- ====== Services Section Start -->
-    <div class="relative overflow-hidden pt-[120px] md:pt-[130px] lg:pt-[160px]">
+    <div class="relative overflow-hidden">
         <div class="container">
             <div class="-mx-4 flex flex-wrap items-center">
                 <div class="w-full px-4 py-10">
@@ -19,7 +19,7 @@
     <!-- ====== Services Section End -->
 
     <!-- ====== Services Cards Section Start -->
-    <div class="py-20">
+    <div>
         <div class="container">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 

@@ -2,6 +2,7 @@
     <!-- Features Section -->
     <section class="py-6 md:py-16 bg-white dark:bg-gray-900">
         <div class="max-w-[120rem] mx-auto px-3 sm:px-6 lg:px-12">
+            <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-white mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-4 sm:px-6 lg:px-8">
                 <!-- Jobs Card -->
                 <a href="{{ route('jobs') }}" class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
@@ -124,39 +125,6 @@
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, სადაც შეგიძლიათ განსაზღვროთ თქვენი ცოდნის ხარისხი და შესაძლებლობა ოფიციალური გამოცდის ჩაბარებისა</p>
                     </div>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-4">
-        <div class="max-w-[120rem] mx-auto px-2 sm:px-8 lg:px-12">
-            <div class="bg-gradient-to-br from-primary-600/90 to-primary-500/90 dark:from-[#0A1A2F] dark:to-[#0F2744] rounded-2xl p-4 sm:p-8 shadow-xl relative overflow-hidden group">
-                <!-- Animated Background Elements -->
-                <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute inset-0 bg-[url('/img/grid-pattern.svg')] opacity-10 dark:opacity-5"></div>
-                
-                <!-- Glowing Orbs -->
-                <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-400/50 dark:bg-blue-500/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20"></div>
-                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-primary-400/50 dark:bg-blue-500/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-20"></div>
-
-                <div class="relative z-10">
-                    <div class="max-w-3xl mx-auto text-center">
-                        <h2 class="text-xl sm:text-4xl font-bold text-white mb-6 drop-shadow-sm">
-                            აიმაღლეთ პროფესიული კვალიფიკაცია
-                        </h2>
-                        <p class="text-md sm:text-xl text-white/90 dark:text-white/80 mb-10 leading-relaxed">
-                            დაიწყეთ თქვენი პროფესიული განვითარების გზა GIPC-სთან ერთად და მიიღეთ საერთაშორისოდ აღიარებული სერტიფიკატი
-                        </p>
-                        <a href="#" class="group/btn bg-white/95 dark:bg-white/90 text-primary-600 dark:text-[#0A1A2F] px-10 py-4 rounded-lg hover:bg-white dark:hover:bg-white transition-all duration-300 inline-flex items-center shadow-lg shadow-primary-950/20 dark:shadow-black/20 font-semibold relative overflow-hidden">
-                            <span class="relative z-10 flex items-center">
-                                უფასო კონსულტაცია 
-                                <i class="fas fa-arrow-right ml-3 transform group-hover/btn:translate-x-1 transition-transform"></i>
-                            </span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

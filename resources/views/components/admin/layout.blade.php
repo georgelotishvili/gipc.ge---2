@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" 
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="font-family: 'DejaVu Sans Condensed', sans-serif;"
  x-data="{ 
           sidebarOpen: localStorage.getItem('sidebarOpen') === 'true', 
           darkMode: localStorage.getItem('darkMode') === 'true',
@@ -20,7 +20,7 @@
       :class="{ 'dark': darkMode }"
       class="bg-gray-50 dark:bg-dark">
     <head>
-        
+        <link rel="stylesheet" href="/node_modules/dejavu-sans-condensed/css/dejavu-sans-condensed.min.css">
         <script>
             if (localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');

@@ -1,4 +1,5 @@
 <x-layout>
+    <x-workspace-sidebar />
     <div class="min-h-screen bg-white dark:bg-dark relative overflow-hidden pt-16" x-data="{ showAllVideos: false }">
         <div class="relative z-10 container mx-auto px-6 py-16">
             <!-- Header -->
