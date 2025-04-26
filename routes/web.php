@@ -10,6 +10,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\QuestionController;
 use App\Models\Course;
 use App\Models\Employee;
 use App\Models\Employer;
@@ -24,9 +25,6 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('index');
 });
-Route::get('/questions', function () {
-    return view('questions');
-})->name('questions');
 Route::get('/regulations', function () {
     $regulations = Regulation::all();
     return view('regulations', compact('regulations'));
@@ -146,6 +144,8 @@ Route::middleware([
     Route::get('/video', function () {
         return view('user.video');
     })->name('video');
+
+    Route::get('/questions', [QuestionController::class, 'indexToUser'])->name('questions');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');

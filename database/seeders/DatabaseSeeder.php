@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             EmployerSeeder::class,
             CertificateSeeder::class,
+            SeederCleaner::class,
         ]);
         // User::factory(10)->create();
 
