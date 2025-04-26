@@ -97,5 +97,39 @@ class UserSeeder extends Seeder
             'position' => 'Civil Engineer',
             'company' => 'Civil Engineering Firm',
         ])->save();
+
+        // Create user with no active subscription
+        $user = $createUser->create([
+            'name' => 'User Without Subscription',
+            'email' => 'user1@user.ge',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'terms' => true,
+        ]);
+        $user->forceFill([
+            'is_admin' => 0,
+            'position' => 'Junior Architect',
+            'company' => 'Design Studio',
+        ])->save();
+        // No subscription created for this user
+        
+        // Create user with weekly active subscription
+        $user = $createUser->create([
+            'name' => 'User With Weekly Subscription',
+            'email' => 'user2@user.ge',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'terms' => true,
+        ]);
+        $user->forceFill([
+            'is_admin' => 0,
+            'position' => 'Designer',
+            'company' => 'Creative Solutions',
+        ])->save();
+        $user->subscription()->update([
+            'is_active' => true,
+            'starts_at' => now(),
+            'type' => \App\Enums\SubscriptionType::WEEKLY->value
+        ]);
     }
 }

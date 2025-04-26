@@ -4,6 +4,9 @@ namespace App\Models;
 
 // Uncomment the following line when you want to enable email verification
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\SubscriptionType;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -162,5 +165,55 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class);
+    }
+
+    /**
+     * Get the subscription for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function isSubscriptionActive(): bool
+    {
+        // If the user doesn't have a subscription, return false
+        if (!$this->subscription)
+        {
+            return false;
+        }
+
+        // If the subscription type is unlimited, it's always active
+        if ($this->subscription->type === SubscriptionType::UNLIMITED->value)
+        {
+            return true;
+        }
+
+        // If starts_at is null, subscription hasn't started yet
+        if (!$this->subscription->starts_at)
+        {
+            return false;
+        }
+
+        // Calculate end date based on subscription type
+        $endDate = null;
+        $startDate = Carbon::parse($this->subscription->starts_at);
+        
+        switch ($this->subscription->type)
+        {
+            case SubscriptionType::WEEKLY->value:
+                $endDate = $startDate->copy()->addWeek();
+                break;
+            case SubscriptionType::MONTHLY->value:
+                $endDate = $startDate->copy()->addMonth();
+                break;
+            case SubscriptionType::YEARLY->value:
+                $endDate = $startDate->copy()->addYear();
+                break;
+        }
+
+        $now = now();
+        $isActive = $now->greaterThanOrEqualTo($startDate) && $now->lessThan($endDate);
+        $this->subscription->is_active = $isActive;
+        $this->subscription->ends_at = $endDate;
+        $this->subscription->save();
+        return $isActive;
     }
 }
