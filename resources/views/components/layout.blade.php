@@ -328,7 +328,7 @@
                         </a>
                     </div>
                     <span class="text-gray-400 dark:text-gray-500">|</span>
-                    <span class="text-gray-600 dark:text-gray-400">© 2024 GIPC</span>
+                    <span class="text-gray-600 dark:text-gray-400">© 2025 GIPC</span>
                 </div>
             </div>
         </div>

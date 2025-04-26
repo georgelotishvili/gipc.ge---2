@@ -18,6 +18,12 @@ Route::get('/home', function () {
 Route::get('/questions', function () {
     return view('questions');
 })->name('questions');
+Route::get('/regulations', function () {
+    return view('regulations');
+})->name('regulations');
+Route::get('/terms-and-conditions', function () {
+    return view('terms_and_conditions');
+})->name('terms-and-conditions');
 Route::get('/services', function () {
     return view('services');
 })->name('services');
