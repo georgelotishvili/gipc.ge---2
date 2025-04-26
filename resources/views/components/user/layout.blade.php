@@ -1,12 +1,12 @@
 <x-layout>
-    <div  class="flex min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:bg-dark">
+    <div  class="flex min-h-screen">
         @auth
         <x-workspace-sidebar />
         @endauth
         <!-- Using the admin sidebar component -->
         
         <!-- Main Content -->
-        <div class="flex-1 py-8 mt-16 dark:bg-dark">
+        <div class="flex-1 py-8 dark:bg-dark">
             <div class="w-full px-4 sm:px-6 lg:px-12">
                 {{ $slot }}
             </div>

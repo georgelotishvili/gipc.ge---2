@@ -1,4 +1,4 @@
-<x-layout>
+<x-user.layout>
     <div class="space-y-6 max-md:max-w-lg max-md:mx-auto">
         <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white">კითხვები</h2>
@@ -88,4 +88,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-user.layout>

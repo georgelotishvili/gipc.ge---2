@@ -27,27 +27,27 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
                     </div>
-                    <span class="ml-3">მთავარი</span>
+                    <span class="ml-3">წინასაგამოცდო ტესტირება</span>
                 </a>
 
-                <a href="" 
+                <a href="{{ route('test_results') }}" 
                    class="group flex items-center rounded-lg p-2.5 text-gray-700 font-medium hover:bg-white hover:shadow-sm dark:text-gray-300 dark:hover:bg-gray-800 {{ Route::is('admin.questions') ? 'bg-white shadow-sm text-primary-600 dark:bg-gray-800 dark:text-primary-400 dark:shadow-none' : '' }}">
                     <div class="flex items-center justify-center h-8 w-8 {{ Route::is('admin.questions') ? 'text-primary-600 bg-primary-50 dark:bg-gray-700 dark:text-primary-400' : 'text-gray-500 bg-gray-100 group-hover:text-primary-600 group-hover:bg-primary-50 dark:bg-gray-700 dark:text-gray-400 dark:group-hover:text-primary-400' }} rounded-md transition-colors">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                         </svg>
                     </div>
-                    <span class="ml-3">წინასაგამოცდო ტესტირება</span>
+                    <span class="ml-3">ტესტების შედეგები</span>
                 </a>
 
-                <a href="{{ route('test_results') }}" 
+                <a href="{{ route('questions') }}" 
                    class="group flex items-center rounded-lg p-2.5 text-gray-700 font-medium hover:bg-white hover:shadow-sm dark:text-gray-300 dark:hover:bg-gray-800 {{ Route::is('test_results') ? 'bg-white shadow-sm text-primary-600 dark:bg-gray-800 dark:text-primary-400 dark:shadow-none' : '' }}">
                     <div class="flex items-center justify-center h-8 w-8 {{ Route::is('test_results') ? 'text-primary-600 bg-primary-50 dark:bg-gray-700 dark:text-primary-400' : 'text-gray-500 bg-gray-100 group-hover:text-primary-600 group-hover:bg-primary-50 dark:bg-gray-700 dark:text-gray-400 dark:group-hover:text-primary-400' }} rounded-md transition-colors">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                         </svg>
                     </div>
-                    <span class="ml-3">ტესტების შედეგები</span>
+                    <span class="ml-3">საგამოცდო კითხვები და სავარაუდო პასუხები</span>
                 </a>
 
                 <a href="{{ route('tutorials') }}" 
@@ -82,15 +82,15 @@
                 </svg>
             </a>
 
-            <a href="" 
-               class="flex justify-center items-center {{ Route::is('admin.questions') ? 'bg-primary-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800' }} h-10 w-10 rounded-lg">
+            <a href="{{ route('test_results') }}" 
+               class="flex justify-center items-center {{ Route::is('test_results') ? 'bg-primary-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800' }} h-10 w-10 rounded-lg">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                 </svg>
             </a>
 
-            <a href="{{ route('test_results') }}" 
-               class="flex justify-center items-center {{ Route::is('test_results') ? 'bg-primary-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800' }} h-10 w-10 rounded-lg">
+            <a href="{{ route('questions') }}" 
+               class="flex justify-center items-center {{ Route::is('questions') ? 'bg-primary-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800' }} h-10 w-10 rounded-lg">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                 </svg>
@@ -103,8 +103,8 @@
                 </svg>
             </a>
 
-            <a href="{{ route('workspace') }}" 
-               class="flex justify-center items-center {{ Route::is('admin.index') ? 'bg-primary-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800' }} h-10 w-10 rounded-lg">
+            <a href="{{ route('profile.show') }}" 
+               class="flex justify-center items-center {{ Route::is('profile.show') ? 'bg-primary-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800' }} h-10 w-10 rounded-lg">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
