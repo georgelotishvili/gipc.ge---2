@@ -1,151 +1,69 @@
 <x-layout>
+    <!-- Flash Messages -->
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <title>Close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+                </svg>
+            </span>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <title>Close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+                </svg>
+            </span>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Validation Error!</strong>
+            <ul class="mt-2 list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <title>Close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+                </svg>
+            </span>
+        </div>
+    @endif
 
 <!-- Main Content -->
     <div class="w-full px-4 sm:px-6 lg:px-8 py-12"
          x-data="{ 
             searchQuery: '',
             activeFilter: 'hiring',
-            jobs: [
-                { 
-                    title: 'არქიტექტორი',
-                    company: 'Construction Pro',
-                    companyLogo: 'https://placehold.co/400x400?text=Construction+Pro',
-                    location: 'თბილისი', 
-                    type: 'სრული განაკვეთი',
-                    salary: '2500-3500 ₾',
-                    description: 'გვესაჭიროება გამოცდილი არქიტექტორი კომერციული პროექტებისთვის...',
-                    posted: '2 დღის წინ',
-                    jobType: 'hiring',
-                    tags: ['AutoCAD', 'Revit', 'SketchUp', 'კომერციული პროექტირება']
-                },
-                { 
-                    title: 'პროექტის მენეჯერი',
-                    company: 'Build Corp',
-                    companyLogo: 'https://placehold.co/400x400?text=Build+Corp',
-                    location: 'ბათუმი',
-                    type: 'სრული განაკვეთი', 
-                    salary: '3000-4500 ₾',
-                    description: 'ვეძებთ გამოცდილ პროექტის მენეჯერს მსხვილი სამშენებლო პროექტებისთვის...',
-                    posted: '3 დღის წინ',
-                    jobType: 'hiring',
-                    tags: ['პროექტის მართვა', 'MS Project', 'სამშენებლო მენეჯმენტი']
-                },
-                { 
-                    title: 'ინტერიერის დიზაინერი',
-                    company: 'Design Studio',
-                    companyLogo: 'https://placehold.co/400x400?text=Design+Studio',
-                    location: 'თბილისი',
-                    type: 'ნახევარი განაკვეთი',
-                    salary: '1500-2000 ₾',
-                    description: 'გვჭირდება კრეატიული ინტერიერის დიზაინერი...',
-                    posted: '1 დღის წინ',
-                    jobType: 'hiring',
-                    tags: ['3ds Max', 'V-Ray', 'Adobe Photoshop', 'საცხოვრებელი დიზაინი']
-                },
-                { 
-                    title: 'კონსტრუქტორი',
-                    company: 'Engineering Solutions',
-                    companyLogo: 'https://placehold.co/400x400?text=Engineering+Solutions',
-                    location: 'ქუთაისი',
-                    type: 'სრული განაკვეთი',
-                    salary: '2800-3800 ₾',
-                    description: 'ვეძებთ გამოცდილ კონსტრუქტორს სამოქალაქო მშენებლობის პროექტებისთვის...',
-                    posted: '5 დღის წინ',
-                    jobType: 'hiring',
-                    tags: ['ETABS', 'SAP2000', 'AutoCAD', 'სტრუქტურული ანალიზი']
-                },
-                { 
-                    title: 'ლანდშაფტის არქიტექტორი',
-                    company: 'Green Spaces',
-                    companyLogo: 'https://placehold.co/400x400?text=Green+Spaces',
-                    location: 'თბილისი',
-                    type: 'სრული განაკვეთი',
-                    salary: '2000-3000 ₾',
-                    description: 'გვესაჭიროება კრეატიული ლანდშაფტის არქიტექტორი...',
-                    posted: '4 დღის წინ',
-                    jobType: 'hiring',
-                    tags: ['Lumion', 'SketchUp', 'გამწვანება', 'ლანდშაფტის დიზაინი']
-                },
-                { 
-                    title: 'გამოცდილი არქიტექტორი',
-                    company: 'დამოუკიდებელი სპეციალისტი',
-                    avatar: 'https://placehold.co/400x400?text=User1',
-                    location: 'თბილისი',
-                    type: 'სრული განაკვეთი',
-                    salary: '3500-4500 ₾',
-                    description: '10 წლიანი გამოცდილება არქიტექტურულ დაგეგმარებაში...',
-                    posted: '2 დღის წინ',
-                    jobType: 'seeking',
-                    tags: ['BIM', 'Revit', 'ArchiCAD', 'მრავალსართულიანი']
-                },
-                { 
-                    title: 'ინტერიერის დიზაინერი',
-                    company: 'თვითდასაქმებული',
-                    avatar: 'https://placehold.co/400x400?text=User2',
-                    location: 'თბილისი',
-                    type: 'ნებისმიერი',
-                    salary: '2000-3000 ₾',
-                    description: '5 წლიანი გამოცდილება ინტერიერის დიზაინში...',
-                    posted: '1 დღის წინ',
-                    jobType: 'seeking',
-                    tags: ['Corona Renderer', '3ds Max', 'კომერციული დიზაინი']
-                },
-                { 
-                    title: 'კონსტრუქტორი',
-                    company: 'დამოუკიდებელი ინჟინერი',
-                    avatar: 'https://placehold.co/400x400?text=User3',
-                    location: 'ბათუმი',
-                    type: 'სრული განაკვეთი',
-                    salary: '3000-4000 ₾',
-                    description: '8 წლიანი გამოცდილება კონსტრუქციულ გაანგარიშებებში...',
-                    posted: '3 დღის წინ',
-                    jobType: 'seeking',
-                    tags: ['SAFE', 'ETABS', 'Robot Structural', 'სეისმური ანალიზი']
-                },
-                { 
-                    title: '3D მოდელირების სპეციალისტი',
-                    company: 'ფრილანსერი',
-                    avatar: 'https://placehold.co/400x400?text=User4',
-                    location: 'დისტანციური',
-                    type: 'ნებისმიერი',
-                    salary: '2500-3500 ₾',
-                    description: 'პროფესიონალი 3D მოდელირების სპეციალისტი ეძებს სამსახურს...',
-                    posted: '4 დღის წინ',
-                    jobType: 'seeking',
-                    tags: ['Blender', 'Maya', 'ZBrush', 'რენდერინგი']
-                },
-                { 
-                    title: 'პროექტის ხელმძღვანელი',
-                    company: 'დამოუკიდებელი მენეჯერი',
-                    avatar: 'https://placehold.co/400x400?text=User5',
-                    location: 'თბილისი',
-                    type: 'სრული განაკვეთი',
-                    salary: '4000-5000 ₾',
-                    description: '12 წლიანი გამოცდილება პროექტების მართვაში...',
-                    posted: '5 დღის წინ',
-                    jobType: 'seeking',
-                    tags: ['Agile', 'Scrum', 'Jira', 'რისკების მართვა']
-                }
-            ],
-            get filteredJobs() {
-                return this.jobs.filter(job => {
-                    const matchesFilter = job.jobType === this.activeFilter;
-                    const matchesSearch = job.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                                        job.company.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                                        job.location.toLowerCase().includes(this.searchQuery.toLowerCase());
-                    return matchesFilter && matchesSearch;
-                });
-            }
          }">
         
         <!-- Search and Filters Card -->
         <div class="bg-white dark:bg-gray-800/50 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm p-6 mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">ვაკანსიები</h2>
-                <button class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg">
-                    <i class="fas fa-plus"></i>
-                    ვაკანსიის დამატება
-                </button>
+                <div class="flex gap-3">
+                    <a href="{{ route('employees.create') }}" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg">
+                        <i class="fas fa-plus"></i>
+                        ვეძებ სამსახურს
+                    </a>
+                    <a href="{{ route('employers.create') }}" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg">
+                        <i class="fas fa-plus"></i>
+                        ვეძებ თანამშრომელს
+                    </a>
+                </div>
             </div>
 
             <!-- Search Bar -->
@@ -167,68 +85,152 @@
                         :class="{ 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400': activeFilter === 'hiring' }"
                         class="px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200">
                     ვეძებთ თანამშრომელს
-                    <span class="ml-2 px-2.5 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700" x-text="jobs.filter(job => job.jobType === 'hiring').length"></span>
+                    <span class="ml-2 px-2.5 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700" x-text="{{$employers->count()}}"></span>
                 </button>
                 <button @click="activeFilter = 'seeking'"
                         :class="{ 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400': activeFilter === 'seeking' }"
                         class="px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200">
-                    ვეძებ სამსახურს
-                    <span class="ml-2 px-2.5 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700" x-text="jobs.filter(job => job.jobType === 'seeking').length"></span>
+                    ვეძებთ თანამშრომელს
+                    <span class="ml-2 px-2.5 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700" x-text="{{$employees->count()}}"></span>
                 </button>
             </div>
         </div>
 
         <!-- Job Cards -->
         <div class="space-y-6">
-            <template x-for="job in filteredJobs" :key="job.title">
-                <div class="bg-white dark:bg-gray-800/50 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm p-6 group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <!-- Employers (Hiring) Section -->
+            <div x-show="activeFilter === 'hiring'" x-cloak x-transition>
+                @foreach($employers as $employer)
+                <div class="bg-white dark:bg-gray-800/50 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm p-6 group hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                     x-show="searchQuery === '' || 
+                            '{{ strtolower($employer->name) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ strtolower($employer->position) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ strtolower($employer->description) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ strtolower($employer->skills) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ $employer->salary }}'.includes(searchQuery)">
                     <div class="flex flex-col h-full">
                         <div class="flex items-center gap-4 mb-4">
-                            <template x-if="job.jobType === 'hiring'">
-                                <img :src="job.companyLogo" :alt="job.company" class="w-16 h-16 object-contain rounded-lg">
-                            </template>
-                            <template x-if="job.jobType === 'seeking'">
-                                <img :src="job.avatar" :alt="job.company" class="w-16 h-16 object-cover rounded-full">
-                            </template>
+                            @if($employer->image)
+                                <img src="{{ asset('storage/' . $employer->image->path) }}" alt="{{ $employer->name }}" class="w-16 h-16 object-contain rounded-lg">
+                            @else
+                                <div class="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-building text-white text-2xl"></i>
+                                </div>
+                            @endif
                             <div>
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white" x-text="job.title"></h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400" x-text="job.company"></p>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $employer->position }}</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $employer->name }}</p>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                             <span class="flex items-center gap-2">
                                 <i class="fas fa-location-dot"></i>
-                                <span x-text="job.location"></span>
+                                <span>{{ $employer->city }}</span>
                             </span>
                             <span class="flex items-center gap-2">
                                 <i class="fas fa-clock"></i>
-                                <span x-text="job.type"></span>
+                                <span>{{ $employer->worktime->label() }}</span>
                             </span>
                             <span class="flex items-center gap-2">
                                 <i class="fas fa-money-bill"></i>
-                                <span x-text="job.salary"></span>
+                                <span>{{ $employer->salary }} ₾</span>
                             </span>
                         </div>
-                        <p class="mt-4 text-sm text-gray-700 dark:text-gray-300 flex-grow" x-text="job.description"></p>
+                        <p class="mt-4 text-sm text-gray-700 dark:text-gray-300 flex-grow">{{ Str::limit($employer->description, 150) }}</p>
                         
                         <!-- Tags Section -->
                         <div class="flex flex-wrap gap-2 mt-4">
-                            <template x-for="tag in job.tags" :key="tag">
+                            @foreach(explode(',', $employer->skills) as $skill)
                                 <span class="px-3 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full">
-                                    <span x-text="tag"></span>
+                                    {{ trim($skill) }}
                                 </span>
-                            </template>
+                            @endforeach
                         </div>
 
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100 dark:border-gray-700/50">
-                            <span class="text-sm text-gray-500 dark:text-gray-400" x-text="job.posted"></span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $employer->created_at->diffForHumans() }}</span>
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                @if(Auth::check() && (Auth::user()->id == $employer->user_id || Auth::user()->is_admin))
+                                    <a href="{{ route('employers.edit', $employer) }}" class="w-full sm:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-center">
+                                        <i class="fas fa-edit mr-1"></i> რედაქტირება
+                                    </a>
+                                    <form action="{{ route('employers.destroy', $employer) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="w-full sm:w-auto px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
+                                            <i class="fas fa-trash-alt mr-1"></i> წაშლა
+                                        </button>
+                                    </form>
+                                @endif
+                                <a href="{{ route('employers.show', $employer) }}" class="w-full sm:w-auto px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-center">
+                                    დეტალურად
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            <!-- Employees (Seeking Jobs) Section -->
+            <div x-show="activeFilter === 'seeking'" x-cloak x-transition>
+                @foreach($employees as $employee)
+                <div class="bg-white dark:bg-gray-800/50 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm p-6 group hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                     x-show="searchQuery === '' || 
+                            '{{ strtolower($employee->name) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ strtolower($employee->position) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ strtolower($employee->description) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ strtolower($employee->skills) }}'.includes(searchQuery.toLowerCase()) || 
+                            '{{ $employee->salary }}'.includes(searchQuery)">
+                    <div class="flex flex-col h-full">
+                        <div class="flex items-center gap-4 mb-4">
+                            @if(file_exists(public_path('images/avatar-placeholder.png')))
+                                <img src="{{ asset('images/avatar-placeholder.png') }}" alt="{{ $employee->name }}" class="w-16 h-16 object-cover rounded-full">
+                            @else
+                                <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-2xl"></i>
+                                </div>
+                            @endif
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $employee->position }}</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $employee->name }}</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-location-dot"></i>
+                                <span>{{ $employee->city }}</span>
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-clock"></i>
+                                <span>{{ $employee->worktime->label() }}</span>
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-money-bill"></i>
+                                <span>{{ $employee->salary }} ₾</span>
+                            </span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-700 dark:text-gray-300 flex-grow">{{ Str::limit($employee->description, 150) }}</p>
+                        
+                        <!-- Tags Section -->
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            @foreach(explode(',', $employee->skills) as $skill)
+                                <span class="px-3 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full">
+                                    {{ trim($skill) }}
+                                </span>
+                            @endforeach
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100 dark:border-gray-700/50">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $employee->created_at->diffForHumans() }}</span>
                             <button class="w-full sm:w-auto px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
                                 დეტალურად
                             </button>
                         </div>
                     </div>
                 </div>
-            </template>
+                @endforeach
+            </div>
         </div>
     </div>
 </x-layout>

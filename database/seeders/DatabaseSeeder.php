@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             AnswerSeeder::class,
             RegulationSeeder::class,
+            EmployeeSeeder::class,
+            EmployerSeeder::class,
+
         ]);
         // User::factory(10)->create();
 

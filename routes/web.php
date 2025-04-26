@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Exam;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployerController;
 use App\Models\Course;
+use App\Models\Employee;
+use App\Models\Employer;
 use App\Models\Regulation;
 use App\Models\Video;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -133,6 +137,22 @@ Route::middleware([
         return view('user.video');
     })->name('video');
 
+    // Employer routes
+    Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
+    Route::post('/employers', [EmployerController::class, 'store'])->name('employers.store');
+    Route::get('/employers/{employer}', [EmployerController::class, 'show'])->name('employers.show');
+    Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
+    Route::patch('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
+    Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
+    
+    // Employee routes
+    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+    Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::patch('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+
     Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
 
     Route::get('/exam/{examRequest}', Exam::class)->name('exam');
@@ -145,7 +165,9 @@ Route::get('/certificated-specialists', function () {
 })->name('certificated-specialists');
 
 Route::get('/jobs', function () {
-    return view('jobs.jobs-listings');
+    $employers = Employer::all();
+    $employees = Employee::all();
+    return view('jobs.jobs-listings', compact('employers', 'employees'));
 })->name('jobs');
 
 // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])

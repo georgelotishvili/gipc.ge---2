@@ -75,4 +75,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(ExamRequest::class);
     }
+
+    /**
+     * User's employer relationship.
+     * 
+     * @return HasMany
+     */
+    public function employers(): HasMany
+    {
+        return $this->hasMany(Employer::class);
+    }
+
+    /**
+     * Get the employees for the user.
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
