@@ -27,16 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `groups`
 --
 
-CREATE TABLE `groups` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `question_weight` int(11) NOT NULL DEFAULT 1,
-  `question_count_in_exam` int(11) NOT NULL DEFAULT 8
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `groups`
 --
@@ -89,8 +79,6 @@ INSERT INTO `groups` (`id`, `name`, `title`, `created_at`, `updated_at`, `questi
 --
 -- Indexes for table `groups`
 --
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -99,8 +87,6 @@ ALTER TABLE `groups`
 --
 -- AUTO_INCREMENT for table `groups`
 --
-ALTER TABLE `groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

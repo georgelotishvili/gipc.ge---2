@@ -14,9 +14,49 @@
             </ul>
         </div>
     @endif
-    @foreach ($systemSettings as $key => $systemSetting)
-        <livewire:admin-system-setting :systemSetting="$systemSetting" wire:key="system-setting-{{ $systemSetting->id }}" />
-    @endforeach
+
+    @if (count($systemSettings) > 0)
+        @foreach ($systemSettings as $systemSetting)
+            <div class="bg-gray-50 dark:bg-dark-3/50 rounded-xl p-5 mb-4">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">სისტემის პარამეტრები</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">პარამეტრის სახელი</label>
+                        <input type="text" wire:model="systemSettings.{{ $loop->index }}.key" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500">
+                        @error("systemSettings.{$loop->index}.key") <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">პარამეტრის მნიშვნელობა</label>
+                        <input type="text" wire:model="systemSettings.{{ $loop->index }}.value" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500">
+                        @error("systemSettings.{$loop->index}.value") <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">აღწერა</label>
+                        <input type="text" wire:model="systemSettings.{{ $loop->index }}.description" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500">
+                        @error("systemSettings.{$loop->index}.description") <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button wire:click="deleteParameter({{ $systemSetting->id }})"
+                        onclick="confirm('ნამდვილად გსურთ წაშლა?') || event.stopImmediatePropagation()" 
+                        class="px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-xl hover:from-red-700 hover:to-red-600 transition-all duration-300 text-sm font-medium shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:-translate-y-0.5 focus:ring-2 focus:ring-red-500/60 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-2">
+                        წაშლა
+                    </button>
+                    <button wire:click="saveParameter({{ $systemSetting->id }})" class="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-xl hover:from-primary-700 hover:to-primary-600 transition-all duration-300 text-sm font-medium shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 hover:-translate-y-0.5 focus:ring-2 focus:ring-primary-500/60 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-2">
+                        შენახვა
+                    </button>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <div class="bg-gray-50 dark:bg-dark-3/50 rounded-xl p-5 mb-4">
+            <p class="text-gray-700 dark:text-gray-300">პარამეტრები არ არის დამატებული.</p>
+        </div>
+    @endif
+
     <!-- Add Parameter Section -->
     <div class="mt-6 bg-gray-50 dark:bg-dark-3/50 rounded-xl p-5">
         <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">პარამეტრის დამატება</h3>
@@ -24,16 +64,20 @@
         <div class="space-y-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">პარამეტრის სახელი</label>
-                <input type="text" wire:model.live.defer="newParameterKey" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500" placeholder="შეიყვანეთ პარამეტრის სახელი">
+                <input type="text" wire:model="newParameterKey" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500" placeholder="შეიყვანეთ პარამეტრის სახელი">
+                @error('newParameterKey') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">პარამეტრის მნიშვნელობა</label>
-                <input type="text" wire:model.live.defer="newParameterValue" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500" placeholder="შეიყვანეთ პარამეტრის მნიშვნელობა">
+                <input type="text" wire:model="newParameterValue" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500" placeholder="შეიყვანეთ პარამეტრის მნიშვნელობა">
+                @error('newParameterValue') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
+            
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">პარამეტრის მნიშვნელობა</label>
-                <input type="text" wire:model.live.defer="newParameterDescription" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500" placeholder="შეიყვანეთ პარამეტრის მნიშვნელობა">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">აღწერა</label>
+                <input type="text" wire:model="newParameterDescription" class="w-full rounded-lg border-gray-300 dark:border-dark-4 dark:bg-dark-2 text-gray-700 dark:text-gray-300 focus:border-primary-500 focus:ring-primary-500" placeholder="შეიყვანეთ პარამეტრის აღწერა">
+                @error('newParameterDescription') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
         

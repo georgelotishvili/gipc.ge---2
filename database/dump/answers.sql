@@ -27,16 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `answers`
 --
 
-CREATE TABLE `answers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `question_id` bigint(20) UNSIGNED NOT NULL,
-  `is_true` tinyint(1) DEFAULT 0,
-  `q_id` int(11) DEFAULT NULL,
-  `text` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `answers`
 --
@@ -6112,9 +6102,6 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 --
 -- Indexes for table `answers`
 --
-ALTER TABLE `answers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `answers_question_id_foreign` (`question_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -6123,8 +6110,6 @@ ALTER TABLE `answers`
 --
 -- AUTO_INCREMENT for table `answers`
 --
-ALTER TABLE `answers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14379;
 
 --
 -- Constraints for dumped tables
@@ -6133,8 +6118,6 @@ ALTER TABLE `answers`
 --
 -- Constraints for table `answers`
 --
-ALTER TABLE `answers`
-  ADD CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

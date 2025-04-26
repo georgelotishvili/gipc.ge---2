@@ -4,51 +4,34 @@ namespace App\Livewire;
 
 use App\Models\SystemSetting;
 use Livewire\Component;
+use Livewire\Attributes\Rule;
 
 class AdminSystemSettings extends Component
 {
-    public $systemSettings;
-
+    #[Rule('required|min:3|max:255')]
     public $newParameterKey = '';
+
+    #[Rule('required|min:1|max:255')]
     public $newParameterValue = '';
+
+    #[Rule('nullable|max:255')]
     public $newParameterDescription = '';
+
+    public $systemSettings = [];
 
     public function mount()
     {
-        $this->systemSettings = SystemSetting::all();
+        $this->loadSettings();
     }
 
-    public $systemSetting = [];
-
-    protected $rules = [
-        'newParameterKey' => 'required|string|max:255',
-        'newParameterValue' => 'required|string|max:255',
-        'newParameterDescription' => 'required|string|max:255',
-    ];
-
-    public function updated($systemSetting, $value)
+    public function loadSettings()
     {
-        $this->validateOnly($systemSetting);
-    }
-
-    public function deleteParameter($id)
-    {
-        $setting = SystemSetting::find($id);
-        if ($setting) {
-            $setting->delete();
-            $this->systemSettings = SystemSetting::all();
-            session()->flash('message', 'პარამეტრი წარმატებით წაიშალა');
-        }
-        $this->systemSettings = SystemSetting::all();
+        $this->systemSettings = SystemSetting::all()->toArray();
     }
 
     public function addParameter()
     {
-        $this->validate([
-            'newParameterKey' => 'required|string|max:255',
-            'newParameterValue' => 'required|string|max:255',
-            'newParameterDescription' => 'required|string|max:255',
-        ]);
+        $this->validate();
 
         SystemSetting::create([
             'key' => $this->newParameterKey,
@@ -56,12 +39,45 @@ class AdminSystemSettings extends Component
             'description' => $this->newParameterDescription,
         ]);
 
-        $this->systemSettings = SystemSetting::all();
-        $this->newParameterKey = '';
-        $this->newParameterValue = '';
-        $this->newParameterDescription = '';
+        $this->reset(['newParameterKey', 'newParameterValue', 'newParameterDescription']);
+        $this->loadSettings();
         
-        session()->flash('message', 'პარამეტრი წარმატებით დაემატა');
+        session()->flash('message', 'პარამეტრი წარმატებით დაემატა.');
+    }
+
+    public function saveParameter($id)
+    {
+        $setting = SystemSetting::find($id);
+        if (!$setting) {
+            return;
+        }
+
+        $index = collect($this->systemSettings)->search(function($item) use ($id) {
+            return $item['id'] == $id;
+        });
+
+        if ($index === false) {
+            return;
+        }
+
+        $setting->update([
+            'key' => $this->systemSettings[$index]['key'],
+            'value' => $this->systemSettings[$index]['value'],
+            'description' => $this->systemSettings[$index]['description'],
+        ]);
+
+        $this->loadSettings();
+        session()->flash('message', 'პარამეტრი წარმატებით განახლდა.');
+    }
+
+    public function deleteParameter($id)
+    {
+        $setting = SystemSetting::find($id);
+        if ($setting) {
+            $setting->delete();
+            $this->loadSettings();
+            session()->flash('message', 'პარამეტრი წარმატებით წაიშალა.');
+        }
     }
 
     public function render()

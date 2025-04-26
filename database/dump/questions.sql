@@ -27,14 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `q_id` int(11) DEFAULT NULL,
-  `text` text DEFAULT NULL,
-  `weight` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `questions`
@@ -1565,8 +1557,6 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 --
 -- Indexes for table `questions`
 --
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1575,8 +1565,6 @@ ALTER TABLE `questions`
 --
 -- AUTO_INCREMENT for table `questions`
 --
-ALTER TABLE `questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2979;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
