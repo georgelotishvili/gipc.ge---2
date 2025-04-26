@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             QuestionSeeder::class,
             AnswerSeeder::class,
+            RegulationSeeder::class,
         ]);
         // User::factory(10)->create();
 

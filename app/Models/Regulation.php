@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Regulation extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array<string>
+     */
+    protected $guarded = [];
 }

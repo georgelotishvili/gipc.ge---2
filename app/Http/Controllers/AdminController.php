@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Regulation;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -166,6 +167,54 @@ class AdminController extends Controller
             'question_count_in_exam' => $request->input('question_count_in_exam')
         ]);
         return redirect()->route('admin.codes')->with('success', 'დადგენილება წარმატებით დამატებულია');
+    }
+
+    public function regulations()
+    {
+        $regulations = Regulation::all();
+        return view('admin.regulations.regulations', [
+            'regulations' => $regulations
+        ]);
+    }
+
+    public function createRegulation()
+    {
+        return view('admin.regulations.create');
+    }
+
+    public function storeRegulation(Request $request)
+    {
+        Regulation::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'link' => $request->input('link'),
+            'date_applied' => $request->input('date_applied')
+        ]);
+        return redirect()->route('admin.regulations.regulations')->with('success', 'დადგენილება წარმატებით დამატებულია');
+    }
+
+    public function editRegulation(Regulation $regulation)
+    {
+        return view('admin.regulations.edit', [
+            'regulation' => $regulation
+        ]);
+    }
+
+    public function updateRegulation(Request $request, Regulation $regulation)
+    {
+        $regulation->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'link' => $request->input('link'),
+            'date_applied' => $request->input('date_applied')
+        ]);
+        return redirect()->route('admin.regulations.regulations')->with('success', 'დადგენილება წარმატებით განახლდა');
+    }
+
+    public function destroyRegulation(Regulation $regulation)
+    {
+        $regulation->delete();
+        return redirect()->back()->with('success', 'დადგენილება წარმატებით წაიშალა');
     }
 
     public function destroy($question)
