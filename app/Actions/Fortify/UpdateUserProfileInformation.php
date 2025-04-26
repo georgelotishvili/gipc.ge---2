@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Actions\Abecert\SaveImageAction;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -24,7 +25,17 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
-            $user->updateProfilePhoto($input['photo']);
+            // Delete old image if exists
+            if ($user->image) {
+                if (file_exists(storage_path('app/public/' . $user->image->path))) {
+                    unlink(storage_path('app/public/' . $user->image->path));
+                }
+                $user->image->delete();
+            }
+            
+            // Save new image using SaveImageAction
+            $image = SaveImageAction::execute($input['photo'], 'profile-photos', 400, 400);
+            $user->image()->save($image);
         }
 
         if ($input['email'] !== $user->email &&

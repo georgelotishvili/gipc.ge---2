@@ -155,6 +155,19 @@
                                                 </a>
                                             </li>
                                             <li>
+                                                <a href="{{ route('profile.show') }}" wire:navigate
+                                                   class="flex items-center gap-3.5 text-sm font-medium text-gray-700 duration-300 ease-in-out hover:text-primary dark:text-dark-6 dark:hover:text-primary">
+                                                    <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22">
+                                                        <path d="M20.8656 8.86874C20.5219 8.49062 19.9469 8.49062 19.6031 8.86874C19.2594 9.24687 19.2594 9.82187 19.6031 10.2C20.4656 11.0625 21 12.2625 21 13.5687C21 16.2562 18.8219 18.4344 16.1344 18.4344C13.4469 18.4344 11.2688 16.2562 11.2688 13.5687C11.2688 12.2625 11.8031 11.0625 12.6656 10.2C13.0094 9.82187 13.0094 9.24687 12.6656 8.86874C12.3219 8.49062 11.7469 8.49062 11.4031 8.86874C10.2031 10.0687 9.45935 11.7469 9.45935 13.5687C9.45935 17.2219 12.4813 20.2437 16.1344 20.2437C19.7875 20.2437 22.8094 17.2219 22.8094 13.5687C22.8094 11.7469 22.0656 10.0687 20.8656 8.86874Z"/>
+                                                        <path d="M16.1344 8.09998C17.7125 8.09998 19 6.81248 19 5.23435C19 3.65623 17.7125 2.36873 16.1344 2.36873C14.5563 2.36873 13.2688 3.65623 13.2688 5.23435C13.2688 6.81248 14.5563 8.09998 16.1344 8.09998Z"/>
+                                                        <path d="M10.4594 13.9781C10.8031 13.6 10.8031 13.025 10.4594 12.6469C10.1156 12.2688 9.54062 12.2688 9.16249 12.6469C8.33749 13.4719 7.80312 14.6719 7.80312 15.9781C7.80312 17.2844 8.33749 18.4844 9.16249 19.3094C9.33124 19.4781 9.57812 19.5625 9.79062 19.5625C10.0031 19.5625 10.25 19.4781 10.4188 19.3094C10.7625 18.9313 10.7625 18.3563 10.4188 17.9781C9.92187 17.4813 9.61249 16.7656 9.61249 15.9781C9.61249 15.1906 9.92187 14.475 10.4594 13.9781Z"/>
+                                                        <path d="M5.86875 10.5C7.44688 10.5 8.73438 9.2125 8.73438 7.63438C8.73438 6.05625 7.44688 4.76875 5.86875 4.76875C4.29063 4.76875 3.00313 6.05625 3.00313 7.63438C3.00313 9.2125 4.29063 10.5 5.86875 10.5Z"/>
+                                                        <path d="M9.1625 5.23438C9.1625 3.88125 9.8625 2.63438 11.0281 1.81875C11.4062 1.54063 11.475 1 11.1969 0.621875C10.9188 0.24375 10.3781 0.175 10 0.453125C8.36563 1.60938 7.35938 3.33125 7.35938 5.23438C7.35938 7.1375 8.36563 8.85938 10 10.0156C10.1688 10.1844 10.4156 10.2688 10.6281 10.2688C10.8406 10.2688 11.0875 10.1844 11.2562 10.0156C11.6344 9.6375 11.6344 9.0625 11.2562 8.68438C9.8625 7.83438 9.1625 6.5875 9.1625 5.23438Z"/>
+                                                    </svg>
+                                                    პროფილის პარამეტრები
+                                                </a>
+                                            </li>
+                                            <li>
                                                 <form method="POST" action="{{ route('logout') }}">
                                                     @csrf
                                                     <button type="submit"
@@ -172,9 +185,14 @@
                             </div>
                         </div>
                     @else
-                        <div class="flex items-center gap-2 sm:gap-4">
-                            <a href="{{ route('login') }}" wire:navigate class="bg-primary-600 dark:bg-primary-500 text-white px-5 py-2.5 rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors shadow-lg shadow-primary-500/20 dark:shadow-primary-500/10">
-                                დაწყება
+                        <div class="flex items-center gap-3">
+                            <a href="{{ route('register') }}" wire:navigate 
+                               class="bg-primary-600 text-white px-5 py-2.5 rounded-xl hover:bg-primary-700 transition-all duration-200 shadow-lg shadow-primary-500/20 font-medium border border-primary-500/20 hover:border-primary-500/30 hover:scale-[1.02] active:scale-[0.98]">
+                                რეგისტრაცია
+                            </a>
+                            <a href="{{ route('login') }}" wire:navigate 
+                               class="bg-white dark:bg-dark-2 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-dark-3 transition-all duration-200 shadow-md border border-gray-200 dark:border-gray-700 font-medium hover:scale-[1.02] active:scale-[0.98]">
+                                შესვლა
                             </a>
                         </div>
                     @endauth

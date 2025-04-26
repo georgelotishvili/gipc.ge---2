@@ -1,5 +1,5 @@
 <x-layout>
-    <div  class="flex min-h-screen">
+    <div  class="flex min-h-screen dark:bg-dark">
         @auth
         <x-workspace-sidebar />
         @endauth
