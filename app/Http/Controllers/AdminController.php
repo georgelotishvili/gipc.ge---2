@@ -236,7 +236,7 @@ class AdminController extends Controller
 
     public function settings()
     {
-        return redirect()->back();
+        return view('admin.settings');
     }
 
     public function courses()

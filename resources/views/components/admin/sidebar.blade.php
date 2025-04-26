@@ -57,7 +57,7 @@
                 <li>
                     <a href="{{ route('admin.regulations.regulations') }}" wire:navigate
                        class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
-                       {{ Route::is('admin.regulations') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
+                       {{ Route::is('admin.regulations.regulations') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>

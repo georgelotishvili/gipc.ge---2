@@ -100,5 +100,5 @@
         </div>
     </div>
 
-    <livewire:admin-exam-requests />
+    {{-- <livewire:admin-exam-requests /> --}}
 </x-admin.layout>

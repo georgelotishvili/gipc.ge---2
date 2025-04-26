@@ -16,5 +16,8 @@ class SpecialitySeeder extends Seeder
         DB::table('specialities')->insert([
             'name' => 'არქიტექტორი',
         ]);
+        DB::table('specialities')->insert([
+            'name' => 'არქიტექტორი ექსპერტი',
+        ]);
     }
 }

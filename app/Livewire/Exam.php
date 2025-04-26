@@ -10,6 +10,7 @@ use App\Models\TestQuestion;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\ExamRequest as ExamRequestModel;
+use App\Models\SystemSetting;
 
 class Exam extends Component
 {
@@ -22,10 +23,11 @@ class Exam extends Component
     public $testQuestion;
     public $currentExamRequest;
     public $timer;
+    public $examDuration;
 
     public function mount(TestQuestion $testQuestion, $examRequest)
     {
-
+        $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
         $this->user = auth()->user();
         $this->currentExamRequest = ExamRequestModel::findOrFail($examRequest);
         // Check if the exam request belongs to the authenticated user
@@ -41,6 +43,7 @@ class Exam extends Component
         $this->current_question_index = $this->test->questions()->orderBy('id', 'asc')->first()->id;
         $this->loadCurrentQuestionIndex();
         $this->initializeFirstQuestion();
+        $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
     }
 
     public function goToQuestion($questionId): void
@@ -51,7 +54,7 @@ class Exam extends Component
 
     public function updateTimer()
     {
-        $timer = now()->diffInSeconds($this->test->started_at) + 7200; // Adding 1 hour (3600 seconds)
+        $timer = now()->diffInSeconds($this->test->started_at) + $this->examDuration; // Adding 1 hour (3600 seconds)
         // Calculate hours, minutes, and seconds from total seconds
         $hours = floor($timer / 3600);
         $minutes = floor(($timer % 3600) / 60);
@@ -77,7 +80,7 @@ class Exam extends Component
         {
             abort(404, 'Test is finished');
         }
-        if ($test->started_at && now()->diffInMinutes($test->started_at) > $test->duration) 
+        if ($test->started_at && now()->diffInMinutes($test->started_at) > $this->examDuration) 
         {
             abort(404, 'Test time has expired');
         }
