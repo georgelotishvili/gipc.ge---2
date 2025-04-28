@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            CommercialSeeder::class,
             SystemSettingSeeder::class,
             // StaticSeeder::class,
             UserSeeder::class,
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             EmployerSeeder::class,
             CertificateSeeder::class,
             SeederCleaner::class,
+
         ]);
         // User::factory(10)->create();
 
