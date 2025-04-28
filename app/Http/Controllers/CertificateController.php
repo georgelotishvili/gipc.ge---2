@@ -33,7 +33,16 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'speciality_id' => 'required|exists:specialities,id',
+            'certificate_number' => 'required|string|max:255',
+            'expiration_date' => 'required|date',
+        ]);
+        
+        $certificate = Certificate::create($request->all());
+        return redirect()->route('certificated-specialists')->with('success', 'Certificate created successfully');
     }
 
     /**
@@ -59,7 +68,15 @@ class CertificateController extends Controller
      */
     public function update(Request $request, Certificate $certificate)
     {
-        //
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'speciality_id' => 'required|exists:specialities,id',
+            'certificate_number' => 'required|string|max:255',
+            'expiration_date' => 'required|date',
+        ]);
+        
+        $certificate->update($request->all());
+        return redirect()->route('certificated-specialists')->with('success', 'Certificate updated successfully');
     }
 
     /**
@@ -67,6 +84,7 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-        //
+        $certificate->delete();
+        return redirect()->route('certificated-specialists')->with('success', 'Certificate deleted successfully');
     }
 }
