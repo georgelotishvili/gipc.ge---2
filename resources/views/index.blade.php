@@ -68,16 +68,20 @@
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სპეციალისტების მონაცემთა ბაზა გაძლევთ საშუალებას მოიძიოთ და დაუკავშირდეთ სერტიფიცირებულ არქიტექტორებს</p>
                     </div>
                 </a>
-
+                @php
+                    $user = auth()->user();
+                    if($user)
+                    {
+                        $isPremium = $user->isSubscriptionActive();
+                    }
+                    else
+                    {
+                        $isPremium = false;
+                    }
+                @endphp
                 <!-- Video Lessons Card -->
-<<<<<<< HEAD
-                <button onclick="showPremiumAlert()" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-=======
-                <a href="{{ route('tutorials') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
->>>>>>> e8279331af1235efffdca9f57c2a2163e2916e51
-                    
                     <!-- Premium Badge -->
                     <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown"></i>
@@ -94,13 +98,8 @@
                 </button>
 
                 <!-- Card 7 -->
-<<<<<<< HEAD
-                <button onclick="showPremiumAlert()" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-=======
-                <a href="{{ route('questions') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
->>>>>>> e8279331af1235efffdca9f57c2a2163e2916e51
                     
                     <!-- Premium Badge -->
                     <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
@@ -115,19 +114,11 @@
                         <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">საგამოცდო ტესტები</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც იძლევა საგამოცდო საკითხების შესწავლის საშუალებას, რათა შეძლოთ საგამოცდო ტესტების წარმატებით ჩაბარება</p>
                     </div>
-<<<<<<< HEAD
                 </button>
-
                 <!-- Card 8 -->
-                <button onclick="showPremiumAlert()" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-=======
-                </a>
 
-                <!-- Card 8 -->
-                <a href="{{ route('dashboard') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
->>>>>>> e8279331af1235efffdca9f57c2a2163e2916e51
                     
                     <!-- Premium Badge -->
                     <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
