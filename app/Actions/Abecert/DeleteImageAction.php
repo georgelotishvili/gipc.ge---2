@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DeleteImageAction
 {
-    public function execute(Image $image): void
+    public static function execute(Image $image): void
     {
         try {
             DB::beginTransaction();

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Storage;
 
 class Commercial extends Model
 {
@@ -17,13 +18,25 @@ class Commercial extends Model
      */
     protected $guarded = [];
 
+    protected $casts = [
+        'expiration_date' => 'datetime',
+        'weight' => 'float',
+        'duration_weight' => 'float',
+    ];
+
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function getImageLink()
+    public function getImageLinkAttribute()
     {
-        return $this->image?->path ?? $this->image_link;
+        if (!$this->image)
+        {
+            return $this->img_link;
+            return null;
+        }
+
+        return Storage::url($this->image->path);
     }
 }

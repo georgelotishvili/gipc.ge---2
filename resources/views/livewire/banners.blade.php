@@ -4,7 +4,7 @@
     slides: [
         @foreach($commercials as $commercial)
             { 
-                image: '{{ $commercial->getImageLink() }}', 
+                image: '{{ $commercial->getImageLinkAttribute() }}', 
                 title: '{{ $commercial->name }}', 
                 subtitle: '{{ $commercial->description }}' 
             }@if(!$loop->last),@endif

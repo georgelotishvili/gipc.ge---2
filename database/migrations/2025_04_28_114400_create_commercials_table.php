@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('expiration_date')->nullable();
             $table->float('weight')->nullable();
             $table->float('duration_weight')->nullable();
-            $table->string('image_link')->nullable();
+            $table->string('img_link')->nullable();
             $table->timestamps();
         });
     }
