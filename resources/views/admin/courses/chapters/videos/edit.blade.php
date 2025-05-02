@@ -91,7 +91,12 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="flex justify-end">
+                        <div class="flex justify-end space-x-4">
+                            <a href="{{ route('admin.courses.chapters.videos', ['course' => $course, 'chapter' => $chapter]) }}" 
+                               class="inline-flex items-center px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md transition-colors duration-200">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                დაბრუნება
+                            </a>
                             <button type="submit" 
                                     class="inline-flex items-center px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
                                 <i class="fas fa-save mr-2"></i>

@@ -486,6 +486,17 @@ class AdminController extends Controller
 
     public function updateVideo(Request $request, Course $course, Chapter $chapter, Video $video)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        $video->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->back()->with('success', 'ვიდეო წარმატებით განახლდა');
         return redirect()->back();
     }
 

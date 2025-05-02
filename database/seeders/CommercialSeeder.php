@@ -20,7 +20,7 @@ class CommercialSeeder extends Seeder
             'expiration_date' => now()->addMonths(3),
             'weight' => 1.0,
             'duration_weight' => 1.0,
-            'image_link' => 'https://picsum.photos/1600/900?random=1',
+            'img_link' => 'https://picsum.photos/1600/900?random=1',
         ]);
 
         Commercial::create([
@@ -30,7 +30,7 @@ class CommercialSeeder extends Seeder
             'expiration_date' => now()->addMonths(4),
             'weight' => 0.9,
             'duration_weight' => 0.9,
-            'image_link' => 'https://picsum.photos/1600/900?random=2',
+            'img_link' => 'https://picsum.photos/1600/900?random=2',
         ]);
 
         Commercial::create([
@@ -40,7 +40,7 @@ class CommercialSeeder extends Seeder
             'expiration_date' => now()->addMonths(5),
             'weight' => 0.8,
             'duration_weight' => 0.8,
-            'image_link' => 'https://picsum.photos/1600/900?random=3',
+            'img_link' => 'https://picsum.photos/1600/900?random=3',
         ]);
 
         Commercial::create([
@@ -50,7 +50,7 @@ class CommercialSeeder extends Seeder
             'expiration_date' => now()->addMonths(6),
             'weight' => 0.7,
             'duration_weight' => 0.7,
-            'image_link' => 'https://picsum.photos/1600/900?random=4',
+            'img_link' => 'https://picsum.photos/1600/900?random=4',
         ]);
 
         Commercial::create([
@@ -60,7 +60,7 @@ class CommercialSeeder extends Seeder
             'expiration_date' => now()->addMonths(7),
             'weight' => 0.6,
             'duration_weight' => 0.6,
-            'image_link' => 'https://picsum.photos/1600/900?random=5',
+            'img_link' => 'https://picsum.photos/1600/900?random=5',
         ]);
     }
 }
