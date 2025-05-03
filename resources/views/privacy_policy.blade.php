@@ -1,23 +1,23 @@
-<x-app-layout>
+<x-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 lg:p-8">
-                    <h1 class="text-2xl font-medium text-gray-900 mb-6">
+                    <h1 class="text-2xl font-medium text-gray-900 dark:text-gray-100 mb-6">
                         კონფიდენციალურობის პოლიტიკა
                     </h1>
                     
-                    <div class="mt-6 text-gray-600 leading-relaxed space-y-6">
+                    <div class="mt-6 text-gray-600 dark:text-gray-300 leading-relaxed space-y-6">
                         <p>
                             ბოლოს განახლდა: {{ now()->format('Y-m-d') }}
                         </p>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">1. შესავალი</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">1. შესავალი</h2>
                         <p>
                             ABE Certification პატივს სცემს თქვენს კონფიდენციალურობას და ვალდებულია დაიცვას თქვენი პერსონალური ინფორმაცია. ეს კონფიდენციალურობის პოლიტიკა განმარტავს, თუ როგორ ვაგროვებთ, ვიყენებთ და ვიცავთ თქვენს მონაცემებს.
                         </p>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">2. რა ინფორმაციას ვაგროვებთ</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">2. რა ინფორმაციას ვაგროვებთ</h2>
                         <p>
                             ჩვენ ვაგროვებთ შემდეგ ინფორმაციას:
                         </p>
@@ -28,7 +28,7 @@
                             <li>გამოყენების ინფორმაცია (როგორ იყენებთ ჩვენს სერვისს)</li>
                         </ul>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">3. როგორ ვიყენებთ თქვენს ინფორმაციას</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">3. როგორ ვიყენებთ თქვენს ინფორმაციას</h2>
                         <p>
                             თქვენ მიერ მოწოდებულ ინფორმაციას ვიყენებთ შემდეგი მიზნებისთვის:
                         </p>
@@ -39,7 +39,7 @@
                             <li>პერსონალიზებული გამოცდილების შესაქმნელად</li>
                         </ul>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">4. ინფორმაციის გაზიარება</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">4. ინფორმაციის გაზიარება</h2>
                         <p>
                             ჩვენ არ ვყიდით, ვაქირავებთ ან ვცვლით თქვენს პერსონალურ ინფორმაციას მესამე მხარეებთან. თუმცა, ინფორმაცია შეიძლება გაზიარდეს შემდეგ სიტუაციებში:
                         </p>
@@ -49,12 +49,12 @@
                             <li>სერვისის პროვაიდერებთან, რომლებიც გვეხმარებიან სერვისის მიწოდებაში</li>
                         </ul>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">5. ინფორმაციის უსაფრთხოება</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">5. ინფორმაციის უსაფრთხოება</h2>
                         <p>
                             ჩვენ ვიღებთ შესაბამის ზომებს, რათა დავიცვათ თქვენი პერსონალური ინფორმაცია არაავტორიზებული წვდომის, გამჟღავნების, შეცვლის ან განადგურებისგან.
                         </p>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">6. თქვენი უფლებები</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">6. თქვენი უფლებები</h2>
                         <p>
                             თქვენ გაქვთ უფლება:
                         </p>
@@ -65,12 +65,12 @@
                             <li>შეზღუდოთ თქვენი ინფორმაციის დამუშავება</li>
                         </ul>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">7. პოლიტიკის ცვლილებები</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">7. პოლიტიკის ცვლილებები</h2>
                         <p>
                             ჩვენ შეიძლება დროდადრო განვაახლოთ ეს კონფიდენციალურობის პოლიტიკა. მნიშვნელოვანი ცვლილებების შემთხვევაში, შეგატყობინებთ ელფოსტით ან ჩვენს ვებგვერდზე შეტყობინების განთავსებით.
                         </p>
                         
-                        <h2 class="text-xl font-medium text-gray-900 mt-8 mb-4">8. კონტაქტი</h2>
+                        <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100 mt-8 mb-4">8. კონტაქტი</h2>
                         <p>
                             თუ გაქვთ კითხვები ამ კონფიდენციალურობის პოლიტიკის შესახებ, გთხოვთ დაგვიკავშირდით ელ-ფოსტაზე: contact@abecert.ge
                         </p>
@@ -79,4 +79,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-layout>
