@@ -13,22 +13,10 @@ class Certificate extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'description',
-        'certificate_number',
-        'issue_date',
-        'expiry_date',
-        'status',
-        'issuing_organization',
-        'credential_url',
-        'credential_id',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
-        'issue_date' => 'date',
-        'expiry_date' => 'date',
+        'release_date' => 'date',
         'status' => CertificateStatus::class,
     ];
 
@@ -122,11 +110,10 @@ class Certificate extends Model
     public function getColorAttribute()
     {
         return match($this->status) {
-            CertificateStatus::APPROVED => 'green',
-            CertificateStatus::PENDING => 'yellow',
-            CertificateStatus::REJECTED => 'red',
+            CertificateStatus::ACTIVE => 'green',
+            CertificateStatus::SUSPENDED => 'yellow',
+            CertificateStatus::TERMINATED => 'red',
             CertificateStatus::EXPIRED => 'gray',
-            CertificateStatus::REVOKED => 'red',
         };
     }
 

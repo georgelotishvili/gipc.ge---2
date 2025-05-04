@@ -93,7 +93,7 @@ class CertificateSeeder extends Seeder
             'user_id' => 4,
             'certificate_number' => 'WATER-2024-001',
             'release_date' => now()->subYears(3),
-            'lifetime_years' => 5,
+            'lifetime_years' => 3,
             'status' => CertificateStatus::EXPIRED->value,
             'location' => 'ზუგდიდი',
             'education' => 'Master\'s Degree',
