@@ -115,7 +115,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/certificates/create', [CertificateController::class, 'create'])->name('admin.certificates.create');
     Route::post('/admin/certificates/store', [CertificateController::class, 'store'])->name('admin.certificates.store');
     Route::get('/admin/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->name('admin.certificates.edit');
-    Route::patch('/admin/certificates/{certificate}/update', [CertificateController::class, 'update'])->name('admin.certificates.update');
+    Route::put('/admin/certificates/{certificate}/update', [CertificateController::class, 'update'])->name('admin.certificates.update');
     Route::delete('/admin/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('admin.certificates.destroy');
 
     // Posts

@@ -34,14 +34,26 @@ class CertificateController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
+        $attributes = $request->validate([
+           'user_id' => 'required|exists:users,id',
             'speciality_id' => 'required|exists:specialities,id',
             'certificate_number' => 'required|string|max:255',
-            'expiration_date' => 'required|date',
+            'release_date' => 'required|date',
+            'lifetime_years' => 'required|integer|min:1',
+            'status' => 'required|in:active,suspended,terminated,expired',
+            'location' => 'nullable|string|max:255',
+            'education' => 'nullable|string|max:255',
+            'experience' => 'nullable|string|max:255',
+            'social' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'score' => 'nullable|numeric|min:0|max:100',
+            'rate' => 'nullable|numeric|min:0|max:100',
+            'jury_count' => 'nullable|integer|min:0',
+            'stars' => 'nullable|integer|min:0|max:5',
         ]);
         
-        $certificate = Certificate::create($request->all());
+        $certificate = Certificate::create($attributes);
         return redirect()->route('certificated-specialists')->with('success', 'Certificate created successfully');
     }
 
@@ -68,14 +80,26 @@ class CertificateController extends Controller
      */
     public function update(Request $request, Certificate $certificate)
     {
-        $request->validate([
+        $attributes = $request->validate([
             'user_id' => 'required|exists:users,id',
             'speciality_id' => 'required|exists:specialities,id',
             'certificate_number' => 'required|string|max:255',
-            'expiration_date' => 'required|date',
+            'release_date' => 'required|date',
+            'lifetime_years' => 'required|integer|min:1',
+            'status' => 'required|in:active,suspended,terminated,expired',
+            'location' => 'nullable|string|max:255',
+            'education' => 'nullable|string|max:255',
+            'experience' => 'nullable|string|max:255',
+            'social' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'score' => 'nullable|numeric|min:0|max:100',
+            'rate' => 'nullable|numeric|min:0|max:100',
+            'jury_count' => 'nullable|integer|min:0',
+            'stars' => 'nullable|integer|min:0|max:5',
         ]);
         
-        $certificate->update($request->all());
+        $certificate->update($attributes);
         return redirect()->route('certificated-specialists')->with('success', 'Certificate updated successfully');
     }
 
