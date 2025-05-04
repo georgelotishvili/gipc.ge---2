@@ -10,6 +10,16 @@
             </a>
         </div>
 
+        @if ($errors->any())
+            <div class="bg-red-500 text-white p-4 rounded-md">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
             <form action="{{ route('admin.certificates.store') }}" method="POST" class="space-y-6">
                 @csrf
@@ -100,7 +110,7 @@
                         <x-label for="speciality_id" value="Speciality" class="text-gray-900 dark:text-white" />
                         <select id="speciality_id" name="speciality_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="">აირჩიეთ სპეციალობა</option>
-                            @foreach($specialities ?? [] as $speciality)
+                            @foreach($specialities as $speciality)
                                 <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
                             @endforeach
                         </select>
@@ -132,8 +142,8 @@
                     <div>
                         <x-label for="status" value="სტატუსი" class="text-gray-900 dark:text-white" />
                         <select id="status" name="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            @foreach(['pending', 'approved', 'rejected', 'expired'] as $status)
-                                <option value="{{ $status }}" {{ old('status') == $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
+                            @foreach(App\Enums\CertificateStatus::cases() as $status)
+                                <option value="{{ $status->value }}" {{ old('status') == $status->value ? 'selected' : '' }}>{{ $status->label() }}</option>
                             @endforeach
                         </select>
                         <x-input-error for="status" class="mt-2" />
