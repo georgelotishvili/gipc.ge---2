@@ -18,28 +18,36 @@ class DumpSeeder extends Seeder
             $dumpPath = database_path('dump');
             $file = database_path('/dump/groups.sql');
             
-        $sql = file_get_contents($file);
-        DB::unprepared($sql);
-        $this->command->info('Seeded: ' . basename($file));
+            $sql = file_get_contents($file);
+            DB::unprepared($sql);
+            $this->command->info('Seeded: ' . basename($file));
 
-        $file = database_path('/dump/questions.sql');
-        
-        $sql = file_get_contents($file);
-        DB::unprepared($sql);
-        $this->command->info('Seeded: ' . basename($file));
+            $file = database_path('/dump/questions.sql');
+            
+            $sql = file_get_contents($file);
+            DB::unprepared($sql);
+            $this->command->info('Seeded: ' . basename($file));
 
-        $file = database_path('/dump/answers.sql');
-        
-        $sql = file_get_contents($file);
-        DB::unprepared($sql);
-        $this->command->info('Seeded: ' . basename($file));
+            $file = database_path('/dump/answers.sql');
+            
+            $sql = file_get_contents($file);
+            DB::unprepared($sql);
+            $this->command->info('Seeded: ' . basename($file));
 
-        $file = database_path('/dump/group_question.sql');
+            $file = database_path('/dump/group_question.sql');
+            
+            $sql = file_get_contents($file);
+            DB::unprepared($sql);
+            $this->command->info('Seeded: ' . basename($file));
+
+            $file = database_path('/dump/abecert.sql');
             
             $sql = file_get_contents($file);
             DB::unprepared($sql);
             $this->command->info('Seeded: ' . basename($file));
         } catch (\Exception $e) {
+            $this->command->error('Error seeding: ' . basename($file));
+            $this->command->error($e->getMessage());
             Log::error('Error seeding: ' . basename($file));
             Log::error($e->getMessage());
         }
