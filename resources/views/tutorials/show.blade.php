@@ -84,7 +84,7 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white">გიორგი ლოთიშვილი</h3>
-                            <p class="text-gray-600 dark:text-gray-400">არქიტექტურის სპეციალისტი</p>
+                            <p class="text-gray-600 dark:text-gray-400">არქიტექტორი</p>
                         </div>
                     </div>
 
