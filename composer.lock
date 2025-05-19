@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75c8cd5b3cfb95ec90e85b21bbf0dc0a",
+    "content-hash": "05bbd327961890cc6b0878340a9e8192",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -725,6 +725,52 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "flittpayments/php-sdk",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flittpayments/php-sdk.git",
+                "reference": "45ee72aecd701ef257b820ececdef4696abe7e40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flittpayments/php-sdk/zipball/45ee72aecd701ef257b820ececdef4696abe7e40",
+                "reference": "45ee72aecd701ef257b820ececdef4696abe7e40",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": "^5.4|^7.0|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5|~8|~9"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flitt\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitriy",
+                    "email": "dmmatrix222@gmail.com"
+                }
+            ],
+            "description": "flittpayments php sdk",
+            "support": {
+                "issues": "https://github.com/flittpayments/php-sdk/issues",
+                "source": "https://github.com/flittpayments/php-sdk/tree/main"
+            },
+            "time": "2025-02-13T18:59:18+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -9509,8 +9555,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "flittpayments/php-sdk": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

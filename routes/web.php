@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommercialController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\QuestionController;
 use App\Models\Course;
 use App\Models\Employee;
@@ -20,9 +21,9 @@ use App\Models\Video;
 use App\Http\Controllers\PostController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
-Route::get('/', function () {
+Route::get( '/', function () {
     return view('index');
-});
+})->name('index');
 
 Route::get('/home', function () {
     return view('index');
@@ -182,8 +183,8 @@ Route::middleware([
         return view('user.workspace');
     })->name('workspace');
 
-
-    
+    Route::post('/payment/{price}', [PaymentController::class, 'createOrder'])->name('payment.pay');
+    Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
