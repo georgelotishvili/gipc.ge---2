@@ -34,6 +34,7 @@ class PaymentController extends Controller
             'merchant_data' => [
                 'user_id' => auth()->user()->id,
                 'subscription_type' => $type->name,
+                'subscription_end' => auth()->user()->subscription->ends_at ?: now(),
             ]
         ];
         $data = \Flitt\Checkout::url($checkoutData);
