@@ -112,6 +112,16 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     }
 
     /**
+     * Get the payments for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
      * Get the employees for the user.
      */
     public function employees(): HasMany

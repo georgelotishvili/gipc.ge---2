@@ -16,8 +16,12 @@ class Subscription extends Model
      * @var array
      */
     protected $guarded = [];
-
-
+    
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'ends_at' => 'datetime',
+    ];
+    
     /**
      * Get the user that owns the subscription.
      *
@@ -26,5 +30,10 @@ class Subscription extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class);
     }
 }

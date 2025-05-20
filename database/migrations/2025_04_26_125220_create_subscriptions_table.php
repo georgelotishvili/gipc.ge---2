@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->boolean('is_active')->default(false);
             $table->enum('type', array_column(SubscriptionType::cases(), 'value'))->default(SubscriptionType::WEEKLY->value);
-            $table->date('starts_at')->nullable();
-            $table->date('ends_at')->nullable();
+            $table->dateTime('starts_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
             $table->timestamps();
         });
     }

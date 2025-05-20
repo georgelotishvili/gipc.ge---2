@@ -173,15 +173,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('workspace');
 
 
-    // ესაა შენი ფაიმენტი
     Route::get('payment/{amount}', [PaymentController::class, 'createOrder'])->name('payment.pay');
     Route::get('payment/status/{status}', [PaymentController::class, 'status'])->name('payment.status');
     Route::get('payment/response/status', [PaymentController::class, 'paymentResponse'])->name('payment.response.status');
-
-    //ეს არ იმუშავებდა იმიტორო მიდლევარები არ გაუშვებდა ასეთი რაღაცები api უნდა მიიღო აუცილებლად ოღნდ იქაც უნდა გააკონტროლო მიდლვეარები
-    // ანუ როცა რექვესთი სხვა სერვერიდან შემოგდის auth მიდლვეარს ვერ გაივლის ვერასდროს
-    // ამიტომ PaymentController კონტრლერში handleCallback მეთდი სულ წასაშლელია
-//    Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -221,10 +215,5 @@ Route::get('/email-form', function() {
 Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
 */
 
-// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-//     ->name('logout');
-
-
-
-//ეს დაბლა იმიტო ჩამოვიტანე რო მიდლვეარები არ შეხებოდა [admin და subscription]
-//withoutMiddleware(['web', 'auth']) - ეს იმიტომ დავწერე ლარაველს ავტომატური ლოგაუთი რომარ გაეკეთებინა
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');

@@ -15,16 +15,14 @@ enum PaymentStatusEnum : string
         return array_column(self::cases(), 'value');
     }
 
-
-    //აქ შეგიძლია გაუწერეო სტატუსის სათაურები მაგალითად approved - წარმატებული გადახდა და ა.შ.
     public function title(): string
     {
         return match($this) {
-            self::PROCESSING => 'Order is still in processing by payment gateway; merchant must continue to request the status of the order',
-            self::DECLINED => 'Order is declined by Flitt payment gateway or by a bank or by an external payment system',
+            self::PROCESSING => 'დაელოდეთ დამტიკცებას',
+            self::DECLINED => 'გადახდა უარყოფილია',
             self::APPROVED => 'წარმატებული გადახდა!',
-            self::EXPIRED => 'Order lifetime expired',
-            self::REVERSED => 'Previously approved transaction was fully reversed. In this case, parameter reversal_amount will be equal to actual_amount',
+            self::EXPIRED => 'გადახდას ვადა გაუვიდა',
+            self::REVERSED => 'წინა დამტკიცებული გადახდა სრულად გაუქმებულია.',
         };
     }
 
@@ -32,11 +30,11 @@ enum PaymentStatusEnum : string
     public function description(): string
     {
         return match($this) {
-            self::PROCESSING => 'Order is still in processing by payment gateway; merchant must continue to request the status of the order',
-            self::DECLINED => 'Order is declined by Flitt payment gateway or by a bank or by an external payment system',
-            self::APPROVED => 'Order completed successfully, funds are held on the payer’s account and soon will be credited of the merchant; merchant can provide the service or ship goods',
-            self::EXPIRED => 'Order lifetime expired',
-            self::REVERSED => 'Previously approved transaction was fully reversed. In this case, parameter reversal_amount will be equal to actual_amount',
+            self::PROCESSING => 'დაელოდეთ დამტიკცებას',
+            self::DECLINED => 'გადახდა უარყოფილია',
+            self::APPROVED => 'წარმატებული გადახდა!',
+            self::EXPIRED => 'გადახდას ვადა გაუვიდა',
+            self::REVERSED => 'წინა დამტკიცებული გადახდა სრულად გაუქმებულია.',
         };
     }
 }
