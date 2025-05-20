@@ -135,24 +135,17 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('admin/commercials/{commercial}', [CommercialController::class, 'destroy'])->name('admin.commercials.destroy');
 });
 
-Route::middleware([
-    'auth:sanctum', 
-    config('jetstream.auth_session'),
-    'verified',
-    'subscription',
-])->group(function () {
-
-
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'subscription'])->group(function () {
     Route::get('/tutorials', function () {
         $courses = Course::all();
         return view('tutorials', compact('courses'));
     })->name('tutorials');
-    
+
     Route::get('/tutorials/course/{course}', function ($course) {
         $course = Course::find($course);
         return view('tutorials.chapters', compact('course'));
     })->name('tutorials.chapters');
-    
+
     Route::get('/tutorials/video/{video}', function ($video) {
         $video = Video::find($video);
         return view('tutorials.show', compact('video'));
@@ -171,11 +164,7 @@ Route::middleware([
     Route::get('/test', Exam::class)->name('test');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('user.workspace');
     })->name('dashboard');
@@ -183,8 +172,16 @@ Route::middleware([
         return view('user.workspace');
     })->name('workspace');
 
-    Route::post('/payment/{price}', [PaymentController::class, 'createOrder'])->name('payment.pay');
-    Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
+
+    // ესაა შენი ფაიმენტი
+    Route::get('payment/{amount}', [PaymentController::class, 'createOrder'])->name('payment.pay');
+    Route::get('payment/status/{status}', [PaymentController::class, 'status'])->name('payment.status');
+    Route::get('payment/response/status', [PaymentController::class, 'paymentResponse'])->name('payment.response.status');
+
+    //ეს არ იმუშავებდა იმიტორო მიდლევარები არ გაუშვებდა ასეთი რაღაცები api უნდა მიიღო აუცილებლად ოღნდ იქაც უნდა გააკონტროლო მიდლვეარები
+    // ანუ როცა რექვესთი სხვა სერვერიდან შემოგდის auth მიდლვეარს ვერ გაივლის ვერასდროს
+    // ამიტომ PaymentController კონტრლერში handleCallback მეთდი სულ წასაშლელია
+//    Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -193,7 +190,7 @@ Route::middleware([
     Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
     Route::patch('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
     Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
-    
+
     // Employee routes
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
@@ -220,9 +217,14 @@ Route::get('/jobs', function () {
 Route::get('/send-test-email', [EmailTestController::class, 'sendTestEmail']);
 Route::get('/email-form', function() {
     return view('emails.form');
-});
+});a
 Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
 */
 
 // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 //     ->name('logout');
+
+
+
+//ეს დაბლა იმიტო ჩამოვიტანე რო მიდლვეარები არ შეხებოდა [admin და subscription]
+//withoutMiddleware(['web', 'auth']) - ეს იმიტომ დავწერე ლარაველს ავტომატური ლოგაუთი რომარ გაეკეთებინა

@@ -1,5 +1,5 @@
 <x-layout>
-    <section class="dark:bg-dark" x-data="{ 
+    <section class="dark:bg-dark" x-data="{
         selectedPlan: 'month',
         plans: {
             week: {
@@ -53,13 +53,13 @@
                         <span class="w-full h-full absolute inset-0 rounded-xl peer-checked:bg-gradient-to-br from-blue-500 to-blue-600 peer-checked:text-white transition-all duration-300 opacity-0 peer-checked:opacity-100 shadow-xl"></span>
                         <span class="relative z-10 px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 peer-checked:text-white transition-colors duration-300">1 კვირა</span>
                     </label>
-                    
+
                     <label class="relative flex items-center p-2 rounded-xl cursor-pointer mx-2" :class="{ 'opacity-75': selectedPlan !== 'month' }">
                         <input type="radio" name="pricing-plan" value="month" class="sr-only peer" x-model="selectedPlan">
                         <span class="w-full h-full absolute inset-0 rounded-xl peer-checked:bg-gradient-to-br from-blue-500 to-blue-600 peer-checked:text-white transition-all duration-300 opacity-0 peer-checked:opacity-100 shadow-xl"></span>
                         <span class="relative z-10 px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 peer-checked:text-white transition-colors duration-300">1 თვე</span>
                     </label>
-                    
+
                     <label class="relative flex items-center p-2 rounded-xl cursor-pointer" :class="{ 'opacity-75': selectedPlan !== 'year' }">
                         <input type="radio" name="pricing-plan" value="year" class="sr-only peer" x-model="selectedPlan">
                         <span class="w-full h-full absolute inset-0 rounded-xl peer-checked:bg-gradient-to-br from-blue-500 to-blue-600 peer-checked:text-white transition-all duration-300 opacity-0 peer-checked:opacity-100 shadow-xl"></span>
@@ -67,7 +67,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <!-- Pricing Card -->
             <div class="max-w-2xl mx-auto">
                 <div class="relative p-8 mx-auto text-center bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-100/50 shadow-2xl dark:bg-gray-800/80 dark:border-blue-900/50 transform transition-all duration-500 hover:scale-[1.02]"
@@ -81,17 +81,17 @@
                             რეკომენდებული
                         </span>
                     </div>
-                    
+
                     <div class="mt-6">
                         <h3 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-600" x-text="plans[selectedPlan].name"></h3>
                         <p class="mt-2 text-lg text-blue-600/80 dark:text-blue-400/80" x-text="plans[selectedPlan].description"></p>
                     </div>
-                    
+
                     <div class="flex justify-center items-baseline my-8">
                         <span class="text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-600">₾<span x-text="plans[selectedPlan].price"></span></span>
                         <span class="ml-2 text-xl text-blue-600/80 dark:text-blue-400/80" x-text="'/' + plans[selectedPlan].name.toLowerCase()"></span>
                     </div>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                         <template x-for="feature in plans[selectedPlan].features" :key="feature">
                             <div class="flex items-center space-x-3 text-left p-4 bg-gradient-to-br from-blue-50 to-blue-50/50 dark:from-blue-900/20 dark:to-blue-900/10 rounded-xl backdrop-blur-sm">
@@ -104,9 +104,9 @@
                             </div>
                         </template>
                     </div>
-                    
-                    {{-- <a 
-                        :href="'/payment/' + plans[selectedPlan].price" 
+
+                    {{-- <a
+                        :href="'/payment/' + plans[selectedPlan].price"
                         class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 text-base font-bold text-white bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-blue-500/30 transform transition duration-300 hover:scale-[1.02] dark:focus:ring-blue-800">
                         დაიწყეთ ახლავე
                         <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -114,7 +114,8 @@
                         </svg>
                     </a> --}}
 
-                    <form x-bind:action="'/payment/' + plans[selectedPlan].price" method="POST">
+{{--                    //Post method changet with GET--}}
+                    <form x-bind:action="'/payment/' + plans[selectedPlan].price" method="GET">
                         @csrf
                         <button type="submit"
                             class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 text-base font-bold text-white bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-blue-500/30 transform transition duration-300 hover:scale-[1.02] dark:focus:ring-blue-800">
@@ -124,7 +125,7 @@
                             </svg>
                         </button>
                     </form>
-                    
+
                     <p class="mt-6 text-sm text-blue-600/80 dark:text-blue-400/80 font-medium">30-დღიანი თანხის უკან დაბრუნების გარანტია. კითხვების გარეშე.</p>
                 </div>
             </div>

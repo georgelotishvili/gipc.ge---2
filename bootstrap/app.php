@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'subscription' => \App\Http\Middleware\SubscriptionMiddleware::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            '/payment/thankYou'
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
