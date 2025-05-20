@@ -25,9 +25,6 @@ class PaymentController extends Controller
             $additionalInfo = json_decode($request->additional_info, true);
             $actualAmount = (int) $request->actual_amount / 100 ?: 0;
             $orderTime = Carbon::createFromFormat('d.m.Y H:i:s', $request->order_time)->format('Y-m-d H:i:s');
-            if (!$userId || !$subscriptionType) {
-                throw new \Exception('Missing user information');
-            }
 
             $subscriptionEndDate = match ($actualAmount) {
                 150 => $subscriptionEnds ? Carbon::parse($subscriptionEnds)->addDays(7) : Carbon::now()->addDays(7),
