@@ -23,22 +23,38 @@ class PaymentRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules(): array
     {
-//        $paymentAmount = $this->route('amount');
+        $validPrices = \App\Models\Pricing::pluck('price')->toArray();
+        $validTypes = \App\Models\Plan::pluck('name')->toArray();
+
         return [
             'amount' => [
                 'required',
                 'integer',
-                Rule::in(SubscriptionPricesEnum::values())
+                Rule::in($validPrices)
+            ],
+            'type' => [
+                'required',
+                'string',
+                Rule::in($validTypes)
+            ],
+            'user' => [
+                'required',
+                'integer',
+                Rule::exists('users', 'id')
             ]
         ];
     }
+
 
     protected function prepareForValidation(): void
     {
         $this->merge([
             'amount' => (int) $this->route('amount'),
+            'type' => $this->input('type'),
+            'user' => auth()->user()->id
         ]);
     }
 

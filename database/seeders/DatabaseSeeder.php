@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             QuestionSeeder::class,
             AnswerSeeder::class,
+            PricingSeeder::class,
             // DumpSeeder::class,
             RegulationSeeder::class,
             EmployerSeeder::class,

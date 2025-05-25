@@ -14,12 +14,7 @@ class PaymentController extends Controller
     public function createOrder(PaymentRequest $request)
     {
         $amount = $request->input('amount');
-
-        $type = match (true) {
-            $amount == 150 => SubscriptionType::WEEKLY,
-            $amount == 350 => SubscriptionType::MONTHLY,
-            $amount == 1150 => SubscriptionType::YEARLY,
-        };
+        $type = $request->input('type');
 
         Configuration::setMerchantId(config('flitt.merchant_id'));
         Configuration::setSecretKey(config('flitt.payment_key'));
@@ -33,8 +28,8 @@ class PaymentController extends Controller
             'server_callback_url' => route('api.payment.callback'),
             'merchant_data' => [
                 'user_id' => auth()->user()->id,
-                'subscription_type' => $type->name,
-                'subscription_end' => auth()->user()->subscription->ends_at ?: now(),
+                'subscription_type' => $type,
+                'subscription_end' => auth()->user()->subscription?->ends_at ?? now(),
             ]
         ];
         $data = \Flitt\Checkout::url($checkoutData);

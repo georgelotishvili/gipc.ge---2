@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Enums\PaymentStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\Plan;
+use App\Models\Pricing;
 use App\Models\Subscription;
 use Carbon\Carbon;
 use App\Models\User;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
-    public function callback(Request $request) : void
+    public function callback(Request $request): void
     {
         try {
             $userInfo = json_decode($request->merchant_data, true);
@@ -26,12 +28,24 @@ class PaymentController extends Controller
             $actualAmount = (int) $request->actual_amount / 100 ?: 0;
             $orderTime = Carbon::createFromFormat('d.m.Y H:i:s', $request->order_time)->format('Y-m-d H:i:s');
 
-            $subscriptionEndDate = match ($actualAmount) {
-                150 => $subscriptionEnds ? Carbon::parse($subscriptionEnds)->addDays(7) : Carbon::now()->addDays(7),
-                350 => $subscriptionEnds ? Carbon::parse($subscriptionEnds)->addDays(30) : Carbon::now()->addDays(30),
-                1150 => $subscriptionEnds ? Carbon::parse($subscriptionEnds)->addDays(365) : Carbon::now()->addDays(365),
-                default => throw new \Exception('Subscription duration could not be determined from payment amount'),
-            };
+            $subscriptionEndDate = null;
+            $pricings = Pricing::with('plan')->get();
+
+            foreach ($pricings as $pricing) {
+                if ((int) $pricing->price == $actualAmount) {
+                    $days = $pricing->plan->term_days ?? 0;
+
+                    $subscriptionEndDate = $subscriptionEnds
+                        ? Carbon::parse($subscriptionEnds)->addDays($days)
+                        : Carbon::now()->addDays($days);
+
+                    break;
+                }
+            }
+
+            if (!$subscriptionEndDate) {
+                throw new \Exception('Subscription duration could not be determined from payment amount');
+            }
 
             $payment = new Payment();
             $payment->user_id = $userId;
@@ -41,24 +55,26 @@ class PaymentController extends Controller
             $payment->order_id = $request->order_id;
             $payment->card_type = $request->card_type ?: 'VISA';
             $payment->order_time = $orderTime;
-            $payment->bank_name = $additionalInfo['bank_name'] ?: null;
+            $payment->bank_name = $additionalInfo['bank_name'] ?? null;
             $payment->payment_method = $request->payment_system ?: 'card';
-            $payment->transaction_id = $additionalInfo['transaction_id'] ?: null;
-            if($payment->save()){
-                if ($orderStatus === PaymentStatusEnum::APPROVED->value) {
-                    $starts_at = $user->subscription ? ($user->subscription->starts_at === null ? Carbon::now() : $user->subscription->starts_at) : Carbon::now();
-                    $user->subscription()->updateOrCreate([],
-                        [
-                            'type' => $subscriptionType,
-                            'is_active' => true,
-                            'starts_at' => $starts_at,
-                            'ends_at' => $subscriptionEndDate,
-                        ]
-                    );
-                }
+            $payment->transaction_id = $additionalInfo['transaction_id'] ?? null;
+
+            if ($payment->save() && $orderStatus === PaymentStatusEnum::APPROVED->value) {
+                $starts_at = $user->subscription?->starts_at ?? Carbon::now();
+                $user->subscription()->updateOrCreate(
+                    [],
+                    [
+                        'type' => $subscriptionType,
+                        'is_active' => true,
+                        'starts_at' => $starts_at,
+                        'ends_at' => $subscriptionEndDate,
+                    ]
+                );
             }
+
         } catch (\Exception $e) {
             Log::error('Payment callback error: ' . $e->getMessage());
         }
     }
+
 }

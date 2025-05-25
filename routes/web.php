@@ -74,6 +74,22 @@ Route::middleware(['admin'])->group(function () {
     Route::patch('/admin/regulations/{regulation}/update', [AdminController::class, 'updateRegulation'])->name('admin.regulations.update');
     Route::delete('/admin/regulations/{regulation}', [AdminController::class, 'destroyRegulation'])->name('admin.regulations.destroy');
 
+    // Pricing
+    Route::get('/admin/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/admin/pricing/create', [AdminController::class, 'createPricing'])->name('admin.pricing.create');
+    Route::post('/admin/pricing/store', [AdminController::class, 'storePricing'])->name('admin.pricing.store');
+    Route::get('/admin/pricing/{pricing}/edit', [AdminController::class, 'editPricing'])->name('admin.pricing.edit');
+    Route::put('/admin/pricing/{pricing}/update', [AdminController::class, 'updatePricing'])->name('admin.pricing.update');
+    Route::delete('/admin/pricing/{pricing}', [AdminController::class, 'destroyPricing'])->name('admin.pricing.destroy');
+
+    // Plan
+    Route::get('/admin/plans/create', [AdminController::class, 'createPlan'])->name('admin.plans.create');
+    Route::post('/admin/plans/store', [AdminController::class, 'storePlan'])->name('admin.plans.store');
+    Route::get('/admin/plans/{plan}/edit', [AdminController::class, 'editPlan'])->name('admin.plans.edit');
+    Route::put('/admin/plans/{plan}/update', [AdminController::class, 'updatePlan'])->name('admin.plans.update');
+    Route::delete('/admin/plans/{plan}', [AdminController::class, 'destroyPlan'])->name('admin.plans.destroy');
+    
+
     // Questions
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
     Route::post('/admin/questions/store', [AdminController::class, 'store'])->name('admin.questions.store');
