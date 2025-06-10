@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommercialController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\QuestionController;
 use App\Models\Course;
 use App\Models\Employee;
@@ -20,9 +21,9 @@ use App\Models\Video;
 use App\Http\Controllers\PostController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
-Route::get('/', function () {
+Route::get( '/', function () {
     return view('index');
-});
+})->name('index');
 
 Route::get('/home', function () {
     return view('index');
@@ -72,6 +73,22 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/regulations/{regulation}/edit', [AdminController::class, 'editRegulation'])->name('admin.regulations.edit');
     Route::patch('/admin/regulations/{regulation}/update', [AdminController::class, 'updateRegulation'])->name('admin.regulations.update');
     Route::delete('/admin/regulations/{regulation}', [AdminController::class, 'destroyRegulation'])->name('admin.regulations.destroy');
+
+    // Pricing
+    Route::get('/admin/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
+    Route::get('/admin/pricing/create', [AdminController::class, 'createPricing'])->name('admin.pricing.create');
+    Route::post('/admin/pricing/store', [AdminController::class, 'storePricing'])->name('admin.pricing.store');
+    Route::get('/admin/pricing/{pricing}/edit', [AdminController::class, 'editPricing'])->name('admin.pricing.edit');
+    Route::put('/admin/pricing/{pricing}/update', [AdminController::class, 'updatePricing'])->name('admin.pricing.update');
+    Route::delete('/admin/pricing/{pricing}', [AdminController::class, 'destroyPricing'])->name('admin.pricing.destroy');
+
+    // Plan
+    Route::get('/admin/plans/create', [AdminController::class, 'createPlan'])->name('admin.plans.create');
+    Route::post('/admin/plans/store', [AdminController::class, 'storePlan'])->name('admin.plans.store');
+    Route::get('/admin/plans/{plan}/edit', [AdminController::class, 'editPlan'])->name('admin.plans.edit');
+    Route::put('/admin/plans/{plan}/update', [AdminController::class, 'updatePlan'])->name('admin.plans.update');
+    Route::delete('/admin/plans/{plan}', [AdminController::class, 'destroyPlan'])->name('admin.plans.destroy');
+    
 
     // Questions
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
@@ -134,24 +151,17 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('admin/commercials/{commercial}', [CommercialController::class, 'destroy'])->name('admin.commercials.destroy');
 });
 
-Route::middleware([
-    'auth:sanctum', 
-    config('jetstream.auth_session'),
-    'verified',
-    'subscription',
-])->group(function () {
-
-
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'subscription'])->group(function () {
     Route::get('/tutorials', function () {
         $courses = Course::all();
         return view('tutorials', compact('courses'));
     })->name('tutorials');
-    
+
     Route::get('/tutorials/course/{course}', function ($course) {
         $course = Course::find($course);
         return view('tutorials.chapters', compact('course'));
     })->name('tutorials.chapters');
-    
+
     Route::get('/tutorials/video/{video}', function ($video) {
         $video = Video::find($video);
         return view('tutorials.show', compact('video'));
@@ -170,11 +180,7 @@ Route::middleware([
     Route::get('/test', Exam::class)->name('test');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('user.workspace');
     })->name('dashboard');
@@ -183,7 +189,9 @@ Route::middleware([
     })->name('workspace');
 
 
-    
+    Route::get('payment/{amount}', [PaymentController::class, 'createOrder'])->name('payment.pay');
+    Route::get('payment/status/{status}', [PaymentController::class, 'status'])->name('payment.status');
+    Route::get('payment/response/status', [PaymentController::class, 'paymentResponse'])->name('payment.response.status');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -192,7 +200,7 @@ Route::middleware([
     Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
     Route::patch('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
     Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
-    
+
     // Employee routes
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
@@ -219,9 +227,9 @@ Route::get('/jobs', function () {
 Route::get('/send-test-email', [EmailTestController::class, 'sendTestEmail']);
 Route::get('/email-form', function() {
     return view('emails.form');
-});
+});a
 Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
 */
 
-// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-//     ->name('logout');
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');

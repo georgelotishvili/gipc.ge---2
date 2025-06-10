@@ -12,6 +12,8 @@ use App\Models\Course;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Pricing;
+use App\Models\Plan;
 use App\Models\Regulation;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +38,124 @@ class AdminController extends Controller
             'average_score' => $average_score,
         ]);
     }
+
+
+
+    // Pricing
+
+    public function pricing()
+    {
+        $pricings = Pricing::all();
+        $plans = Plan::all();
+
+        return view('admin.pricing.index', [
+            'pricings' => $pricings,
+            'plans' => $plans
+        ]);
+    }
+
+    public function createPricing()
+    {
+        return view('admin.pricing.create');
+    }
+
+    public function storePricing(Request $request)
+    {
+        $attributes = $request->validate([
+            'price' => 'required',
+            'tags' => 'required',
+            'name' => 'required',
+            'small_description' => 'required|string',
+            'term' => 'required',
+            'plan_id' => 'required|exists:plans,id|unique:pricings,plan_id',
+        ]);
+
+
+        Pricing::create($attributes);
+
+        return redirect()->route('admin.pricing')->with('success-pricing', 'ფასი წარმატებით დამატებულია');
+    }
+
+    public function editPricing(Pricing $pricing)
+    {
+        return view('admin.pricing.edit', [
+            'pricing' => $pricing
+        ]);
+    }
+
+    public function updatePricing(Request $request, Pricing $pricing)
+    {
+        $attributes = $request->validate([
+            'price' => 'required',
+            'tags' => 'required',
+            'name' => 'required',
+            'small_description' => 'required|string',
+            'term' => 'required',
+            'plan_id' => 'required|exists:plans,id|unique:pricings,plan_id,' . $pricing->id,
+        ]);
+
+        $pricing->update($attributes);
+
+        return redirect()->route('admin.pricing')->with('success-pricing', 'ფასი წარმატებით განახლდა');
+    }
+
+
+    public function destroyPricing(Pricing $pricing)
+    {
+        $pricing->delete();
+        return redirect()->route('admin.pricing')->with('success-pricing', 'ფასი წარმატებით წაიშალა');
+    }
+
+
+    /////////////////////////////////
+
+
+    public function createPlan()
+    {
+        return view('admin.plans.create');
+    }
+
+    public function storePlan(Request $request)
+    {
+        $attributes = $request->validate([
+            'name' => 'required|unique:plans,name',
+            'term_days' => 'required|integer|min:1',
+        ]);
+
+        Plan::create($attributes);
+
+        return redirect()->route('admin.pricing')->with('success-plan', 'სახეობა წარმატებით დამატებულია');
+    }
+
+    public function editPlan(Plan $plan)
+    {
+        return view('admin.plans.edit', [
+            'plan' => $plan
+        ]);
+    }
+
+    public function updatePlan(Request $request, Plan $plan)
+    {
+        $attributes = $request->validate([
+            'name' => 'required|unique:plans,name,' . $plan->id,
+            'term_days' => 'required|integer|min:1',
+        ]);
+
+        $plan->update($attributes);
+
+        return redirect()->route('admin.pricing')->with('success-plan', 'სახეობა წარმატებით განახლდა');
+    }
+
+
+    public function destroyPlan(Plan $plan)
+    {
+        $plan->delete();
+        return redirect()->route('admin.pricing')->with('success-plan', 'სახეობა წარმატებით წაიშალა');
+    }
+
+
+
+    // end of pricing
 
     public function questions()
     {
@@ -64,7 +184,7 @@ class AdminController extends Controller
             'text' => $request->input('text'),
         ]);
 
-        foreach($request->input('answers') as $index => $answer) {
+        foreach ($request->input('answers') as $index => $answer) {
             Answer::create([
                 'text' => $answer['text'],
                 'is_true' => $request->input('is_true') == $index,
@@ -96,15 +216,15 @@ class AdminController extends Controller
         $question->answers()->delete();
 
         // Create new answers
-        foreach($request->input('answers') as $index => $answer) {
+        foreach ($request->input('answers') as $index => $answer) {
             Answer::create([
                 'text' => $answer['text'],
                 'is_true' => $request->input('correct_answer') == $index,
                 'question_id' => $question->id,
             ]);
-            
+
         }
-        
+
         $question->groups()->detach();
         $question->groups()->attach($request->input('group'));
 
@@ -129,8 +249,7 @@ class AdminController extends Controller
 
     public function destroyGroup(Group $group)
     {
-        if($group->questions()->exists()) 
-        {
+        if ($group->questions()->exists()) {
             return redirect()->back()->with('error', 'კანონმდებლობაში არსებობს კითხვები, გთხოვთ წაშალოთ კანონმდებლობის კითხვები მისი წაშლის წინ.');
         }
         $group->delete();
@@ -219,9 +338,9 @@ class AdminController extends Controller
 
     public function destroy($question)
     {
-        if($question === 'bulk') {   
+        if ($question === 'bulk') {
             $questionIds = request('selected_questions', []);
-            Question::whereIn('id', $questionIds)->each(function($question) {
+            Question::whereIn('id', $questionIds)->each(function ($question) {
                 $question->answers()->delete();
                 $question->delete();
             });
@@ -230,7 +349,7 @@ class AdminController extends Controller
             $question->answers()->delete();
             $question->delete();
         }
-        
+
         return redirect()->back();
     }
 
@@ -258,10 +377,10 @@ class AdminController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
             ]);
-            
+
             if ($request->hasFile('image')) {
                 $image = SaveImageAction::execute($request->file('image'));
-                
+
                 $course->image()->save($image);
             }
             DB::commit();
@@ -313,7 +432,7 @@ class AdminController extends Controller
         DB::beginTransaction();
         try {
             $course->delete();
-            
+
             if ($course->image) {
                 $deleteImage = new DeleteImageAction();
                 $deleteImage->execute($course->image);
@@ -321,9 +440,7 @@ class AdminController extends Controller
 
             DB::commit();
             return redirect()->route('admin.courses')->with('success', 'კურსი წარმატებით წაიშალა');
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
@@ -348,11 +465,11 @@ class AdminController extends Controller
                 'description' => $request->input('description'),
                 'course_id' => $course->id
             ]);
-            
+
             if ($request->hasFile('image')) {
                 $saveImage = new SaveImageAction();
                 $image = $saveImage->execute($request->file('image'));
-                
+
                 $chapter->image()->save($image);
             }
             DB::commit();
@@ -362,7 +479,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
     }
-    
+
     public function editChapter(Course $course, Chapter $chapter)
     {
         return view('admin.courses.chapters.edit', compact('course', 'chapter'));
@@ -392,9 +509,7 @@ class AdminController extends Controller
 
             DB::commit();
             return redirect()->route('admin.courses.chapters', $course)->with('success', 'თავი წარმატებით განახლდა');
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
@@ -444,7 +559,7 @@ class AdminController extends Controller
                 'library_id' => 382670
             ]);
 
-            Log::info('video created'. $video);
+            Log::info('video created' . $video);
 
             $response = $client->request('PUT', "https://video.bunnycdn.com/library/382670/videos/$videoId", [
                 'headers' => [
@@ -454,14 +569,14 @@ class AdminController extends Controller
                 'body' => $videoData
             ]);
 
-            Log::info('video uploaded Status: '. $response->getStatusCode());
+            Log::info('video uploaded Status: ' . $response->getStatusCode());
 
             $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
                 'headers' => [
                     'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
                     'accept' => 'application/json',
                 ],
-                ]);
+            ]);
 
             // Convert the response body to a JSON object
             $responseData = json_decode($response->getBody(), true);
@@ -471,9 +586,7 @@ class AdminController extends Controller
             // dd($video);
 
             // echo $response->getStatusCode(); // Should be 200
-        } 
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw $e;
             return redirect()->back()->with('error', 'ვიდეოს ატვირთვა ვერ მოხერხდა: ' . $e->getMessage());
         }
@@ -519,7 +632,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             Log::error('video deletion error: ' . $e->getMessage());
         }
-        
+
         $video->delete();
         return redirect()->back();
     }

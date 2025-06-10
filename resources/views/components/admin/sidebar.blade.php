@@ -96,6 +96,17 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.pricing') }}" wire:navigate
+                       class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
+                       {{ Route::is('admin.pricing') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
+                       <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M3 11l10 10 8-8-10-10H5a2 2 0 00-2 2v4z" />
+                      </svg>
+                                 
+                        <span :class="{ 'opacity-0 hidden': !sidebarOpen }">ფასები</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.settings') }}" wire:navigate
                        class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.settings') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
