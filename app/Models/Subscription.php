@@ -2,29 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subscription extends Model
 {
-    use HasFactory;
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = [];
+    use SoftDeletes;
 
+    protected $fillable = [
+        'user_id',
+        'plan_type_id',
+        'is_active',
+        'recToken',
+        'signature',
+        'starts_at',
+        'ends_at'
+    ];
 
-    /**
-     * Get the user that owns the subscription.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function planType(): BelongsTo
+    {
+        return $this->belongsTo(PlanType::class);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function payment(): HasOne
+    {
+        return $this->hasOne(Payment::class)->ofMany('id', 'MAX');
     }
 }

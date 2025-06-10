@@ -17,24 +17,20 @@ class DatabaseSeeder extends Seeder
             CommercialSeeder::class,
             SystemSettingSeeder::class,
             // StaticSeeder::class,
-            UserSeeder::class,
             SpecialitySeeder::class,
             // GroupSeeder::class,
             // QuestionSeeder::class,
             // AnswerSeeder::class,
+            UserSeeder::class,
             DumpSeeder::class,
             RegulationSeeder::class,
             EmployeeSeeder::class,
             EmployerSeeder::class,
             CertificateSeeder::class,
             SeederCleaner::class,
+            PlanTypeSeeder::class,
+            PlanSeeder::class,
 
-        ]);
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
         ]);
     }
 }

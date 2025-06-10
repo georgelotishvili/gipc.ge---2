@@ -28,10 +28,10 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
-                'required', 
-                'string', 
-                'email', 
-                'max:255', 
+                'required',
+                'string',
+                'email',
+                'max:255',
                 Rule::unique('users')->whereNull('deleted_at')
             ],
             'password' => $this->passwordRules(),
@@ -45,11 +45,6 @@ class CreateNewUser implements CreatesNewUsers
             'terms_accepted' => true,
             'terms_accepted_at' => Carbon::now(),
         ]);
-
-        $user->subscription()->create([
-            'is_active' => false
-        ]);
-
         return $user;
     }
 }

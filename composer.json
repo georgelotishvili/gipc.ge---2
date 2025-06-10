@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "bunnycdn/storage": "^3.4",
+        "flittpayments/php-sdk": "dev-main",
         "intervention/image": "^3.11",
         "laravel/fortify": "^1.25",
         "laravel/framework": "^11.9",
@@ -71,6 +72,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
