@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('plan_type_id')->constrained()->cascadeOnDelete();;
+            $table->string('plan_name')->nullable();
             $table->text('plan_description')->nullable();
+            $table->integer('plan_price')->default(0);
+            $table->integer('plan_discount')->default(0);
             $table->boolean('plan_recommended')->default(false)->nullable();
             $table->tinyInteger('plan_order')->default(0)->nullable();
             $table->boolean('is_active')->default(0)->nullable();

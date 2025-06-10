@@ -11,25 +11,16 @@ class PlanType extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = [
+        'type_name',
+        'type_duration',
+        'payment_days',
+        'is_free',
+    ];
+
     public function plans() : HasMany
     {
         return $this->hasMany(Plan::class);
     }
 
-
-    protected function typePrice(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?float $value) => (float) ($value / 100),
-            set: fn (?float $value) => (float) ($value * 100),
-        );
-    }
-
-    protected function typeDiscount(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?float $value) => (float) ($value / 100),
-            set: fn (?float $value) => (float) ($value * 100),
-        );
-    }
 }

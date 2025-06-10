@@ -22,7 +22,7 @@ trait HasSubscription
     public function activeSubscriptionType(): int|bool
     {
         if($this->hasActiveSubscription()){
-            return $this->subscription?->plan_type_id;
+            return $this->subscription?->plan_id;
         }
         return false;
 

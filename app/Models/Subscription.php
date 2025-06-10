@@ -16,9 +16,9 @@ class Subscription extends Model
     protected $fillable = [
         'user_id',
         'plan_type_id',
+        'plan_id',
         'is_active',
         'recToken',
-        'signature',
         'starts_at',
         'ends_at'
     ];
@@ -31,6 +31,11 @@ class Subscription extends Model
     public function planType(): BelongsTo
     {
         return $this->belongsTo(PlanType::class);
+    }
+
+    public function plan(): BelongsTo
+    {
+        return $this->belongsTo(Plan::class);
     }
 
     public function payments(): HasMany

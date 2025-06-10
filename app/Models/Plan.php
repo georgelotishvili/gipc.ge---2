@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,6 +12,17 @@ class Plan extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = [
+        'plan_type_id',
+        'plan_name',
+        'plan_description',
+        'plan_price',
+        'plan_discount',
+        'plan_recommended',
+        'plan_order',
+        'is_active',
+    ];
+
     public function planType(): BelongsTo
     {
         return $this->belongsTo(PlanType::class);
@@ -19,6 +31,22 @@ class Plan extends Model
     public function planOptions(): HasMany
     {
         return $this->hasMany(PlanOption::class);
+    }
+
+    protected function planPrice(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?float $value) => (float) ($value / 100),
+            set: fn (?float $value) => (float) ($value * 100),
+        );
+    }
+
+    protected function planDiscount(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?float $value) => (float) ($value / 100),
+            set: fn (?float $value) => (float) ($value * 100),
+        );
     }
 
 }

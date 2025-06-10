@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('plan_types', function (Blueprint $table) {
             $table->id();
             $table->string('type_name')->unique();
-            $table->integer('type_price')->default(0);
-            $table->integer('type_discount')->default(0);
             $table->tinyInteger('type_duration')->default(30);
             $table->tinyInteger('payment_days')->default(3);
             $table->tinyInteger('is_free')->default(false);

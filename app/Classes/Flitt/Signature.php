@@ -9,28 +9,16 @@ class Signature {
     /**
      * @params string $password
      */
-    private static string $password;
+    private static string $password = '';
     /**
      * @params string $merchant
      */
-    private static string $merchant;
+    private static string $merchant = '';
 
-    public static function setPassword(): void
+    public static function init(): void
     {
-        $secretKey = config('flitt.secret_key');
-        if (!is_string($secretKey) || empty($secretKey)) {
-            throw new \InvalidArgumentException('Invalid or missing secret key configuration');
-        }
-        self::$password = $secretKey;
-    }
-
-    public static function setMerchant(): void
-    {
-        $merchantId = config('flitt.merchant_id');
-        if (!is_string($merchantId) || empty($merchantId)) {
-            throw new \InvalidArgumentException('Invalid or missing merchant id configuration');
-        }
-        self::$merchant = $merchantId;
+        self::$merchant = config('flitt.merchant_id');
+        self::$password = config('flitt.secret_key');
     }
 
     /**
@@ -40,6 +28,7 @@ class Signature {
      */
     public static function generate(Array $params): string
     {
+        self::init();
         $params['merchant_id'] = self::$merchant;
         $params = array_filter($params,'strlen');
         ksort($params);
@@ -51,6 +40,7 @@ class Signature {
 
     public static function generateString(Array $params): string
     {
+        self::init();
         $params['merchant_id'] = self::$merchant;
         $params = array_filter($params,'strlen');
         ksort($params);

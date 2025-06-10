@@ -16,76 +16,126 @@ class PlanSeeder extends Seeder
         $plans = [
             [
                 'plan_type_id' => 1,
+                'plan_name' => 'უფასო',
                 'plan_description' => 'უფასო გეგმა',
+                'plan_price' => 150,
+                'plan_discount' => 0,
                 'plan_recommended' => false,
                 'plan_order' => 1,
                 'is_active' => true,
                 'options' => [
                     [
-                        'option_description' =>'1 სატესტო პროექტის ხარჯთაღრიცხვა',
+                        'option_description' =>'სრული წვდომა ყველა მასალაზე',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'ულიმიტო მასალების გადმოწერა',
-                        'is_included' => false,
+                        'option_description' =>'პროგრესის თვალყურის დევნება',
+                        'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'ულიმიტო პროექტების ხარჯთაღრიცხვა',
-                        'is_included' => false,
+                        'option_description' =>'ონლაინ კონსულტაცია',
+                        'is_included' => true,
                         'is_active' =>true,
-                    ]
+                    ],
+                    [
+                        'option_description' =>'პრაქტიკული დავალებები',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'მობილური ვერსია',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'სერტიფიკატი',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+
                 ]
             ],
             [
                 'plan_type_id' => 2,
+                'plan_name' => 'სტანდარტი',
                 'plan_description' => 'სტანდარტი გეგმა',
+                'plan_price' => 350,
+                'plan_discount' => 0,
                 'plan_recommended' => false,
                 'plan_order' => 1,
                 'is_active' => true,
                 'options' => [
                     [
-                        'option_description' =>'ულიმიტო პროექტების ხარჯთაღრიცხვა',
+                        'option_description' =>'ყველა კვირის უპირატესობა',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'500 მასალის გადმოწერა',
+                        'option_description' =>'ჯგუფური მეცადინეობები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'Revit ინტეგრაცია',
+                        'option_description' =>'პერსონალური მენტორი',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'ულიმიტო მასალების გადმოწერა',
-                        'is_included' => false,
+                        'option_description' =>'პერსონალური მენტორი',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'დამატებითი მასალები',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'დამატებითი პრაქტიკული სავარჯიშოები',
+                        'is_included' => true,
                         'is_active' =>true,
                     ],
                 ]
             ],
             [
                 'plan_type_id' => 3,
-                'plan_description' => 'პრემიუმი გეგმა',
+                'plan_name' => '1 წელი',
+                'plan_description' => 'სრული წვდომა მთელი წლის განმავლობაში',
+                'plan_price' => 1150,
+                'plan_discount' => 0,
                 'plan_recommended' => true,
                 'plan_order' => 1,
                 'is_active' => true,
                 'options' => [
                     [
-                        'option_description' =>'ულიმიტო პროექტების ხარჯთაღრიცხვა',
+                        'option_description' =>'ყველა თვის უპირატესობა',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'ულიმიტო მასალის გადმოწერა',
+                        'option_description' =>'VIP მხარდაჭერა',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'Revit ინტეგრაცია',
+                        'option_description' =>'კარიერული კონსულტაცია',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'ულიმიტო წვდომა',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'ექსკლუზიური მასალები',
+                        'is_included' => true,
+                        'is_active' =>true,
+                    ],
+                    [
+                        'option_description' =>'გარანტირებული დასაქმება',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
@@ -95,7 +145,10 @@ class PlanSeeder extends Seeder
         foreach ($plans as $item) {
             $plan = new Plan;
             $plan->plan_type_id = $item['plan_type_id'];
+            $plan->plan_name = $item['plan_name'];
             $plan->plan_description = $item['plan_description'];
+            $plan->plan_price = $item['plan_price'];
+            $plan->plan_discount = $item['plan_discount'];
             $plan->plan_recommended = $item['plan_recommended'];
             $plan->plan_order = $item['plan_order'];
             $plan->is_active = $item['is_active'];

@@ -88,7 +88,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/plans/{plan}/edit', [AdminController::class, 'editPlan'])->name('admin.plans.edit');
     Route::put('/admin/plans/{plan}/update', [AdminController::class, 'updatePlan'])->name('admin.plans.update');
     Route::delete('/admin/plans/{plan}', [AdminController::class, 'destroyPlan'])->name('admin.plans.destroy');
-    
+
 
     // Questions
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
@@ -189,9 +189,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('workspace');
 
 
-    Route::get('payment/{amount}', [PaymentController::class, 'createOrder'])->name('payment.pay');
-    Route::get('payment/status/{status}', [PaymentController::class, 'status'])->name('payment.status');
-    Route::get('payment/response/status', [PaymentController::class, 'paymentResponse'])->name('payment.response.status');
+    Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -233,3 +231,7 @@ Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail'
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
+
+Route::get('/test', function (\Illuminate\Http\Request $request) {
+    return $request;
+});
