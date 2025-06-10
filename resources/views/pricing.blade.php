@@ -1,4 +1,5 @@
 <x-layout>
+{{-- Todo: Remove model froeach from blade and get model from Livewire compinent. foreach plan cards not data! --}}
     <section class="dark:bg-dark" x-data="{
         selectedPlan: '{{ App\Models\Pricing::with('plan')->first()->plan->name }}',
         plans: {
@@ -72,11 +73,9 @@
                         </template>
                     </div>
 
+                    {{-- Todo: Remove form and make an '<a></a>' anchor tag --}}
                     <form x-bind:action="'/payment/' + plans[selectedPlan].price" method="GET">
-                        @csrf
-
                         <input type="hidden" name="type" :value="plans[selectedPlan].type">
-
                         <button type="submit"
                             class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 text-base font-bold text-white bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-blue-500/30 transform transition duration-300 hover:scale-[1.02] dark:focus:ring-blue-800">
                             დაიწყეთ ახლავე
