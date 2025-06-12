@@ -7,427 +7,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE `answers` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `question_id` bigint unsigned NOT NULL,
-  `is_true` tinyint(1) DEFAULT '0',
-  `q_id` int DEFAULT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `answers_question_id_foreign` (`question_id`),
-  CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14387 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `cache` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration` int NOT NULL,
-  PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `cache_locks` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration` int NOT NULL,
-  PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `certificates` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `speciality_id` bigint unsigned NOT NULL,
-  `user_id` bigint unsigned NOT NULL,
-  `certificate_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `release_date` date NOT NULL DEFAULT '2025-05-04',
-  `lifetime_years` int NOT NULL DEFAULT '5',
-  `status` enum('active','suspended','terminated','expired') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'suspended',
-  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `education` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `experience` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Comma-separated social media links',
-  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `score` decimal(8,2) DEFAULT NULL,
-  `rate` decimal(5,2) DEFAULT NULL,
-  `jury_count` int NOT NULL DEFAULT '0',
-  `stars` int NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `certificates_certificate_number_unique` (`certificate_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `chapters` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `course_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `chapters_course_id_foreign` (`course_id`),
-  CONSTRAINT `chapters_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `comments` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint unsigned NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `commentable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `commentable_id` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `comments_user_id_foreign` (`user_id`),
-  KEY `comments_commentable_type_commentable_id_index` (`commentable_type`,`commentable_id`),
-  CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `commercials` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expiration_date` timestamp NULL DEFAULT NULL,
-  `weight` double DEFAULT NULL,
-  `duration_weight` double DEFAULT NULL,
-  `img_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `courses` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `employees` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `worktime` enum('full-time','part-time','contract','freelance') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'full-time',
-  `salary` decimal(10,2) DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `skills` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Comma-separated social media links',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `employees_user_id_foreign` (`user_id`),
-  CONSTRAINT `employees_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `employers` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `worktime` enum('full-time','part-time','contract','freelance') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'full-time',
-  `salary` decimal(10,2) NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `skills` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Comma-separated social media links',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `employers_user_id_foreign` (`user_id`),
-  CONSTRAINT `employers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `exam_requests` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `approved` tinyint(1) NOT NULL DEFAULT '0',
-  `closed` tinyint(1) NOT NULL DEFAULT '0',
-  `user_id` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `exam_requests_user_id_foreign` (`user_id`),
-  CONSTRAINT `exam_requests_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `group_question` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `question_id` bigint unsigned NOT NULL,
-  `group_id` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3596 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `groups` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `question_weight` int NOT NULL DEFAULT '1',
-  `question_count_in_exam` int NOT NULL DEFAULT '8',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `images` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `imageable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `imageable_id` bigint unsigned DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `images_imageable_type_imageable_id_index` (`imageable_type`,`imageable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `job_batches` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_jobs` int NOT NULL,
-  `pending_jobs` int NOT NULL,
-  `failed_jobs` int NOT NULL,
-  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
-  `cancelled_at` int DEFAULT NULL,
-  `created_at` int NOT NULL,
-  `finished_at` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `jobs` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attempts` tinyint unsigned NOT NULL,
-  `reserved_at` int unsigned DEFAULT NULL,
-  `available_at` int unsigned NOT NULL,
-  `created_at` int unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `jobs_queue_index` (`queue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `migrations` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `posts` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `posts_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `questions` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `q_id` int DEFAULT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci,
-  `weight` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2979 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `ratings` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `certificate_id` bigint unsigned NOT NULL,
-  `user_id` bigint unsigned NOT NULL,
-  `stars` int NOT NULL DEFAULT '0' COMMENT 'Rating from 0 to 5',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ratings_certificate_id_foreign` (`certificate_id`),
-  KEY `ratings_user_id_foreign` (`user_id`),
-  CONSTRAINT `ratings_certificate_id_foreign` FOREIGN KEY (`certificate_id`) REFERENCES `certificates` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ratings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `regulations` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` longtext COLLATE utf8mb4_unicode_ci,
-  `date_applied` date DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint unsigned DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `sessions_user_id_index` (`user_id`),
-  KEY `sessions_last_activity_index` (`last_activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `specialities` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `subscriptions` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint unsigned NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `type` enum('weekly','monthly','yearly','unlimited') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'weekly',
-  `starts_at` date DEFAULT NULL,
-  `ends_at` date DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `subscriptions_user_id_foreign` (`user_id`),
-  CONSTRAINT `subscriptions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `system_settings` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `test_question` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `test_id` bigint unsigned NOT NULL,
-  `question_id` bigint unsigned NOT NULL,
-  `answer` int DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=801 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `tests` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `exam_request_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `started_at` timestamp NULL DEFAULT NULL,
-  `finished_at` timestamp NULL DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `questions_count` int NOT NULL DEFAULT '0' COMMENT 'Number of questions in the test',
-  `correct_answers_count` int NOT NULL DEFAULT '0' COMMENT 'Number of correct answers in the test',
-  `incorrect_answers_count` int NOT NULL DEFAULT '0' COMMENT 'Number of incorrect answers in the test',
-  `score` int NOT NULL DEFAULT '0' COMMENT 'Test score',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `tests_exam_request_id_foreign` (`exam_request_id`),
-  CONSTRAINT `tests_exam_request_id_foreign` FOREIGN KEY (`exam_request_id`) REFERENCES `exam_requests` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
-  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
-  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `current_team_id` bigint unsigned DEFAULT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `terms_accepted` tinyint(1) NOT NULL DEFAULT '0',
-  `terms_accepted_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `videos` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `chapter_id` bigint unsigned NOT NULL,
-  `course_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `duration` int DEFAULT NULL,
-  `views` int NOT NULL DEFAULT '0',
-  `video_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `library_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pull_zone_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `thumbnail_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `videos_chapter_id_foreign` (`chapter_id`),
-  KEY `videos_course_id_foreign` (`course_id`),
-  CONSTRAINT `videos_chapter_id_foreign` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `videos_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
 (5450, 1352, 0, NULL, '(ა) საქართველოს ეკონომიკისა და მდგრადი განვითარების სამინისტრო', '2025-01-28 06:06:52', '2025-01-28 06:06:52');
 INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
@@ -514,12 +93,9 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (5781, 1273, 0, NULL, '(დ) მაღალი ინტენსივობის საცხოვრებელი ზონა (სზ-4)', '2025-01-28 07:30:43', '2025-01-28 07:30:43'),
 (5782, 1274, 1, NULL, '(ა) სასოფლო-სამოსახლო ზონა (შზ-1)', '2025-01-28 07:31:07', '2025-01-28 07:31:07'),
 (5783, 1274, 0, NULL, '(ბ) ცენტრის ზონა (შზ-2)', '2025-01-28 07:31:07', '2025-01-28 07:31:07'),
-(5784, 1274, 0, NULL, '(გ) სასოფლო სამეურნეო ზონა (შზ-3)', '2025-01-28 07:31:07', '2025-01-28 07:31:07');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(5785, 1274, 0, NULL, '(დ) საკურორტო-სარეკრეაციო ზონა (შზ-4)', '2025-01-28 07:31:07', '2025-01-28 07:31:07');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(5786, 1275, 0, NULL, '(ა) ცენტრის ზონა (შზ-2)', '2025-01-28 07:31:29', '2025-01-28 07:31:29');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(5784, 1274, 0, NULL, '(გ) სასოფლო სამეურნეო ზონა (შზ-3)', '2025-01-28 07:31:07', '2025-01-28 07:31:07'),
+(5785, 1274, 0, NULL, '(დ) საკურორტო-სარეკრეაციო ზონა (შზ-4)', '2025-01-28 07:31:07', '2025-01-28 07:31:07'),
+(5786, 1275, 0, NULL, '(ა) ცენტრის ზონა (შზ-2)', '2025-01-28 07:31:29', '2025-01-28 07:31:29'),
 (5787, 1275, 1, NULL, '(ბ) საქმიანი ზონა (შზ-3)', '2025-01-28 07:31:29', '2025-01-28 07:31:29'),
 (5788, 1275, 0, NULL, '(გ) საკურორტო-სარეკრეაციო ზონა (შზ-4)', '2025-01-28 07:31:29', '2025-01-28 07:31:29'),
 (5789, 1275, 0, NULL, '(დ) კომერციული ზონა (შზ-5)', '2025-01-28 07:31:29', '2025-01-28 07:31:29'),
@@ -629,9 +205,12 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (6081, 254, 0, NULL, '(დ) მთლიანი ფილა', '2025-01-29 08:57:17', '2025-01-29 08:57:17'),
 (6082, 255, 1, NULL, '(ა) ხის კარკასი', '2025-01-29 08:57:45', '2025-01-29 08:57:45'),
 (6083, 255, 0, NULL, '(ბ) ლითონის კარკასი', '2025-01-29 08:57:45', '2025-01-29 08:57:45'),
-(6084, 255, 0, NULL, '(გ) რკინაბეტონის კარკასი', '2025-01-29 08:57:45', '2025-01-29 08:57:45'),
-(6085, 255, 0, NULL, '(დ) კომბინირებული კარკასი', '2025-01-29 08:57:45', '2025-01-29 08:57:45'),
-(6086, 256, 1, NULL, '(ა) რკინაბეტონის გადახურვა', '2025-01-29 08:58:17', '2025-01-29 08:58:17'),
+(6084, 255, 0, NULL, '(გ) რკინაბეტონის კარკასი', '2025-01-29 08:57:45', '2025-01-29 08:57:45');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(6085, 255, 0, NULL, '(დ) კომბინირებული კარკასი', '2025-01-29 08:57:45', '2025-01-29 08:57:45');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(6086, 256, 1, NULL, '(ა) რკინაბეტონის გადახურვა', '2025-01-29 08:58:17', '2025-01-29 08:58:17');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
 (6087, 256, 0, NULL, '(ბ) ხის კოჭებიანი გადახურვა', '2025-01-29 08:58:17', '2025-01-29 08:58:17'),
 (6088, 256, 0, NULL, '(გ) ლითონის კოჭებიანი გადახურვა', '2025-01-29 08:58:17', '2025-01-29 08:58:17'),
 (6089, 256, 0, NULL, '(დ) ხე-ლითონის გადახურვა', '2025-01-29 08:58:17', '2025-01-29 08:58:17'),
@@ -872,9 +451,12 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (6906, 1456, 0, NULL, '(დ) როდესაც ის დაკავშირებულია დსშ ჯგუფის დაკავებულობასთან', '2025-01-31 03:25:26', '2025-01-31 03:25:26'),
 (6907, 1457, 1, NULL, '(ა) თავშეყრის ჯგუფი თვ-1', '2025-01-31 03:27:38', '2025-01-31 03:27:38'),
 (6908, 1457, 0, NULL, '(ბ) თავშეყრის ჯგუფი თვ-2', '2025-01-31 03:27:38', '2025-01-31 03:27:38'),
-(6909, 1457, 0, NULL, '(გ) თავშეყრის ჯგუფი თვ-3', '2025-01-31 03:27:38', '2025-01-31 03:27:38'),
-(6910, 1457, 0, NULL, '(დ) თავშეყრის ჯგუფი თვ-4', '2025-01-31 03:27:38', '2025-01-31 03:27:38'),
-(6911, 1458, 0, NULL, '(ა) თავშეყრის ჯგუფი თვ-1', '2025-01-31 03:30:32', '2025-01-31 03:30:32'),
+(6909, 1457, 0, NULL, '(გ) თავშეყრის ჯგუფი თვ-3', '2025-01-31 03:27:38', '2025-01-31 03:27:38');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(6910, 1457, 0, NULL, '(დ) თავშეყრის ჯგუფი თვ-4', '2025-01-31 03:27:38', '2025-01-31 03:27:38');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(6911, 1458, 0, NULL, '(ა) თავშეყრის ჯგუფი თვ-1', '2025-01-31 03:30:32', '2025-01-31 03:30:32');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
 (6912, 1458, 1, NULL, '(ბ) თავშეყრის ჯგუფი თვ-2', '2025-01-31 03:30:32', '2025-01-31 03:30:32'),
 (6913, 1458, 0, NULL, '(გ) თავშეყრის ჯგუფი თვ-3', '2025-01-31 03:30:32', '2025-01-31 03:30:32'),
 (6914, 1458, 0, NULL, '(დ) თავშეყრის ჯგუფი თვ-4', '2025-01-31 03:30:32', '2025-01-31 03:30:32'),
@@ -992,9 +574,12 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (7042, 1490, 0, NULL, '(დ) გამმიჯნავი კედელი საჭირო არ არის', '2025-02-02 04:22:50', '2025-02-02 04:22:50'),
 (7043, 1491, 1, NULL, '(ა) IA, IB, IIA და IIB', '2025-02-02 04:24:23', '2025-02-02 04:24:23'),
 (7044, 1491, 0, NULL, '(ბ) მხოლოდ IA და IB', '2025-02-02 04:24:23', '2025-02-02 04:24:23'),
-(7045, 1491, 0, NULL, '(გ) მხოლოდ IIA და IIB', '2025-02-02 04:24:23', '2025-02-02 04:24:23'),
-(7046, 1491, 0, NULL, '(დ) ყველა ტიპის კონსტრუქციის შემთხვევაში საჭიროა დაცვა', '2025-02-02 04:24:23', '2025-02-02 04:24:23'),
-(7051, 1493, 0, NULL, '(ა) მხოლოდ იატაკის ანაწყობები', '2025-02-02 04:28:00', '2025-02-02 04:28:00'),
+(7045, 1491, 0, NULL, '(გ) მხოლოდ IIA და IIB', '2025-02-02 04:24:23', '2025-02-02 04:24:23');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(7046, 1491, 0, NULL, '(დ) ყველა ტიპის კონსტრუქციის შემთხვევაში საჭიროა დაცვა', '2025-02-02 04:24:23', '2025-02-02 04:24:23');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(7051, 1493, 0, NULL, '(ა) მხოლოდ იატაკის ანაწყობები', '2025-02-02 04:28:00', '2025-02-02 04:28:00');
+INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
 (7052, 1493, 0, NULL, '(ბ) მხოლოდ სახურავის ანაწყობები', '2025-02-02 04:28:00', '2025-02-02 04:28:00'),
 (7053, 1493, 1, NULL, '(გ) როგორც იატაკის, ასევე სახურავის ანაწყობები', '2025-02-02 04:28:00', '2025-02-02 04:28:00'),
 (7054, 1493, 0, NULL, '(დ) არცერთი ზემოთ ჩამოთვლილი', '2025-02-02 04:28:00', '2025-02-02 04:28:00'),
@@ -1823,12 +1408,9 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (9091, 1998, 1, NULL, '(ა) საშხეფების რაოდენობა 13-ს არ უნდა აღემატებოდეს', '2025-02-08 20:01:35', '2025-02-08 20:01:35'),
 (9092, 1998, 0, NULL, '(ბ) საშხეფების რაოდენობა 20-ს არ უნდა აღემატებოდეს', '2025-02-08 20:01:35', '2025-02-08 20:01:35'),
 (9093, 1998, 0, NULL, '(გ) საჭიროა დამატებითი რიგის დამონტაჟება', '2025-02-08 20:01:35', '2025-02-08 20:01:35'),
-(9094, 1998, 0, NULL, '(დ) საჭიროა ალტერნატიული დამცავების გამოყენება', '2025-02-08 20:01:35', '2025-02-08 20:01:35');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9095, 1999, 0, NULL, '(ა) NFPA 13', '2025-02-08 20:02:46', '2025-02-08 20:02:46');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9096, 1999, 1, NULL, '(ბ) NFPA 13R', '2025-02-08 20:02:46', '2025-02-08 20:02:46');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(9094, 1998, 0, NULL, '(დ) საჭიროა ალტერნატიული დამცავების გამოყენება', '2025-02-08 20:01:35', '2025-02-08 20:01:35'),
+(9095, 1999, 0, NULL, '(ა) NFPA 13', '2025-02-08 20:02:46', '2025-02-08 20:02:46'),
+(9096, 1999, 1, NULL, '(ბ) NFPA 13R', '2025-02-08 20:02:46', '2025-02-08 20:02:46'),
 (9097, 1999, 0, NULL, '(გ) NFPA 13D', '2025-02-08 20:02:46', '2025-02-08 20:02:46'),
 (9098, 1999, 0, NULL, '(დ) NFPA 14', '2025-02-08 20:02:46', '2025-02-08 20:02:46'),
 (9099, 2000, 1, NULL, '(ა) თუ შენობის ყველა საკლასო ოთახს შენობიდან გამოსასვლელი თითო კარი მიწის დონეზე აქვს', '2025-02-08 20:04:51', '2025-02-08 20:04:51'),
@@ -2054,12 +1636,9 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (9372, 2066, 0, NULL, '(ბ) უნდა იყენებდეს ორივე - კვამლის და სითბოს აღმომჩენებს', '2025-02-08 22:32:32', '2025-02-08 22:32:32'),
 (9373, 2066, 1, NULL, '(გ) უნდა იყენებდეს კვამლაღმომჩენებს, თუ გარემომცველი პირობების გამო არ იკრძალება მათი დაყენება', '2025-02-08 22:32:32', '2025-02-08 22:32:32'),
 (9374, 2066, 0, NULL, '(დ) არცერთი ზემოთ ჩამოთვლილიდან', '2025-02-08 22:32:32', '2025-02-08 22:32:32'),
-(9375, 2068, 1, NULL, '(ა) სითბოს ნებადართული ავტომატური აღმომჩენი', '2025-02-08 22:33:43', '2025-02-08 22:33:43');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9376, 2068, 0, NULL, '(ბ) კვამლის ავტომატური აღმომჩენი', '2025-02-08 22:33:43', '2025-02-08 22:33:43');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9377, 2068, 0, NULL, '(გ) ცეცხლის ავტომატური აღმომჩენი', '2025-02-08 22:33:43', '2025-02-08 22:33:43');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(9375, 2068, 1, NULL, '(ა) სითბოს ნებადართული ავტომატური აღმომჩენი', '2025-02-08 22:33:43', '2025-02-08 22:33:43'),
+(9376, 2068, 0, NULL, '(ბ) კვამლის ავტომატური აღმომჩენი', '2025-02-08 22:33:43', '2025-02-08 22:33:43'),
+(9377, 2068, 0, NULL, '(გ) ცეცხლის ავტომატური აღმომჩენი', '2025-02-08 22:33:43', '2025-02-08 22:33:43'),
 (9378, 2068, 0, NULL, '(დ) არცერთი ზემოთ ჩამოთვლილიდან', '2025-02-08 22:33:43', '2025-02-08 22:33:43'),
 (9379, 2069, 0, NULL, '(ა) შეტყობინება უნდა გადაეცეს მხოლოდ სახანძრო-სამაშველო სამსახურს', '2025-02-08 22:36:03', '2025-02-08 22:36:03'),
 (9380, 2069, 0, NULL, '(ბ) შეტყობინება უნდა გადაეცეს მხოლოდ შენობის მეპატრონეს', '2025-02-08 22:36:03', '2025-02-08 22:36:03'),
@@ -2208,12 +1787,9 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (9524, 2105, 0, NULL, '(ბ) უნდა გადასცემდეს სიგნალს მხოლოდ სახანძრო-სამაშველო სამსახურს', '2025-02-09 08:46:18', '2025-02-09 08:46:18'),
 (9525, 2105, 0, NULL, '(გ) უნდა გადასცემდეს სიგნალს მხოლოდ შენობის მეპატრონეს', '2025-02-09 08:46:18', '2025-02-09 08:46:18'),
 (9526, 2105, 0, NULL, '(დ) არცერთი ზემოთ ჩამოთვლილიდან', '2025-02-09 08:46:18', '2025-02-09 08:46:18'),
-(9527, 2106, 1, NULL, '(ა) როგორც მხედველობითი, ისე ხმოვანი და უნდა ისმოდეს როგორც აირის გამოვლენის ფართობზე, ისე მის გარეთ', '2025-02-09 08:47:52', '2025-02-09 08:47:52');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9528, 2106, 0, NULL, '(ბ) მხოლოდ მხედველობითი და უნდა ჩანდეს როგორც აირის გამოვლენის ფართობზე, ისე მის გარეთ', '2025-02-09 08:47:52', '2025-02-09 08:47:52');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9529, 2106, 0, NULL, '(გ) მხოლოდ ხმოვანი და უნდა ისმოდეს როგორც აირის გამოვლენის ფართობზე, ისე მის გარეთ', '2025-02-09 08:47:52', '2025-02-09 08:47:52');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(9527, 2106, 1, NULL, '(ა) როგორც მხედველობითი, ისე ხმოვანი და უნდა ისმოდეს როგორც აირის გამოვლენის ფართობზე, ისე მის გარეთ', '2025-02-09 08:47:52', '2025-02-09 08:47:52'),
+(9528, 2106, 0, NULL, '(ბ) მხოლოდ მხედველობითი და უნდა ჩანდეს როგორც აირის გამოვლენის ფართობზე, ისე მის გარეთ', '2025-02-09 08:47:52', '2025-02-09 08:47:52'),
+(9529, 2106, 0, NULL, '(გ) მხოლოდ ხმოვანი და უნდა ისმოდეს როგორც აირის გამოვლენის ფართობზე, ისე მის გარეთ', '2025-02-09 08:47:52', '2025-02-09 08:47:52'),
 (9530, 2106, 0, NULL, '(დ) არცერთი ზემოთ ჩამოთვლილიდან', '2025-02-09 08:47:52', '2025-02-09 08:47:52'),
 (9531, 2107, 0, NULL, '(ა) უნდა იყოს იგივე, რაც ხანძრის განგაშის სიგნალი', '2025-02-09 08:49:22', '2025-02-09 08:49:22'),
 (9532, 2107, 0, NULL, '(ბ) უნდა იყოს იგივე, რაც ქურდობის განგაშის სიგნალი', '2025-02-09 08:49:22', '2025-02-09 08:49:22'),
@@ -2446,12 +2022,9 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (9760, 2164, 0, NULL, '(ბ) 1.15 მეტრი', '2025-02-09 16:16:50', '2025-02-09 16:16:50'),
 (9761, 2164, 1, NULL, '(გ) 2.3 მეტრი', '2025-02-09 16:16:50', '2025-02-09 16:16:50'),
 (9762, 2164, 0, NULL, '(დ) 2.5 მეტრი', '2025-02-09 16:16:50', '2025-02-09 16:16:50'),
-(9763, 2165, 0, NULL, '(ა) 2 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9764, 2165, 1, NULL, '(ბ) 10 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9765, 2165, 0, NULL, '(გ) 20 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(9763, 2165, 0, NULL, '(ა) 2 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05'),
+(9764, 2165, 1, NULL, '(ბ) 10 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05'),
+(9765, 2165, 0, NULL, '(გ) 20 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05'),
 (9766, 2165, 0, NULL, '(დ) 5 სანტიმეტრზე მეტად', '2025-02-09 16:19:05', '2025-02-09 16:19:05'),
 (9767, 2166, 0, NULL, '(ა) 1 ლუქსი', '2025-02-09 16:20:27', '2025-02-09 16:20:27'),
 (9768, 2166, 0, NULL, '(ბ) 2.15 ლუქსი', '2025-02-09 16:20:27', '2025-02-09 16:20:27'),
@@ -2654,12 +2227,9 @@ INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_
 (9970, 2216, 0, NULL, '(დ) 120 წუთი', '2025-02-10 07:43:45', '2025-02-10 07:43:45'),
 (9971, 2217, 0, NULL, '(ა) ქვეთავი 1009', '2025-02-10 07:44:58', '2025-02-10 07:44:58'),
 (9972, 2217, 0, NULL, '(ბ) ქვეთავი 1010', '2025-02-10 07:44:58', '2025-02-10 07:44:58'),
-(9973, 2217, 0, NULL, '(გ) ქვეთავი 1011', '2025-02-10 07:44:58', '2025-02-10 07:44:58');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9974, 2217, 1, NULL, '(დ) ქვეთავი 1012', '2025-02-10 07:44:58', '2025-02-10 07:44:58');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
-(9975, 2218, 0, NULL, '(ა) 85 სმ', '2025-02-10 07:46:13', '2025-02-10 07:46:13');
-INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
+(9973, 2217, 0, NULL, '(გ) ქვეთავი 1011', '2025-02-10 07:44:58', '2025-02-10 07:44:58'),
+(9974, 2217, 1, NULL, '(დ) ქვეთავი 1012', '2025-02-10 07:44:58', '2025-02-10 07:44:58'),
+(9975, 2218, 0, NULL, '(ა) 85 სმ', '2025-02-10 07:46:13', '2025-02-10 07:46:13'),
 (9976, 2218, 0, NULL, '(ბ) 90 სმ', '2025-02-10 07:46:13', '2025-02-10 07:46:13'),
 (9977, 2218, 0, NULL, '(გ) 95 სმ', '2025-02-10 07:46:13', '2025-02-10 07:46:13'),
 (9978, 2218, 1, NULL, '(დ) 100 სმ', '2025-02-10 07:46:13', '2025-02-10 07:46:13'),
@@ -6959,7 +6529,8 @@ INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `up
 (394, 394, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22'),
 (395, 395, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22'),
 (396, 396, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22'),
-(397, 397, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22'),
+(397, 397, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22');
+INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `updated_at`) VALUES
 (398, 398, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22'),
 (399, 399, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22'),
 (400, 400, 9, '2025-01-14 12:25:22', '2025-01-14 12:25:22');
@@ -7139,7 +6710,8 @@ INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `up
 (571, 571, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
 (572, 572, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
 (573, 573, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
-(574, 574, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
+(574, 574, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23');
+INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `updated_at`) VALUES
 (575, 575, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
 (576, 576, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
 (577, 577, 9, '2025-01-14 12:25:23', '2025-01-14 12:25:23'),
@@ -7571,9 +7143,12 @@ INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `up
 (1003, 1003, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
 (1004, 1004, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
 (1005, 1005, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
-(1006, 1006, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
-(1007, 1007, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
-(1008, 1008, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
+(1006, 1006, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25');
+INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `updated_at`) VALUES
+(1007, 1007, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25');
+INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `updated_at`) VALUES
+(1008, 1008, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25');
+INSERT INTO `group_question` (`id`, `question_id`, `group_id`, `created_at`, `updated_at`) VALUES
 (1009, 1009, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
 (1010, 1010, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
 (1011, 1011, 9, '2025-01-14 12:25:25', '2025-01-14 12:25:25'),
@@ -9830,9 +9405,12 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (273, 21, 'რომელი ტიპის გადახურვა უზრუნველყოფს საუკეთესო ხმის იზოლაციას?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:10:35'),
 (274, 22, 'რომელი სტრუქტურული სისტემა უზრუნველყოფს შენობის მაქსიმალურ არქიტექტურულ მოქნილობას?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:11:13'),
 (275, 23, 'რა არის მთავარი უპირატესობა რკინაბეტონის წინასწარ დაჭიმული ელემენტების გამოყენების?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:12:02'),
-(276, 24, 'რა არის მთავარი უპირატესობა ფოლადის კონსტრუქციების გამოყენების?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:12:30'),
-(277, 25, 'რა არის მთავარი უპირატესობა წებოვანი ლამინირებული შედგენილი ხის კონსტრუქციის გამოყენების?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:13:06'),
-(278, 26, 'რა მასალით ჯობს დიდმალიანი გადახურვის გადაწყვეტა?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:14:36'),
+(276, 24, 'რა არის მთავარი უპირატესობა ფოლადის კონსტრუქციების გამოყენების?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:12:30');
+INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(277, 25, 'რა არის მთავარი უპირატესობა წებოვანი ლამინირებული შედგენილი ხის კონსტრუქციის გამოყენების?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:13:06');
+INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(278, 26, 'რა მასალით ჯობს დიდმალიანი გადახურვის გადაწყვეტა?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:14:36');
+INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
 (279, 27, 'ნაგებობის სიიაფისათვის, რა ოპტიმალური მალების დაგეგმარება ჯობს საცხოვრებელ და საოფისე შენობებში?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:15:27'),
 (280, 28, 'რა არის გასათვალისწინებელი სეისმურ ზონაში შენობის მზიდი სტრუქტურის დაგეგმარებისას ?', NULL, '2025-01-14 12:25:21', '2025-01-30 10:51:28'),
 (281, 29, 'რაში ზღუდავს სტრუქტურულ გადაწყვეტას სეისმური ზონა ?', NULL, '2025-01-14 12:25:21', '2025-01-29 09:16:56'),
@@ -9968,12 +9546,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (1444, NULL, 'რომელი შენობები არ ექვემდებარება 2016 წლის 28 იანვრის №41 დადგენილებას მაშინაც კი თუ ისინი III IV ან V კლასს განეკუთვნებიან?', NULL, '2025-01-31 02:03:09', '2025-01-31 02:03:09'),
 (1445, NULL, 'რა არის \"შენობა-ნაგებობის უსაფრთხოების წესების\" ძირითადი მიზანი?', NULL, '2025-01-31 02:05:03', '2025-01-31 02:05:03'),
 (1446, NULL, 'როდის ამოქმედდა საქართველოს მთავრობის 2016 წლის 28 იანვრის №41 დადგენილება?', NULL, '2025-01-31 02:09:08', '2025-01-31 02:09:08'),
-(1447, NULL, 'რა უნდა მოიმოქმედოს არქიტექტორმა თუ სარეკონსტრუქციო შენობა აშენებულია ახალი წესების ამოქმედებამდე და არ შეესაბამება 41 დადგენილების მოთხოვნებს?', NULL, '2025-01-31 02:12:14', '2025-01-31 02:12:14');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(1448, NULL, 'რა შემთხვევაში შეიძლება გამოყენებულ იქნას მითითებული სტანდარტების შესაბამისი სხვა სტანდარტები?', NULL, '2025-01-31 03:06:00', '2025-01-31 03:06:00');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(1449, NULL, 'რომელ შემთხვევაში შეიძლება არსებულმა ნაგებობამ გააგრძელოს ფუნქციონირება უცვლელად მიუხედავად იმისა რომ ის არ შეესაბამება ახალ წესებს?', NULL, '2025-01-31 03:08:12', '2025-01-31 03:08:12');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(1447, NULL, 'რა უნდა მოიმოქმედოს არქიტექტორმა თუ სარეკონსტრუქციო შენობა აშენებულია ახალი წესების ამოქმედებამდე და არ შეესაბამება 41 დადგენილების მოთხოვნებს?', NULL, '2025-01-31 02:12:14', '2025-01-31 02:12:14'),
+(1448, NULL, 'რა შემთხვევაში შეიძლება გამოყენებულ იქნას მითითებული სტანდარტების შესაბამისი სხვა სტანდარტები?', NULL, '2025-01-31 03:06:00', '2025-01-31 03:06:00'),
+(1449, NULL, 'რომელ შემთხვევაში შეიძლება არსებულმა ნაგებობამ გააგრძელოს ფუნქციონირება უცვლელად მიუხედავად იმისა რომ ის არ შეესაბამება ახალ წესებს?', NULL, '2025-01-31 03:08:12', '2025-01-31 03:08:12'),
 (1450, NULL, 'რომელი ნაგებობები არ ექვემდებარება 2016 წლის 28 იანვრის №41 დადგენილებით დამტკიცებულ წესებს?', NULL, '2025-01-31 03:10:49', '2025-01-31 03:10:49'),
 (1451, NULL, 'რომელი ნაგებობები არ ექვემდებარება 2016 წლის 28 იანვრის №41 დადგენილებით დამტკიცებულ წესებს?', NULL, '2025-01-31 03:13:45', '2025-01-31 03:13:45'),
 (1452, NULL, 'რას არეგულირებს \"გამოყენება და დაკავებულობის კლასიფიცირების\" თავი?', NULL, '2025-01-31 03:17:33', '2025-01-31 03:17:33'),
@@ -10298,12 +9873,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (1960, NULL, 'რა შემთხვევაში შეიძლება წვადი მასალების გამოყენება I ან II ტიპის კონსტრუქციების დამალულ სივრცეებში?', NULL, '2025-02-06 10:57:53', '2025-02-25 15:59:40'),
 (1963, NULL, 'სად უნდა განთავსდეს ბათქაში I და II ტიპის კონსტრუქციის შენობებში?', NULL, '2025-02-06 11:05:29', '2025-02-06 11:05:29'),
 (1964, NULL, 'რა შემთხვევაში უნდა გაძლიერდეს ბათქაში დამატებითი საბათქაშე ბადის ფენით?', NULL, '2025-02-06 11:09:00', '2025-02-06 11:09:00'),
-(1966, NULL, 'რომელ სტანდარტებთან შესაბამისობა უნდა ჰქონდეს საიზოლაციო მასალების ალის გავრცელების ან კვამლის წარმოქმნის ინდექსებს?', NULL, '2025-02-06 11:11:50', '2025-02-06 11:11:50');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(1968, NULL, 'რა ალის გავრცელების და კვამლის წარმოქმნის ინდექსებს უნდა აკმაყოფილებდეს დამალულ სივრცეებში განთავსებული საიზოლაციო მასალები?', NULL, '2025-02-06 11:14:17', '2025-02-06 11:14:17');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(1974, NULL, 'რამდენი უნდა იყოს მილების და მილების იზოლაციის ალის გავრცელების და კვამლის წარმოქმნის ინდექსი მაქსიმუმ?', NULL, '2025-02-06 11:24:37', '2025-02-06 11:24:37');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(1966, NULL, 'რომელ სტანდარტებთან შესაბამისობა უნდა ჰქონდეს საიზოლაციო მასალების ალის გავრცელების ან კვამლის წარმოქმნის ინდექსებს?', NULL, '2025-02-06 11:11:50', '2025-02-06 11:11:50'),
+(1968, NULL, 'რა ალის გავრცელების და კვამლის წარმოქმნის ინდექსებს უნდა აკმაყოფილებდეს დამალულ სივრცეებში განთავსებული საიზოლაციო მასალები?', NULL, '2025-02-06 11:14:17', '2025-02-06 11:14:17'),
+(1974, NULL, 'რამდენი უნდა იყოს მილების და მილების იზოლაციის ალის გავრცელების და კვამლის წარმოქმნის ინდექსი მაქსიმუმ?', NULL, '2025-02-06 11:24:37', '2025-02-06 11:24:37'),
 (1977, NULL, 'ცეცხლმედეგი მასალების სისქე, რომელიც აუცილებელი სტრუქტურული ნაწილების დასაცავად გამოიყენება:', NULL, '2025-02-06 11:28:43', '2025-02-06 11:28:43'),
 (1982, NULL, 'რა მიზანს ემსახურება 722.1 ქვეთავის დებულებები?', NULL, '2025-02-06 11:36:34', '2025-02-06 11:36:34'),
 (1983, NULL, 'რომელი სტანდარტის მიხედვით უნდა გამოითვალოს ბეტონის, ბეტონის წყობისა და თიხის წყობის ცეცხლმედეგობა?', NULL, '2025-02-06 11:39:19', '2025-02-06 11:39:19'),
@@ -10349,12 +9921,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2034, NULL, 'რომელი სისტემა უნდა იყოს დაყენებული ახალ შენობებსა და ნაგებობებში 907.2 ქვეთავის მიხედვით?', NULL, '2025-02-08 21:01:23', '2025-02-08 21:01:23'),
 (2035, NULL, 'რომელ შემთხვევაში არ არის საჭირო სახანძრო განგაშის ხელით სამართავი კოლოფი?', NULL, '2025-02-08 21:04:40', '2025-02-08 21:04:40'),
 (2036, NULL, 'რომელი ჯგუფის დაკავებულობებში არის საჭირო სახანძრო განგაშის ხელით სამართავი სისტემის მოწყობა, თუ დაკავებულობის დატვირთვა 100 ადამიანზე მეტია შენობიდან გამოსასვლელის ყველაზე დაბალი დონის ზემოთ ან ქვემოთ?', NULL, '2025-02-08 21:06:28', '2025-02-08 21:06:28'),
-(2037, NULL, 'რომელ ჯგუფის დაკავებულობებში არის საჭირო ელექტრონულად მაკონტროლებელი კვამლის ავტომატური აღმომჩენი სისტემის მოწყობა, თუ ცეცხლისგან დაცული ფართობი მოიცავს მოვლა-მზრუნველობის ამბულატორიულ დაწესებულებას?', NULL, '2025-02-08 21:07:45', '2025-02-08 21:07:45');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2038, NULL, 'რომელი ჯგუფის დაკავებულობებში არის საჭირო სახანძრო განგაშის ხელით სამართავი სისტემის მოწყობა, რომელიც გამოსცემს დამკავებელთა შეტყობინების სიგნალს 907.5.2.2 ქვეთავის შესაბამისად მოწყობილი საგანგებო ხმოვანი განგაშის საკომუნიკაციო სისტემის საშუალებით?', NULL, '2025-02-08 21:09:11', '2025-02-08 21:09:11');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2039, NULL, 'რომელი ჯგუფის დაკავებულობებში არის საჭირო სახანძრო განგაშის ხელით სამართავი სისტემის მოწყობა, თუ დაკავებულობა ორ ან ორზე მეტსართულიანია და საერთო დატვირთვა შეადგენს 500-ს ან მეტს შენობიდან გამოსასვლელი ყველაზე დაბალი დონის ზემოთ ან ქვემოთ?', NULL, '2025-02-08 21:12:17', '2025-02-08 21:12:17');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2037, NULL, 'რომელ ჯგუფის დაკავებულობებში არის საჭირო ელექტრონულად მაკონტროლებელი კვამლის ავტომატური აღმომჩენი სისტემის მოწყობა, თუ ცეცხლისგან დაცული ფართობი მოიცავს მოვლა-მზრუნველობის ამბულატორიულ დაწესებულებას?', NULL, '2025-02-08 21:07:45', '2025-02-08 21:07:45'),
+(2038, NULL, 'რომელი ჯგუფის დაკავებულობებში არის საჭირო სახანძრო განგაშის ხელით სამართავი სისტემის მოწყობა, რომელიც გამოსცემს დამკავებელთა შეტყობინების სიგნალს 907.5.2.2 ქვეთავის შესაბამისად მოწყობილი საგანგებო ხმოვანი განგაშის საკომუნიკაციო სისტემის საშუალებით?', NULL, '2025-02-08 21:09:11', '2025-02-08 21:09:11'),
+(2039, NULL, 'რომელი ჯგუფის დაკავებულობებში არის საჭირო სახანძრო განგაშის ხელით სამართავი სისტემის მოწყობა, თუ დაკავებულობა ორ ან ორზე მეტსართულიანია და საერთო დატვირთვა შეადგენს 500-ს ან მეტს შენობიდან გამოსასვლელი ყველაზე დაბალი დონის ზემოთ ან ქვემოთ?', NULL, '2025-02-08 21:12:17', '2025-02-08 21:12:17'),
 (2040, NULL, 'რომელ ჯგუფის დაკავებულობებში არის საჭირო ხელით სამართავი და სახანძრო განგაშის ავტომატური სისტემის დაყენება?', NULL, '2025-02-08 21:19:26', '2025-02-08 21:19:26'),
 (2041, NULL, 'რომელ ჯგუფის დაკავებულობებში არის საჭირო კვამლის ავტომატური აღმომჩენი სისტემის დაყენება დერეფნებში, დერეფნებისა და სამყოფი სივრცეებისკენ, არასაძინებელი ერთეულებისა და სამზარეულოებისკენ, ღია მოსაცდელებში?', NULL, '2025-02-08 21:25:53', '2025-02-08 21:25:53'),
 (2042, NULL, 'რომელი ჯგუფის დაკავებულობებში არის საჭირო კვამლის ავტომატური აღმომჩენი სისტემის დაყენება სამედიცინო მომსახურების სახლების, ხანგრძლივი მოვლა-მზრუნველობის დაწესებულებებისა და დეტოკსიკაციის დაწესებულებების დერეფნებსა და ისეთ სივრცეებში, რომლებიც დასაშვებია გადიოდეს დერეფნებში 407.2 ქვეთავის შესაბამისად?', NULL, '2025-02-08 21:32:26', '2025-02-08 21:32:26'),
@@ -10496,12 +10065,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2172, NULL, 'რომელია ლიფტის მიმართ ერთ-ერთი მოთხოვნა, რათა ის მისაწვდომ გასასვლელ საშუალებად ჩაითვალოს?', NULL, '2025-02-09 16:27:32', '2025-02-09 16:27:32'),
 (2173, NULL, 'რა არის თავშესაფრის ფართობი?', NULL, '2025-02-09 16:29:38', '2025-02-09 16:29:38'),
 (2174, NULL, 'რა არის მინიმალური ზომა ეტლისათვის განკუთვნილი სივრცისა თავშესაფრის ფართობზე?', NULL, '2025-02-09 16:31:34', '2025-02-09 16:31:34'),
-(2175, NULL, 'რა მოთხოვნაა კარების მიმართ გასასვლელი საშუალებების სისტემაში?', NULL, '2025-02-09 16:32:39', '2025-02-09 16:32:39');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2176, NULL, 'რა არის მინიმალური თავისუფალი სიგანე და სიმაღლე კარის ღიობისთვის გასასვლელ საშუალებებში?', NULL, '2025-02-09 16:34:06', '2025-02-09 16:34:06');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2177, NULL, 'როგორ უნდა იღებოდეს კარი გასასვლელ საშუალებებში, თუ კარი ემსახურება სივრცეს, რომლის დაკავებულობის დატვირთვა 50 ან მეტია?', NULL, '2025-02-09 16:35:11', '2025-02-09 16:35:11');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2175, NULL, 'რა მოთხოვნაა კარების მიმართ გასასვლელი საშუალებების სისტემაში?', NULL, '2025-02-09 16:32:39', '2025-02-09 16:32:39'),
+(2176, NULL, 'რა არის მინიმალური თავისუფალი სიგანე და სიმაღლე კარის ღიობისთვის გასასვლელ საშუალებებში?', NULL, '2025-02-09 16:34:06', '2025-02-09 16:34:06'),
+(2177, NULL, 'როგორ უნდა იღებოდეს კარი გასასვლელ საშუალებებში, თუ კარი ემსახურება სივრცეს, რომლის დაკავებულობის დატვირთვა 50 ან მეტია?', NULL, '2025-02-09 16:35:11', '2025-02-09 16:35:11'),
 (2178, NULL, 'რომელია გამონაკლისი იმ წესიდან, რომ გასასვლელის კარები უნდა მოძრაობდეს ღერძზე ან იღებოდეს გვერდითა ანჯამების საშუალებით?', NULL, '2025-02-09 16:36:31', '2025-02-09 16:36:31'),
 (2179, NULL, 'რა არის მაქსიმალური დასაშვები ძალა შიდა გასასვლელის ორმხრივმოძრავი კარების გასაღებად ან შესაღებად (გარდა ცეცხლმედეგი კარისა)?', NULL, '2025-02-09 16:40:09', '2025-02-09 16:40:09'),
 (2180, NULL, 'რომელია მბრუნავი კარების გამოყენების ერთ-ერთი შეზღუდვა?', NULL, '2025-02-09 16:42:23', '2025-02-09 16:42:23'),
@@ -10613,12 +10179,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2283, NULL, 'როდის არის საჭირო გარე გასასვლელის გზა-კიბეებისა და პანდუსების შენობის შიგა სივრცისაგან გამიჯვნა?', NULL, '2025-02-10 15:49:29', '2025-02-10 15:49:29'),
 (2284, NULL, 'რომელ შემთხვევაში არ არის აუცილებელი გასასვლელის ბილიკის კონტურული განათება?', NULL, '2025-02-10 15:51:12', '2025-02-10 15:51:12'),
 (2285, NULL, 'რა არის კონტურული ზოლების მინიმალური თარაზული სიგანე საფეხურებზე?', NULL, '2025-02-10 15:52:21', '2025-02-10 15:52:21'),
-(2286, NULL, 'სად უნდა განთავსდეს პერიმეტრის სადემარკაციო ხაზები კედელზე?', NULL, '2025-02-10 15:54:20', '2025-02-10 15:54:20');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2287, NULL, 'რა არის მინიმალური მოთხოვნა თარაზული გასასვლელების რაოდენობასთან დაკავშირებით შენობაში ან ნაგებობაში?', NULL, '2025-02-10 15:56:40', '2025-02-10 15:56:40');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2288, NULL, 'რომელი სივრცეები უნდა მოეწყოს 1028-ე ქვეთავის შესაბამისად?', NULL, '2025-02-10 15:57:43', '2025-02-10 15:57:43');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2286, NULL, 'სად უნდა განთავსდეს პერიმეტრის სადემარკაციო ხაზები კედელზე?', NULL, '2025-02-10 15:54:20', '2025-02-10 15:54:20'),
+(2287, NULL, 'რა არის მინიმალური მოთხოვნა თარაზული გასასვლელების რაოდენობასთან დაკავშირებით შენობაში ან ნაგებობაში?', NULL, '2025-02-10 15:56:40', '2025-02-10 15:56:40'),
+(2288, NULL, 'რომელი სივრცეები უნდა მოეწყოს 1028-ე ქვეთავის შესაბამისად?', NULL, '2025-02-10 15:57:43', '2025-02-10 15:57:43'),
 (2289, NULL, 'როგორ უნდა გაიმიჯნოს სივრცეები ღია და დახურული ტრიბუნების ქვეშ, თუ ისინი არ გამოიყენება 10 მ2-ზე ნაკლები ფართობის სალაროების ან ტუალეტის ოთახების მოსაწყობად?', NULL, '2025-02-10 15:58:58', '2025-02-10 15:58:58'),
 (2290, NULL, 'რა არის მთავარი გასასვლელის მინიმალური გამტარუნარიანობა თავშეყრის მიზნით გამოყენებულ შენობაში, სადაც დაკავებულობის დატვირთვა აღემატება 300-ს?', NULL, '2025-02-10 16:00:00', '2025-02-10 16:00:00'),
 (2291, NULL, 'რა მოთხოვნა ვრცელდება თავშეყრის მიზნით გამოყენებულ შენობაში მთავარ გასასვლელზე, თუ შენობა კლასიფიცირებულია როგორც თვ ჯგუფის დაკავებულობა?', NULL, '2025-02-10 16:01:10', '2025-02-10 16:01:10'),
@@ -10902,9 +10465,12 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2563, NULL, 'რა ზომის საჰაერო ფართობი უნდა ჰქონდეს ლიფტის შახტს?', NULL, '2025-02-11 15:11:20', '2025-02-11 15:11:20'),
 (2564, NULL, 'რა შემთხვევაში შეიძლება ლიფტის შახტს არ დასჭირდეს საჰაერო?', NULL, '2025-02-11 15:13:07', '2025-02-11 15:13:07'),
 (2565, NULL, 'რა უნდა მოხდეს, თუ ლიფტი სახანძრო განგაშის რეჟიმშია?', NULL, '2025-02-11 15:14:17', '2025-02-11 15:14:17'),
-(2566, NULL, 'რა მოთხოვნებს უნდა აკმაყოფილებდეს დამკავებელთა საევაკუაციო ლიფტის ფოიე?', NULL, '2025-02-11 15:15:25', '2025-02-11 15:15:25'),
-(2567, NULL, 'რა ტიპის საკომუნიკაციო სისტემა უნდა იყოს დამკავებელთა საევაკუაციო ლიფტში?', NULL, '2025-02-11 15:16:39', '2025-02-11 15:16:39'),
-(2568, NULL, 'როგორ უნდა განთავსდეს ლიფტის სამანქანო ოთახი?', NULL, '2025-02-11 15:17:46', '2025-02-11 15:17:46'),
+(2566, NULL, 'რა მოთხოვნებს უნდა აკმაყოფილებდეს დამკავებელთა საევაკუაციო ლიფტის ფოიე?', NULL, '2025-02-11 15:15:25', '2025-02-11 15:15:25');
+INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2567, NULL, 'რა ტიპის საკომუნიკაციო სისტემა უნდა იყოს დამკავებელთა საევაკუაციო ლიფტში?', NULL, '2025-02-11 15:16:39', '2025-02-11 15:16:39');
+INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2568, NULL, 'როგორ უნდა განთავსდეს ლიფტის სამანქანო ოთახი?', NULL, '2025-02-11 15:17:46', '2025-02-11 15:17:46');
+INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
 (2569, NULL, 'რა ტიპის ნაგებობებს არეგულირებს მე-18 თავის დებულებები?', NULL, '2025-02-11 15:21:16', '2025-02-17 14:36:25'),
 (2570, NULL, 'რომელი ტიპის კონსტრუქციად ითვლება მემბრანული ნაგებობები, თუ იგი არაწვადი მასალისგანაა დამზადებული?', NULL, '2025-02-11 15:22:31', '2025-02-11 15:22:31'),
 (2571, NULL, 'რა დროით აგებულ ნაგებობებზე ვრცელდება დროებითი ნაგებობების რეგულაციები?', NULL, '2025-02-11 15:23:47', '2025-02-11 15:23:47'),
@@ -10968,12 +10534,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2629, NULL, 'არსებული ტუალეტებისა და სააბაზანოების გადაკეთებისას თუ ტექნიკურად შეუძლებელია მათი სრულად მისაწვდომად გადაკეთება, დასაშვებია:', NULL, '2025-02-11 17:49:41', '2025-02-11 17:49:41'),
 (2630, NULL, 'ისტორიული შენობების გადაკეთებისას, თუ ძირითადი შესასვლელის მისაწვდომობა შეუძლებელია, შეიძლება:', NULL, '2025-02-11 17:52:02', '2025-02-11 17:52:02'),
 (2631, NULL, 'რომელ ჯგუფს მიეკუთვნება ავტოსადგომი?', NULL, '2025-02-13 04:35:28', '2025-02-13 04:35:28'),
-(2632, NULL, 'რას გულისხმობს ტექნიკური რეგლამენტი \"მისაწვდომობის ეროვნული სტანდარტები\"?', NULL, '2025-02-14 14:13:48', '2025-02-14 14:13:48');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2633, NULL, 'რა არის ამ ტექნიკური რეგლამენტის ძირითადი მიზანი?', NULL, '2025-02-14 14:14:56', '2025-02-14 14:14:56');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2634, NULL, 'რას ნიშნავს ტერმინი \"მისაწვდომი\"?', NULL, '2025-02-14 14:15:57', '2025-02-14 14:15:57');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2632, NULL, 'რას გულისხმობს ტექნიკური რეგლამენტი \"მისაწვდომობის ეროვნული სტანდარტები\"?', NULL, '2025-02-14 14:13:48', '2025-02-14 14:13:48'),
+(2633, NULL, 'რა არის ამ ტექნიკური რეგლამენტის ძირითადი მიზანი?', NULL, '2025-02-14 14:14:56', '2025-02-14 14:14:56'),
+(2634, NULL, 'რას ნიშნავს ტერმინი \"მისაწვდომი\"?', NULL, '2025-02-14 14:15:57', '2025-02-14 14:15:57'),
 (2635, NULL, 'ჩამოთვლილთაგან რომელია \"არსებული შენობა\"?', NULL, '2025-02-14 14:17:24', '2025-02-14 14:17:24'),
 (2636, NULL, 'რა არის \"ბორდიურის პანდუსი\"?', NULL, '2025-02-14 14:19:45', '2025-02-14 14:19:45'),
 (2637, NULL, 'რას გულისხმობს ტერმინი \"ელემენტი\"?', NULL, '2025-02-14 14:21:17', '2025-02-14 14:21:17'),
@@ -11114,12 +10677,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2769, NULL, 'რა ზედაპირი უნდა ჰქონდეს დაბალი გარჩევადობის მქონე მოძრავი/ცვალებადი შეტყობინების (VMS) ნიშნებს?', NULL, '2025-02-16 21:43:49', '2025-02-16 21:43:49'),
 (2770, NULL, 'რა ფერები უნდა იყოს გამოყენებული დაბალი გარჩევადობის მქონე მოძრავი/ცვალებადი შეტყობინების (VMS) ნიშნებზე?', NULL, '2025-02-16 21:44:57', '2025-02-16 21:44:57'),
 (2771, NULL, 'რა მინიმალური მანძილი უნდა იყოს ტელეტაიპის კლავიატურის ზედაპირსა და იატაკს შორის?', NULL, '2025-02-16 21:46:02', '2025-02-16 21:46:02'),
-(2772, NULL, 'რა მინიმალური სიგრძე უნდა იყოს ამოცნობადი გამაფრთხილებელი ზედაპირების ფეხით მოსიარულეთა მოძრაობის მიმართულებით?', NULL, '2025-02-16 21:49:27', '2025-02-16 21:49:27');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2773, NULL, 'სად უნდა იყოს განთავსებული ამოცნობადი გამაფრთხილებელი ზედაპირები ბორდიურის პერპენდიკულარულ პანდუსებზე?', NULL, '2025-02-16 21:50:42', '2025-02-16 21:50:42');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2774, NULL, 'სად უნდა იყოს განთავსებული ამოცნობადი გამაფრთხილებელი ზედაპირები ლიანდაგზე საფეხმავლო გადასასვლელებზე?', NULL, '2025-02-16 21:51:48', '2025-02-16 21:51:48');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2772, NULL, 'რა მინიმალური სიგრძე უნდა იყოს ამოცნობადი გამაფრთხილებელი ზედაპირების ფეხით მოსიარულეთა მოძრაობის მიმართულებით?', NULL, '2025-02-16 21:49:27', '2025-02-16 21:49:27'),
+(2773, NULL, 'სად უნდა იყოს განთავსებული ამოცნობადი გამაფრთხილებელი ზედაპირები ბორდიურის პერპენდიკულარულ პანდუსებზე?', NULL, '2025-02-16 21:50:42', '2025-02-16 21:50:42'),
+(2774, NULL, 'სად უნდა იყოს განთავსებული ამოცნობადი გამაფრთხილებელი ზედაპირები ლიანდაგზე საფეხმავლო გადასასვლელებზე?', NULL, '2025-02-16 21:51:48', '2025-02-16 21:51:48'),
 (2775, NULL, 'რა არის სიმბოლოს მინიმალური სიმაღლე, როდესაც ის იატაკიდან 1100 მმ-დან 1800 მმ-ის სიმაღლეზეა განთავსებული და ხედვის ჰორიზონტალური მანძილი 1800 მმ-ზე ნაკლები?', NULL, '2025-02-16 21:53:25', '2025-02-16 21:53:25'),
 (2776, NULL, 'რა არის სიმბოლოს მინიმალური სიმაღლე, თუ ის იატაკიდან 1800 მმ-დან 3000 მმ-მდე სიმაღლეზეა განთავსებული და ხედვის ჰორიზონტალური მანძილი 4500 მმ-ზე ნაკლებია?', NULL, '2025-02-16 21:54:20', '2025-02-16 21:54:20'),
 (2777, NULL, 'ბრაილის წერტილის ფუძის დიამეტრის მინიმალური და მაქსიმალური დიაპაზონი რომელია?', NULL, '2025-02-16 21:55:54', '2025-02-16 21:55:54'),
@@ -11222,12 +10782,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2871, NULL, 'რა მინიმალური სიგანე უნდა იყოს სამზარეულოს სამუშაო ზედაპირისთვის?', NULL, '2025-02-18 19:23:28', '2025-02-18 19:23:28'),
 (2872, NULL, 'რა არის ბ ტიპის ერთეულებისთვის იატაკის თავისუფალი სივრცის მინიმალური ზომა?', NULL, '2025-02-18 19:26:46', '2025-02-18 19:26:46'),
 (2873, NULL, 'რა არის გამონაკლისი ტუალეტისა და აბაზანის მოწყობილობების განთავსებისას მრავალდონიან ერთეულებში?', NULL, '2025-02-18 19:28:53', '2025-02-18 19:28:53'),
-(2874, NULL, 'რა არის მინიმალური თავისუფალი სიგანე კარის ღიობისთვის, რომელიც განკუთვნილია შშმ პირებისთვის?', NULL, '2025-02-18 19:30:10', '2025-02-18 19:30:10');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2875, NULL, 'რა მინიმალური ზომისაა უნიტაზის თავისუფალი სივრცე ა ტიპის ერთეულში?', NULL, '2025-02-18 19:31:13', '2025-02-18 19:31:13');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2876, NULL, 'რა მანძილით უნდა დაშორდეს უნიტაზის ცენტრალურ ღერძს ხელსაბანი, თუ ხელსაბანი იჭრება უნიტაზის თავისუფალ სივრცეში ა ტიპის ერთეულში?', NULL, '2025-02-18 19:33:29', '2025-02-18 19:33:29');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2874, NULL, 'რა არის მინიმალური თავისუფალი სიგანე კარის ღიობისთვის, რომელიც განკუთვნილია შშმ პირებისთვის?', NULL, '2025-02-18 19:30:10', '2025-02-18 19:30:10'),
+(2875, NULL, 'რა მინიმალური ზომისაა უნიტაზის თავისუფალი სივრცე ა ტიპის ერთეულში?', NULL, '2025-02-18 19:31:13', '2025-02-18 19:31:13'),
+(2876, NULL, 'რა მანძილით უნდა დაშორდეს უნიტაზის ცენტრალურ ღერძს ხელსაბანი, თუ ხელსაბანი იჭრება უნიტაზის თავისუფალ სივრცეში ა ტიპის ერთეულში?', NULL, '2025-02-18 19:33:29', '2025-02-18 19:33:29'),
 (2877, NULL, 'რა მანძილით უნდა გადაცდეს თავის უკან მდებარე კედელს, თავისუფალი სივრცე ა ტიპის ერთეულებში მუდმივი დასაჯდომების მქონე აბაზანებისთვის?', NULL, '2025-02-18 19:34:28', '2025-02-18 19:34:28'),
 (2878, NULL, 'რა ზომისაა სტანდარტული ეტლის შესაგორებელი ტიპის საშხაპე ნაკვეთურების თავისუფალი სივრცე ა ტიპის ერთეულებში', NULL, '2025-02-18 19:35:55', '2025-02-18 19:35:55'),
 (2879, NULL, 'რა მინიმალური ზომისაა უნიტაზის თავისუფალი სივრცე ბ ტიპის ერთეულში?', NULL, '2025-02-18 19:37:01', '2025-02-18 19:37:01'),
@@ -11292,12 +10849,9 @@ INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_
 (2939, NULL, 'შენობა-ნაგებობის ექსპლუატაციაში მიღებისათვის ვარგისად აღიარებაზე უარის თქმის საფუძველი შეიძლება იყოს:', NULL, '2025-02-26 00:22:21', '2025-02-26 00:22:21'),
 (2940, NULL, 'რას განსაზღვრავს \"სამშენებლო საქმიანობაში საექსპერტო შეფასება\"?', NULL, '2025-02-26 00:25:10', '2025-02-26 00:25:10'),
 (2941, NULL, 'რას გულისხმობს არქიტექტურული პროექტის საექსპერტო შეფასება \"ტექნიკური რეგლამენტის - შენობა-ნაგებობის უსაფრთხოების წესების დამტკიცების თაობაზე\" მიხედვით?', NULL, '2025-02-26 00:33:28', '2025-02-26 00:33:28'),
-(2942, NULL, 'სტრუქტურული ხარვეზის აღმოჩენის შემთხვევაში, ვის ეკისრება პასუხისმგებლობა?', NULL, '2025-02-26 00:35:29', '2025-02-26 00:35:29');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2943, NULL, 'რა არის ინტერკომის სისტემის მთავარი დანიშნულება?', NULL, '2025-02-26 01:16:38', '2025-02-26 01:16:38');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
-(2944, NULL, 'რა არის წყალგაყვანილობის სისტემის მთავარი ფუნქცია?', NULL, '2025-02-26 01:17:37', '2025-02-26 01:17:37');
-INSERT INTO `questions` (`id`, `q_id`, `text`, `weight`, `created_at`, `updated_at`) VALUES
+(2942, NULL, 'სტრუქტურული ხარვეზის აღმოჩენის შემთხვევაში, ვის ეკისრება პასუხისმგებლობა?', NULL, '2025-02-26 00:35:29', '2025-02-26 00:35:29'),
+(2943, NULL, 'რა არის ინტერკომის სისტემის მთავარი დანიშნულება?', NULL, '2025-02-26 01:16:38', '2025-02-26 01:16:38'),
+(2944, NULL, 'რა არის წყალგაყვანილობის სისტემის მთავარი ფუნქცია?', NULL, '2025-02-26 01:17:37', '2025-02-26 01:17:37'),
 (2945, NULL, 'რომელი ტიპის მილები არ გამოიყენება ცხელი წყლისთვის?', NULL, '2025-02-26 01:18:28', '2025-02-26 01:18:28'),
 (2946, NULL, 'რა არის კანალიზაციის სისტემის მთავარი დანიშნულება?', NULL, '2025-02-26 01:19:22', '2025-02-26 01:19:22'),
 (2947, NULL, 'რა არის ელექტრო პანელის მთავარი ფუნქცია?', NULL, '2025-02-26 01:21:56', '2025-02-26 01:21:56'),
@@ -11968,9 +11522,12 @@ INSERT INTO `test_question` (`id`, `test_id`, `question_id`, `answer`, `created_
 (564, 6, 2255, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
 (565, 6, 2346, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
 (566, 6, 2340, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
-(567, 6, 2344, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
-(568, 6, 2382, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
-(569, 6, 2416, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
+(567, 6, 2344, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16');
+INSERT INTO `test_question` (`id`, `test_id`, `question_id`, `answer`, `created_at`, `updated_at`) VALUES
+(568, 6, 2382, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16');
+INSERT INTO `test_question` (`id`, `test_id`, `question_id`, `answer`, `created_at`, `updated_at`) VALUES
+(569, 6, 2416, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16');
+INSERT INTO `test_question` (`id`, `test_id`, `question_id`, `answer`, `created_at`, `updated_at`) VALUES
 (570, 6, 2409, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
 (571, 6, 2474, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
 (572, 6, 2472, NULL, '2025-05-21 22:40:16', '2025-05-21 22:40:16'),
