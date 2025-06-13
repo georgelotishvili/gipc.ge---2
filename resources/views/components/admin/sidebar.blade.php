@@ -96,7 +96,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.pricing') }}" wire:navigate
+                    <a href="{{ route('admin.plans') }}" wire:navigate
                        class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.pricing') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                        <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
