@@ -190,6 +190,11 @@ class User extends Authenticatable /* implements MustVerifyEmail */
             return false;
         }
 
+        if($this->subscription->is_active) //ბეკურამ დავამატე ეს ახლა
+        {
+            return true;
+        }
+
         // If the subscription type is unlimited, it's always active
         if ($this->subscription->type === SubscriptionType::UNLIMITED->value)
         {
