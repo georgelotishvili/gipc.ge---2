@@ -15,7 +15,7 @@ class SubscriptionMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user() || !$request->user()->isSubscriptionActive()) {
+        if (!$request->user() || !$request->user()->hasActiveSubscription()) {
             return redirect()->route('pricing')->with('message', 'ამ გვერდების ნახვისთვის გთხოვთ შეიძინოთ პრემიუმ პაკეტი');
         }
         return $next($request);

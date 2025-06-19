@@ -7,7 +7,7 @@
                 <!-- Jobs Card -->
                 <a href="{{ route('jobs') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-briefcase text-lg md:text-2xl"></i>
@@ -20,7 +20,7 @@
                 <!-- posts card -->
                 <a href="{{ route('posts.index') }}" class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-newspaper text-lg md:text-2xl"></i>
@@ -33,7 +33,7 @@
                 <!-- Simulation Exam Card -->
                 <a href="{{ route('regulations') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-book text-lg md:text-2xl"></i>
@@ -46,7 +46,7 @@
                 <!-- Card 5 -->
                 <a href="{{ route('terms-and-conditions') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-file-contract text-lg md:text-2xl"></i>
@@ -59,7 +59,7 @@
                 <!-- Card 6 -->
                 <a href="{{ route('certificated-specialists') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-users text-lg md:text-2xl"></i>
@@ -72,7 +72,7 @@
                     $user = auth()->user();
                     if($user)
                     {
-                        $isPremium = $user->isSubscriptionActive();
+                        $isPremium = $user->hasActiveSubscription();
                     }
                     else
                     {
@@ -87,7 +87,7 @@
                         <i class="fas fa-crown"></i>
                         <span>ფასიაინი</span>
                     </div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-amber-100 dark:bg-amber-800/50 text-amber-600 dark:text-amber-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-video text-lg md:text-2xl"></i>
@@ -100,13 +100,13 @@
                 <!-- Card 7 -->
                 <button onclick="{{ $isPremium ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     <!-- Premium Badge -->
                     <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown"></i>
                         <span>ფასიაინი</span>
                     </div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-amber-100 dark:bg-amber-800/50 text-amber-600 dark:text-amber-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-clipboard-list text-lg md:text-2xl"></i>
@@ -119,13 +119,13 @@
                 <button onclick="{{ $isPremium ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    
+
                     <!-- Premium Badge -->
                     <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown"></i>
                         <span>ფასიაინი</span>
                     </div>
-                    
+
                     <div class="relative z-10">
                         <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-amber-100 dark:bg-amber-800/50 text-amber-600 dark:text-amber-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-user-graduate text-lg md:text-2xl"></i>
@@ -144,16 +144,16 @@
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
             </div>
-            
+
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            
+
             <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
                 <div class="relative">
                     <!-- Animated background effect -->
                     <div class="absolute inset-0 overflow-hidden">
                         <div class="absolute -inset-4 bg-gradient-to-r from-amber-300/20 via-amber-500/10 to-amber-300/20 animate-gradient-x"></div>
                     </div>
-                    
+
                     <!-- Premium content -->
                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 relative z-10">
                         <div class="sm:flex sm:items-start">
@@ -175,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse relative z-10">
                         <a href="{{ route('pricing') }}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-base font-medium text-white hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm transition-all hover:scale-105">
                             <span class="flex items-center">
@@ -187,7 +187,7 @@
                             დახურვა
                         </button>
                     </div>
-                    
+
                     <!-- Decorative elements -->
                     <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-amber-300/30 to-transparent rounded-br-full"></div>
                     <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-amber-300/30 to-transparent rounded-tl-full"></div>
@@ -201,39 +201,39 @@
             0% { transform: translateX(-50%); }
             100% { transform: translateX(50%); }
         }
-        
+
         @keyframes fadeIn {
             0% { opacity: 0; transform: scale(0.95); }
             100% { opacity: 1; transform: scale(1); }
         }
-        
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
             100% { transform: translateY(0px); }
         }
-        
+
         @keyframes pulse-slow {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 0.6; }
         }
-        
+
         .animate-gradient-x {
             animation: gradient-x 8s linear infinite;
         }
-        
+
         .animate-fadeIn {
             animation: fadeIn 0.3s ease-out forwards;
         }
-        
+
         .animate-float {
             animation: float 3s ease-in-out infinite;
         }
-        
+
         .animate-pulse-slow {
             animation: pulse-slow 3s ease-in-out infinite;
         }
-        
+
         .crown-container {
             position: relative;
             z-index: 10;
@@ -245,7 +245,7 @@
             document.getElementById('premiumAlertModal').classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
         }
-        
+
         function closePremiumAlert() {
             document.getElementById('premiumAlertModal').classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
