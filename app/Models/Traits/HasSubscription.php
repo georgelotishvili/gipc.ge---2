@@ -19,6 +19,14 @@ trait HasSubscription
         return $endDate && $endDate->greaterThan(now()) && $this->subscription?->is_active;
     }
 
+    public function createOrUpdateSubscription(array $data)
+    {
+        return $this->subscription()->updateOrCreate(
+            ['user_id' => $this->id],
+            $data
+        );
+    }
+
     public function activeSubscriptionType(): int|bool
     {
         if($this->hasActiveSubscription()){
@@ -27,6 +35,15 @@ trait HasSubscription
         return false;
 
 
+    }
+
+
+    public function activeSubscriptionName(): string
+    {
+        if($this->hasActiveSubscription()){
+            return $this->subscription?->plan?->plan_name ?: 'არ აქვს გამოწერილი';
+        }
+        return 'არ აქვს გამოწერილი';
     }
 
 
