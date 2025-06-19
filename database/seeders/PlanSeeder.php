@@ -25,36 +25,20 @@ class PlanSeeder extends Seeder
                 'is_active' => true,
                 'options' => [
                     [
-                        'option_description' =>'სრული წვდომა ყველა მასალაზე',
+                        'option_description' =>'წინასაგამოცდო ტესტები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'პროგრესის თვალყურის დევნება',
+                        'option_description' =>'გამოცდის სიმულაცია',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'ონლაინ კონსულტაცია',
+                        'option_description' =>'ვიდეოგაკვეთილები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
-                    [
-                        'option_description' =>'პრაქტიკული დავალებები',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'მობილური ვერსია',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'სერტიფიკატი',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-
                 ]
             ],
             [
@@ -68,32 +52,17 @@ class PlanSeeder extends Seeder
                 'is_active' => true,
                 'options' => [
                     [
-                        'option_description' =>'ყველა კვირის უპირატესობა',
+                        'option_description' =>'წინასაგამოცდო ტესტები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'ჯგუფური მეცადინეობები',
+                        'option_description' =>'გამოცდის სიმულაცია',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'პერსონალური მენტორი',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'პერსონალური მენტორი',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'დამატებითი მასალები',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'დამატებითი პრაქტიკული სავარჯიშოები',
+                        'option_description' =>'ვიდეოგაკვეთილები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
@@ -110,32 +79,17 @@ class PlanSeeder extends Seeder
                 'is_active' => true,
                 'options' => [
                     [
-                        'option_description' =>'ყველა თვის უპირატესობა',
+                        'option_description' =>'წინასაგამოცდო ტესტები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'VIP მხარდაჭერა',
+                        'option_description' =>'გამოცდის სიმულაცია',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
                     [
-                        'option_description' =>'კარიერული კონსულტაცია',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'ულიმიტო წვდომა',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'ექსკლუზიური მასალები',
-                        'is_included' => true,
-                        'is_active' =>true,
-                    ],
-                    [
-                        'option_description' =>'გარანტირებული დასაქმება',
+                        'option_description' =>'ვიდეოგაკვეთილები',
                         'is_included' => true,
                         'is_active' =>true,
                     ],
