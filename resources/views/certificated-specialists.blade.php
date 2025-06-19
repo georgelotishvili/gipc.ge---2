@@ -157,8 +157,7 @@
                                 <div
                                     class="absolute top-0 right-0 w-32 h-32 -mt-8 -mr-8 bg-indigo-100 dark:bg-indigo-900 rounded-full opacity-20">
                                 </div>
-                                <h1 class="text-xl font-bold text-gray-800 dark:text-white mb-4">არქიტექტურის
-                                    სერტიფიკატი</h1>
+                                <h1 class="text-xl font-bold text-gray-800 dark:text-white mb-4">სერტიფიკატი</h1>
                                 <div class="grid grid-cols-2 gap-6 mb-6">
                                     <div>
                                         <p class="text-sm text-gray-500 dark:text-gray-400">სერტიფიკატის №</p>
