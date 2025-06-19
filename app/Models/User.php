@@ -6,6 +6,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\SubscriptionType;
+use App\Models\Traits\HasSubscription;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,12 +24,11 @@ class User extends Authenticatable /* implements MustVerifyEmail */
 {
     use HasApiTokens;
     use SoftDeletes;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasSubscription;
 
     /**
      * The attributes that are mass assignable.
@@ -81,20 +81,20 @@ class User extends Authenticatable /* implements MustVerifyEmail */
 
     /**
      * User's exam requests relationship.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function examRequests(): HasMany
     {
         return $this->hasMany(ExamRequest::class);
     }
-    
+
     /**
      * Send the email verification notification.
      * Uncomment this method when you want to enable email verification
      *
      * @return void
-     
+
     public function sendEmailVerificationNotification()
     {
         $this->notify(new \App\Notifications\VerifyEmailNotification());
@@ -103,12 +103,22 @@ class User extends Authenticatable /* implements MustVerifyEmail */
 
     /**
      * User's employer relationship.
-     * 
+     *
      * @return HasMany
      */
     public function employers(): HasMany
     {
         return $this->hasMany(Employer::class);
+    }
+
+    /**
+     * Get the payments for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 
     /**
@@ -195,7 +205,7 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         // Calculate end date based on subscription type
         $endDate = null;
         $startDate = Carbon::parse($this->subscription->starts_at);
-        
+
         switch ($this->subscription->type)
         {
             case SubscriptionType::WEEKLY->value:

@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommercialController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\QuestionController;
 use App\Models\Course;
 use App\Models\Employee;
@@ -20,9 +21,9 @@ use App\Models\Video;
 use App\Http\Controllers\PostController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
-Route::get('/', function () {
+Route::get( '/', function () {
     return view('index');
-});
+})->name('index');
 
 Route::get('/home', function () {
     return view('index');
@@ -72,6 +73,26 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/regulations/{regulation}/edit', [AdminController::class, 'editRegulation'])->name('admin.regulations.edit');
     Route::patch('/admin/regulations/{regulation}/update', [AdminController::class, 'updateRegulation'])->name('admin.regulations.update');
     Route::delete('/admin/regulations/{regulation}', [AdminController::class, 'destroyRegulation'])->name('admin.regulations.destroy');
+
+    // Pricing
+    Route::get('/admin/plans', [AdminController::class, 'plans'])->name('admin.plans');
+    Route::get('/admin/plans/create', [AdminController::class, 'createPlan'])->name('admin.plans.create');
+    Route::post('/admin/plans/store', [AdminController::class, 'storePlan'])->name('admin.plans.store');
+    Route::get('/admin/plans/{plan}/edit', [AdminController::class, 'editPlan'])->name('admin.plans.edit');
+    Route::put('/admin/plans/{plan}/update', [AdminController::class, 'updatePlan'])->name('admin.plans.update');
+    Route::delete('/admin/plans/{plan}', [AdminController::class, 'destroyPlan'])->name('admin.plans.destroy');
+
+    Route::get('/admin/plan-types/create', [AdminController::class, 'createPlanType'])->name('admin.plan-types.create');
+    Route::post('/admin/plan-types/store', [AdminController::class, 'storePlanType'])->name('admin.plan-types.store');
+    Route::get('/admin/plan-types/{planType}/edit', [AdminController::class, 'editPlanType'])->name('admin.plan-types.edit');
+    Route::put('/admin/plan-types/{planType}/update', [AdminController::class, 'updatePlanType'])->name('admin.plan-types.update');
+    Route::delete('/admin/plan-types/{planType}', [AdminController::class, 'destroyPlanType'])->name('admin.plan-types.destroy');
+
+    Route::get('/admin/plan-options/create', [AdminController::class, 'createPlanOption'])->name('admin.plan-options.create');
+    Route::post('/admin/plan-options/store', [AdminController::class, 'storePlanOption'])->name('admin.plan-options.store');
+    Route::get('/admin/plan-options/{planOption}/edit', [AdminController::class, 'editPlanOption'])->name('admin.plan-options.edit');
+    Route::put('/admin/plan-options/{planOption}/update', [AdminController::class, 'updatePlanOption'])->name('admin.plan-options.update');
+    Route::delete('/admin/plan-options/{planOption}', [AdminController::class, 'destroyPlanOption'])->name('admin.plan-options.destroy');
 
     // Questions
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
@@ -134,24 +155,17 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('admin/commercials/{commercial}', [CommercialController::class, 'destroy'])->name('admin.commercials.destroy');
 });
 
-Route::middleware([
-    'auth:sanctum', 
-    config('jetstream.auth_session'),
-    'verified',
-    'subscription',
-])->group(function () {
-
-
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'subscription'])->group(function () {
     Route::get('/tutorials', function () {
         $courses = Course::all();
         return view('tutorials', compact('courses'));
     })->name('tutorials');
-    
+
     Route::get('/tutorials/course/{course}', function ($course) {
         $course = Course::find($course);
         return view('tutorials.chapters', compact('course'));
     })->name('tutorials.chapters');
-    
+
     Route::get('/tutorials/video/{video}', function ($video) {
         $video = Video::find($video);
         return view('tutorials.show', compact('video'));
@@ -170,11 +184,7 @@ Route::middleware([
     Route::get('/test', Exam::class)->name('test');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('user.workspace');
     })->name('dashboard');
@@ -183,7 +193,7 @@ Route::middleware([
     })->name('workspace');
 
 
-    
+    Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay')->middleware('agreement');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -192,7 +202,7 @@ Route::middleware([
     Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
     Route::patch('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
     Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
-    
+
     // Employee routes
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
@@ -219,9 +229,19 @@ Route::get('/jobs', function () {
 Route::get('/send-test-email', [EmailTestController::class, 'sendTestEmail']);
 Route::get('/email-form', function() {
     return view('emails.form');
-});
+});a
 Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
 */
 
-// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-//     ->name('logout');
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
+
+Route::get('/test', function (\Illuminate\Http\Request $request) {
+    return $request;
+});
+
+// Test route to clear agreement session
+Route::get('/clear-agreement', function () {
+    session()->forget('agreement_accepted');
+    return redirect()->back()->with('message', 'Agreement session cleared');
+})->name('clear.agreement');

@@ -12,6 +12,10 @@ use App\Models\Course;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Pricing;
+use App\Models\Plan;
+use App\Models\PlanType;
+use App\Models\PlanOption;
 use App\Models\Regulation;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +40,184 @@ class AdminController extends Controller
             'average_score' => $average_score,
         ]);
     }
+
+
+    public function plans()
+    {
+        $planTypes = PlanType::all();
+        $plans = Plan::all();
+        $planOptions = PlanOption::with('plans')->get();
+
+        return view('admin.plans.index', [
+            'planTypes' => $planTypes,
+            'plans' => $plans,
+            'planOptions' => $planOptions
+        ]);
+    }
+
+    public function createPlan()
+    {
+        $planTypes = PlanType::all();
+
+        return view('admin.plans.create', [
+            'planTypes' => $planTypes
+        ]);
+    }
+
+    public function storePlan(Request $request)
+    {
+        $attributes = $request->validate([
+            'plan_name' => 'required|unique:plans,plan_name',
+            'plan_description' => 'required',
+            'plan_price' => 'required|numeric',
+            'plan_discount' => 'numeric|nullable',
+            'plan_recommended' => 'required|boolean',
+            'plan_order' => 'required|numeric',
+            'plan_type_id' => 'required|exists:plan_types,id|unique:plans,plan_type_id',
+            'is_active' => 'required|boolean',
+        ]);
+
+
+        Plan::create($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით დამატებულია');
+    }
+
+    public function editPlan(Plan $plan)
+    {
+        $planTypes = PlanType::all();
+
+        return view('admin.plans.edit', [
+            'plan' => $plan,
+            'planTypes' => $planTypes
+        ]);
+    }
+
+    public function updatePlan(Request $request, Plan $plan)
+    {
+        $attributes = $request->validate([
+            'plan_name' => 'required|unique:plans,plan_name,' . $plan->id,
+            'plan_description' => 'required',
+            'plan_price' => 'required|numeric',
+            'plan_discount' => 'numeric|nullable',
+            'plan_recommended' => 'required|boolean',
+            'plan_order' => 'required|numeric',
+            'plan_type_id' => 'required|exists:plan_types,id|unique:plans,plan_type_id,' . $plan->id,
+            'is_active' => 'required|boolean',
+        ]);
+
+        $plan->update($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით განახლდა');
+    }
+
+
+    public function destroyPlan(Plan $plan)
+    {
+        $plan->delete();
+        return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით წაიშალა');
+    }
+
+
+    public function createPlanType()
+    {
+        return view('admin.planTypes.create');
+    }
+
+    public function storePlanType(Request $request)
+    {
+        $attributes = $request->validate([
+            'type_name' => 'required|unique:plan_types,type_name',
+            'type_duration' => 'required|integer|min:1',
+            'is_free' => 'required|boolean',
+        ]);
+
+        PlanType::create($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით დამატებულია');
+    }
+
+    public function editPlanType(PlanType $planType)
+    {
+        return view('admin.planTypes.edit', [
+            'planType' => $planType
+        ]);
+    }
+
+    public function updatePlanType(Request $request, PlanType $planType)
+    {
+        $attributes = $request->validate([
+            'type_name' => 'required|unique:plan_types,type_name,' . $planType->id,
+            'type_duration' => 'required|integer|min:1',
+            'is_free' => 'required|boolean',
+        ]);
+
+        $planType->update($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით განახლდა');
+    }
+
+
+    public function destroyPlanType(PlanType $planType)
+    {
+        $planType->delete();
+        return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით წაიშალა');
+    }
+
+    public function createPlanOption()
+    {
+        $plans = Plan::all();
+
+        return view('admin.planOptions.create', [
+            'plans' => $plans
+        ]);
+    }
+
+    public function storePlanOption(Request $request)
+    {
+        $attributes = $request->validate([
+            'plan_id' => 'required|exists:plans,id',
+            'option_description' => 'required',
+            'is_included' => 'required|boolean',
+            'is_active' => 'required|boolean',
+        ]);
+
+        PlanOption::create($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-option', 'პარამეტრი წარმატებით დამატებულია');
+    }
+
+    public function editPlanOption(PlanOption $planOption)
+    {
+        $plans = Plan::all();
+
+        return view('admin.planOptions.edit', [
+            'planOption' => $planOption,
+            'plans' => $plans
+        ]);
+    }
+
+    public function updatePlanOption(Request $request, PlanOption $planOption)
+    {
+        $attributes = $request->validate([
+            'plan_id' => 'required|exists:plans,id',
+            'option_description' => 'required',
+            'is_included' => 'required|boolean',
+            'is_active' => 'required|boolean',
+        ]);
+
+        $planOption->update($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-option', 'პარამეტრი წარმატებით განახლდა');
+    }
+
+
+    public function destroyPlanOption(PlanOption $planOption)
+    {
+        $planOption->delete();
+        return redirect()->route('admin.plans')->with('success-plan-option', 'პარამეტრი წარმატებით წაიშალა');
+    }
+
 
     public function questions()
     {
@@ -64,7 +246,7 @@ class AdminController extends Controller
             'text' => $request->input('text'),
         ]);
 
-        foreach($request->input('answers') as $index => $answer) {
+        foreach ($request->input('answers') as $index => $answer) {
             Answer::create([
                 'text' => $answer['text'],
                 'is_true' => $request->input('is_true') == $index,
@@ -96,15 +278,15 @@ class AdminController extends Controller
         $question->answers()->delete();
 
         // Create new answers
-        foreach($request->input('answers') as $index => $answer) {
+        foreach ($request->input('answers') as $index => $answer) {
             Answer::create([
                 'text' => $answer['text'],
                 'is_true' => $request->input('correct_answer') == $index,
                 'question_id' => $question->id,
             ]);
-            
+
         }
-        
+
         $question->groups()->detach();
         $question->groups()->attach($request->input('group'));
 
@@ -129,8 +311,7 @@ class AdminController extends Controller
 
     public function destroyGroup(Group $group)
     {
-        if($group->questions()->exists()) 
-        {
+        if ($group->questions()->exists()) {
             return redirect()->back()->with('error', 'კანონმდებლობაში არსებობს კითხვები, გთხოვთ წაშალოთ კანონმდებლობის კითხვები მისი წაშლის წინ.');
         }
         $group->delete();
@@ -219,9 +400,9 @@ class AdminController extends Controller
 
     public function destroy($question)
     {
-        if($question === 'bulk') {   
+        if ($question === 'bulk') {
             $questionIds = request('selected_questions', []);
-            Question::whereIn('id', $questionIds)->each(function($question) {
+            Question::whereIn('id', $questionIds)->each(function ($question) {
                 $question->answers()->delete();
                 $question->delete();
             });
@@ -230,7 +411,7 @@ class AdminController extends Controller
             $question->answers()->delete();
             $question->delete();
         }
-        
+
         return redirect()->back();
     }
 
@@ -258,10 +439,10 @@ class AdminController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
             ]);
-            
+
             if ($request->hasFile('image')) {
                 $image = SaveImageAction::execute($request->file('image'));
-                
+
                 $course->image()->save($image);
             }
             DB::commit();
@@ -313,7 +494,7 @@ class AdminController extends Controller
         DB::beginTransaction();
         try {
             $course->delete();
-            
+
             if ($course->image) {
                 $deleteImage = new DeleteImageAction();
                 $deleteImage->execute($course->image);
@@ -321,9 +502,7 @@ class AdminController extends Controller
 
             DB::commit();
             return redirect()->route('admin.courses')->with('success', 'კურსი წარმატებით წაიშალა');
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
@@ -348,11 +527,11 @@ class AdminController extends Controller
                 'description' => $request->input('description'),
                 'course_id' => $course->id
             ]);
-            
+
             if ($request->hasFile('image')) {
                 $saveImage = new SaveImageAction();
                 $image = $saveImage->execute($request->file('image'));
-                
+
                 $chapter->image()->save($image);
             }
             DB::commit();
@@ -362,7 +541,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
     }
-    
+
     public function editChapter(Course $course, Chapter $chapter)
     {
         return view('admin.courses.chapters.edit', compact('course', 'chapter'));
@@ -392,9 +571,7 @@ class AdminController extends Controller
 
             DB::commit();
             return redirect()->route('admin.courses.chapters', $course)->with('success', 'თავი წარმატებით განახლდა');
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'დაფიქსირდა შეცდომა');
         }
@@ -444,7 +621,7 @@ class AdminController extends Controller
                 'library_id' => 382670
             ]);
 
-            Log::info('video created'. $video);
+            Log::info('video created' . $video);
 
             $response = $client->request('PUT', "https://video.bunnycdn.com/library/382670/videos/$videoId", [
                 'headers' => [
@@ -454,14 +631,14 @@ class AdminController extends Controller
                 'body' => $videoData
             ]);
 
-            Log::info('video uploaded Status: '. $response->getStatusCode());
+            Log::info('video uploaded Status: ' . $response->getStatusCode());
 
             $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
                 'headers' => [
                     'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
                     'accept' => 'application/json',
                 ],
-                ]);
+            ]);
 
             // Convert the response body to a JSON object
             $responseData = json_decode($response->getBody(), true);
@@ -471,9 +648,7 @@ class AdminController extends Controller
             // dd($video);
 
             // echo $response->getStatusCode(); // Should be 200
-        } 
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw $e;
             return redirect()->back()->with('error', 'ვიდეოს ატვირთვა ვერ მოხერხდა: ' . $e->getMessage());
         }
@@ -519,7 +694,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             Log::error('video deletion error: ' . $e->getMessage());
         }
-        
+
         $video->delete();
         return redirect()->back();
     }

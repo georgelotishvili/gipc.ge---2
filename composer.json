@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "bunnycdn/storage": "^3.4",
+        "flittpayments/php-sdk": "dev-main",
         "intervention/image": "^3.11",
         "laravel/fortify": "^1.25",
         "laravel/framework": "^11.9",
@@ -16,6 +17,7 @@
         "livewire/livewire": "^3.0",
         "mailgun/mailgun-php": "^4.3",
         "nyholm/psr7": "^1.8",
+        "opcodesio/log-viewer": "^3.17",
         "platformcommunity/flysystem-bunnycdn": "^3.3",
         "symfony/http-client": "^7.2",
         "symfony/mailgun-mailer": "^7.1"
@@ -71,6 +73,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

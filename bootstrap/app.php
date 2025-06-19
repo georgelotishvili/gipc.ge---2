@@ -15,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'subscription' => \App\Http\Middleware\SubscriptionMiddleware::class,
+            'agreement' => \App\Http\Middleware\CheckAgreementMiddleware::class,
+        ]);
+        $middleware->validateCsrfTokens(except: [
+            '/payment/thankYou'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
