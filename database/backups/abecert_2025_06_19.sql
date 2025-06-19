@@ -7,6 +7,459 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP TABLE IF EXISTS `answers`;
+CREATE TABLE `answers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` bigint unsigned NOT NULL,
+  `is_true` tinyint(1) DEFAULT '0',
+  `q_id` int DEFAULT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `answers_question_id_foreign` (`question_id`),
+  CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14391 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `cache`;
+CREATE TABLE `cache` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `cache_locks`;
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `certificates`;
+CREATE TABLE `certificates` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `speciality_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `certificate_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `release_date` date NOT NULL DEFAULT '2025-05-04',
+  `lifetime_years` int NOT NULL DEFAULT '5',
+  `status` enum('active','suspended','terminated','expired') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'suspended',
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `education` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `experience` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Comma-separated social media links',
+  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `score` decimal(8,2) DEFAULT NULL,
+  `rate` decimal(5,2) DEFAULT NULL,
+  `jury_count` int NOT NULL DEFAULT '0',
+  `stars` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `certificates_certificate_number_unique` (`certificate_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `chapters`;
+CREATE TABLE `chapters` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `course_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `chapters_course_id_foreign` (`course_id`),
+  CONSTRAINT `chapters_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commentable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commentable_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comments_user_id_foreign` (`user_id`),
+  KEY `comments_commentable_type_commentable_id_index` (`commentable_type`,`commentable_id`),
+  CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `commercials`;
+CREATE TABLE `commercials` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expiration_date` timestamp NULL DEFAULT NULL,
+  `weight` double DEFAULT NULL,
+  `duration_weight` double DEFAULT NULL,
+  `img_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `courses`;
+CREATE TABLE `courses` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `employees`;
+CREATE TABLE `employees` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `worktime` enum('full-time','part-time','contract','freelance') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'full-time',
+  `salary` decimal(10,2) DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `skills` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Comma-separated social media links',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employees_user_id_foreign` (`user_id`),
+  CONSTRAINT `employees_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `employers`;
+CREATE TABLE `employers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `worktime` enum('full-time','part-time','contract','freelance') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'full-time',
+  `salary` decimal(10,2) NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `skills` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Comma-separated social media links',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employers_user_id_foreign` (`user_id`),
+  CONSTRAINT `employers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `exam_requests`;
+CREATE TABLE `exam_requests` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
+  `user_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `exam_requests_user_id_foreign` (`user_id`),
+  CONSTRAINT `exam_requests_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `group_question`;
+CREATE TABLE `group_question` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` bigint unsigned NOT NULL,
+  `group_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3597 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE `groups` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `question_weight` int NOT NULL DEFAULT '1',
+  `question_count_in_exam` int NOT NULL DEFAULT '8',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE `images` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `imageable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imageable_id` bigint unsigned DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `images_imageable_type_imageable_id_index` (`imageable_type`,`imageable_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `job_batches`;
+CREATE TABLE `job_batches` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int NOT NULL,
+  `pending_jobs` int NOT NULL,
+  `failed_jobs` int NOT NULL,
+  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `cancelled_at` int DEFAULT NULL,
+  `created_at` int NOT NULL,
+  `finished_at` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `jobs`;
+CREATE TABLE `jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint unsigned NOT NULL,
+  `reserved_at` int unsigned DEFAULT NULL,
+  `available_at` int unsigned NOT NULL,
+  `created_at` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jobs_queue_index` (`queue`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `password_reset_tokens`;
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE `posts` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `posts_slug_unique` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `q_id` int DEFAULT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci,
+  `weight` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2979 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `ratings`;
+CREATE TABLE `ratings` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `certificate_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `stars` int NOT NULL DEFAULT '0' COMMENT 'Rating from 0 to 5',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ratings_certificate_id_foreign` (`certificate_id`),
+  KEY `ratings_user_id_foreign` (`user_id`),
+  CONSTRAINT `ratings_certificate_id_foreign` FOREIGN KEY (`certificate_id`) REFERENCES `certificates` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ratings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `regulations`;
+CREATE TABLE `regulations` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` longtext COLLATE utf8mb4_unicode_ci,
+  `date_applied` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sessions_user_id_index` (`user_id`),
+  KEY `sessions_last_activity_index` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `specialities`;
+CREATE TABLE `specialities` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `subscriptions`;
+CREATE TABLE `subscriptions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `type` enum('weekly','monthly','yearly','unlimited') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'weekly',
+  `starts_at` date DEFAULT NULL,
+  `ends_at` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subscriptions_user_id_foreign` (`user_id`),
+  CONSTRAINT `subscriptions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `system_settings`;
+CREATE TABLE `system_settings` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `test_question`;
+CREATE TABLE `test_question` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `test_id` bigint unsigned NOT NULL,
+  `question_id` bigint unsigned NOT NULL,
+  `answer` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1801 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `tests`;
+CREATE TABLE `tests` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `exam_request_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `started_at` timestamp NULL DEFAULT NULL,
+  `finished_at` timestamp NULL DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `questions_count` int NOT NULL DEFAULT '0' COMMENT 'Number of questions in the test',
+  `correct_answers_count` int NOT NULL DEFAULT '0' COMMENT 'Number of correct answers in the test',
+  `incorrect_answers_count` int NOT NULL DEFAULT '0' COMMENT 'Number of incorrect answers in the test',
+  `score` int NOT NULL DEFAULT '0' COMMENT 'Test score',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_exam_request_id_foreign` (`exam_request_id`),
+  CONSTRAINT `tests_exam_request_id_foreign` FOREIGN KEY (`exam_request_id`) REFERENCES `exam_requests` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `current_team_id` bigint unsigned DEFAULT NULL,
+  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `terms_accepted` tinyint(1) NOT NULL DEFAULT '0',
+  `terms_accepted_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `videos`;
+CREATE TABLE `videos` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `chapter_id` bigint unsigned NOT NULL,
+  `course_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duration` int DEFAULT NULL,
+  `views` int NOT NULL DEFAULT '0',
+  `video_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `library_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pull_zone_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `thumbnail_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `videos_chapter_id_foreign` (`chapter_id`),
+  KEY `videos_course_id_foreign` (`course_id`),
+  CONSTRAINT `videos_chapter_id_foreign` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `videos_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 INSERT INTO `answers` (`id`, `question_id`, `is_true`, `q_id`, `text`, `created_at`, `updated_at`) VALUES
 (5450, 1352, 0, NULL, '(ა) საქართველოს ეკონომიკისა და მდგრადი განვითარების სამინისტრო', '2025-01-28 06:06:52', '2025-01-28 06:06:52'),
 (5451, 1352, 0, NULL, '(ბ) აკრედიტაციის ცენტრი', '2025-01-28 06:06:52', '2025-01-28 06:06:52'),
@@ -12682,14 +13135,4 @@ INSERT INTO `videos` (`id`, `chapter_id`, `course_id`, `name`, `image`, `descrip
 (79, 9, 5, 'მისაწვდომი აბრები და ნიშნევი', NULL, NULL, 776, 0, '9c33f4cc-d173-4a39-b3df-7c7db8673a95', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/9c33f4cc-d173-4a39-b3df-7c7db8673a95', NULL, '2025-06-09 21:01:15', '2025-06-09 21:01:22'),
 (80, 9, 5, 'მისაწვდომი ავტოსადგომები', NULL, NULL, 776, 0, '8dd68fdd-7fcc-4fd6-946b-976159dd31b5', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/8dd68fdd-7fcc-4fd6-946b-976159dd31b5', NULL, '2025-06-09 21:01:49', '2025-06-09 21:01:50'),
 (81, 9, 5, 'მისაწვდომი ტუალეტები', NULL, NULL, 776, 0, 'ac443977-a0b1-4694-9ed8-6cc10072b60e', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/ac443977-a0b1-4694-9ed8-6cc10072b60e', NULL, '2025-06-09 21:02:08', '2025-06-09 21:02:12'),
-(82, 9, 5, 'სვლაგეზი, მოსატრიალებლები', NULL, NULL, 776, 0, 'fa9aa65b-676f-408f-9531-4d1fe2b3a2ce', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/fa9aa65b-676f-408f-9531-4d1fe2b3a2ce', NULL, '2025-06-09 21:02:34', '2025-06-09 21:02:35'),
-(83, 10, 1, '64. ლიფტები', NULL, NULL, 776, 0, 'fa862e1b-2891-41bb-a060-e3e76e93fc10', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/fa862e1b-2891-41bb-a060-e3e76e93fc10', NULL, '2025-06-16 22:24:24', '2025-06-16 22:24:28');
-
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+(82, 9, 5, 'სვლაგეზი, მოსატრიალებლები', NULL, NULL, 776, 0, 'fa9aa65b-676f-408f-9531-4d1fe2b3a2ce', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/fa9aa65b-676f-408f-
