@@ -193,7 +193,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('workspace');
 
 
-    Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay');
+    Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay')->middleware('agreement');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -239,3 +239,9 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::get('/test', function (\Illuminate\Http\Request $request) {
     return $request;
 });
+
+// Test route to clear agreement session
+Route::get('/clear-agreement', function () {
+    session()->forget('agreement_accepted');
+    return redirect()->back()->with('message', 'Agreement session cleared');
+})->name('clear.agreement');

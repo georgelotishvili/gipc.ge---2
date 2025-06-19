@@ -8,6 +8,9 @@ use App\Models\Plan;
 class PlanSelector extends Component
 {
     public array $plans = [];
+    public bool $showAgreementModal = false;
+    public bool $agreementAccepted = false;
+    public ?string $selectedPlanId = null;
 
     public function mount()
     {
@@ -39,6 +42,67 @@ class PlanSelector extends Component
                 ]
             ];
         })->toArray();
+
+        // Check if we should show the agreement modal (redirected from middleware)
+        if (session()->has('show_agreement')) {
+            $this->showAgreementModal = true;
+            $this->agreementAccepted = false; // Reset checkbox state
+            // Set the plan ID if redirected from a specific plan
+            if (session()->has('redirected_plan_id')) {
+                $this->selectedPlanId = session()->get('redirected_plan_id');
+                session()->forget('redirected_plan_id');
+            }
+            session()->forget('show_agreement');
+        }
+    }
+
+    public function acceptAgreement()
+    {
+        $this->agreementAccepted = true;
+        // Store in session for middleware check - will be cleared by PaymentController
+        session()->put('agreement_accepted', true);
+        
+        // If there's an intended URL, redirect there
+        if (session()->has('intended_url')) {
+            $intendedUrl = session()->get('intended_url');
+            session()->forget('intended_url');
+            return redirect($intendedUrl);
+        }
+        
+        // Otherwise redirect to the selected plan
+        if ($this->selectedPlanId) {
+            return redirect()->route('subscribe.pay', ['plan' => $this->selectedPlanId]);
+        }
+        
+        // Fallback - redirect to pricing page
+        return redirect()->route('pricing');
+    }
+
+    public function cancelAgreement()
+    {
+        $this->showAgreementModal = false;
+        $this->agreementAccepted = false;
+        $this->selectedPlanId = null;
+        session()->forget('agreement_accepted');
+        session()->forget('intended_url');
+    }
+
+    public function setSelectedPlan($planId)
+    {
+        $this->selectedPlanId = $planId;
+        $this->agreementAccepted = false; // Reset checkbox state
+    }
+
+    public function closeModal()
+    {
+        $this->showAgreementModal = false;
+        $this->agreementAccepted = false; // Reset checkbox state
+    }
+
+    public function openAgreementModal()
+    {
+        $this->showAgreementModal = true;
+        $this->agreementAccepted = false; // Reset checkbox state
     }
 
     public function render()
