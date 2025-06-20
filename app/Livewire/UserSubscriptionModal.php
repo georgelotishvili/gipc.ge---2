@@ -18,30 +18,28 @@ class UserSubscriptionModal extends Component
     public ?User $user;
     public ?Subscription $subscription;
 
-    public bool $is_active = false;
+    public bool $is_active = true;
     public $type;
     public $starts_at;
     public $ends_at;
 
-
-    public function mount()
+    public function mount(): void
     {
         $this->user = null;
         $this->subscription = null;
     }
 
     #[On('open-modal')]
-    public function openModal($userId)
+    public function openModal($userId): void
     {
         $this->user = User::find($userId);
         $this->subscription = $this->user->subscription;
-        $this->is_active = $this->user->hasActiveSubscription() ?: false;
         $this->type = $this->user->subscription?->plan_id ?: 0;
         $this->starts_at = $this->user->subscription?->starts_at ? Carbon::parse($this->user->subscription?->starts_at)->format('Y-m-d') : null;;
         $this->ends_at = $this->user->subscription?->ends_at ? Carbon::parse($this->user->subscription?->ends_at)->format('Y-m-d') : null;
     }
 
-    public function save()
+    public function save(): void
     {
         $plan = Plan::find($this->type);
         $planType = PlanType::find($plan->plan_type_id);
@@ -55,6 +53,7 @@ class UserSubscriptionModal extends Component
         ];
         $this->user->createOrUpdateSubscription($data);
         $this->dispatch('close-modal');
+        $this->dispatch('update_user_row');
     }
 
     public function render(): View

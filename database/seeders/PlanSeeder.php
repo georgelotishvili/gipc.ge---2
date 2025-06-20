@@ -16,8 +16,8 @@ class PlanSeeder extends Seeder
         $plans = [
             [
                 'plan_type_id' => 1,
-                'plan_name' => 'უფასო',
-                'plan_description' => 'უფასო გეგმა',
+                'plan_name' => '1 კვირა',
+                'plan_description' => 'იდეალური მოკლევადიანი მომზადებისთვის',
                 'plan_price' => 150,
                 'plan_discount' => 0,
                 'plan_recommended' => false,
@@ -43,8 +43,8 @@ class PlanSeeder extends Seeder
             ],
             [
                 'plan_type_id' => 2,
-                'plan_name' => 'სტანდარტი',
-                'plan_description' => 'სტანდარტი გეგმა',
+                'plan_name' => '1 თვე',
+                'plan_description' => 'საუკეთესო არჩევანი სრული მომზადებისთვის',
                 'plan_price' => 350,
                 'plan_discount' => 0,
                 'plan_recommended' => false,

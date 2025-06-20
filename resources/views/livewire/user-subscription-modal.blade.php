@@ -39,7 +39,7 @@
                             <div class="mt-4 space-y-4">
                                 <div>
                                     <label for="is_active" class="block text-sm font-medium text-gray-700 dark:text-gray-300">სტატუსი</label>
-                                    <select id="is_active" wire:model.live.defer="is_active" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 dark:bg-dark-3 dark:text-gray-200 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                    <select id="is_active" wire:model="is_active" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 dark:bg-dark-3 dark:text-gray-200 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                                         <option value="1">გამოწერილი</option>
                                         <option value="0">არ არის გამოწერილი</option>
                                     </select>
@@ -47,7 +47,7 @@
 
                                 <div>
                                     <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">გამოწერის ტიპი</label>
-                                    <select id="type" wire:model.live.defer="type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 dark:bg-dark-3 dark:text-gray-200 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                    <select id="type" wire:model="type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 dark:bg-dark-3 dark:text-gray-200 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                                        @foreach($plans as $plan)
                                             <option value="{{$plan->id }}">{{$plan->plan_name}}</option>
                                        @endforeach
