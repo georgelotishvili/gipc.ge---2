@@ -74,7 +74,7 @@
                     <div id="answers-{{$question->id}}" class="hidden">
                         <div class="p-4 bg-gray-50 dark:bg-dark-3 space-y-2.5 border-t-2 border-gray-100 dark:border-dark-4">
                             @foreach($question->answers as $answer)
-                                <div class="flex items-center space-x-3 p-3.5 rounded-xl bg-white dark:bg-dark-2 text-gray-700 dark:text-gray-200 border-2 border-gray-100 dark:border-dark-4">
+                                <div class="flex items-center space-x-3 p-3.5 rounded-xl {{ $answer->is_true ? 'bg-green-100 dark:bg-green-900/80' : 'bg-white dark:bg-dark-2' }} text-gray-700 dark:text-gray-200 border-2 {{ $answer->is_correct ? 'border-green-100 dark:border-green-800/30' : 'border-gray-100 dark:border-dark-4' }}">
                                     <span>{{ $answer->text }}</span>
                                 </div>
                             @endforeach
