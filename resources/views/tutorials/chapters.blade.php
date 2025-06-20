@@ -32,29 +32,7 @@
                                 @if($chapter->videos->count() > 0)
                                     <div class="space-y-4">
                                         @foreach($chapter->videos as $video)
-                                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
-                                                <div class="w-32 h-20 relative bg-gray-200 dark:bg-gray-600 rounded-md flex-shrink-0 mr-4 overflow-hidden">
-                                                    @if($video->imageUrl())
-                                                        <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="absolute inset-0 w-full h-full object-cover">
-                                                    @else
-                                                        <div class="absolute inset-0 flex items-center justify-center">
-                                                            <i class="fas fa-play-circle text-gray-400 text-3xl"></i>
-                                                        </div>
-                                                    @endif
-                                                    <div class="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-1.5 py-0.5 rounded">
-                                                        {{ isset($video->duration) ? sprintf('%02d:%02d:%02d', floor($video->duration/3600), floor(($video->duration/60)%60), $video->duration%60) : '00:00:00' }}
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="flex-grow">
-                                                    <h3 class="font-medium text-gray-900 dark:text-white">{{ $video->name }}</h3>
-                                                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">{{ $video->description }}</p>
-                                                </div>
-                                                
-                                                <a href="{{ route('tutorials.show', $video->id) }}" class="ml-4 p-2 bg-primary-500 hover:bg-primary-600 text-white rounded-full flex-shrink-0 transition-colors duration-200">
-                                                    <i class="fas fa-play"></i>
-                                                </a>
-                                            </div>
+                                            <livewire:video-card :video="$video" style="list" />
                                         @endforeach
                                     </div>
                                 @else

@@ -90,55 +90,7 @@
                 @foreach ($courses as $course)
                     @foreach ($course->chapters as $chapter)
                         @foreach ($chapter->videos as $video)
-                            <a href="{{ route('tutorials.show', $video->id) }}" class="group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] flex-shrink-0">
-                                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
-                                    <div class="aspect-video relative">
-                                        @if($video->imageUrl())
-                                            <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="w-full h-full object-cover">
-                                        @else
-                                            <div class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                                                <i class="fas fa-video text-gray-400 text-3xl"></i>
-                                            </div>
-                                        @endif
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
-                                                    <i class="fas fa-play text-gray-900 text-xl ml-1"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="absolute bottom-3 right-3 bg-black/80 text-white px-2.5 py-1 rounded-md text-sm font-medium">
-                                            @php
-                                                $hours = floor($video->duration / 3600);
-                                                $minutes = floor(($video->duration % 3600) / 60);
-                                                $seconds = $video->duration % 60;
-                                                $formattedTime = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
-                                            @endphp
-                                            {{ $formattedTime }}
-                                        </div>
-                                    </div>
-                                    <div class="p-5 flex flex-col flex-grow">
-                                        <div class="flex-grow">
-                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-500 transition-colors line-clamp-2">
-                                                {{ $video->name }}
-                                            </h3>
-                                            <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
-                                                {{ $video->description }}
-                                            </p>
-                                        </div>
-                                        <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mt-4">
-                                            <span class="inline-flex items-center gap-1.5">
-                                                <i class="far fa-calendar text-gray-400"></i>
-                                                {{ $video->created_at->format('d F, Y') }}
-                                            </span>
-                                            <span class="inline-flex items-center gap-1.5">
-                                                <i class="far fa-eye text-gray-400"></i>
-                                                {{ $video->views }} ნახვა
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                            <livewire:video-card :video="$video" />
                         @endforeach
                     @endforeach
                 @endforeach
