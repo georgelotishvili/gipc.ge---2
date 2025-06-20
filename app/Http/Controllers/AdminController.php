@@ -586,7 +586,10 @@ class AdminController extends Controller
 
     public function createVideo(Request $request, Course $course, Chapter $chapter)
     {
-        return view('admin.courses.chapters.videos.create', compact('course', 'chapter'));
+        $highestWeight = $chapter->videos()->max('weight') ?? 0;
+        $nextWeight = $highestWeight + 1;
+        
+        return view('admin.courses.chapters.videos.create', compact('course', 'chapter', 'nextWeight'));
     }
 
     public function storeVideo(Request $request, Course $course, Chapter $chapter)
@@ -618,7 +621,9 @@ class AdminController extends Controller
                 'course_id' => $course->id,
                 'video_id' => $videoId,
                 'video_url' => "https://video.bunnycdn.com/library/382670/videos/$videoId",
-                'library_id' => 382670
+                'library_id' => 382670,
+                'weight' => $request->input('weight'),
+                'description' => $request->input('description')
             ]);
 
             Log::info('video created' . $video);
@@ -633,6 +638,15 @@ class AdminController extends Controller
 
             Log::info('video uploaded Status: ' . $response->getStatusCode());
 
+            if ($request->hasFile('thumbnail')) {
+                try {
+                    $image = SaveImageAction::execute($request->file('thumbnail'));
+                    $video->image()->save($image);
+                } catch (\Exception $e) {
+                    Log::error('Error saving thumbnail: ' . $e->getMessage());
+                }
+            }
+
             $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/9d566441-ae03-4b17-ac16-30fd0a2fcdaf', [
                 'headers' => [
                     'AccessKey' => '389ab102-2f80-4aff-9fed5d887804-31ef-4caf',
@@ -645,11 +659,10 @@ class AdminController extends Controller
 
             $video->duration = $responseData['length'];
             $video->save();
-            // dd($video);
 
-            // echo $response->getStatusCode(); // Should be 200
+            return redirect()->route('admin.courses.chapters.videos', [$course, $chapter])->with('success', 'ვიდეო წარმატებით დაემატა');
         } catch (\Exception $e) {
-            throw $e;
+            Log::error('Error uploading video: ' . $e->getMessage());
             return redirect()->back()->with('error', 'ვიდეოს ატვირთვა ვერ მოხერხდა: ' . $e->getMessage());
         }
     }

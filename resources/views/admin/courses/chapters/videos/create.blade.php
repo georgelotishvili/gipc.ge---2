@@ -82,7 +82,7 @@
                                    name="name" 
                                    id="name" 
                                    required
-                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
+                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
                                    placeholder="შეიყვანეთ ვიდეოს სახელი">
                         </div>
 
@@ -95,8 +95,24 @@
                                       id="description" 
                                       required
                                       rows="4" 
-                                      class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
+                                      class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
                                       placeholder="შეიყვანეთ ვიდეოს აღწერა"></textarea>
+                        </div>
+
+                        <!-- Video Weight -->
+                        <div class="mb-8 relative">
+                            <label for="weight" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                რიგი
+                                <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">(მიმდინარე მაქსიმალური რიგი: {{ $nextWeight - 1 }})</span>
+                            </label>
+                            <input type="number" 
+                                   name="weight" 
+                                   id="weight" 
+                                   step="any"
+                                   min="0"
+                                   value="{{ $nextWeight }}"
+                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
+                                   placeholder="შეიყვანეთ ვიდეოს რიგითი ნომერი">
                         </div>
 
                         <!-- Video Upload with Progress Bar -->

@@ -30,71 +30,7 @@
                 <!-- Videos List -->
                 <div class="max-w-4xl mx-auto space-y-4">
                     @foreach($chapter->videos as $video)
-                        @php
-
-                            $client = new \GuzzleHttp\Client();
-
-                            $response = $client->request('GET', 'https://video.bunnycdn.com/library/382670/videos/'.$video->video_id, [
-                            'headers' => [
-                                'AccessKey' => config('video.api_key'),
-                                'accept' => 'application/json',
-                            ],
-                            ]);
-
-                            // Convert the response body to a JSON object
-                            $responseData = json_decode($response->getBody(), true);
-
-                            // echo $response->getBody();
-
-                            // dd($response);
-                        @endphp
-                    <div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
-                        <a href="{{ route('admin.courses.chapters.videos.show', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" target="_blank">
-                        <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
-                            @if($video->imageUrl())
-                                <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="absolute inset-0 w-full h-full object-cover rounded-l-lg">
-                            @else
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-video text-gray-400 text-3xl"></i>
-                                </div>
-                            @endif
-                        </div>
-                        </a>
-                        
-                        <div class="p-4 flex-grow flex justify-between">
-                            <div class="flex flex-col justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                        {{ $video->name }}
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                                        {{ $video->description }}
-                                    </p>
-                                </div>
-                                <div class="text-sm text-gray-500">
-                                    <span>{{ isset($video->duration) ? sprintf('%02d:%02d:%02d', floor($video->duration/3600), floor(($video->duration/60)%60), $video->duration%60) : '00:00:00' }} წუთი</span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex flex-col justify-between items-end">
-                                <div class="flex gap-2">
-                                    <a href="{{ route('admin.courses.chapters.videos.edit', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" 
-                                       class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
-                                        <i class="fas fa-edit mr-1.5"></i>
-                                        რედაქტირება
-                                    </a>
-                                    <form action="{{ route('admin.courses.chapters.videos.destroy', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
-                                            <i class="fas fa-trash-alt mr-1.5"></i>
-                                            წაშლა
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <livewire:admin.video-card :video="$video" :course="$course" :chapter="$chapter" />
                     @endforeach
                 </div>
             @else

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignIdFor(Course::class)->constrained()->nullable()->cascadeOnDelete();
             $table->string('name');
             $table->float('weight')->default(0)->nullable();
-            $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->integer('duration')->nullable();
             $table->integer('views')->default(0);

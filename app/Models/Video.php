@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Video extends Model
 {
@@ -21,6 +22,16 @@ class Video extends Model
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    /**
+     * Get the video title attribute
+     */
+    protected function title(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->weight . '. ' . $this->name,
+        );
     }
 
     /**

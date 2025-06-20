@@ -28,7 +28,7 @@
 
                         <!-- Video Info -->
                         <div class="p-6 bg-white dark:bg-gray-800 rounded-b-lg">
-                            <h5 class="text-gray-900 dark:text-white text-2xl font-medium mb-2">{{ $video->name }}</h5>
+                            <h5 class="text-gray-900 dark:text-white text-2xl font-medium mb-2">{{ $video->title }}</h5>
                             <p class="text-gray-700 dark:text-gray-300 text-base mb-4">
                                 {{ $video->description }}
                             </p>
@@ -53,7 +53,7 @@
                     <!-- Video Info with Glass Effect -->
                     <div class="mb-12 p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200/10 dark:border-gray-700/30 shadow-lg">
                         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
-                            {{ $video->name }}
+                            {{ $video->title }}
                         </h1>
                         <div class="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-400 mb-6">
                             <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800/50 px-3 py-1 rounded-full">

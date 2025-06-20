@@ -22,15 +22,14 @@ class DatabaseSeeder extends Seeder
             // QuestionSeeder::class,
             // AnswerSeeder::class,
             UserSeeder::class,
-            DumpSeeder::class,
+            // DumpSeeder::class,
             RegulationSeeder::class,
             EmployeeSeeder::class,
             EmployerSeeder::class,
             CertificateSeeder::class,
-            SeederCleaner::class,
+            // SeederCleaner::class,
             PlanTypeSeeder::class,
             PlanSeeder::class,
-
         ]);
     }
 }
