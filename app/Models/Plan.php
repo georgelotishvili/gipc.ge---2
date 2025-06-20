@@ -12,16 +12,7 @@ class Plan extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'plan_type_id',
-        'plan_name',
-        'plan_description',
-        'plan_price',
-        'plan_discount',
-        'plan_recommended',
-        'plan_order',
-        'is_active',
-    ];
+    protected $guarded = [];
 
     public function planType(): BelongsTo
     {

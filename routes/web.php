@@ -75,20 +75,24 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/admin/regulations/{regulation}', [AdminController::class, 'destroyRegulation'])->name('admin.regulations.destroy');
 
     // Pricing
-    Route::get('/admin/pricing', [AdminController::class, 'pricing'])->name('admin.pricing');
-    Route::get('/admin/pricing/create', [AdminController::class, 'createPricing'])->name('admin.pricing.create');
-    Route::post('/admin/pricing/store', [AdminController::class, 'storePricing'])->name('admin.pricing.store');
-    Route::get('/admin/pricing/{pricing}/edit', [AdminController::class, 'editPricing'])->name('admin.pricing.edit');
-    Route::put('/admin/pricing/{pricing}/update', [AdminController::class, 'updatePricing'])->name('admin.pricing.update');
-    Route::delete('/admin/pricing/{pricing}', [AdminController::class, 'destroyPricing'])->name('admin.pricing.destroy');
-
-    // Plan
+    Route::get('/admin/plans', [AdminController::class, 'plans'])->name('admin.plans');
     Route::get('/admin/plans/create', [AdminController::class, 'createPlan'])->name('admin.plans.create');
     Route::post('/admin/plans/store', [AdminController::class, 'storePlan'])->name('admin.plans.store');
     Route::get('/admin/plans/{plan}/edit', [AdminController::class, 'editPlan'])->name('admin.plans.edit');
     Route::put('/admin/plans/{plan}/update', [AdminController::class, 'updatePlan'])->name('admin.plans.update');
     Route::delete('/admin/plans/{plan}', [AdminController::class, 'destroyPlan'])->name('admin.plans.destroy');
 
+    Route::get('/admin/plan-types/create', [AdminController::class, 'createPlanType'])->name('admin.plan-types.create');
+    Route::post('/admin/plan-types/store', [AdminController::class, 'storePlanType'])->name('admin.plan-types.store');
+    Route::get('/admin/plan-types/{planType}/edit', [AdminController::class, 'editPlanType'])->name('admin.plan-types.edit');
+    Route::put('/admin/plan-types/{planType}/update', [AdminController::class, 'updatePlanType'])->name('admin.plan-types.update');
+    Route::delete('/admin/plan-types/{planType}', [AdminController::class, 'destroyPlanType'])->name('admin.plan-types.destroy');
+
+    Route::get('/admin/plan-options/create', [AdminController::class, 'createPlanOption'])->name('admin.plan-options.create');
+    Route::post('/admin/plan-options/store', [AdminController::class, 'storePlanOption'])->name('admin.plan-options.store');
+    Route::get('/admin/plan-options/{planOption}/edit', [AdminController::class, 'editPlanOption'])->name('admin.plan-options.edit');
+    Route::put('/admin/plan-options/{planOption}/update', [AdminController::class, 'updatePlanOption'])->name('admin.plan-options.update');
+    Route::delete('/admin/plan-options/{planOption}', [AdminController::class, 'destroyPlanOption'])->name('admin.plan-options.destroy');
 
     // Questions
     Route::get('/admin/questions/create', [AdminController::class, 'create'])->name('admin.questions.create');
@@ -189,7 +193,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('workspace');
 
 
-    Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay');
+    Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay')->middleware('agreement');
 
     // Employer routes
     Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
@@ -235,3 +239,9 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::get('/test', function (\Illuminate\Http\Request $request) {
     return $request;
 });
+
+// Test route to clear agreement session
+Route::get('/clear-agreement', function () {
+    session()->forget('agreement_accepted');
+    return redirect()->back()->with('message', 'Agreement session cleared');
+})->name('clear.agreement');

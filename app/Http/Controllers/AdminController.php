@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Pricing;
 use App\Models\Plan;
+use App\Models\PlanType;
+use App\Models\PlanOption;
 use App\Models\Regulation;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
@@ -40,122 +42,182 @@ class AdminController extends Controller
     }
 
 
-
-    // Pricing
-
-    public function pricing()
+    public function plans()
     {
-        $pricings = Pricing::all();
+        $planTypes = PlanType::all();
         $plans = Plan::all();
+        $planOptions = PlanOption::with('plans')->get();
 
-        return view('admin.pricing.index', [
-            'pricings' => $pricings,
-            'plans' => $plans
+        return view('admin.plans.index', [
+            'planTypes' => $planTypes,
+            'plans' => $plans,
+            'planOptions' => $planOptions
         ]);
     }
-
-    public function createPricing()
-    {
-        return view('admin.pricing.create');
-    }
-
-    public function storePricing(Request $request)
-    {
-        $attributes = $request->validate([
-            'price' => 'required',
-            'tags' => 'required',
-            'name' => 'required',
-            'small_description' => 'required|string',
-            'term' => 'required',
-            'plan_id' => 'required|exists:plans,id|unique:pricings,plan_id',
-        ]);
-
-
-        Pricing::create($attributes);
-
-        return redirect()->route('admin.pricing')->with('success-pricing', 'ფასი წარმატებით დამატებულია');
-    }
-
-    public function editPricing(Pricing $pricing)
-    {
-        return view('admin.pricing.edit', [
-            'pricing' => $pricing
-        ]);
-    }
-
-    public function updatePricing(Request $request, Pricing $pricing)
-    {
-        $attributes = $request->validate([
-            'price' => 'required',
-            'tags' => 'required',
-            'name' => 'required',
-            'small_description' => 'required|string',
-            'term' => 'required',
-            'plan_id' => 'required|exists:plans,id|unique:pricings,plan_id,' . $pricing->id,
-        ]);
-
-        $pricing->update($attributes);
-
-        return redirect()->route('admin.pricing')->with('success-pricing', 'ფასი წარმატებით განახლდა');
-    }
-
-
-    public function destroyPricing(Pricing $pricing)
-    {
-        $pricing->delete();
-        return redirect()->route('admin.pricing')->with('success-pricing', 'ფასი წარმატებით წაიშალა');
-    }
-
-
-    /////////////////////////////////
-
 
     public function createPlan()
     {
-        return view('admin.plans.create');
+        $planTypes = PlanType::all();
+
+        return view('admin.plans.create', [
+            'planTypes' => $planTypes
+        ]);
     }
 
     public function storePlan(Request $request)
     {
         $attributes = $request->validate([
-            'name' => 'required|unique:plans,name',
-            'term_days' => 'required|integer|min:1',
+            'plan_name' => 'required|unique:plans,plan_name',
+            'plan_description' => 'required',
+            'plan_price' => 'required|numeric',
+            'plan_discount' => 'numeric|nullable',
+            'plan_recommended' => 'required|boolean',
+            'plan_order' => 'required|numeric',
+            'plan_type_id' => 'required|exists:plan_types,id|unique:plans,plan_type_id',
+            'is_active' => 'required|boolean',
         ]);
+
 
         Plan::create($attributes);
 
-        return redirect()->route('admin.pricing')->with('success-plan', 'სახეობა წარმატებით დამატებულია');
+        return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით დამატებულია');
     }
 
     public function editPlan(Plan $plan)
     {
+        $planTypes = PlanType::all();
+
         return view('admin.plans.edit', [
-            'plan' => $plan
+            'plan' => $plan,
+            'planTypes' => $planTypes
         ]);
     }
 
     public function updatePlan(Request $request, Plan $plan)
     {
         $attributes = $request->validate([
-            'name' => 'required|unique:plans,name,' . $plan->id,
-            'term_days' => 'required|integer|min:1',
+            'plan_name' => 'required|unique:plans,plan_name,' . $plan->id,
+            'plan_description' => 'required',
+            'plan_price' => 'required|numeric',
+            'plan_discount' => 'numeric|nullable',
+            'plan_recommended' => 'required|boolean',
+            'plan_order' => 'required|numeric',
+            'plan_type_id' => 'required|exists:plan_types,id|unique:plans,plan_type_id,' . $plan->id,
+            'is_active' => 'required|boolean',
         ]);
 
         $plan->update($attributes);
 
-        return redirect()->route('admin.pricing')->with('success-plan', 'სახეობა წარმატებით განახლდა');
+        return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით განახლდა');
     }
 
 
     public function destroyPlan(Plan $plan)
     {
         $plan->delete();
-        return redirect()->route('admin.pricing')->with('success-plan', 'სახეობა წარმატებით წაიშალა');
+        return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით წაიშალა');
     }
 
 
+    public function createPlanType()
+    {
+        return view('admin.planTypes.create');
+    }
 
-    // end of pricing
+    public function storePlanType(Request $request)
+    {
+        $attributes = $request->validate([
+            'type_name' => 'required|unique:plan_types,type_name',
+            'type_duration' => 'required|integer|min:1',
+            'is_free' => 'required|boolean',
+        ]);
+
+        PlanType::create($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით დამატებულია');
+    }
+
+    public function editPlanType(PlanType $planType)
+    {
+        return view('admin.planTypes.edit', [
+            'planType' => $planType
+        ]);
+    }
+
+    public function updatePlanType(Request $request, PlanType $planType)
+    {
+        $attributes = $request->validate([
+            'type_name' => 'required|unique:plan_types,type_name,' . $planType->id,
+            'type_duration' => 'required|integer|min:1',
+            'is_free' => 'required|boolean',
+        ]);
+
+        $planType->update($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით განახლდა');
+    }
+
+
+    public function destroyPlanType(PlanType $planType)
+    {
+        $planType->delete();
+        return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით წაიშალა');
+    }
+
+    public function createPlanOption()
+    {
+        $plans = Plan::all();
+
+        return view('admin.planOptions.create', [
+            'plans' => $plans
+        ]);
+    }
+
+    public function storePlanOption(Request $request)
+    {
+        $attributes = $request->validate([
+            'plan_id' => 'required|exists:plans,id',
+            'option_description' => 'required',
+            'is_included' => 'required|boolean',
+            'is_active' => 'required|boolean',
+        ]);
+
+        PlanOption::create($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-option', 'პარამეტრი წარმატებით დამატებულია');
+    }
+
+    public function editPlanOption(PlanOption $planOption)
+    {
+        $plans = Plan::all();
+
+        return view('admin.planOptions.edit', [
+            'planOption' => $planOption,
+            'plans' => $plans
+        ]);
+    }
+
+    public function updatePlanOption(Request $request, PlanOption $planOption)
+    {
+        $attributes = $request->validate([
+            'plan_id' => 'required|exists:plans,id',
+            'option_description' => 'required',
+            'is_included' => 'required|boolean',
+            'is_active' => 'required|boolean',
+        ]);
+
+        $planOption->update($attributes);
+
+        return redirect()->route('admin.plans')->with('success-plan-option', 'პარამეტრი წარმატებით განახლდა');
+    }
+
+
+    public function destroyPlanOption(PlanOption $planOption)
+    {
+        $planOption->delete();
+        return redirect()->route('admin.plans')->with('success-plan-option', 'პარამეტრი წარმატებით წაიშალა');
+    }
+
 
     public function questions()
     {

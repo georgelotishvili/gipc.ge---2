@@ -36,10 +36,22 @@ class CheckSubscriptionsCommand extends Command
             foreach ($subscriptions as $subscription) {
                 $diffInDays = abs($subscription->days_left);
                 $this->info($diffInDays);
-                if(abs($diffInDays) <= $subscription->planType->payment_days) {
+                if ($diffInDays <= $subscription->planType->payment_days) {
                     $data = $payment->getRecurrentData($subscription);
-                    //Todo: Waiting to enable Recurrent payment From Bank
-                    dd($payment->recurringPayment($data));
+    
+                    $result = $payment->recurringPayment($data);
+    
+                    if ($result['status'] === 'success') {
+                        $subscription->update([
+                            'starts_at' => now(),
+                            'ends_at' => now()->addDays($subscription->planType->duration),
+                        ]);
+    
+                        $this->info("Subscription ID {$subscription->id} successfully renewed.");
+                    } else {
+                        Log::warning("Failed to renew subscription ID {$subscription->id}: " . $result['message']);
+                        $this->warn("Failed to renew subscription ID {$subscription->id}");
+                    }
                 }
             }
         } catch (\Exception $e) {

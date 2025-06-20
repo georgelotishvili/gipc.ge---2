@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('plan_types', function (Blueprint $table) {
             $table->id();
             $table->string('type_name')->unique();
-            $table->tinyInteger('type_duration')->default(30);
-            $table->tinyInteger('payment_days')->default(3);
-            $table->tinyInteger('is_free')->default(false);
+            $table->integer('type_duration')->default(30);
+            $table->integer('payment_days')->default(3);
+            $table->boolean('is_free')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
