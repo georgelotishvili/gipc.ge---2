@@ -36,7 +36,7 @@
                 </h3>
                 <ul class="space-y-3 text-gray-700 dark:text-gray-300">
                     <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>ვებგვერდი</strong>: gipc.ge, მისი ყველა ქვეგვერდი, კონტენტი და ფუნქციონალი.</li>
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>ინსტიტუტი (GIPC)</strong>: სსიპ საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი, ვებგვერდის მფლობელი და ოპერატორი.</li>
+                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>ინსტიტუტი (GIPC)</strong>: შპს საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი, ვებგვერდის მფლობელი და ოპერატორი.</li>
                     <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>მომხმარებელი</strong>: ნებისმიერი ფიზიკური ან იურიდიული პირი, რომელიც შედის ვებგვერდზე, რეგისტრირდება ან იყენებს მის სერვისებს.</li>
                     <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>კონტენტი</strong>: ვებგვერდზე განთავსებული ნებისმიერი ინფორმაცია, მათ შორის ტექსტი, სურათები, ვიდეო, აუდიო მასალა, მონაცემთა ბაზები, პროგრამული უზრუნველყოფა, ლოგოები, სავაჭრო ნიშნები.</li>
                     <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>სერვისები</strong>: ვებგვერდის მეშვეობით ხელმისაწვდომი ყველა უფასო და ფასიანი მომსახურება.</li>

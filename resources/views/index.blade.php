@@ -80,57 +80,57 @@
                     }
                 @endphp
                 <!-- Video Lessons Card -->
-                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
-                    <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <!-- Premium Badge -->
-                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
+                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown"></i>
                         <span>ფასიაინი</span>
                     </div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-amber-100 dark:bg-amber-800/50 text-amber-600 dark:text-amber-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-purple-100 dark:bg-purple-800/50 text-purple-600 dark:text-pink-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-video text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">ვიდეო გაკვეთილები</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-purple-600 dark:group-hover:text-pink-300 transition-colors">ვიდეო გაკვეთილები</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც წარმოადგენს აუდიო/ვიდეო მასალის კრებულს, არქიტექტორების გადასამზადებლად</p>
                     </div>
                 </button>
 
                 <!-- Card 7 -->
-                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
-                    <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <!-- Premium Badge -->
-                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
+                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown"></i>
                         <span>ფასიაინი</span>
                     </div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-amber-100 dark:bg-amber-800/50 text-amber-600 dark:text-amber-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-purple-100 dark:bg-purple-800/50 text-purple-600 dark:text-pink-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-clipboard-list text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">საგამოცდო ტესტები</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-purple-600 dark:group-hover:text-pink-300 transition-colors">საგამოცდო ტესტები</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც იძლევა საგამოცდო საკითხების შესწავლის საშუალებას, რათა შეძლოთ საგამოცდო ტესტების წარმატებით ჩაბარება</p>
                     </div>
                 </button>
                 <!-- Card 8 -->
-                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-amber-100 to-amber-200 dark:bg-gradient-to-br dark:from-amber-700/40 dark:to-amber-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-amber-200 dark:border-amber-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
-                    <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-amber-400/15 dark:to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <button onclick="{{ $isPremium ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
 
                     <!-- Premium Badge -->
-                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
+                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown"></i>
                         <span>ფასიაინი</span>
                     </div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-amber-100 dark:bg-amber-800/50 text-amber-600 dark:text-amber-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-purple-100 dark:bg-purple-800/50 text-purple-600 dark:text-pink-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-user-graduate text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">სიმულაციური გამოცდა</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-purple-600 dark:group-hover:text-pink-300 transition-colors">სიმულაციური გამოცდა</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, სადაც შეგიძლიათ განსაზღვროთ თქვენი ცოდნის ხარისხი და შესაძლებლობა ოფიციალური გამოცდის ჩაბარებისა</p>
                     </div>
                 </button>
@@ -151,14 +151,14 @@
                 <div class="relative">
                     <!-- Animated background effect -->
                     <div class="absolute inset-0 overflow-hidden">
-                        <div class="absolute -inset-4 bg-gradient-to-r from-amber-300/20 via-amber-500/10 to-amber-300/20 animate-gradient-x"></div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-purple-300/20 via-pink-500/10 to-purple-300/20 animate-gradient-x"></div>
                     </div>
 
                     <!-- Premium content -->
                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 relative z-10">
                         <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 sm:mx-0 sm:h-14 sm:w-14 shadow-lg relative overflow-hidden">
-                                <div class="absolute inset-0 bg-amber-500 animate-pulse-slow opacity-50"></div>
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-purple-400 to-pink-600 sm:mx-0 sm:h-14 sm:w-14 shadow-lg relative overflow-hidden">
+                                <div class="absolute inset-0 bg-purple-500 animate-pulse-slow opacity-50"></div>
                                 <div class="crown-container animate-float">
                                     <i class="fas fa-crown text-white text-2xl"></i>
                                 </div>
@@ -189,8 +189,8 @@
                     </div>
 
                     <!-- Decorative elements -->
-                    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-amber-300/30 to-transparent rounded-br-full"></div>
-                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-amber-300/30 to-transparent rounded-tl-full"></div>
+                    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-purple-300/30 to-transparent rounded-br-full"></div>
+                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-pink-300/30 to-transparent rounded-tl-full"></div>
                 </div>
             </div>
         </div>
