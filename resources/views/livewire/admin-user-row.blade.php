@@ -23,8 +23,8 @@
                     {{ $subscription->is_active ? 'გამოწერილი' : 'არ არის გამოწერილი' }}
                 </span>
                 <div class="mt-1 text-xs">
-                    <div>დაწყება: {{ $subscription->starts_at ? $subscription->starts_at : 'N/A' }}</div>
-                    <div>დასრულება: {{ $subscription->ends_at ? $subscription->ends_at : 'N/A' }}</div>
+                    <div>დაწყება: {{ $subscription->starts_at ?? 'N/A' }}</div>
+                    <div>დასრულება: {{ $subscription->ends_at ?? 'N/A' }}</div>
                     <div>ტიპი: {{ $user->activeSubscriptionName() }}</div>
                 </div>
             @else

@@ -20,7 +20,7 @@
                     </div>
                     <div class="bg-white dark:bg-dark-2 divide-y divide-gray-200 dark:divide-gray-700">
                         @foreach($users as $user)
-                            <livewire:admin-user-row :user="$user" wire:key="user-{{ $user->id }}" />
+                            <livewire:admin-user-row :$user wire:key="user-{{ $user->id }}" />
                         @endforeach
                     </div>
                 </div>

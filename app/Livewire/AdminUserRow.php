@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Subscription;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class AdminUserRow extends Component
@@ -10,14 +11,19 @@ class AdminUserRow extends Component
     public $user;
     public $subscription;
 
-    public function mount()
+
+    protected $listeners = [
+        'update_user_row' => 'refresh',
+    ];
+
+    public function mount(): void
     {
         $this->subscription = $this->user->subscription;
     }
 
     public function deleteUser($userId)
     {
-        
+
         \Illuminate\Support\Facades\DB::beginTransaction();
         try {
             $user = \App\Models\User::find($userId);
@@ -27,7 +33,7 @@ class AdminUserRow extends Component
                 {
                     $user->subscription->delete();
                 }
-                
+
                 // Delete the user
                 $user->delete();
             }
@@ -39,7 +45,7 @@ class AdminUserRow extends Component
         return redirect()->route('admin.users');
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.admin-user-row');
     }
