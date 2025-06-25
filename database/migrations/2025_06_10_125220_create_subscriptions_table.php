@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->foreignId('plan_type_id')->constrained()->cascadeOnDelete();
             $table->foreignId('plan_id')->constrained()->cascadeOnDelete();
             $table->boolean('is_active')->default(false);
-            $table->boolean('auto_renew')->default(true);
+            $table->boolean('auto_renew')->default(false);
             $table->string('recToken')->unique();
             $table->dateTime('starts_at')->nullable();
             $table->dateTime('ends_at')->nullable();

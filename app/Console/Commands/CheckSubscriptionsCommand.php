@@ -37,21 +37,26 @@ class CheckSubscriptionsCommand extends Command
                 $diffInDays = abs($subscription->days_left);
                 $this->info($diffInDays);
                 if ($diffInDays <= $subscription->planType->payment_days) {
-                    $data = $payment->getRecurrentData($subscription);
+                    
+                    $subscription->is_active = false;
+                    $subscription->save();
+
+                    // რეკურსიული:
+                    // $data = $payment->getRecurrentData($subscription);
     
-                    $result = $payment->recurringPayment($data);
+                    // $result = $payment->recurringPayment($data);
     
-                    if ($result['status'] === 'success') {
-                        $subscription->update([
-                            'starts_at' => now(),
-                            'ends_at' => now()->addDays($subscription->planType->duration),
-                        ]);
+                    // if ($result['status'] === 'success') {
+                    //     $subscription->update([
+                    //         'starts_at' => now(),
+                    //         'ends_at' => now()->addDays($subscription->planType->duration),
+                    //     ]);
     
-                        $this->info("Subscription ID {$subscription->id} successfully renewed.");
-                    } else {
-                        Log::warning("Failed to renew subscription ID {$subscription->id}: " . $result['message']);
-                        $this->warn("Failed to renew subscription ID {$subscription->id}");
-                    }
+                    //     $this->info("Subscription ID {$subscription->id} successfully renewed.");
+                    // } else {
+                    //     Log::warning("Failed to renew subscription ID {$subscription->id}: " . $result['message']);
+                    //     $this->warn("Failed to renew subscription ID {$subscription->id}");
+                    // }
                 }
             }
         } catch (\Exception $e) {
