@@ -12,12 +12,12 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Styles -->
-        <style>[x-cloak]{display:none!important}</style>
+        <style>[x-cloak]{display:none}</style>
         @stack('styles')
         @vite(['resources/css/app.css'])
 
         <!-- Scripts -->
-        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @stack('scripts')
         @vite(['resources/js/app.js'])
 

@@ -1,10 +1,12 @@
-<aside class="fixed left-0 top-20 z-40 h-[calc(100vh-5rem)] overflow-y-auto bg-white bg-gradient-to-b from-white to-gray-50 shadow-sm border-r border-gray-100 dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-950 dark:border-gray-800"
-       :class="{ 
-           '-translate-x-full lg:translate-x-0': !sidebarOpen,
-           'w-64': sidebarOpen,
-           'w-16': !sidebarOpen,
-           'shadow-lg': sidebarOpen && window.innerWidth < 1024
-       }" x-cloak>
+<div x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }" 
+     x-init="$watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value))">
+    <aside class="fixed left-0 top-20 z-40 h-[calc(100vh-5rem)] overflow-y-auto bg-white bg-gradient-to-b from-white to-gray-50 shadow-sm border-r border-gray-100 dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-950 dark:border-gray-800"
+           :class="{ 
+               '-translate-x-full lg:translate-x-0': !sidebarOpen,
+               'w-64': sidebarOpen,
+               'w-16': !sidebarOpen,
+               'shadow-lg': sidebarOpen && window.innerWidth < 1024
+           }" x-cloak>
 
     <!-- Navigation Menu -->
     <nav class="h-full flex flex-col justify-between">
@@ -137,8 +139,7 @@
     x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="opacity-100"
-    x-transition:leave-end="opacity-0"
-    x-cloak></div>
+    x-transition:leave-end="opacity-0"></div>
 
 <!-- Mobile menu button (visible when sidebar is closed) -->
 <button 
@@ -150,8 +151,7 @@
     x-transition:enter-end="opacity-100 translate-y-0"
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="opacity-100 translate-y-0"
-    x-transition:leave-end="opacity-0 translate-y-4"
-    x-cloak>
+    x-transition:leave-end="opacity-0 translate-y-4">
     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
     </svg>
@@ -159,6 +159,6 @@
 
 <style>
     [x-cloak] {
-        display: none !important;
+        display: none;
     }
 </style>
