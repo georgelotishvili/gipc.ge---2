@@ -13,12 +13,12 @@
         <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">აღწერა</label>
             <div class="p-3 bg-white dark:bg-dark-2 border border-gray-200 dark:border-dark-4 rounded-lg text-gray-700 dark:text-gray-300">
-                {{ $systemSetting->description }}
+                {{ $systemSetting['description'] }}
             </div>
         </div>
     </div>
     <div class="mt-6 flex justify-end space-x-3">
-        <button wire:click="$parent.deleteParameter({{ $systemSetting->id }})"
+        <button wire:click="$parent.deleteParameter({{ $systemSetting['id'] }})"
             onclick="confirm('ნამდვილად გსურთ წაშლა?') || event.stopImmediatePropagation()" 
             class="px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-xl hover:from-red-700 hover:to-red-600 transition-all duration-300 text-sm font-medium shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:-translate-y-0.5 focus:ring-2 focus:ring-red-500/60 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-2">
             წაშლა
