@@ -21,6 +21,7 @@ use App\Models\Regulation;
 use App\Models\Video;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use App\Mail\TestMail;
 
@@ -65,10 +66,11 @@ Route::get('/pricing', function () {
 
 Route::get('/mail', function () {
     try {
-        Mail::to('giorgibekurashvili@gmail.com')->send(new TestMail());
+        Mail::mailer('smtp')->to('giorgibekurashvili@gmail.com')->send(new TestMail());
         return 'Email sent successfully!';
     } catch (\Exception $e) {
-        return 'Error sending email: ' . $e->getMessage();
+        Log::error('Mail error: ' . $e->getMessage());
+        return 'Error sending email: ' . $e->getMessage() . ' | Check logs for more details.';
     }
 })->name('mail');
 
