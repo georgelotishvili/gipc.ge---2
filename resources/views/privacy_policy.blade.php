@@ -1,25 +1,25 @@
 <x-layout>
     <!-- Beautiful container with gradient background -->
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900 dark:to-purple-900 py-4 sm:py-6 lg:py-8 px-3 sm:px-4 lg:px-8">
         <!-- Content wrapper with max width and centering -->
         <div class="max-w-4xl mx-auto">
             <!-- Beautiful card container -->
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-blue-100/50 dark:shadow-blue-900/50 overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg sm:shadow-xl lg:shadow-2xl shadow-blue-100/50 dark:shadow-blue-900/50 overflow-hidden">
                 <!-- Header with icon -->
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6">
-                    <div class="flex items-center justify-center space-x-3">
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6">
+                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3">
                         <div class="p-2 bg-white/20 rounded-lg">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
                         </div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-white">Privacy Policy & Terms</h1>
+                        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white text-center sm:text-left">Privacy Policy & Terms</h1>
                     </div>
                 </div>
                 
                 <!-- Content area with beautiful styling -->
-                <div class="px-8 py-10">
-                    <div lang="EN-US" style="word-wrap:break-word" class="prose prose-lg dark:prose-invert max-w-none text-justify dark:text-white">
+                <div class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
+                    <div lang="EN-US" style="word-wrap:break-word" class="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none text-justify dark:text-white">
                         <div class="WordSection1 space-y-8">
          
             
@@ -30,17 +30,36 @@
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">წინამდებარე წესები და პირობები (შემდგომში &bdquo;<strong>წესები</strong>&ldquo;) არეგულირებს თქვენ მიერ ვებგვერდის (gipc.ge) და მასზე განთავსებული სერვისებისა და ინფორმაციის გამოყენებას. ვებგვერდზე რეგისტრაციით, მასზე წვდომით ან მისი ნებისმიერი სერვისით სარგებლობით, თქვენ (შემდგომში &bdquo;<strong>მომხმარებელი</strong>&ldquo;) ადასტურებთ, რომ ყურადღებით გაეცანით, გესმით და სრულად ეთანხმებით წინამდებარე წესებს. თუ არ ეთანხმებით ამ წესების რომელიმე ნაწილს, გთხოვთ, არ გამოიყენოთ ვებგვერდი ან მისი სერვისები.</p>
             </div>
             <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 mb-8">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">1</span>
-                    <strong><em><u>ტერმინთა განმარტება</u></em></strong>
+                <h3 class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4">
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full w-8 h-8 flex items-center justify-center text-base sm:text-lg font-bold">1</span>
+                    <span class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white"><strong><em><u>ტერმინთა განმარტება</u></em></strong></span>
                 </h3>
                 <ul class="space-y-3 text-gray-700 dark:text-gray-300">
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>ვებგვერდი</strong>: gipc.ge, მისი ყველა ქვეგვერდი, კონტენტი და ფუნქციონალი.</li>
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>ინსტიტუტი (GIPC)</strong>: სსიპ საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი, ვებგვერდის მფლობელი და ოპერატორი.</li>
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>მომხმარებელი</strong>: ნებისმიერი ფიზიკური ან იურიდიული პირი, რომელიც შედის ვებგვერდზე, რეგისტრირდება ან იყენებს მის სერვისებს.</li>
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>კონტენტი</strong>: ვებგვერდზე განთავსებული ნებისმიერი ინფორმაცია, მათ შორის ტექსტი, სურათები, ვიდეო, აუდიო მასალა, მონაცემთა ბაზები, პროგრამული უზრუნველყოფა, ლოგოები, სავაჭრო ნიშნები.</li>
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>სერვისები</strong>: ვებგვერდის მეშვეობით ხელმისაწვდომი ყველა უფასო და ფასიანი მომსახურება.</li>
-                    <li class="flex items-start"><span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span><strong>რეგისტრაცია</strong>: მომხმარებლის მიერ ვებგვერდზე ანგარიშის შექმნის პროცესი.</li>
+                    <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
+                        <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                        <span><strong>ვებგვერდი</strong>: gipc.ge, მისი ყველა ქვეგვერდი, კონტენტი და ფუნქციონალი.</span>
+                    </li>
+                    <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
+                        <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                        <span><strong>ინსტიტუტი (GIPC)</strong>: სსიპ საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი, ვებგვერდის მფლობელი და ოპერატორი.</span>
+                    </li>
+                    <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
+                        <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                        <span><strong>მომხმარებელი</strong>: ნებისმიერი ფიზიკური ან იურიდიული პირი, რომელიც შედის ვებგვერდზე, რეგისტრირდება ან იყენებს მის სერვისებს.</span>
+                    </li>
+                    <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
+                        <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                        <span><strong>კონტენტი</strong>: ვებგვერდზე განთავსებული ნებისმიერი ინფორმაცია, მათ შორის ტექსტი, სურათები, ვიდეო, აუდიო მასალა, მონაცემთა ბაზები, პროგრამული უზრუნველყოფა, ლოგოები, სავაჭრო ნიშნები.</span>
+                    </li>
+                    <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
+                        <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                        <span><strong>სერვისები</strong>: ვებგვერდის მეშვეობით ხელმისაწვდომი ყველა უფასო და ფასიანი მომსახურება.</span>
+                    </li>
+                    <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
+                        <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                        <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                        <span><strong>რეგისტრაცია</strong>: მომხმარებლის მიერ ვებგვერდზე ანგარიშის შექმნის პროცესი.</span>
+                    </li>
                 </ul>
             </div>
             <h3><strong><em><u>2. ვებგვერდის მიზანი და შეთავაზებული სერვისები</u></em></strong></h3>
@@ -172,12 +191,12 @@
                 </div>
                 
                 <!-- Footer with contact info -->
-                <div class="bg-gray-50 dark:bg-gray-900 px-8 py-6 border-t border-gray-200 dark:border-gray-700">
+                <div class="bg-gray-50 dark:bg-gray-900 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 border-t border-gray-200 dark:border-gray-700">
                     <div class="text-center">
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                             © {{ date('Y') }} საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი (GIPC)
                         </p>
-                        <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-500 mt-1 sm:mt-2">
                             Last updated: {{ date('Y-m-d') }}
                         </p>
                     </div>
