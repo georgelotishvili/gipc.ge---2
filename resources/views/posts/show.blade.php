@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6">
+    <div class="min-h-screen py-12 px-4 sm:px-6">
         <div class="max-w-4xl mx-auto">
             <!-- Back button -->
             <div class="mb-8">
@@ -14,7 +14,7 @@
             
             <!-- Article header -->
             <header class="relative mb-12">
-                <div class="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-primary-400/10 dark:from-primary-600/5 dark:to-primary-400/5 rounded-3xl transform -skew-y-2"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-primary-400/10 dark:from-primary-600/5 dark:to-primary-400/5 rounded-3xl"></div>
                 <div class="relative px-6 py-8">
                     <h1 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight mb-4 break-words">
                         {{ $post->title }}
