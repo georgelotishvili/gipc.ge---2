@@ -167,7 +167,6 @@
                                     </svg>
                                 </button>
                             </li>
-
                             <!-- Notifications -->
                             <li>
                                 <button class="relative flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 dark:border-dark-4 hover:bg-gray-100 dark:hover:bg-dark-4 bg-white dark:bg-dark-2 text-gray-700 dark:text-dark-6 transition-all duration-200">

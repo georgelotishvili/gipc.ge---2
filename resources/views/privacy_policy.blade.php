@@ -60,6 +60,7 @@
                         <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
                         <span><strong>რეგისტრაცია</strong>: მომხმარებლის მიერ ვებგვერდზე ანგარიშის შექმნის პროცესი.</span>
                     </li>
+
                 </ul>
             </div>
             <h3><strong><em><u>2. ვებგვერდის მიზანი და შეთავაზებული სერვისები</u></em></strong></h3>
