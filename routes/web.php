@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommercialController;
+use App\Http\Controllers\EmailTestController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\PaymentController;
@@ -19,7 +20,9 @@ use App\Models\Employer;
 use App\Models\Regulation;
 use App\Models\Video;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use App\Mail\TestMail;
 
 Route::get( '/', function () {
     return view('index');
@@ -59,6 +62,10 @@ Route::get('/about', function () {
 Route::get('/pricing', function () {
     return view('pricing');
 })->name('pricing');
+
+Route::get('/mail', function () {
+    Mail::to('giorgibekurashvili@gmail.com')->send(new TestMail());
+})->name('mail');
 
 
 Route::middleware(['admin'])->group(function () {
@@ -224,14 +231,14 @@ Route::get('/jobs', function () {
 })->name('jobs');
 
 // Commented out email testing routes - Uncomment to test email functionality
-/*
+
 // Test Email Routes
-Route::get('/send-test-email', [EmailTestController::class, 'sendTestEmail']);
-Route::get('/email-form', function() {
-    return view('emails.form');
-});a
-Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
-*/
+// Route::get('/send-test-email', [EmailTestController::class, 'sendTestEmail']);
+// Route::get('/email-form', function() {
+//     return view('emails.form');
+// });
+// Route::post('/send-custom-email', [EmailTestController::class, 'sendCustomEmail']);
+
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
