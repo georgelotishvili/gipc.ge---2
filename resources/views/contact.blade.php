@@ -1,49 +1,98 @@
 <x-layout>
-    <!-- ====== Hero Section Start -->
-    <div id="home" class="relative overflow-hidden bg-primary pt-[120px] md:pt-[130px] lg:pt-[160px]">
-        <div class="container">
-            <div class="-mx-4 flex flex-wrap items-center">
-                
-                <div class="w-full px-4 py-10">
-                    <div class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center" data-wow-delay=".2s">
-                        <h1 class="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
-                            დაგვიკავშირდით
-                        </h1>
-                        <p class="mx-auto mb-9 max-w-[600px] text-base font-medium text-white sm:text-lg sm:leading-[1.44]">
-                            გაქვთ შეკითხვები? ჩვენი გუნდი მზადაა დაგეხმაროთ
-                        </p>
-                    </div>
+    <!-- Hero Section -->
+    <section class="relative rounded-2xl overflow-hidden py-12">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    დაგვიკავშირდით
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    გაქვთ შეკითხვები? ჩვენი გუნდი მზადაა დაგეხმაროთ
+                </p>
+            </div>
+        </div>
+    </section>
 
-                    <div class="flex flex-col md:flex-row justify-center items-stretch gap-8 mt-10">
-                        <!-- Phone Contact Card -->
-                        <div class="w-full md:w-1/3 p-6 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm text-center transform transition duration-500 hover:scale-105">
-                            <div class="text-white mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Contact Cards Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Phone Contact Card -->
+                <div class="group relative overflow-hidden bg-white dark:bg-dark-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                    <!-- Gradient overlay on hover -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative p-8">
+                        <!-- Icon Container -->
+                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                        </div>
+                        
+                        <!-- Content -->
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">ტელეფონი</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">+995 593 22 20 33</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Call to action -->
+                        <div class="mt-16">
+                            <a href="tel:+995593222033" 
+                               class="flex w-full items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium text-sm group-hover:shadow-lg">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2">ტელეფონი</h3>
-                            <p class="text-white">+995 593 22 20 33</p>
-                            <div class="h-[24px]"></div>
-                        </div>
-
-                        <!-- Email Contact Cards -->
-                        <div class="w-full md:w-1/3 p-6 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm text-center transform transition duration-500 hover:scale-105">
-                            <div class="text-white mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2">ელ-ფოსტა</h3>
-                            <p class="text-white mb-2">gipcsoftware@gmail.com</p>
-                            <p class="text-white">naormala@gmail.com</p>
+                                დარეკვა
+                            </a>
                         </div>
                     </div>
                 </div>
 
-
+                <!-- Email Contact Card -->
+                <div class="group relative overflow-hidden bg-white dark:bg-dark-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                    <!-- Gradient overlay on hover -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative p-8">
+                        <!-- Icon Container -->
+                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        
+                        <!-- Content -->
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">ელ-ფოსტა</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">gipcsoftware@gmail.com</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">naormala@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Call to action -->
+                        <div class="mt-6">
+                            <a href="mailto:gipcsoftware@gmail.com" 
+                               class="flex w-full items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium text-sm group-hover:shadow-lg">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                მიწერა
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- ====== Hero Section End -->
+    </section>
 </x-layout>

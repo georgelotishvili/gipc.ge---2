@@ -9,7 +9,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-briefcase text-lg md:text-2xl"></i>
                         </div>
                         <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">ვაკანსიები არქიტექტორებისთვის</h3>
@@ -22,7 +22,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-newspaper text-lg md:text-2xl"></i>
                         </div>
                         <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სიახლე</h3>
@@ -35,7 +35,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-book text-lg md:text-2xl"></i>
                         </div>
                         <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სამშენებლო რეგულაციები</h3>
@@ -48,7 +48,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-file-contract text-lg md:text-2xl"></i>
                         </div>
                         <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">წესები და პირობები</h3>
@@ -61,7 +61,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-users text-lg md:text-2xl"></i>
                         </div>
                         <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სერტიფიცირებული სპეციალისტები</h3>
