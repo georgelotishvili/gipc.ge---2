@@ -1,70 +1,70 @@
 <x-layout>
     <!-- Features Section -->
-    <section class="py-6 md:py-16 bg-white dark:bg-gray-900">
+    <section class="py-6 md:py-16 bg-white dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
         <div class="max-w-[120rem] mx-auto px-3 sm:px-6 lg:px-12">
-            <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-white mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
+            <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-4 sm:px-6 lg:px-8">
                 <!-- Jobs Card -->
-                <a href="{{ route('jobs') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <a href="{{ route('jobs') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-briefcase text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">ვაკანსიები არქიტექტორებისთვის</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">ვაკანსიები არქიტექტორებისთვის</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">შეგიძლიათ მოიძიოთ ან შესთავაზოთ სამუშაო სამშენებლო სფეროს სხვადასხვა დარგის სპეციალისტებს</p>
                     </div>
                 </a>
 
                 <!-- posts card -->
-                <a href="{{ route('posts.index') }}" class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <a href="{{ route('posts.index') }}" class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-newspaper text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სიახლე</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სიახლე</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სამშენებლო სექტორში არსებული სიახლეების, რეგულაციებში შეტანილი ცვლილებებისა და განახლებების საინფორმაციო ბაზა</p>
                     </div>
                 </a>
 
                 <!-- Simulation Exam Card -->
-                <a href="{{ route('regulations') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <a href="{{ route('regulations') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-book text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სამშენებლო რეგულაციები</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სამშენებლო რეგულაციები</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სერტიფიკატის მიღებისთვის საჭირო სამშენებლო რეგულაციების, კანონების დადგენილებებისა და კოდექსების ბაზა</p>
                     </div>
                 </a>
 
                 <!-- Card 5 -->
-                <a href="{{ route('terms-and-conditions') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <a href="{{ route('terms-and-conditions') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-file-contract text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">წესები და პირობები</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">წესები და პირობები</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სერტიფიკატის მიღების წესებისა და პირობების დეტალური განმარტებები და საგამოცდო პირობების აღწერა</p>
                     </div>
                 </a>
 
                 <!-- Card 6 -->
-                <a href="{{ route('certificated-specialists') }}" wire:navigate class="group bg-white dark:bg-gray-800/50 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-primary-400/10 dark:to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <a href="{{ route('certificated-specialists') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-100 dark:bg-dark-indigo-400/50 text-primary-600 dark:text-dark-indigo-200 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-users text-lg md:text-2xl"></i>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">სერტიფიცირებული სპეციალისტები</h3>
+                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სერტიფიცირებული სპეციალისტები</h3>
                         <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სპეციალისტების მონაცემთა ბაზა გაძლევთ საშუალებას მოიძიოთ და დაუკავშირდეთ სერტიფიცირებულ არქიტექტორებს</p>
                     </div>
                 </a>
@@ -142,12 +142,12 @@
     <div id="premiumAlertModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                <div class="absolute inset-0 bg-dark-indigo-50 opacity-75"></div>
             </div>
 
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-            <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
+            <div class="inline-block align-bottom bg-white dark:bg-dark-indigo-200/90 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
                 <div class="relative">
                     <!-- Animated background effect -->
                     <div class="absolute inset-0 overflow-hidden">
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-xl leading-6 font-bold text-gray-900 dark:text-white">
+                                <h3 class="text-xl leading-6 font-bold text-gray-900 dark:text-gray-100">
                                     პრემიუმ სერვისი
                                 </h3>
                                 <div class="mt-3">
@@ -176,14 +176,14 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse relative z-10">
+                    <div class="bg-gray-50 dark:bg-dark-indigo-300/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse relative z-10">
                         <a href="{{ route('pricing') }}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-base font-medium text-white hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm transition-all hover:scale-105">
                             <span class="flex items-center">
                                 <i class="fas fa-gem mr-2 animate-pulse"></i>
                                 ნახეთ ფასები
                             </span>
                         </a>
-                        <button type="button" onclick="closePremiumAlert()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-all">
+                        <button type="button" onclick="closePremiumAlert()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-dark-indigo-400 shadow-sm px-4 py-2 bg-white dark:bg-dark-indigo-200 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-all">
                             დახურვა
                         </button>
                     </div>
