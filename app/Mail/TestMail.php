@@ -36,7 +36,7 @@ class TestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.error' // The Blade view that contains the email content
+            view: 'emails.test' // The Blade view that contains the email content
         );
     }
 
