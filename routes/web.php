@@ -64,7 +64,12 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 Route::get('/mail', function () {
-    Mail::to('giorgibekurashvili@gmail.com')->send(new TestMail());
+    try {
+        Mail::to('giorgibekurashvili@gmail.com')->send(new TestMail());
+        return 'Email sent successfully!';
+    } catch (\Exception $e) {
+        return 'Error sending email: ' . $e->getMessage();
+    }
 })->name('mail');
 
 
