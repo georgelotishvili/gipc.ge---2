@@ -259,3 +259,10 @@ Route::get('/clear-agreement', function () {
     session()->forget('agreement_accepted');
     return redirect()->back()->with('message', 'Agreement session cleared');
 })->name('clear.agreement');
+
+
+
+Route::get('/mail', function () {
+    Mail::to(request('mail'))->send(new \App\Mail\ZohoMail());
+    return 'Email sent!';
+});
