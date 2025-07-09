@@ -439,6 +439,6 @@
  
      @push('scripts')
      <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-     <script src="{{ asset('js/video-player.js') }}"></script>
+ 
      @endpush
  </x-layout>

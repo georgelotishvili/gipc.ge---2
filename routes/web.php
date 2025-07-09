@@ -29,6 +29,14 @@ Route::get( '/', function () {
     return view('index');
 })->name('index');
 
+// Language switching route
+Route::get('/language/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ka'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('language.switch');
+
 Route::get('/home', function () {
     return view('index');
 });
@@ -169,7 +177,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('admin/commercials/{commercial}', [CommercialController::class, 'destroy'])->name('admin.commercials.destroy');
 });
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'subscription'])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscription','verified'])->group(function () {
     Route::get('/tutorials', function () {
         $courses = Course::all();
         return view('tutorials', compact('courses'));
@@ -182,7 +190,26 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/tutorials/video/{video}', function ($video) {
         $video = Video::find($video);
-        return view('tutorials.show', compact('video'));
+        
+        // Get the chapter this video belongs to
+        $chapter = $video->chapter;
+        
+        // Get the course this chapter belongs to
+        $course = $chapter->course;
+        
+        // Get all videos in this chapter, ordered by weight
+        $playlist = $chapter->videos()->orderBy('weight')->get();
+        
+        // Find current video index in playlist
+        $currentIndex = $playlist->search(function($item) use ($video) {
+            return $item->id === $video->id;
+        });
+        
+        // Get next and previous videos
+        $nextVideo = $currentIndex < $playlist->count() - 1 ? $playlist[$currentIndex + 1] : null;
+        $previousVideo = $currentIndex > 0 ? $playlist[$currentIndex - 1] : null;
+        
+        return view('tutorials.show', compact('video', 'chapter', 'course', 'playlist', 'currentIndex', 'nextVideo', 'previousVideo'));
     })->name('tutorials.show');
 
     Route::get('/test_results', function () {

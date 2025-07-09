@@ -1,4 +1,4 @@
-<x-user.layout>
+<x-layout>
     <div class="bg-white rounded-xl shadow-md overflow-hidden">
         <div class="p-6">
             <div class="flex items-center justify-between mb-4">
@@ -22,4 +22,4 @@
             </div>
         </div>
     </div>
-</x-user.layout>
+</x-layout>

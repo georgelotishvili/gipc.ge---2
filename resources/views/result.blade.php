@@ -1,4 +1,4 @@
-<x-user.layout>
+<x-layout>
     <div class="min-h-screen py-8 mt-12 sm:mt-16 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black">
         <div class="max-w-4xl mx-auto px-4">
             <!-- Score Card -->
@@ -173,4 +173,4 @@
             </div>
         </div>
     </div>
-</x-user.layout>
+</x-layout>

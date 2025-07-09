@@ -1,4 +1,4 @@
-<x-user.layout>
+<x-layout>
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 mt-4">
         @foreach(auth()->user()->examRequests as $examRequest)
@@ -53,4 +53,4 @@
             </div>
         @endforeach
     </div>
-</x-user.layout>
+</x-layout>
