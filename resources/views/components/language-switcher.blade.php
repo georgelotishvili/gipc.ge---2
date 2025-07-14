@@ -20,7 +20,7 @@
         </button>
     </div>
 
-    <div class="hidden origin-top-right absolute right-0 mt-2 w-28 sm:w-32 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
+    {{-- <div class="hidden origin-top-right absolute right-0 mt-2 w-28 sm:w-32 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
          role="menu" 
          aria-orientation="vertical" 
          aria-labelledby="language-menu-button" 
@@ -40,7 +40,7 @@
                 🇬🇪 ქართული
             </a>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <script>

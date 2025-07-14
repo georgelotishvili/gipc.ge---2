@@ -30,12 +30,12 @@ Route::get( '/', function () {
 })->name('index');
 
 // Language switching route
-Route::get('/language/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'ka'])) {
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-})->name('language.switch');
+// Route::get('/language/{locale}', function ($locale) {
+//     if (in_array($locale, ['en', 'ka'])) {
+//         session(['locale' => $locale]);
+//     }
+//     return redirect()->back();
+// })->name('language.switch');
 
 Route::get('/home', function () {
     return view('index');
