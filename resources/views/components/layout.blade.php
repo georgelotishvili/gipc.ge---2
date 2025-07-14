@@ -520,14 +520,24 @@
     </nav>
 
     <!-- Hero Section Start -->
-    <section class="relative overflow-hidden pt-24 px-12 dark:bg-dark">
+    <section class="relative overflow-hidden pt-24 px-12 dark:bg-dark @auth lg:ml-16 @endauth"
+             x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }"
+             :class="{ 'lg:ml-64': sidebarOpen, 'lg:ml-16': !sidebarOpen }">
         <div class="absolute inset-0 bg-white dark:bg-dark -z-10"></div>
         <div class="absolute inset-0 opacity-30 -z-10 bg-pattern dark:opacity-10"></div>
         
         <livewire:banners />
     </section>
+    
+    <!-- Workspace Sidebar for authenticated users -->
+    @auth
+        <x-workspace-sidebar />
+    @endauth
+    
     <!-- Rest of your layout -->
-    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 dark:bg-dark">
+    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 dark:bg-dark @auth lg:ml-16 @endauth"
+          x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }"
+          :class="{ 'lg:ml-64': sidebarOpen, 'lg:ml-16': !sidebarOpen }">
         {{ $slot }}
     </main>
 
@@ -566,6 +576,7 @@
     </footer>
 
     @livewireScripts()
+    @stack('scripts')
 
     <!-- Dark mode script -->
     <script>

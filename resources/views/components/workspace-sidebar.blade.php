@@ -6,7 +6,8 @@
                'w-64': sidebarOpen,
                'w-16': !sidebarOpen,
                'shadow-lg': sidebarOpen && window.innerWidth < 1024
-           }" x-cloak>
+           }" 
+           x-cloak>
 
     <!-- Navigation Menu -->
     <nav class="h-full flex flex-col justify-between">

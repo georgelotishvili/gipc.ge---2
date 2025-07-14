@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'subscription' => \App\Http\Middleware\SubscriptionMiddleware::class,
             'agreement' => \App\Http\Middleware\CheckAgreementMiddleware::class,
         ]);
+        
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
+        ]);
+        
         $middleware->validateCsrfTokens(except: [
             '/payment/thankYou'
         ]);

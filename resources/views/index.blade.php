@@ -1,9 +1,9 @@
 <x-layout>
     <!-- Features Section -->
     <section class="py-6 md:py-16 bg-white dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
-        <div class="max-w-[120rem] mx-auto px-3 sm:px-6 lg:px-12">
+        <div class="max-w-[125rem] mx-auto">
             <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full">
                 <!-- Jobs Card -->
                 <a href="{{ route('jobs') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
