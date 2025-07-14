@@ -35,8 +35,8 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased dark:bg-dark">
-        <div class="flex min-h-screen bg-gray-50 dark:bg-dark">
+    <body class="font-sans antialiased bg-gray-200 dark:bg-slate-800">
+        <div class="flex min-h-screen">
             <x-admin.sidebar />
 
             <!-- Main Content -->

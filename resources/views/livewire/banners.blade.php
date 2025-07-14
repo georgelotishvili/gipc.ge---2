@@ -20,7 +20,7 @@ x-init="
 class="relative max-w-[120rem] mx-auto mb-16">
     
     <!-- Slides Container -->
-    <div class="relative h-[300px] overflow-hidden rounded-3xl">
+    <div class="relative h-[250px] overflow-hidden rounded-3xl">
         <template x-for="(slide, index) in slides" :key="index">
             <div x-show="currentSlide === index"
                 x-transition:enter="transition ease-out duration-500"
