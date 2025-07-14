@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
+    <div class="min-h-screen bg-gray-200 dark:bg-slate-800 pt-16 rounded-lg">
         <div class="container mx-auto px-4 py-8">
             <!-- Header -->
             <div class="text-center mb-8">

@@ -1,18 +1,18 @@
 @if($style === 'grid')
     <a href="{{ route('tutorials.show', $video->id) }}" class="group w-full flex-shrink-0">
-        <div class="relative bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-700 h-full flex flex-col border border-gray-200 dark:border-gray-700 transform hover:-translate-y-1 sm:hover:-translate-y-2 hover:scale-[1.01] sm:hover:scale-[1.02]">
+        <div class="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-700 h-full flex flex-col border border-gray-200 dark:border-gray-700 transform hover:-translate-y-1 hover:scale-[1.01]">
             <!-- Animated Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             
             <!-- Corner Accent -->
-            <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-500/20 to-transparent rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <div class="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-blue-500/20 to-transparent rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             
             <div class="aspect-video relative overflow-hidden">
                 @if($video->imageUrl())
-                    <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="w-full h-full object-cover group-hover:scale-125 transition-transform duration-1000">
+                    <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
                 @else
                     <div class="w-full h-full bg-gradient-to-br from-gray-100 via-blue-50 to-purple-50 dark:from-gray-700 dark:via-blue-900/20 dark:to-purple-900/20 flex items-center justify-center">
-                        <i class="fas fa-video text-gray-400 text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                        <i class="fas fa-video text-gray-400 text-3xl group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                 @endif
                 
@@ -20,8 +20,8 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="relative">
-                            <div class="w-20 h-20 rounded-full bg-white/95 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500 shadow-2xl">
-                                <i class="fas fa-play text-gray-900 text-2xl ml-1"></i>
+                            <div class="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500 shadow-2xl">
+                                <i class="fas fa-play text-gray-900 text-lg ml-1"></i>
                             </div>
                             <!-- Ripple Effect -->
                             <div class="absolute inset-0 rounded-full bg-white/30 animate-ping group-hover:animate-none"></div>
@@ -29,24 +29,21 @@
                     </div>
                 </div>
                 
-                <!-- Floating Elements -->
-                <div class="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-75 group-hover:opacity-100"></div>
-                <div class="absolute top-8 left-8 w-1 h-1 bg-purple-400 rounded-full animate-ping opacity-75 group-hover:opacity-100" style="animation-delay: 1s;"></div>
-                
-                <div class="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/90 backdrop-blur-sm text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold border border-white/20 group-hover:bg-blue-600 transition-colors duration-500">
+                <!-- Duration Badge -->
+                <div class="absolute bottom-2 right-2 bg-black/90 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs font-bold border border-white/20 group-hover:bg-blue-600 transition-colors duration-500">
                     {{ $this->getFormattedDuration() }}
                 </div>
                 @auth
                     @if(auth()->user()->is_admin)
-                        <div class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/90 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-white/20">
-                            <div class="flex items-center gap-1 sm:gap-2">
-                                <label for="weight-{{ $video->id }}" class="text-xs sm:text-sm text-white font-medium">რიგი:</label>
+                        <div class="absolute top-2 right-2 bg-black/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/20">
+                            <div class="flex items-center gap-1">
+                                <label for="weight-{{ $video->id }}" class="text-xs text-white font-medium">რიგი:</label>
                                 <input 
                                     type="number" 
                                     id="weight-{{ $video->id }}" 
                                     wire:model="weight" 
                                     wire:change="updateWeight"
-                                    class="w-16 sm:w-20 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded px-1 sm:px-2 py-0.5 sm:py-1 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 dark:text-white"
+                                    class="w-12 text-xs border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 text-black dark:text-white rounded-md shadow-sm"
                                     step="any"
                                     min="0"
                                 >
@@ -55,29 +52,25 @@
                     @endif
                 @endauth
             </div>
-            <div class="p-4 sm:p-6 lg:p-7 flex flex-col flex-grow relative">
+            <div class="p-3 flex flex-col flex-grow relative">
                 <div class="flex-grow">
-                    <h3 class="text-base sm:text-lg lg:text-xl font-black text-gray-900 dark:text-white mb-2 sm:mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500 line-clamp-2 leading-tight">
+                    <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500 line-clamp-2 leading-tight">
                         {{ $video->title }}
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm lg:text-base line-clamp-2 leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-500">
+                    <p class="text-gray-600 dark:text-gray-300 text-xs line-clamp-2 leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-500">
                         {{ $video->description }}
                     </p>
                 </div>
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-4 sm:mt-6 pt-3 sm:pt-5 border-t border-gray-100 dark:border-gray-700 gap-2 sm:gap-0">
-                    <div class="flex flex-wrap items-center gap-2 sm:gap-4">
-                        <span class="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl group-hover:from-blue-50 group-hover:to-purple-50 dark:group-hover:from-blue-900/20 dark:group-hover:to-purple-900/20 transition-all duration-500">
-                            <i class="far fa-calendar text-gray-400 group-hover:text-blue-500 transition-colors duration-500"></i>
-                            <span class="font-bold text-xs sm:text-sm">{{ $video->created_at->format('d F, Y') }}</span>
-                        </span>
-                        <span class="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl group-hover:from-blue-50 group-hover:to-purple-50 dark:group-hover:from-blue-900/20 dark:group-hover:to-purple-900/20 transition-all duration-500">
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mt-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1">
                             <i class="far fa-eye text-gray-400 group-hover:text-purple-500 transition-colors duration-500"></i>
-                            <span class="font-bold text-xs sm:text-sm">{{ $video->views }} ნახვა</span>
+                            <span class="font-medium">{{ $video->views }}</span>
                         </span>
                     </div>
-                    <div class="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg sm:rounded-xl group-hover:from-blue-100 group-hover:to-purple-100 dark:group-hover:from-blue-800/30 dark:group-hover:to-purple-800/30 transition-all duration-500 w-fit">
+                    <div class="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg group-hover:from-blue-100 group-hover:to-purple-100 dark:group-hover:from-blue-800/30 dark:group-hover:to-purple-800/30 transition-all duration-500">
                         <i class="fas fa-clock text-blue-500 group-hover:text-purple-500 transition-colors duration-500"></i>
-                        <span class="font-bold text-blue-600 dark:text-blue-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 text-xs sm:text-sm">{{ $this->getFormattedDuration() }}</span>
+                        <span class="font-medium text-blue-600 dark:text-blue-400 group-hover:text-purple-600 dark:group-hover:text-purple-400">{{ $this->getFormattedDuration() }}</span>
                     </div>
                 </div>
             </div>
@@ -109,7 +102,8 @@
                                     id="weight-list-{{ $video->id }}" 
                                     wire:model="weight" 
                                     wire:change="updateWeight"
-                                    class="w-12 sm:w-14 text-xs border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 dark:text-white"
+                                    class="w-12 sm:w-14 text-xs border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 
+                                    text-black dark:text-white"
                                     step="any"
                                     min="0"
                                 >

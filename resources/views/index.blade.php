@@ -1,6 +1,6 @@
 <x-layout>
     <!-- Features Section -->
-    <section class="py-6 md:py-16 bg-white dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
+    <section class="py-6 md:py-16 dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
         <div class="max-w-[125rem] mx-auto">
             <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full">

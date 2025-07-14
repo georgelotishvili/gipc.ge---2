@@ -117,7 +117,7 @@
     </style>
 </head>
 
-<body class="bg-white dark:bg-dark" id="body">
+<body class="bg-gray-200 dark:bg-slate-800" id="body">
     <!-- ====== Navbar Section Start -->
     <nav class="fixed w-full bg-white/80 dark:bg-dark top-0 z-50 border-b border-gray-100 dark:border-gray-800">
         <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
@@ -333,7 +333,7 @@
                             <x-application-logo />
                         </a>
                         <button @click="mobileMenuOpen = false" 
-                                class="p-2 rounded-lg bg-gray-100 dark:bg-dark-2 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-4 transition-all duration-200">
+                                class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-4 transition-all duration-200">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
@@ -520,10 +520,10 @@
     </nav>
 
     <!-- Hero Section Start -->
-    <section class="relative overflow-hidden pt-24 px-12 dark:bg-dark @auth lg:ml-16 @endauth"
+    <section class="relative overflow-hidden pt-24 px-12 @auth lg:ml-16 @endauth"
              x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }"
              :class="{ 'lg:ml-64': sidebarOpen, 'lg:ml-16': !sidebarOpen }">
-        <div class="absolute inset-0 bg-white dark:bg-dark -z-10"></div>
+        <div class="absolute inset-0 -z-10"></div>
         <div class="absolute inset-0 opacity-30 -z-10 bg-pattern dark:opacity-10"></div>
         
         <livewire:banners />
@@ -535,7 +535,7 @@
     @endauth
     
     <!-- Rest of your layout -->
-    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 dark:bg-dark @auth lg:ml-16 @endauth"
+    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 @auth lg:ml-16 @endauth"
           x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }"
           :class="{ 'lg:ml-64': sidebarOpen, 'lg:ml-16': !sidebarOpen }">
         {{ $slot }}

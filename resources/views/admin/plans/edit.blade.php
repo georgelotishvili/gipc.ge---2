@@ -149,7 +149,7 @@
                                 </label>
                                 <input type="number" name="plan_order" id="plan_order" value="{{ $plan->plan_order }}"
                                     required
-                                    class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-2 focus:border-primary-500 focus:ring-primary-500">
+                                    class="text-black dark:text-white w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-2 focus:border-primary-500 focus:ring-primary-500">
                                 @error('plan_order')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
