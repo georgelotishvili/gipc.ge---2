@@ -189,12 +189,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscripti
     })->name('tutorials.chapters');
 
     Route::get('/tutorials/video/{video}', function ($video) {
-        $video = Video::find($video);
+        $video = Video::findOrFail($video);
         
         // Get the chapter this video belongs to
+        if (!$video->chapter) {
+            abort(404, 'Video chapter not found');
+        }
         $chapter = $video->chapter;
         
         // Get the course this chapter belongs to
+        if (!$chapter->course) {
+            abort(404, 'Chapter course not found');
+        }
         $course = $chapter->course;
         
         // Get all videos in this chapter, ordered by weight
