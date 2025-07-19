@@ -87,9 +87,6 @@
                             clip-rule="evenodd" />
                     </svg>
                 </button>
-
-                <p class="mt-6 text-sm text-blue-600/80 dark:text-blue-400/80 font-medium">30-დღიანი თანხის უკან
-                    დაბრუნების გარანტია. კითხვების გარეშე.</p>
             </div>
         </div>
     </div>
