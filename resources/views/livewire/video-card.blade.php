@@ -102,7 +102,7 @@
                                     id="weight-list-{{ $video->id }}" 
                                     wire:model="weight" 
                                     wire:change="updateWeight"
-                                    class="w-12 sm:w-14 text-xs border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 
+                                    class="w-16 sm:w-14 text-xs border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 
                                     text-black dark:text-white"
                                     step="any"
                                     min="0"
