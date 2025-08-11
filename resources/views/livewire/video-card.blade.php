@@ -43,7 +43,7 @@
                                     id="weight-{{ $video->id }}" 
                                     wire:model="weight" 
                                     wire:change="updateWeight"
-                                    class="w-12 text-xs border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 text-black dark:text-white rounded-md shadow-sm"
+                                    class="w-24 sm:w-28 text-xs border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 text-black dark:text-white rounded-md shadow-sm"
                                     step="any"
                                     min="0"
                                 >
@@ -102,7 +102,7 @@
                                     id="weight-list-{{ $video->id }}" 
                                     wire:model="weight" 
                                     wire:change="updateWeight"
-                                    class="w-16 sm:w-14 text-xs border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 
+                                    class="w-24 sm:w-28 text-xs border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-white/95 dark:bg-gray-800 
                                     text-black dark:text-white"
                                     step="any"
                                     min="0"

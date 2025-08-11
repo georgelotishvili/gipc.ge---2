@@ -180,7 +180,8 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscription','verified'])->group(function () {
     Route::get('/tutorials', function () {
         $courses = Course::all();
-        return view('tutorials', compact('courses'));
+        $videos_ordered = Video::orderBy('weight')->get();
+        return view('tutorials', compact('courses', 'videos_ordered'));
     })->name('tutorials');
 
     Route::get('/tutorials/course/{course}', function ($course) {

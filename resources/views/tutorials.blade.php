@@ -186,12 +186,8 @@
 
             <!-- Video Grid -->
             <div x-show="showAllVideos" x-cloak x-transition class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
-                @foreach ($courses as $course)
-                    @foreach ($course->chapters as $chapter)
-                        @foreach ($chapter->videos as $video)
-                            <livewire:video-card :video="$video" />
-                        @endforeach
-                    @endforeach
+                @foreach ($videos_ordered as $video)
+                    <livewire:video-card :video="$video" />
                 @endforeach
             </div>
         </div>
