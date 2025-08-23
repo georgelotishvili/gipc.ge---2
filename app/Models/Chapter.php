@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -13,6 +14,13 @@ class Chapter extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('orderByName', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
 
     /**
      * Get the course that owns the chapter
