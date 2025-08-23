@@ -34,18 +34,13 @@ class PaymentController extends Controller
                     'subscription_end' => Auth::user()->subscription?->ends_at ?: now(),
                 ]
             ];
-            $url = $this->payment->createOrder($data, $amount);
-            if ($url) {
-                return redirect()->away($url);
-            }
-            // If amount is zero or URL missing, just go back safely
-            return redirect()->route('pricing');
+            
+            $this->payment->createOrder($data, $amount);
             
             // Clear agreement session after successful payment processing
             session()->forget('agreement_accepted');
         } catch (\Throwable $e) {
             Log::error('Error creating subscription: '. $e->getMessage());
-            return redirect()->back()->withErrors('Could not start payment.');
         }
     }
 
