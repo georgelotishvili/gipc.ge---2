@@ -18,7 +18,7 @@ class Chapter extends Model
     protected static function booted(): void
     {
         static::addGlobalScope('orderByName', function (Builder $builder) {
-            $builder->orderBy('name');
+            $builder->orderByRaw('LENGTH(name), name');
         });
     }
 
