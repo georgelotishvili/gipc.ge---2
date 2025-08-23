@@ -28,32 +28,34 @@ class Payment
         $this->orderId = $this->generateOrderId($this->merchantId);
     }
 
-    public function createOrder(array $data, int $amount)
+    public function createOrder(array $data, int $amount): ?string
     {
-        if($amount > 0){
-            try {
-                $params = array_merge([
-                    'response_url' => $this->responseUrl,
-                    'server_callback_url' => $this->callbackUrl,
-                ], $data);
-                $this->sendRequest($params);
-            } catch (\Exception $e) {
-                return response(['error' => $e->getMessage()], 500);
-            }
+        if ($amount <= 0) {
+            return null;
+        }
+        try {
+            $params = array_merge([
+                'response_url' => $this->responseUrl,
+                'server_callback_url' => $this->callbackUrl,
+            ], $data);
+            return $this->sendRequest($params);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return null;
         }
     }
 
 
-    private function sendRequest(array $data): void
+    private function sendRequest(array $data): string
     {
         Configuration::setMerchantId(config('flitt.merchant_id'));
         Configuration::setSecretKey(config('flitt.secret_key'));
         Configuration::setApiVersion('1.0');
         Configuration::setRequestType('json');
 
-        $data = Checkout::url($data);
-        $data->getUrl();
-        $data->toCheckout();
+        $checkout = Checkout::url($data);
+        $url = $checkout->getUrl();
+        return $url;
     }
 
 
