@@ -35,15 +35,12 @@ class PaymentController extends Controller
                 ]
             ];
             
-            $url = $this->payment->createOrder($data, $amount);
-            if ($url) {
-                // Do NOT clear agreement session here to avoid middleware bounce
-                return redirect()->away($url);
-            }
-            return redirect()->route('pricing');
+            $this->payment->createOrder($data, $amount);
+            
+            // Clear agreement session after successful payment processing
+            session()->forget('agreement_accepted');
         } catch (\Throwable $e) {
             Log::error('Error creating subscription: '. $e->getMessage());
-            return redirect()->back()->withErrors('Could not start payment.');
         }
     }
 
