@@ -1,103 +1,105 @@
 <x-admin.layout>
-    <div class="min-h-screen bg-white dark:bg-dark relative overflow-hidden">
-        <div class="relative z-10 max-w-[1920px] mx-auto px-6 py-8">
+    <div class="min-h-screen bg-white dark:bg-dark-2">
+        <div class="max-w-7xl mx-auto px-6 py-8">
             <!-- Header -->
-            <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                    სასწავლო <span class="bg-gradient-to-r from-primary-400 to-blue-400 bg-clip-text text-transparent">კურსები</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                    გაეცანით ჩვენს საგანმანათლებლო კურსებს არქიტექტურული სერტიფიცირებისთვის
-                </p>
-            </div>
-
-            <!-- Create Course Button -->
-            <div class="mb-8 flex justify-end">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">კურსები</h1>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">მართეთ თქვენი სასწავლო მასალები</p>
+                </div>
                 <a href="{{ route('admin.courses.create') }}" 
-                   class="inline-flex items-center px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
-                    <i class="fas fa-plus mr-2"></i>
-                    ახალი კურსის დამატება
+                   class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors">
+                    + ახალი კურსი
                 </a>
             </div>
 
             @if($courses->count() > 0)
                 <!-- Courses Grid -->
-                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     @foreach($courses as $course)
-                    <div class="bg-white dark:bg-dark-2 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
-                        <div class="aspect-video relative bg-gray-100 dark:bg-dark-3">
+                    <div class="bg-white dark:bg-dark-3 rounded-lg border border-gray-200 dark:border-dark-4 overflow-hidden hover:shadow-md transition-shadow">
+                        <!-- Image -->
+                        <div class="aspect-video bg-gray-100 dark:bg-dark-4 relative">
                             @if($course->image()->first())
                                 <a href="{{ route('admin.courses.chapters', $course->id) }}">
-                                    <img src="{{ Storage::url($course->image()->first()->path) }}" alt="{{ $course->name }}" class="absolute inset-0 w-full h-full object-cover">
+                                    <img src="{{ Storage::url($course->image()->first()->path) }}" 
+                                         alt="{{ $course->name }}" 
+                                         class="w-full h-full object-cover">
                                 </a>
                             @else
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <span class="w-14 h-14 rounded-full bg-gray-200 dark:bg-dark-4 flex items-center justify-center">
-                                        <i class="fas fa-book text-gray-600 dark:text-gray-300 text-xl"></i>
-                                    </span>
+                                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
                                 </div>
                             @endif
                         </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <div class="flex-grow">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
-                                    <a href="{{ route('admin.courses.edit', $course->id) }}" class="hover:text-primary-500 transition-colors duration-200">
-                                        {{ $course->name }}
-                                    </a>
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
-                                    {{ $course->description }}
-                                </p>
+                        
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg mb-2">
+                                <a href="{{ route('admin.courses.edit', $course->id) }}" class="hover:text-primary-600 transition-colors">
+                                    {{ $course->name }}
+                                </a>
+                            </h3>
+                            
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                                {{ $course->description }}
+                            </p>
+                            
+                            <!-- Stats -->
+                            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500 dark:text-gray-400">
+                                <span>{{ $course->chapters_count ?? 0 }} თავი</span>
+                                <span>{{ $course->videos_count ?? 0 }} ვიდეო</span>
                             </div>
-                            <div class="flex items-center justify-between mt-4">
-                                <div class="flex gap-2">
-                                    <a href="{{ route('admin.courses.edit', $course->id) }}" 
-                                       class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
-                                        <i class="fas fa-edit mr-1.5"></i>
-                                        რედაქტირება
-                                    </a>
-                                    <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="inline-flex items-center px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md transition-colors duration-200"
-                                                onclick="return confirm('დარწმუნებული ხართ?')">
-                                            <i class="fas fa-trash-alt mr-1.5"></i>
-                                            წაშლა
-                                        </button>
-                                    </form>
-                                </div>
+                            
+                            <!-- Actions -->
+                            <div class="flex gap-2">
+                                <a href="{{ route('admin.courses.edit', $course->id) }}" 
+                                   class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded text-center transition-colors">
+                                    რედაქტირება
+                                </a>
+                                <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" class="flex-1">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" 
+                                            class="w-full px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded transition-colors"
+                                            onclick="return confirm('დარწმუნებული ხართ?')">
+                                        წაშლა
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
             @else
-                <div class="flex flex-col items-center justify-center py-12">
-                    <div class="w-48 h-48 relative mb-8">
-                        <div class="absolute inset-0 flex items-center justify-center animate-pulse">
-                            <i class="fas fa-video text-8xl text-primary-400"></i>
-                        </div>
-                        <div class="absolute inset-0 border-4 border-t-primary-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                <!-- Empty State -->
+                <div class="text-center py-16">
+                    <div class="w-16 h-16 bg-gray-100 dark:bg-dark-4 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">კურსები მზადდება</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-center max-w-md">
-                        ამჟამად მიმდინარეობს კურსების ჩაწერა. გთხოვთ, შეამოწმოთ მოგვიანებით.
-                    </p>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">კურსები არ არის</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">დაიწყეთ პირველი კურსის შექმნით</p>
+                    <a href="{{ route('admin.courses.create') }}" 
+                       class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors">
+                        კურსის დამატება
+                    </a>
                 </div>
             @endif
         </div>
     </div>
 
     @push('styles')
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <style>
-        [x-cloak] { display: none !important; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
-    @endpush
-
-    @push('scripts')
-    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
     @endpush
 </x-admin.layout>

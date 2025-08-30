@@ -21,6 +21,9 @@
       class="bg-gray-50 dark:bg-dark">
     <head>
         <link rel="stylesheet" href="/node_modules/dejavu-sans-condensed/css/dejavu-sans-condensed.min.css">
+        <style>
+            [x-cloak] { display: none !important; }
+        </style>
         <script>
             if (localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
@@ -31,8 +34,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- <script src="//unpkg.com/alpinejs" defer></script> -->
         <title>{{ config('app.name', 'Laravel') }}</title>
+        
+        <!-- Load Alpine.js first -->
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-gray-200 dark:bg-slate-800">

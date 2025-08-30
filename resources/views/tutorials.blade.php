@@ -105,7 +105,7 @@
                             <!-- Revolutionary Stats Section -->
                             <div class="mb-2 sm:mb-3">
                                 <div class="grid grid-cols-2 gap-2 sm:gap-3">
-                                    <div class="bg-gradient-to-br from-gray-50 to-white dark:from-white/8 dark:to-white/4 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 border border-gray-200 dark:border-white/10 group-hover:bg-gradient-to-br group-hover:from-blue-500/10 group-hover:to-blue-600/10 transition-all duration-500 h-12 sm:h-16 flex items-center relative overflow-hidden">
+                                    <div class="bg-gradient-to-br from-gray-50 to-white dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-blue-600/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 border border-gray-200 dark:border-white/10 group-hover:bg-gradient-to-br group-hover:from-blue-500/10 group-hover:to-blue-600/10 transition-all duration-500 h-12 sm:h-16 flex items-center relative overflow-hidden">
                                         <div class="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-400/5 to-blue-500/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                         <div class="flex items-center gap-1.5 sm:gap-2.5 w-full relative z-10">
                                             <div class="w-6 h-6 sm:w-8 sm:h-8 bg-blue-500/20 rounded-md sm:rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="bg-gradient-to-br from-gray-50 to-white dark:from-white/8 dark:to-white/4 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 border border-gray-200 dark:border-white/10 group-hover:bg-gradient-to-br group-hover:from-purple-500/10 group-hover:to-purple-600/10 transition-all duration-500 h-12 sm:h-16 flex items-center relative overflow-hidden">
+                                    <div class="bg-gradient-to-br from-gray-50 to-white dark:bg-gradient-to-br dark:from-purple-500/10 dark:to-purple-600/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 border border-gray-200 dark:border-white/10 group-hover:bg-gradient-to-br group-hover:from-purple-500/10 group-hover:to-purple-600/10 transition-all duration-500 h-12 sm:h-16 flex items-center relative overflow-hidden">
                                         <div class="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-400/5 to-purple-500/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                         <div class="flex items-center gap-1.5 sm:gap-2.5 w-full relative z-10">
                                             <div class="w-6 h-6 sm:w-8 sm:h-8 bg-purple-500/20 rounded-md sm:rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
