@@ -41,8 +41,16 @@ class Exam extends Component
         // dd($this->currentExamRequest);
         $this->validateTestActive($this->test);
         $this->testQuestion = $testQuestion;
-        $this->current_question_index = $this->test->questions()->orderBy('id', 'asc')->first()->id;
+        
+        // Check if this is a new exam start or resuming an ongoing exam
         $this->loadCurrentQuestionIndex();
+        
+        // If no saved question index (new exam) or exam just started, go to first question
+        if (is_null($this->current_question_index) || !$this->test->started_at) {
+            $this->current_question_index = $this->test->questions()->orderBy('id', 'asc')->first()->id;
+            session()->forget('current_question_index');
+        }
+        
         $this->initializeFirstQuestion();
         $this->examDuration = SystemSetting::where('key', 'exam_duration')->first()->value;
     }
@@ -89,16 +97,20 @@ class Exam extends Component
 
     public function initializeFirstQuestion(): void
     {
-        if($this->current_question_index) {
+        // If we have a saved question index, load that question
+        if ($this->current_question_index) {
             $this->question = $this->test->questions()->where('questions.id', $this->current_question_index)->withPivot('answer')->first();
         }
         
-        if(!$this->question) {
-            $this->question = $this->test->questions()->withPivot('answer')->first();
+        // If no saved question or question not found, go to first question
+        if (!$this->question) {
+            $this->question = $this->test->questions()->orderBy('id', 'asc')->withPivot('answer')->first();
+            if ($this->question) {
+                $this->current_question_index = $this->question->id;
+            }
         }
-
+        
         if($this->question) {
-            $this->current_question_index = $this->question->id;
             $this->saveCurrentQuestionIndex();
         }
 
@@ -108,9 +120,27 @@ class Exam extends Component
     public function answer($answer)
     {
         if(TestQuestion::where('test_id', $this->test->id)->where('question_id', $this->question->id)->first()->answer) return false;
+        
+        // Save the answer
         $this->test->questions()->syncWithoutDetaching([$this->question->id => ['answer' => $answer]]);
+        
+        // Update progress
         $this->updateProgress();
+        
+        // Reload current question with answer
         $this->question = $this->test->questions()->where('questions.id', $this->question->id)->withPivot('answer')->first();
+        
+        // Check if this was the last question
+        $currentQuestionId = $this->question->id;
+        $nextQuestion = $this->test->questions()
+            ->where('questions.id', '>', $currentQuestionId)
+            ->orderBy('questions.id')
+            ->first();
+        
+        // If there's a next question, go to it after a brief delay
+        if ($nextQuestion) {
+            $this->dispatch('goToNextQuestion', questionId: $nextQuestion->id);
+        }
     }
 
     public function nextQuestion(): void
@@ -175,12 +205,20 @@ class Exam extends Component
 
     public function loadCurrentQuestionIndex()
     {
-        $this->current_question_index = session('current_question_index', 0);
+        $this->current_question_index = session('current_question_index', null);
     }
 
     public function finalizeExam()
     {
         FinalizeExamAction::execute($this->test, $this->currentExamRequest);
+    }
+    
+    public function goToQuestionAfterAnswer($questionId): void
+    {
+        $this->question = Question::findOrFail($questionId);
+        $this->current_question_index = $this->question->id;
+        $this->saveCurrentQuestionIndex();
+        $this->updateProgress();
     }
 
     public function render()

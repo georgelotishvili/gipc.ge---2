@@ -30,9 +30,13 @@ class ExamRequest extends Component
 
     public function requestExam()
     {
-        if($this->examRequests)
-        {
+        if ($this->examRequests) {
             return;
+        }
+
+        // Block unpaid users from creating exam requests
+        if (!$this->user || method_exists($this->user, 'hasActiveSubscription') && !$this->user->hasActiveSubscription()) {
+            return redirect()->route('pricing');
         }
 
         $examRequest = $this->user->examRequests()->create([
@@ -45,8 +49,12 @@ class ExamRequest extends Component
 
     public function startExam()
     {
-        if(!$this->examRequests)
-        {
+        // Block unpaid users from starting exams
+        if (!$this->user || method_exists($this->user, 'hasActiveSubscription') && !$this->user->hasActiveSubscription()) {
+            return redirect()->route('pricing');
+        }
+
+        if (!$this->examRequests) {
             $examRequest = $this->user->examRequests()->create([
                 'approved' => true,
                 'closed' => false,

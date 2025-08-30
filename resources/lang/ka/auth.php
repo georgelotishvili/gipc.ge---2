@@ -32,7 +32,7 @@ return [
     "Don't have an account?" => 'არ გაქვთ ანგარიში?',
     'Sign up' => 'რეგისტრაცია',
     'Create account' => 'ანგარიშის შექმნა',
-    'Join us today' => 'შეუერთდით ჩვენ დღეს',
+    'Join us today' => 'შემოგვიერთდით ჩვენ დღეს',
     'Name' => 'სახელი',
     'Enter your name' => 'შეიყვანეთ თქვენი სახელი',
     'Confirm password' => 'გაიმეორეთ პაროლი',
