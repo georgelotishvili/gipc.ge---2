@@ -520,9 +520,7 @@
     </nav>
 
     <!-- Hero Section Start -->
-    <section class="relative overflow-hidden pt-24 px-12 @auth lg:ml-16 @endauth"
-             x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }"
-             :class="{ 'lg:ml-64': sidebarOpen, 'lg:ml-16': !sidebarOpen }">
+    <section class="relative overflow-hidden pt-24 px-12 @auth lg:ml-16 @endauth">
         <div class="absolute inset-0 -z-10"></div>
         <div class="absolute inset-0 opacity-30 -z-10 bg-pattern dark:opacity-10"></div>
         
@@ -535,9 +533,7 @@
     @endauth
     
     <!-- Rest of your layout -->
-    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 @auth lg:ml-16 @endauth"
-          x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'true' }"
-          :class="{ 'lg:ml-64': sidebarOpen, 'lg:ml-16': !sidebarOpen }">
+    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 @auth lg:ml-16 @endauth">
         {{ $slot }}
     </main>
 

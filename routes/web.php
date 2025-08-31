@@ -87,6 +87,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/questions', [AdminController::class, 'questions'])->name('admin.questions');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::delete('/admin/users/{userId}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 
     // Regulations
     Route::get('/admin/regulations', [AdminController::class, 'regulations'])->name('admin.regulations.regulations');
@@ -300,3 +301,5 @@ Route::get('/mail', function () {
     Mail::to(request('mail'))->send(new \App\Mail\ZohoMail());
     return 'Email sent!';
 });
+
+

@@ -301,6 +301,46 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteUser($userId)
+    {
+        try {
+            DB::beginTransaction();
+            
+            $user = User::findOrFail($userId);
+            
+            // Delete related data first
+            $user->examRequests()->delete();
+            $user->tokens()->delete();
+            $user->employers()->delete();
+            $user->payments()->delete();
+            $user->employees()->delete();
+            $user->certificates()->delete();
+            $user->comments()->delete();
+            $user->ratings()->delete();
+            
+            // Delete profile image if exists
+            if ($user->image()->exists()) {
+                $user->image()->delete();
+            }
+            
+            // Delete subscription if exists
+            if ($user->subscription()->exists()) {
+                $user->subscription()->delete();
+            }
+            
+            // Force delete the user
+            $user->forceDelete();
+            
+            DB::commit();
+            
+            return redirect()->route('admin.users')->with('success', 'User deleted successfully!');
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.users')->with('error', 'Error deleting user: ' . $e->getMessage());
+        }
+    }
+
     public function codes()
     {
         $groups = Group::all();
@@ -495,9 +535,12 @@ class AdminController extends Controller
         try {
             $course->delete();
 
-            if ($course->image) {
-                $deleteImage = new DeleteImageAction();
-                $deleteImage->execute($course->image);
+            if ($course->image()->exists()) {
+                $image = $course->image()->first();
+                if ($image) {
+                    $deleteImage = new DeleteImageAction();
+                    $deleteImage->execute($image);
+                }
             }
 
             DB::commit();
