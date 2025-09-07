@@ -20,21 +20,21 @@
         }
     </style>
     
-    <!-- Full Screen Form Container -->
-    <div class="min-h-screen relative overflow-hidden">
-        <!-- Floating Header -->
-        <div class="relative z-10 pt-8 pb-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Clean Form Container -->
+    <div class="min-h-screen transition-colors duration-200">
+        <!-- Simple Header -->
+        <div class="border-b border-gray-200 dark:border-gray-700">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-3xl mb-6 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
                     </div>
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                         რეზიუმეს შექმნა
                     </h1>
-                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                         შექმენით თქვენი პროფესიონალური რეზიუმე და დაიწყეთ თქვენი კარიერის შემდეგი ეტაპი
                     </p>
                 </div>
@@ -42,76 +42,62 @@
         </div>
 
         <!-- Main Form Container -->
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-            <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/30 overflow-hidden">
-                <!-- Gradient Header -->
-                <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 px-8 py-6 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
-                    <div class="relative z-10">
-                        <h2 class="text-2xl font-bold text-white flex items-center">
-                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            პროფესიონალური რეზიუმე
-                        </h2>
-                        <p class="text-blue-100 mt-1">შეიყვანეთ თქვენი ინფორმაცია ნაბიჯ-ნაბიჯ</p>
-                    </div>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             
-                @if ($errors->any())
-                    <div class="m-8 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-800/30 text-red-800 dark:text-red-200 px-6 py-4 rounded-2xl backdrop-blur-sm">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-lg font-semibold">გთხოვთ შეასწოროთ შემდეგი შეცდომები:</h3>
-                                <ul class="list-disc pl-5 mt-2 space-y-1">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+            @if ($errors->any())
+                <div class="mb-8 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/30 text-red-800 dark:text-red-200 px-6 py-4 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-semibold">გთხოვთ შეასწოროთ შემდეგი შეცდომები:</h3>
+                            <ul class="list-disc pl-5 mt-2 space-y-1 text-sm">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
                 
-                <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" class="p-8 space-y-12" x-data="{ showPreview: false }">
-                    @csrf
+            <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8" x-data="{ showPreview: false }">
+                @csrf
+                
+                <!-- Preview Toggle Button -->
+                <div class="flex justify-center mb-8">
+                    <button type="button" @click="showPreview = !showPreview" 
+                        class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-sm transition-all duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <span x-text="showPreview ? 'დამალვა' : 'წინასწარი ნახვა'"></span>
+                    </button>
+                </div>
                     
-                    <!-- Preview Toggle Button -->
-                    <div class="flex justify-center mb-8">
-                        <button type="button" @click="showPreview = !showPreview" 
-                            class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Live Preview Section -->
+                <div x-show="showPreview" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mr-4">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                             </svg>
-                            <span x-text="showPreview ? 'დამალვა' : 'წინასწარი ნახვა'"></span>
-                        </button>
-                    </div>
-                    
-                    <!-- Live Preview Section -->
-                    <div x-show="showPreview" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-indigo-50/50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-3xl p-8 border border-blue-100/50 dark:border-blue-800/30 backdrop-blur-sm">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">წინასწარი ნახვა</h3>
-                                <p class="text-gray-600 dark:text-gray-400">თქვენი რეზიუმეს ბარათი</p>
-                            </div>
                         </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">წინასწარი ნახვა</h3>
+                            <p class="text-gray-600 dark:text-gray-400">თქვენი რეზიუმეს ბარათი</p>
+                        </div>
+                    </div>
                         
-                        <!-- Preview Card -->
-                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                            <!-- Card Header with Image -->
-                            <div class="relative h-48 sm:h-56 md:h-64 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500">
+                    <!-- Preview Card -->
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <!-- Card Header with Image -->
+                        <div class="relative h-48 sm:h-56 md:h-64 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600">
                                 <div class="absolute inset-0 bg-gradient-to-br from-black/10 to-black/30"></div>
                                 <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
                                     <div class="flex flex-col md:flex-row items-center md:items-end md:space-y-0 md:space-x-6 text-center md:text-left pt-4 md:pt-0">
@@ -240,27 +226,27 @@
                         </div>
                     </div>
                 
-                <!-- Personal Information Section -->
-                <div class="bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-indigo-50/50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-3xl p-8 border border-blue-100/50 dark:border-blue-800/30 backdrop-blur-sm">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">პირადი ინფორმაცია</h3>
-                            <p class="text-gray-600 dark:text-gray-400">შეიყვანეთ თქვენი ძირითადი მონაცემები</p>
-                        </div>
+            <!-- Personal Information Section -->
+            <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800/30">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">პირადი ინფორმაცია</h3>
+                        <p class="text-gray-600 dark:text-gray-400">შეიყვანეთ თქვენი ძირითადი მონაცემები</p>
+                    </div>
+                </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- Floating Input Fields -->
-                        <div class="group">
-                            <div class="relative">
-                                <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                                    class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" 
-                                    placeholder="სახელი და გვარი" required>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Floating Input Fields -->
+                    <div class="group">
+                        <div class="relative">
+                            <input type="text" name="name" id="name" value="{{ old('name') }}" 
+                                class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" 
+                                placeholder="სახელი და გვარი" required>
                                 <label for="name" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                     <span class="flex items-center text-sm">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -386,26 +372,26 @@
                     </div>
                 </div>
                 
-                <!-- Experience & Skills Section -->
-                <div class="bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-indigo-50/50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-3xl p-8 border border-blue-100/50 dark:border-blue-800/30 backdrop-blur-sm">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">გამოცდილება და უნარები</h3>
-                            <p class="text-gray-600 dark:text-gray-400">აღწერეთ თქვენი პროფესიონალური უნარები</p>
-                        </div>
+            <!-- Experience & Skills Section -->
+            <div class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-2xl p-8 border border-indigo-200 dark:border-indigo-800/30">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">გამოცდილება და უნარები</h3>
+                        <p class="text-gray-600 dark:text-gray-400">აღწერეთ თქვენი პროფესიონალური უნარები</p>
+                    </div>
+                </div>
                     
-                    <div class="space-y-8">
-                        <div class="group">
-                            <div class="relative">
-                                <textarea name="description" id="description" rows="8" 
-                                    class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm resize-none" 
-                                    placeholder="თქვენი გამოცდილება და კვალიფიკაცია" required>{{ old('description') }}</textarea>
+                <div class="space-y-8">
+                    <div class="group">
+                        <div class="relative">
+                            <textarea name="description" id="description" rows="8" 
+                                class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm resize-none" 
+                                placeholder="თქვენი გამოცდილება და კვალიფიკაცია" required>{{ old('description') }}</textarea>
                                 <label for="description" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                     <span class="flex items-center text-sm">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -453,26 +439,26 @@
                     </div>
                 </div>
                 
-                <!-- Contact Information Section -->
-                <div class="bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-indigo-50/50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-3xl p-8 border border-blue-100/50 dark:border-blue-800/30 backdrop-blur-sm">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">საკონტაქტო ინფორმაცია</h3>
-                            <p class="text-gray-600 dark:text-gray-400">როგორ შეგვიძლია დაგიკავშირდეთ</p>
-                        </div>
+            <!-- Contact Information Section -->
+            <div class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-800/30">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">საკონტაქტო ინფორმაცია</h3>
+                        <p class="text-gray-600 dark:text-gray-400">როგორ შეგვიძლია დაგიკავშირდეთ</p>
+                    </div>
+                </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="group">
-                            <div class="relative">
-                                <input type="email" name="email" id="email" value="{{ old('email') }}" 
-                                    class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" 
-                                    placeholder="ელ-ფოსტა" required>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="group">
+                        <div class="relative">
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" 
+                                class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" 
+                                placeholder="ელ-ფოსტა" required>
                                 <label for="email" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-green-600 dark:peer-focus:text-green-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                     <span class="flex items-center text-sm">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -551,52 +537,52 @@
                     </div>
                 </div>
                 
-                <!-- File Upload Section -->
-                <div class="bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-indigo-50/50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-3xl p-8 border border-blue-100/50 dark:border-blue-800/30 backdrop-blur-sm">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">პროფილის ფოტო</h3>
-                            <p class="text-gray-600 dark:text-gray-400">ატვირთეთ თქვენი პროფესიონალური ფოტო</p>
-                        </div>
+            <!-- File Upload Section -->
+            <div class="rounded-2xl p-8">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">პროფილის ფოტო</h3>
+                        <p class="text-gray-600 dark:text-gray-400">ატვირთეთ თქვენი პროფესიონალური ფოტო</p>
+                    </div>
+                </div>
                     
-                    <!-- Modern File Upload Area -->
-                    <div class="relative">
-                        <input type="file" name="image" id="image" accept="image/*" 
-                            class="hidden" 
-                            onchange="previewImage(this)">
-                        
-                        <!-- Upload Area with Image Preview -->
-                        <label for="image" class="cursor-pointer block">
-                            <div id="uploadArea" class="border-2 border-dashed border-purple-300 dark:border-purple-600 rounded-2xl hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-gray-800/70 relative overflow-hidden">
+                <!-- Modern File Upload Area -->
+                <div class="relative">
+                    <input type="file" name="image" id="image" accept="image/*" 
+                        class="hidden" 
+                        onchange="previewImage(this)">
+                    
+                    <!-- Upload Area with Image Preview -->
+                    <label for="image" class="cursor-pointer block">
+                        <div id="uploadArea" class="border-2 border-dashed border-purple-300 dark:border-purple-600 rounded-2xl hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-gray-800/70 relative overflow-hidden">
                                 
-                                <!-- Default Upload State -->
-                                <div id="defaultState" class="p-8 text-center">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                                        </svg>
-                                    </div>
-                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">ატვირთეთ ფოტო</h4>
-                                    <p class="text-gray-600 dark:text-gray-400 mb-4">დააჭირეთ ან ჩაიტანეთ ფაილი აქ</p>
-                                    <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 text-white rounded-xl font-medium hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                        </svg>
-                                        აირჩიეთ ფაილი
-                                    </div>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3">მხოლოდ JPG, PNG ან GIF ფორმატები, მაქსიმუმ 2MB</p>
+                            <!-- Default Upload State -->
+                            <div id="defaultState" class="p-8 text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                    </svg>
                                 </div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">ატვირთეთ ფოტო</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">დააჭირეთ ან ჩაიტანეთ ფაილი აქ</p>
+                                <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white rounded-xl font-medium hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    აირჩიეთ ფაილი
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-3">მხოლოდ JPG, PNG ან GIF ფორმატები, მაქსიმუმ 2MB</p>
+                            </div>
 
-                                <!-- Image Preview State -->
-                                <div id="imagePreviewState" class="hidden">
-                                    <div class="relative w-full h-64 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30">
-                                        <img id="previewImg" src="" alt="Preview" class="w-full h-full object-cover">
+                            <!-- Image Preview State -->
+                            <div id="imagePreviewState" class="hidden">
+                                <div class="relative w-full h-64 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30">
+                                    <img id="previewImg" src="" alt="Preview" class="w-full h-full object-cover">
                                         
                                         <!-- Trash Button -->
                                         <button type="button" onclick="removeImage(event)" class="absolute top-3 right-3 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200 transform hover:scale-110">
@@ -813,11 +799,11 @@
                         });
 
                         function highlight(e) {
-                            uploadArea.classList.add('border-purple-400', 'dark:border-purple-500', 'bg-purple-50/50', 'dark:bg-purple-900/20');
+                            uploadArea.classList.add('border-blue-400', 'dark:border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
                         }
 
                         function unhighlight(e) {
-                            uploadArea.classList.remove('border-purple-400', 'dark:border-purple-500', 'bg-purple-50/50', 'dark:bg-purple-900/20');
+                            uploadArea.classList.remove('border-blue-400', 'dark:border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
                         }
 
                         uploadArea.addEventListener('drop', handleDrop, false);
@@ -900,25 +886,24 @@
                 });
                 </script>
                 
-                <!-- Submit Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-end gap-6 pt-8 border-t border-gray-200/50 dark:border-gray-700/50">
-                    <a href="{{ route('jobs') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 text-gray-700 dark:text-gray-200 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-gray-200/50 dark:border-gray-600/50">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                        გაუქმება
-                    </a>
-                    <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white rounded-2xl font-bold text-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:scale-105">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                        </svg>
-                        რეზიუმეს შექმნა
-                    </button>
-                </div>
+            <!-- Submit Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-6 pt-8 border-t border-gray-200/50 dark:border-gray-700/50">
+                <a href="{{ route('jobs') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 text-gray-700 dark:text-gray-200 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-gray-200/50 dark:border-gray-600/50">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    გაუქმება
+                </a>
+                <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white rounded-2xl font-bold text-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:scale-105">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    რეზიუმეს შექმნა
+                </button>
+            </div>
             </form>
         </div>
     </div>
-</div>
 
 <!-- Image Modal -->
 <div id="imageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
