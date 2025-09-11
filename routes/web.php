@@ -242,6 +242,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/workspace', function () {
         return view('user.workspace');
     })->name('workspace');
+    
+    Route::post('/exam/start', [App\Http\Controllers\ExamController::class, 'start'])->name('exam.start');
 
 
     Route::get('subscribe/{plan}', [PaymentController::class, 'buySubscription'])->name('subscribe.pay')->middleware('agreement');

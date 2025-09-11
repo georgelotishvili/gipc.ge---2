@@ -49,9 +49,18 @@ class ExamRequest extends Component
 
     public function startExam()
     {
-        // Block unpaid users from starting exams
-        if (!$this->user || method_exists($this->user, 'hasActiveSubscription') && !$this->user->hasActiveSubscription()) {
-            return redirect()->route('pricing');
+        // Debug: Check user and subscription status
+        if (!$this->user) {
+            session()->flash('error', 'User not found');
+            return;
+        }
+
+        // Check subscription status
+        $hasSubscription = $this->user->hasActiveSubscription();
+        
+        if (!$hasSubscription) {
+            session()->flash('error', 'You need an active subscription to start an exam');
+            $this->redirect(route('pricing'));
         }
 
         if (!$this->examRequests) {
@@ -64,9 +73,11 @@ class ExamRequest extends Component
         }
         
         if(!$this->approvedExamRequest) {
+            session()->flash('error', 'No approved exam request found');
             return;
         }
-        return redirect()->route('exam', $this->approvedExamRequest);
+        
+        $this->redirect(route('exam', $this->approvedExamRequest));
     }
 
     public function cancelExam()
@@ -76,7 +87,7 @@ class ExamRequest extends Component
         }
         FinalizeExamAction::execute($this->approvedExamRequest->test, $this->approvedExamRequest);
         $this->fetchExamRequests();
-        return redirect()->route('workspace');
+        $this->redirect(route('workspace'));
     }
 
     public function render()
