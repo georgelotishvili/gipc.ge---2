@@ -341,6 +341,51 @@ class AdminController extends Controller
         }
     }
 
+    public function editSubscription($userId)
+    {
+        $user = User::findOrFail($userId);
+        $plans = Plan::with('planType')->get();
+        
+        return view('admin.subscription-edit', [
+            'user' => $user,
+            'plans' => $plans
+        ]);
+    }
+
+    public function updateSubscription(Request $request, $userId)
+    {
+        $user = User::findOrFail($userId);
+        
+        $request->validate([
+            'is_active' => 'required|boolean',
+            'plan_id' => 'required|exists:plans,id',
+            'starts_at' => 'required|date',
+            'ends_at' => 'nullable|date|after:starts_at',
+        ], [
+            'plan_id.required' => 'გამოწერის ტიპი აუცილებელია',
+            'plan_id.exists' => 'არჩეული გამოწერის ტიპი არ არსებობს',
+            'starts_at.required' => 'დაწყების თარიღი აუცილებელია',
+            'starts_at.date' => 'დაწყების თარიღი არასწორი ფორმატია',
+            'ends_at.date' => 'დასრულების თარიღი არასწორი ფორმატია',
+            'ends_at.after' => 'დასრულების თარიღი უნდა იყოს დაწყების თარიღის შემდეგ',
+        ]);
+
+        $plan = Plan::findOrFail($request->plan_id);
+        
+        $data = [
+            'plan_type_id' => $plan->plan_type_id,
+            'plan_id' => $plan->id,
+            'is_active' => (bool) $request->is_active,
+            'starts_at' => \Carbon\Carbon::parse($request->starts_at)->startOfDay(),
+            'ends_at' => $request->ends_at ? \Carbon\Carbon::parse($request->ends_at)->endOfDay() : \Carbon\Carbon::now()->addDays($plan->planType->type_duration),
+            'recToken' => md5(time() . $user->id),
+        ];
+
+        $user->createOrUpdateSubscription($data);
+
+        return redirect()->route('admin.users')->with('success', 'Subscription updated successfully!');
+    }
+
     public function codes()
     {
         $groups = Group::all();

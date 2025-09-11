@@ -88,6 +88,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/questions', [AdminController::class, 'questions'])->name('admin.questions');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
     Route::delete('/admin/users/{userId}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::get('/admin/users/{userId}/subscription/edit', [AdminController::class, 'editSubscription'])->name('admin.subscription.edit');
+    Route::put('/admin/users/{userId}/subscription/update', [AdminController::class, 'updateSubscription'])->name('admin.subscription.update');
 
     // Regulations
     Route::get('/admin/regulations', [AdminController::class, 'regulations'])->name('admin.regulations.regulations');

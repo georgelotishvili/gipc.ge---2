@@ -15,8 +15,29 @@ trait HasSubscription
 
     public function hasActiveSubscription(): bool
     {
-        $endDate = $this->subscription?->ends_at ? Carbon::parse($this->subscription?->ends_at) : null;
-        return $endDate && $endDate->greaterThan(now()) && $this->subscription?->is_active;
+        if (!$this->subscription || !$this->subscription->is_active) {
+            return false;
+        }
+
+        // If ends_at is set, use it
+        if ($this->subscription->ends_at) {
+            $endDate = Carbon::parse($this->subscription->ends_at);
+            return $endDate->greaterThan(now());
+        }
+
+        // If ends_at is not set but starts_at is, calculate it
+        if ($this->subscription->starts_at && $this->subscription->planType) {
+            $startDate = Carbon::parse($this->subscription->starts_at);
+            $endDate = $startDate->copy()->addDays($this->subscription->planType->type_duration);
+            
+            // Update the database with calculated end date
+            $this->subscription->ends_at = $endDate;
+            $this->subscription->save();
+            
+            return $endDate->greaterThan(now());
+        }
+
+        return false;
     }
 
     public function createOrUpdateSubscription(array $data)
