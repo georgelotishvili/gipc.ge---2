@@ -53,9 +53,9 @@
         </div>
         <div class="whitespace-nowrap text-right text-sm font-medium">
             <div class="flex justify-end gap-2">
-                <button @click="$dispatch('open-modal', { name: 'edit-user', userId: {{ $user->id }} })" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                <a href="{{ route('admin.subscription.edit', $user->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                     რედაქტირება
-                </button>
+                </a>
                 <button
                     wire:click="confirmDelete"
                     class="px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:from-red-700 hover:to-red-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
