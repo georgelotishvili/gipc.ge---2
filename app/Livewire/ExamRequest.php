@@ -55,12 +55,14 @@ class ExamRequest extends Component
             return;
         }
 
-        // Check subscription status
+        // Check subscription status FIRST - before creating any exam requests
         $hasSubscription = $this->user->hasActiveSubscription();
         
+        
         if (!$hasSubscription) {
-            session()->flash('error', 'You need an active subscription to start an exam');
+            session()->flash('error', 'You need an active subscription to start an exam - redirecting to pricing');
             $this->redirect(route('pricing'));
+            return; // IMPORTANT: Stop execution here!
         }
 
         if (!$this->examRequests) {
