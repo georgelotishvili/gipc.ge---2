@@ -15,7 +15,7 @@ trait HasSubscription
 
     public function hasActiveSubscription(): bool
     {
-        if (!$this->subscription || !$this->subscription->is_active) {
+        if (!$this->subscription) {
             return false;
         }
 

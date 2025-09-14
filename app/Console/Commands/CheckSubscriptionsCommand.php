@@ -34,12 +34,14 @@ class CheckSubscriptionsCommand extends Command
                 ->selectRaw('DATEDIFF(ends_at, NOW()) AS days_left')
                 ->get();
             foreach ($subscriptions as $subscription) {
-                $diffInDays = abs($subscription->days_left);
-                $this->info($diffInDays);
-                if ($diffInDays <= $subscription->planType->payment_days) {
-                    
+                $diffInDays = $subscription->days_left;
+                $this->info("Subscription {$subscription->id}: {$diffInDays} days left");
+                
+                // Only deactivate if subscription has actually expired (days_left <= 0)
+                if ($diffInDays <= 0) {
                     $subscription->is_active = false;
                     $subscription->save();
+                    $this->info("Deactivated expired subscription ID {$subscription->id}");
 
                     // რეკურსიული:
                     // $data = $payment->getRecurrentData($subscription);
