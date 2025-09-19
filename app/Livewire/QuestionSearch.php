@@ -14,8 +14,22 @@ class QuestionSearch extends Component
     {
         $trimmedSearch = preg_replace('/\s+/', ' ', trim($this->search));
         
-        if (strlen($trimmedSearch) >= 2) {
-            $this->searchResults = Question::where('text', 'like', '%' . $trimmedSearch . '%')
+        if ($trimmedSearch !== '') {
+            $this->searchResults = Question::query()
+                ->where(function ($query) use ($trimmedSearch) {
+                    $query->where('text', 'like', '%' . $trimmedSearch . '%');
+
+                    if (ctype_digit($trimmedSearch)) {
+                        $query->orWhere('id', (int) $trimmedSearch);
+                    }
+
+                    $query->orWhereHas('groups', function ($q) use ($trimmedSearch) {
+                        $q->where('name', 'like', '%' . $trimmedSearch . '%')
+                          ->orWhere('title', 'like', '%' . $trimmedSearch . '%');
+                    });
+                })
+                ->with(['groups:id,name,title'])
+                ->distinct()
                 ->take(10)
                 ->get();
         } else {
