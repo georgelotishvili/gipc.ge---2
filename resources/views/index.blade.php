@@ -241,14 +241,14 @@
     </style>
 
     <script>
-        function showPremiumAlert() {
-            document.getElementById('premiumAlertModal').classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closePremiumAlert() {
-            document.getElementById('premiumAlertModal').classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
+        //function showPremiumAlert() {
+        //    document.getElementById('premiumAlertModal').classList.remove('hidden');
+        //    document.body.classList.add('overflow-hidden');
+        //}
+//
+        //function closePremiumAlert() {
+        //    document.getElementById('premiumAlertModal').classList.add('hidden');
+        //    document.body.classList.remove('overflow-hidden');
+        //}
     </script>
 </x-layout>
