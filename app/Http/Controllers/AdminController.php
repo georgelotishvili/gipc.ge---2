@@ -711,7 +711,8 @@ class AdminController extends Controller
                 'video_url' => "https://video.bunnycdn.com/library/382670/videos/$videoId",
                 'library_id' => 382670,
                 'weight' => $request->input('weight'),
-                'description' => $request->input('description')
+                'description' => $request->input('description'),
+                'free' => (bool) $request->boolean('free')
             ]);
 
             Log::info('video created' . $video);
@@ -770,6 +771,7 @@ class AdminController extends Controller
         $video->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
+            'free' => (bool) $request->boolean('free')
         ]);
 
         return redirect()->back()->with('success', 'ვიდეო წარმატებით განახლდა');

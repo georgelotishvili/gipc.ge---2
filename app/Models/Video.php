@@ -14,6 +14,10 @@ class Video extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'free' => 'boolean',
+    ];
+
     /**
      * Get the course that owns the video
      * 
@@ -51,13 +55,10 @@ class Video extends Model
 
     public function imageUrl(): string
     {
-        if($this->image)
-        {
-            if($this->image->url)
-            {
-                return asset('storage/' . $this->image->path);
-            }
+        $image = $this->image()->first();
+        if ($image && $image->url) {
+            return asset('storage/' . $image->path);
         }
-        return asset('https://'. config('video.cdn_hostname') .'/'. $this->video_id .'/'. config('video.default_thumbnail_filename'));
+        return asset('https://' . config('video.cdn_hostname') . '/' . $this->video_id . '/' . config('video.default_thumbnail_filename'));
     }
 }
