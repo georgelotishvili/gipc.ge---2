@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\Auth;
 
 Route::get( '/', function () {
     return view('index');
@@ -181,9 +182,23 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscription','verified'])->group(function () {
+    Route::get('/test_results', function () {
+        return view('user.test_results');
+    })->name('test_results');
+
+    Route::get('/questions', [QuestionController::class, 'indexToUser'])->name('questions');
+    Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
+    Route::get('/exam/{examRequest}', Exam::class)->name('exam');
+    Route::get('/test', Exam::class)->name('test');
+});
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/tutorials', function () {
         $courses = Course::all();
-        $videos_ordered = Video::orderBy('weight')->get();
+        if(Auth::user()->hasActiveSubscription()) 
+            $videos_ordered = Video::orderBy('weight')->get();
+        else 
+            $videos_ordered = Video::where('free', true)->orderBy('weight')->get();
         return view('tutorials', compact('courses', 'videos_ordered'));
     })->name('tutorials');
 
@@ -192,8 +207,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscripti
         return view('tutorials.chapters', compact('course'));
     })->name('tutorials.chapters');
 
+    Route::get('/video', function () {
+        return view('user.video');
+    })->name('video');
+
     Route::get('/tutorials/video/{video}', function ($video) {
         $video = Video::findOrFail($video);
+        if(!Auth::user()->hasActiveSubscription() && !$video->free) {
+            abort(403, 'გთხოვთ შეიძინოთ პრემიუმ პაკეტი ვიდეოს ნახვისთვის.');
+        }
+        
         
         // Get the chapter this video belongs to
         if (!$video->chapter) {
@@ -209,7 +232,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscripti
         
         // Get all videos in this chapter, ordered by weight
         $playlist = $chapter->videos()->orderBy('weight')->get();
-        
         // Find current video index in playlist
         $currentIndex = $playlist->search(function($item) use ($video) {
             return $item->id === $video->id;
@@ -222,20 +244,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscripti
         return view('tutorials.show', compact('video', 'chapter', 'course', 'playlist', 'currentIndex', 'nextVideo', 'previousVideo'));
     })->name('tutorials.show');
 
-    Route::get('/test_results', function () {
-        return view('user.test_results');
-    })->name('test_results');
-    Route::get('/video', function () {
-        return view('user.video');
-    })->name('video');
-
-    Route::get('/questions', [QuestionController::class, 'indexToUser'])->name('questions');
-    Route::get('/result/{test}', [ResultController::class, 'index'])->name('result');
-    Route::get('/exam/{examRequest}', Exam::class)->name('exam');
-    Route::get('/test', Exam::class)->name('test');
-});
-
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('user.workspace');
     })->name('dashboard');

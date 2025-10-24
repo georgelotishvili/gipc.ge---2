@@ -1,5 +1,9 @@
 @if($style === 'grid')
+    @if(!$this->isLocked)
     <a href="{{ route('tutorials.show', $video->id) }}" class="group w-full flex-shrink-0">
+    @else
+    <div class="group w-full flex-shrink-0 cursor-not-allowed" title="Not allowed">
+    @endif
         <div class="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-700 h-full flex flex-col border border-gray-200 dark:border-gray-700 transform hover:-translate-y-1 hover:scale-[1.01]">
             <!-- Animated Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -33,6 +37,11 @@
                 <div class="absolute bottom-2 right-2 bg-black/90 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs font-bold border border-white/20 group-hover:bg-blue-600 transition-colors duration-500">
                     {{ $this->getFormattedDuration() }}
                 </div>
+                @if($this->isLocked)
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-white text-xs font-semibold px-2 py-1 bg-black/70 rounded"><i class="fas fa-lock mr-1"></i> Not allowed</span>
+                    </div>
+                @endif
                 @auth
                     @if(auth()->user()->is_admin)
                         <div class="absolute top-2 right-2 bg-black/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/20">
@@ -75,7 +84,11 @@
                 </div>
             </div>
         </div>
+    @if(!$this->isLocked)
     </a>
+    @else
+    </div>
+    @endif
 @else
     <div class="group relative bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl p-2 sm:p-4 flex flex-col sm:flex-row sm:items-center hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 dark:hover:from-gray-700 dark:hover:to-blue-900/20 transition-all duration-500 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
         <!-- Animated Background -->
@@ -92,6 +105,11 @@
             <div class="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 bg-black/90 backdrop-blur-sm text-white text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg font-bold border border-white/20 group-hover:bg-blue-600 transition-colors duration-500">
                 {{ $this->getFormattedDuration() }}
             </div>
+            @if($this->isLocked)
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white text-[10px] px-2 py-0.5 bg-black/70 rounded"><i class="fas fa-lock mr-1"></i> Not allowed</span>
+                </div>
+            @endif
             @auth
                                     @if(auth()->user()->is_admin)
                         <div class="absolute top-2 sm:top-3 right-2 sm:right-3 bg-black/90 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg border border-white/20">
@@ -128,12 +146,20 @@
             </div>
         </div>
         
-        <a href="{{ route('tutorials.show', $video->id) }}" class="mt-2 sm:mt-0 sm:ml-3 relative self-center sm:self-auto">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-500 transform group-hover:scale-105 shadow-md sm:shadow-lg">
-                <i class="fas fa-play text-xs"></i>
+        @if(!$this->isLocked)
+            <a href="{{ route('tutorials.show', $video->id) }}" class="mt-2 sm:mt-0 sm:ml-3 relative self-center sm:self-auto">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-500 transform group-hover:scale-105 shadow-md sm:shadow-lg">
+                    <i class="fas fa-play text-xs"></i>
+                </div>
+                <!-- Ripple Effect -->
+                <div class="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 animate-ping group-hover:animate-none"></div>
+            </a>
+        @else
+            <div class="mt-2 sm:mt-0 sm:ml-3 relative self-center sm:self-auto cursor-not-allowed" title="Not allowed">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 dark:bg-gray-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 shadow-md sm:shadow-lg">
+                    <i class="fas fa-lock text-xs"></i>
+                </div>
             </div>
-            <!-- Ripple Effect -->
-            <div class="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 animate-ping group-hover:animate-none"></div>
-        </a>
+        @endif
     </div>
 @endif

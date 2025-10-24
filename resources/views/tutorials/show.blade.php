@@ -115,21 +115,31 @@
                                 <!-- Navigation Buttons -->
                                 <div class="flex flex-wrap items-center gap-4 sm:gap-6">
                                     @if($previousVideo)
-                                        <a href="{{ route('tutorials.show', $previousVideo->id) }}" 
-                                           class="group inline-flex items-center gap-3 px-6 sm:px-8 py-4 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-300 text-sm font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                        @php $prevLocked = !Auth::user()->hasActiveSubscription() && !$previousVideo?->free; @endphp
+                                        <a href="{{ $prevLocked ? '#' : route('tutorials.show', $previousVideo->id) }}" 
+                                           class="group inline-flex items-center gap-3 px-6 sm:px-8 py-4 {{ $prevLocked ? 'bg-slate-200 dark:bg-slate-700/60 text-slate-400 cursor-not-allowed' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600' }} rounded-2xl transition-all duration-300 text-sm font-semibold shadow-lg hover:shadow-xl transform {{ $prevLocked ? '' : 'hover:-translate-y-1' }}"
+                                           {{ $prevLocked ? 'aria-disabled=true' : '' }}>
                                             <i class="fas fa-chevron-left text-sm group-hover:-translate-x-1 transition-transform"></i>
                                             <span class="hidden sm:inline">წინა ვიდეო</span>
+                                            @if($prevLocked)
+                                                <i class="fas fa-lock ml-2 text-xs"></i>
+                                            @endif
                                             <span class="sm:hidden">წინა</span>
                                         </a>
                                     @endif
                                     
                                     @if($nextVideo)
-                                        <a href="{{ route('tutorials.show', $nextVideo->id) }}" 
+                                        @php $nextLocked = !Auth::user()->hasActiveSubscription() && !$nextVideo?->free; @endphp
+                                        <a href="{{ $nextLocked ? '#' : route('tutorials.show', $nextVideo->id) }}" 
                                            id="next-video-btn"
-                                           class="group inline-flex items-center gap-3 px-6 sm:px-8 py-4 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-all duration-300 text-sm font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                           class="group inline-flex items-center gap-3 px-6 sm:px-8 py-4 {{ $nextLocked ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700' }} text-white rounded-2xl transition-all duration-300 text-sm font-semibold shadow-lg hover:shadow-xl transform {{ $nextLocked ? '' : 'hover:-translate-y-1' }}"
+                                           {{ $nextLocked ? 'aria-disabled=true' : '' }}>
                                             <span class="hidden sm:inline">შემდეგი ვიდეო</span>
                                             <span class="sm:hidden">შემდეგი</span>
                                             <i class="fas fa-chevron-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                                            @if($nextLocked)
+                                                <i class="fas fa-lock ml-2 text-xs"></i>
+                                            @endif
                                         </a>
                                     @endif
                                 </div>
@@ -219,9 +229,11 @@
                 <div class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100 dark:scrollbar-thumb-slate-600 dark:scrollbar-track-slate-700">
                     <div class="p-4 space-y-3">
                         @foreach($playlist as $index => $playlistVideo)
-                            <a href="{{ route('tutorials.show', $playlistVideo->id) }}" 
-                               class="group block rounded-xl border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 {{ $playlistVideo->id === $video->id ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-600 shadow-lg dark:shadow-md' : 'bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 hover:border-slate-300 dark:hover:border-slate-500 shadow-md dark:shadow-sm' }}"
-                               data-video-title="{{ strtolower($playlistVideo->title) }}">
+                            @php $locked = !Auth::user()->hasActiveSubscription() && !$playlistVideo->free; @endphp
+                            <a href="{{ $locked ? '#' : route('tutorials.show', $playlistVideo->id) }}" 
+                               class="group block rounded-xl border transition-all duration-300 {{ $locked ? 'opacity-60 cursor-not-allowed' : 'hover:shadow-xl hover:-translate-y-1' }} {{ $playlistVideo->id === $video->id ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-600 shadow-lg dark:shadow-md' : 'bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 hover:border-slate-300 dark:hover:border-slate-500 shadow-md dark:shadow-sm' }}"
+                               data-video-title="{{ strtolower($playlistVideo->title) }}"
+                               {{ $locked ? 'aria-disabled=true' : '' }}>
                                 
                                 <!-- Thumbnail Section -->
                                 <div class="relative overflow-hidden rounded-t-xl bg-slate-100 dark:bg-slate-600">
@@ -240,6 +252,11 @@
                                     <div class="absolute top-2 left-2 w-6 h-6 rounded-lg {{ $playlistVideo->id === $video->id ? 'bg-blue-600 text-white' : 'bg-white bg-opacity-90 text-slate-700' }} flex items-center justify-center text-xs font-bold shadow-lg">
                                         {{ $index + 1 }}
                                     </div>
+                                    @if($locked)
+                                        <div class="absolute top-2 right-2 w-6 h-6 rounded-full bg-black bg-opacity-60 text-white flex items-center justify-center text-xs">
+                                            <i class="fas fa-lock"></i>
+                                        </div>
+                                    @endif
                                     
                                     <!-- Play Button Overlay -->
                                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
@@ -275,8 +292,15 @@
                                                 <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">
                                                     ვიდეო {{ $index + 1 }}
                                                 </span>
-                                                <!-- Watched indicator -->
-                                                <div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></div>
+                                                @if($locked)
+                                                    <span class="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300">
+                                                        <i class="fas fa-lock"></i>
+                                                        დაიბლოკა
+                                                    </span>
+                                                @else
+                                                    <!-- Watched indicator -->
+                                                    <div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></div>
+                                                @endif
                                             </div>
                                         @endif
                                         

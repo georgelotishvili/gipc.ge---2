@@ -46,6 +46,18 @@ class VideoCard extends Component
         $this->dispatch('weight-updated');
     }
 
+    public function getIsLockedProperty(): bool
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return true;
+        }
+        if ($user->hasActiveSubscription()) {
+            return false;
+        }
+        return !$this->video->free;
+    }
+
     public function render()
     {
         return view('livewire.video-card');
