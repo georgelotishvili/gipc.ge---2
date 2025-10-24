@@ -198,7 +198,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         if(Auth::user()->hasActiveSubscription()) 
             $videos_ordered = Video::orderBy('weight')->get();
         else 
-            $videos_ordered = Video::where('free', true)->orderBy('weight')->get();
+            $videos_ordered = Video::orderByDesc('free')->orderBy('weight')->get();
         return view('tutorials', compact('courses', 'videos_ordered'));
     })->name('tutorials');
 
