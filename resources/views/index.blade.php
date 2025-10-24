@@ -80,7 +80,7 @@
                     }
                 @endphp
                 <!-- Video Lessons Card -->
-                <button onclick="{{ false ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                <button onclick="{{ true ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <!-- Premium Badge -->
                     <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
@@ -98,7 +98,7 @@
                 </button>
 
                 <!-- Card 7 -->
-                <button onclick="{{ false ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                <button onclick="{{ true ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     <!-- Premium Badge -->
@@ -116,7 +116,7 @@
                     </div>
                 </button>
                 <!-- Card 8 -->
-                <button onclick="{{ false ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
+                <button onclick="{{ true ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
 
