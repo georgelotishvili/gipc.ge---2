@@ -21701,4 +21701,14 @@ INSERT INTO `videos` (`id`, `chapter_id`, `course_id`, `name`, `weight`, `descri
 (118, 19, 5, 'ა ტიპის ერთეული', 101, 'ა ტიპის ერთეული', 776, 0, '349624b4-6a52-49f9-bcd1-8a522f055bcf', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/349624b4-6a52-49f9-bcd1-8a522f055bcf', NULL, '2025-08-18 03:47:40', '2025-08-28 03:52:20'),
 (119, 19, 5, 'ბ ტიპის ერთეული', 102, 'ბ ტიპის ერთეული', 776, 0, '6827c2a5-854c-4dfd-9d0d-b1711beb85f6', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/6827c2a5-854c-4dfd-9d0d-b1711beb85f6', NULL, '2025-08-18 03:48:27', '2025-08-28 03:52:23'),
 (120, 20, 6, 'დეკლარაციის შევსება', 110, 'დეკლარაციის შევსება', 776, 0, '89849bbb-03d0-41eb-9d72-7079a1048e97', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/89849bbb-03d0-41eb-9d72-7079a1048e97', NULL, '2025-08-28 03:12:06', '2025-08-28 03:54:25'),
-(122, 21, 7, '1. ვებგვერდის გამოყენების 
+(122, 21, 7, '1. ვებგვერდის გამოყენების წესები', 1, 'ვებგვერდის გამოყენების წესები', 776, 0, 'c33fc3ca-117f-4c7a-ae3c-577dbbc8d797', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/c33fc3ca-117f-4c7a-ae3c-577dbbc8d797', NULL, '2025-08-29 13:00:51', '2025-08-29 13:00:54'),
+(124, 18, 1, 'არსებული შენობები', 83, 'არსებული შენობების მიშენება-დაშენებები და გადაკეთებები, ისტორიული შენობები', 776, 0, '368ce642-78d1-40ec-ac53-da9fe8112d6f', '382670', NULL, 'https://video.bunnycdn.com/library/382670/videos/368ce642-78d1-40ec-ac53-da9fe8112d6f', NULL, '2025-09-12 17:33:06', '2025-09-12 17:33:07');
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
