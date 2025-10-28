@@ -221,7 +221,14 @@ Route::get('/tutorials/video/{video}', function ($video) {
     $course = $chapter->course;
     
     // Get all videos in this chapter, ordered by weight
-    $playlist = $chapter->videos()->orderBy('weight')->get();
+    if(Auth::user()?->hasActiveSubscription()) 
+    {
+        $playlist = $chapter->videos()->orderBy('weight')->get();
+    } 
+    else 
+    {
+        $playlist = $chapter->videos()->orderByDesc('free')->orderBy('weight')->get();
+    }
     // Find current video index in playlist
     $currentIndex = $playlist->search(function($item) use ($video) {
         return $item->id === $video->id;
