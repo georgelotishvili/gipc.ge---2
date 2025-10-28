@@ -115,7 +115,7 @@
                                 <!-- Navigation Buttons -->
                                 <div class="flex flex-wrap items-center gap-4 sm:gap-6">
                                     @if($previousVideo)
-                                        @php $prevLocked = !Auth::user()->hasActiveSubscription() && !$previousVideo?->free; @endphp
+                                        @php $prevLocked = !Auth::user()?->hasActiveSubscription() && !$previousVideo?->free; @endphp
                                         <a href="{{ $prevLocked ? '#' : route('tutorials.show', $previousVideo->id) }}" 
                                            class="group inline-flex items-center gap-3 px-6 sm:px-8 py-4 {{ $prevLocked ? 'bg-slate-200 dark:bg-slate-700/60 text-slate-400 cursor-not-allowed' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600' }} rounded-2xl transition-all duration-300 text-sm font-semibold shadow-lg hover:shadow-xl transform {{ $prevLocked ? '' : 'hover:-translate-y-1' }}"
                                            {{ $prevLocked ? 'aria-disabled=true' : '' }}>
@@ -129,7 +129,7 @@
                                     @endif
                                     
                                     @if($nextVideo)
-                                        @php $nextLocked = !Auth::user()->hasActiveSubscription() && !$nextVideo?->free; @endphp
+                                        @php $nextLocked = !Auth::user()?->hasActiveSubscription() && !$nextVideo?->free; @endphp
                                         <a href="{{ $nextLocked ? '#' : route('tutorials.show', $nextVideo->id) }}" 
                                            id="next-video-btn"
                                            class="group inline-flex items-center gap-3 px-6 sm:px-8 py-4 {{ $nextLocked ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700' }} text-white rounded-2xl transition-all duration-300 text-sm font-semibold shadow-lg hover:shadow-xl transform {{ $nextLocked ? '' : 'hover:-translate-y-1' }}"
@@ -229,7 +229,7 @@
                 <div class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100 dark:scrollbar-thumb-slate-600 dark:scrollbar-track-slate-700">
                     <div class="p-4 space-y-3">
                         @foreach($playlist as $index => $playlistVideo)
-                            @php $locked = !Auth::user()->hasActiveSubscription() && !$playlistVideo->free; @endphp
+                            @php $locked = !Auth::user()?->hasActiveSubscription() && !$playlistVideo->free; @endphp
                             <a href="{{ $locked ? '#' : route('tutorials.show', $playlistVideo->id) }}" 
                                class="group block rounded-xl border transition-all duration-300 {{ $locked ? 'opacity-60 cursor-not-allowed' : 'hover:shadow-xl hover:-translate-y-1' }} {{ $playlistVideo->id === $video->id ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-600 shadow-lg dark:shadow-md' : 'bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 hover:border-slate-300 dark:hover:border-slate-500 shadow-md dark:shadow-sm' }}"
                                data-video-title="{{ strtolower($playlistVideo->title) }}"

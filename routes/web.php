@@ -192,15 +192,50 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'subscripti
     Route::get('/test', Exam::class)->name('test');
 });
 
+Route::get('/tutorials', function () {
+    $courses = Course::all();
+    if(Auth::user()?->hasActiveSubscription()) 
+        $videos_ordered = Video::orderBy('weight')->get();
+    else 
+        $videos_ordered = Video::orderByDesc('free')->orderBy('weight')->get();
+    return view('tutorials', compact('courses', 'videos_ordered'));
+})->name('tutorials');
+
+Route::get('/tutorials/video/{video}', function ($video) {
+    $video = Video::findOrFail($video);
+    if(!Auth::user()?->hasActiveSubscription() && !$video->free) {
+        abort(403, 'გთხოვთ შეიძინოთ პრემიუმ პაკეტი ვიდეოს ნახვისთვის.');
+    }
+    
+    
+    // Get the chapter this video belongs to
+    if (!$video->chapter) {
+        abort(404, 'Video chapter not found');
+    }
+    $chapter = $video->chapter;
+    
+    // Get the course this chapter belongs to
+    if (!$chapter->course) {
+        abort(404, 'Chapter course not found');
+    }
+    $course = $chapter->course;
+    
+    // Get all videos in this chapter, ordered by weight
+    $playlist = $chapter->videos()->orderBy('weight')->get();
+    // Find current video index in playlist
+    $currentIndex = $playlist->search(function($item) use ($video) {
+        return $item->id === $video->id;
+    });
+    
+    // Get next and previous videos
+    $nextVideo = $currentIndex < $playlist->count() - 1 ? $playlist[$currentIndex + 1] : null;
+    $previousVideo = $currentIndex > 0 ? $playlist[$currentIndex - 1] : null;
+    
+    return view('tutorials.show', compact('video', 'chapter', 'course', 'playlist', 'currentIndex', 'nextVideo', 'previousVideo'));
+})->name('tutorials.show');
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/tutorials', function () {
-        $courses = Course::all();
-        if(Auth::user()->hasActiveSubscription()) 
-            $videos_ordered = Video::orderBy('weight')->get();
-        else 
-            $videos_ordered = Video::orderByDesc('free')->orderBy('weight')->get();
-        return view('tutorials', compact('courses', 'videos_ordered'));
-    })->name('tutorials');
+
 
     Route::get('/tutorials/course/{course}', function ($course) {
         $course = Course::find($course);
@@ -210,39 +245,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/video', function () {
         return view('user.video');
     })->name('video');
-
-    Route::get('/tutorials/video/{video}', function ($video) {
-        $video = Video::findOrFail($video);
-        if(!Auth::user()->hasActiveSubscription() && !$video->free) {
-            abort(403, 'გთხოვთ შეიძინოთ პრემიუმ პაკეტი ვიდეოს ნახვისთვის.');
-        }
-        
-        
-        // Get the chapter this video belongs to
-        if (!$video->chapter) {
-            abort(404, 'Video chapter not found');
-        }
-        $chapter = $video->chapter;
-        
-        // Get the course this chapter belongs to
-        if (!$chapter->course) {
-            abort(404, 'Chapter course not found');
-        }
-        $course = $chapter->course;
-        
-        // Get all videos in this chapter, ordered by weight
-        $playlist = $chapter->videos()->orderBy('weight')->get();
-        // Find current video index in playlist
-        $currentIndex = $playlist->search(function($item) use ($video) {
-            return $item->id === $video->id;
-        });
-        
-        // Get next and previous videos
-        $nextVideo = $currentIndex < $playlist->count() - 1 ? $playlist[$currentIndex + 1] : null;
-        $previousVideo = $currentIndex > 0 ? $playlist[$currentIndex - 1] : null;
-        
-        return view('tutorials.show', compact('video', 'chapter', 'course', 'playlist', 'currentIndex', 'nextVideo', 'previousVideo'));
-    })->name('tutorials.show');
 
     Route::get('/dashboard', function () {
         return view('user.workspace');
