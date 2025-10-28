@@ -234,13 +234,15 @@ Route::get('/tutorials/video/{video}', function ($video) {
     return view('tutorials.show', compact('video', 'chapter', 'course', 'playlist', 'currentIndex', 'nextVideo', 'previousVideo'));
 })->name('tutorials.show');
 
+Route::get('/tutorials/course/{course}', function ($course) {
+    $course = Course::find($course);
+    return view('tutorials.chapters', compact('course'));
+})->name('tutorials.chapters');
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
 
-    Route::get('/tutorials/course/{course}', function ($course) {
-        $course = Course::find($course);
-        return view('tutorials.chapters', compact('course'));
-    })->name('tutorials.chapters');
+
 
     Route::get('/video', function () {
         return view('user.video');
