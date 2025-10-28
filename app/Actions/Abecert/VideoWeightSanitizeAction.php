@@ -3,6 +3,7 @@
 namespace App\Actions\Abecert;
 
 use App\Models\Video;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -12,7 +13,14 @@ class VideoWeightSanitizeAction
     {
         try {
             // Get all videos
-            $videos = Video::orderBy('weight', 'asc')->get();
+            if(Auth::user()?->hasActiveSubscription()) 
+            {
+                $videos = Video::orderBy('weight', 'asc')->get();
+            } 
+            else 
+            {
+                $videos = Video::orderByDesc('free')->orderBy('weight', 'asc')->get();
+            }
             
             if ($videos->isEmpty()) {
                 return true;
