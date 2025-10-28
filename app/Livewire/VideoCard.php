@@ -46,7 +46,7 @@ class VideoCard extends Component
         $this->dispatch('weight-updated');
     }
 
-    public function getIsLockedProperty(): bool
+    public function getIsAvailable(): bool
     {
         $user = Auth::user();
         if ($user) {

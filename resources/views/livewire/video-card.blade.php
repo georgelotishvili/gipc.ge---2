@@ -1,5 +1,5 @@
 @if($style === 'grid')
-    @if(!$this->getIsLockedProperty())
+    @if($this->getIsAvailable())
     <a href="{{ route('tutorials.show', $video->id) }}" class="group w-full flex-shrink-0">
     @else
     <div class="group w-full flex-shrink-0 cursor-not-allowed" title="Not allowed">
@@ -37,7 +37,7 @@
                 <div class="absolute bottom-2 right-2 bg-black/90 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs font-bold border border-white/20 group-hover:bg-blue-600 transition-colors duration-500">
                     {{ $this->getFormattedDuration() }}
                 </div>
-                @if($this->getIsLockedProperty())
+                @if(!$this->getIsAvailable())
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <span class="text-white text-xs font-semibold px-2 py-1 bg-black/70 rounded"><i class="fas fa-lock mr-1"></i> Not allowed</span>
                     </div>
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-    @if(!$this->getIsLockedProperty())
+    @if($this->getIsAvailable())
     </a>
     @else
     </div>
@@ -105,7 +105,7 @@
             <div class="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 bg-black/90 backdrop-blur-sm text-white text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg font-bold border border-white/20 group-hover:bg-blue-600 transition-colors duration-500">
                 {{ $this->getFormattedDuration() }}
             </div>
-            @if($this->getIsLockedProperty())
+            @if(!$this->getIsAvailable())
                 <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-[10px] px-2 py-0.5 bg-black/70 rounded"><i class="fas fa-lock mr-1"></i> Not allowed</span>
                 </div>
@@ -146,7 +146,7 @@
             </div>
         </div>
         
-        @if(!$this->getIsLockedProperty())
+        @if($this->getIsAvailable())
             <a href="{{ route('tutorials.show', $video->id) }}" class="mt-2 sm:mt-0 sm:ml-3 relative self-center sm:self-auto">
                 <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-500 transform group-hover:scale-105 shadow-md sm:shadow-lg">
                     <i class="fas fa-play text-xs"></i>
