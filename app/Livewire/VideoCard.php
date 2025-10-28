@@ -49,13 +49,13 @@ class VideoCard extends Component
     public function getIsLockedProperty(): bool
     {
         $user = Auth::user();
-        if (!$user) {
-            return true;
+        if ($user) {
+            if ($user->hasActiveSubscription()) 
+            {
+                return true;
+            }
         }
-        if ($user->hasActiveSubscription()) {
-            return false;
-        }
-        return !$this->video->free;
+        return $this->video->free;
     }
 
     public function render()
