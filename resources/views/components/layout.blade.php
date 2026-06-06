@@ -32,27 +32,27 @@
             color: #ffffff !important;
         }
         
-        .dark-mode .bg-white {
+        .dark-mode .bg-white:not([class*="dark:bg"]) {
             background-color: #0F172A !important;
         }
         
-        .dark-mode .text-gray-600 {
+        .dark-mode .text-gray-600:not([class*="dark:text"]) {
             color: #9CA3AF !important;
         }
         
-        .dark-mode .text-gray-300 {
+        .dark-mode .text-gray-300:not([class*="dark:text"]) {
             color: #D1D5DB !important;
         }
         
-        .dark-mode .border-gray-100 {
+        .dark-mode .border-gray-100:not([class*="dark:border"]) {
             border-color: #1F2A37 !important;
         }
         
-        .dark-mode .border-gray-800 {
+        .dark-mode .border-gray-800:not([class*="dark:border"]) {
             border-color: #374151 !important;
         }
         
-        .dark-mode .bg-white\/80 {
+        .dark-mode .bg-white\/80:not([class*="dark:bg"]) {
             background-color: rgba(15, 23, 42, 0.8) !important;
         }
         
@@ -123,7 +123,7 @@
             <div class="flex justify-between h-20 items-center relative">
                 <!-- Three-column flex layout for perfect centering -->
                 <div class="w-[180px] flex-shrink-0 flex items-center">
-                    <a href="/" wire:navigate class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    <a href="/" wire:navigate class="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-primary-400 transition-all duration-300 hover:scale-105 hover:opacity-90 hover:brightness-110">
                         <x-application-logo />
                     </a>
                 </div>
@@ -136,6 +136,12 @@
                     </a>
                     <a href="/about" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                         ჩვენს შესახებ
+                    </a>
+                    <a href="/contact" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                        კონტაქტი
+                    </a>
+                    <a href="https://gipc.org.ge" class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
+                        სერტიფიცირება
                     </a>
                 </div>
                 <div class="hidden lg:flex flex-shrink-0 items-center gap-4 sm:gap-5 2xsm:gap-8 z-10 justify-end">
@@ -381,6 +387,24 @@
                                         </div>
                                         <span>ჩვენს შესახებ</span>
                                     </a>
+                                    <a href="/contact" wire:navigate @click="mobileMenuOpen = false" 
+                                       class="flex items-center space-x-4 text-lg font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 py-4 px-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-2 group">
+                                        <div class="flex items-center justify-center w-10 h-10 rounded-md bg-blue-100 dark:bg-blue-900/30 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/50 transition-all duration-200">
+                                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                            </svg>
+                                        </div>
+                                        <span>კონტაქტი</span>
+                                    </a>
+                                    <a href="https://gipc.org.ge" @click="mobileMenuOpen = false" 
+                                       class="flex items-center space-x-4 text-lg font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 py-4 px-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-2 group">
+                                        <div class="flex items-center justify-center w-10 h-10 rounded-md bg-primary-100 dark:bg-primary-900/30 group-hover:bg-primary-200 dark:group-hover:bg-primary-800/50 transition-all duration-200">
+                                            <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75M12 3l7.5 4.5v5.25c0 4.5-3.06 8.39-7.5 9.75-4.44-1.36-7.5-5.25-7.5-9.75V7.5L12 3z"/>
+                                            </svg>
+                                        </div>
+                                        <span>სერტიფიცირება</span>
+                                    </a>
                                 </div>
 
                                 <!-- User Profile Section (for authenticated users) -->
@@ -516,7 +540,7 @@
     </nav>
 
     <!-- Hero Section Start -->
-    <section class="relative overflow-hidden pt-24 px-12 @auth lg:ml-16 @endauth">
+    <section class="relative overflow-hidden pt-20">
         <div class="absolute inset-0 -z-10"></div>
         <div class="absolute inset-0 opacity-30 -z-10 bg-pattern dark:opacity-10"></div>
         
@@ -538,12 +562,12 @@
         <div class="max-w-[120rem] mx-auto px-4 sm:px-6 lg:px-12">
             <div class="flex flex-col items-center space-y-6 md:space-y-8">
                 <!-- Navigation Links -->
-                <nav class="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-row gap-4 md:gap-8 text-center md:text-left w-full md:w-auto md:justify-center">
-                    <a href="/" wire:navigate class="text-lg md:text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">GIPC</a>
+                <nav class="flex flex-wrap justify-center gap-x-6 gap-y-4 text-center w-full">
+                    <a href="/" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">მთავარი</a>
+                    <a href="/pricing" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ფასები</a>
                     <a href="/about" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ჩვენს შესახებ</a>
                     <a href="/contact" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონტაქტი</a>
-                    <a href="{{ route('regulations') }}" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">სამშენებლო რეგულაციები</a>
-                    <a href="{{ route('terms-and-conditions') }}" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">წესები და პირობები</a>
+                    <a href="https://gipc.org.ge" class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">სერტიფიცირება</a>
                     <a href="{{ route('privacy-policy') }}" wire:navigate class="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">კონფიდენციალურობის პოლიტიკა</a>
                 </nav>
                 

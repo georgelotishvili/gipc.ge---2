@@ -23,7 +23,7 @@
                         <div class="WordSection1 space-y-8">
          
             
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center border-b-2 border-blue-200 dark:border-blue-700 pb-4"><strong><em><u>ვებგვერდის gipc.ge გამოყენების წესები და პირობები</u></em></strong></h1>
+            <h1 class="not-prose text-xl sm:text-2xl font-semibold leading-snug text-gray-900 dark:text-white mb-6 text-center border-b-2 border-blue-200 dark:border-blue-700 pb-4">ვებგვერდის gipc.ge გამოყენების წესები და პირობები</h1>
             <div class="bg-blue-50 dark:bg-blue-900/30 rounded-md p-6 border-l-4 border-blue-500 mb-8">
                 <h3 class="text-xl font-semibold text-blue-900 dark:text-blue-100 mb-3"><strong>შესავალი</strong></h3>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">კეთილი იყოს თქვენი მობრძანება gipc.ge-ზე, შპს &bdquo;საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი&ldquo; ს/ნ 405773854 (შემდგომში &bdquo;<strong>ინსტიტუტი</strong>&ldquo; ან &bdquo;<strong>GIPC</strong>&ldquo;) ოფიციალურ ვებგვერდზე.</p>

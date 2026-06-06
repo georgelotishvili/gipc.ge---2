@@ -15,7 +15,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
                 <!-- Vision Card -->
                 <div class="group relative">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="text-primary-400 mb-4">
                             <i class="fas fa-eye text-3xl"></i>
                         </div>
@@ -28,7 +28,7 @@
 
                 <!-- Mission Card -->
                 <div class="group relative">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="text-primary-400 mb-4">
                             <i class="fas fa-rocket text-3xl"></i>
                         </div>
@@ -41,7 +41,7 @@
 
                 <!-- Values Card -->
                 <div class="group relative">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="text-primary-400 mb-4">
                             <i class="fas fa-heart text-3xl"></i>
                         </div>
@@ -54,7 +54,7 @@
 
                 <!-- Standards Card -->
                 <div class="group relative">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="text-primary-400 mb-4">
                             <i class="fas fa-shield-alt text-3xl"></i>
                         </div>
@@ -78,10 +78,10 @@
                 </p>
             </div>
 
-            <div class="grid max-lg:grid-cols-1 lg:grid-cols-3 gap-8 w-full mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 w-full mx-auto">
                 <!-- Team Member 1 -->
                 <div class="group relative min-w-[280px]">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="relative w-32 h-32 mx-auto mb-6 group-hover:scale-105 transition-all duration-300">
                             <div class="absolute inset-0 bg-slate-100 dark:bg-slate-800 rounded-md"></div>
                             <img src="https://api.dicebear.com/7.x/initials/svg?seed=GL&backgroundType=gradientLinear&backgroundColor=003c96" 
@@ -89,14 +89,14 @@
                                  class="relative z-10 w-full h-full object-cover rounded-md border-4 border-white dark:border-gray-800 group-hover:border-slate-300 dark:group-hover:border-slate-600 transition-colors">
                         </div>
                         <h3 class="text-lg text-center sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary-400 transition-colors">გიორგი ლოთიშვილი</h3>
-                        <p class="text-primary-400 text-center mb-4">არქიტექტორი</p>
+                        <p class="text-primary-400 text-center mb-4">საგამოცდო მენეჯერი</p>
                         <div class="h-px w-full bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
                     </div>
                 </div>
 
                 <!-- Team Member 2 -->
                 <div class="group relative min-w-[280px]">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="relative w-32 h-32 mx-auto mb-6 group-hover:scale-105 transition-all duration-300">
                             <div class="absolute inset-0 bg-slate-100 dark:bg-slate-800 rounded-md"></div>
                             <img src="https://api.dicebear.com/7.x/initials/svg?seed=GB&backgroundType=gradientLinear&backgroundColor=003c96" 
@@ -111,7 +111,7 @@
 
                 <!-- Team Member 3 -->
                 <div class="group relative min-w-[280px]">
-                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl h-full border border-slate-300 dark:border-slate-700 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-slate-600 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
                         <div class="relative w-32 h-32 mx-auto mb-6 group-hover:scale-105 transition-all duration-300">
                             <div class="absolute inset-0 bg-slate-100 dark:bg-slate-800 rounded-md"></div>
                             <img src="https://api.dicebear.com/7.x/initials/svg?seed=NJ&backgroundType=gradientLinear&backgroundColor=003c96" 
@@ -120,6 +120,21 @@
                         </div>
                         <h3 class="text-lg text-center sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary-400 transition-colors whitespace-normal">ნიკოლოზ ჯიმშიტაშვილი</h3>
                         <p class="text-primary-400 text-center mb-4">Frontend Developer</p>
+                        <div class="h-px w-full bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="group relative min-w-[280px]">
+                    <div class="relative rounded-md p-8 bg-white/90 dark:bg-[#1E293B]/[0.98] backdrop-blur-xl h-full border border-slate-300 dark:border-indigo-500/25 shadow-md shadow-slate-200/70 dark:shadow-black/20 transition-all duration-300 hover:scale-[1.02] hover:border-slate-400 dark:hover:border-indigo-400/40 hover:shadow-lg hover:shadow-slate-300/70 dark:hover:shadow-black/30">
+                        <div class="relative w-32 h-32 mx-auto mb-6 group-hover:scale-105 transition-all duration-300">
+                            <div class="absolute inset-0 bg-slate-100 dark:bg-slate-800 rounded-md"></div>
+                            <img src="https://api.dicebear.com/7.x/initials/svg?seed=LP&backgroundType=gradientLinear&backgroundColor=003c96" 
+                                 alt="ლაშა ფოფხაძე" 
+                                 class="relative z-10 w-full h-full object-cover rounded-md border-4 border-white dark:border-gray-800 group-hover:border-slate-300 dark:group-hover:border-slate-600 transition-colors">
+                        </div>
+                        <h3 class="text-lg text-center sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary-400 transition-colors">ლაშა ფოფხაძე</h3>
+                        <p class="text-primary-400 text-center mb-4">გენერალური დირექტორი</p>
                         <div class="h-px w-full bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
                     </div>
                 </div>

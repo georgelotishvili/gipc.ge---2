@@ -1,6 +1,6 @@
 <x-layout>
     <!-- Features Section -->
-    <section class="py-6 md:py-16 dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
+    <section class="pt-6 pb-6 md:pt-8 md:pb-16 dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-2xl md:text-4xl font-semibold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
             @php
@@ -73,7 +73,7 @@
                     @endphp
                     <a href="{{ $cardHref }}" @if ($requiresPremium) onclick="event.preventDefault(); showPremiumAlert();" @else wire:navigate @endif class="group relative h-full">
                         <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-md blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
-                        <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                        <div class="relative bg-white dark:bg-[#1E293B]/[0.98] backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-indigo-500/25 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
                             <div class="h-52 sm:h-48 overflow-hidden flex-shrink-0 relative">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent z-10"></div>
                                 <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">

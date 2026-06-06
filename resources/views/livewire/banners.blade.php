@@ -17,10 +17,10 @@ x-init="
         localStorage.setItem('currentSlide', currentSlide);
     }, 4000);
     $watch('currentSlide', value => localStorage.setItem('currentSlide', value));"
-class="relative max-w-[120rem] mx-auto mb-16">
+class="relative left-1/2 w-screen -translate-x-1/2 mb-8">
     
     <!-- Slides Container -->
-    <div class="relative h-[250px] overflow-hidden rounded-md border border-slate-400 dark:border-slate-600">
+    <div class="relative h-[250px] overflow-hidden border-y border-slate-400 dark:border-slate-600">
         <template x-for="(slide, index) in slides" :key="index">
             <div x-show="currentSlide === index"
                 x-transition:enter="transition ease-out duration-500"
@@ -40,6 +40,8 @@ class="relative max-w-[120rem] mx-auto mb-16">
             </div>
         </template>
     </div>
+    <div class="h-1 w-full bg-white dark:bg-slate-900"></div>
+    <div class="h-1 w-full bg-gradient-to-r from-indigo-500 to-purple-600"></div>
 
     <!-- Navigation Dots -->
     <!-- <div class="flex justify-center gap-3 mt-6">
