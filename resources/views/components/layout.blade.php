@@ -131,9 +131,6 @@
                     <a href="/" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                         მთავარი
                     </a>
-                    <a href="/services" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
-                        სერვისები
-                    </a>
                     <a href="/pricing" wire:navigate class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                         ფასები
                     </a>

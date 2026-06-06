@@ -60,11 +60,18 @@
                         'cta' => 'სიმულაციის დაწყება',
                     ],
                 ];
+
+                $user = auth()->user();
+                $isPremium = $user ? $user->hasActiveSubscription() : false;
             @endphp
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 @foreach ($cards as $card)
-                    <a href="{{ $card['route'] }}" wire:navigate class="group relative h-full">
+                    @php
+                        $requiresPremium = $card['premium'] && ! $isPremium;
+                        $cardHref = $requiresPremium ? '#' : $card['route'];
+                    @endphp
+                    <a href="{{ $cardHref }}" @if ($requiresPremium) onclick="event.preventDefault(); showPremiumAlert();" @else wire:navigate @endif class="group relative h-full">
                         <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-md blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
                         <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
                             <div class="h-52 sm:h-48 overflow-hidden flex-shrink-0 relative">
@@ -201,14 +208,14 @@
     </style>
 
     <script>
-        //function showPremiumAlert() {
-        //    document.getElementById('premiumAlertModal').classList.remove('hidden');
-        //    document.body.classList.add('overflow-hidden');
-        //}
-//
-        //function closePremiumAlert() {
-        //    document.getElementById('premiumAlertModal').classList.add('hidden');
-        //    document.body.classList.remove('overflow-hidden');
-        //}
+        function showPremiumAlert() {
+            document.getElementById('premiumAlertModal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closePremiumAlert() {
+            document.getElementById('premiumAlertModal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
     </script>
 </x-layout>
