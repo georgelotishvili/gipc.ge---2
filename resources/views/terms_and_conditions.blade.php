@@ -4,11 +4,11 @@
         <!-- Content wrapper with max width and centering -->
         <div class="max-w-4xl mx-auto">
             <!-- Beautiful card container -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg sm:shadow-xl lg:shadow-2xl shadow-blue-100/50 dark:shadow-blue-900/50 overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-md sm:rounded-md lg:rounded-md shadow-lg sm:shadow-xl lg:shadow-2xl shadow-blue-100/50 dark:shadow-blue-900/50 overflow-hidden">
                 <!-- Header with icon -->
                 <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6">
                     <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3">
-                        <div class="p-2 bg-white/20 rounded-lg">
+                        <div class="p-2 bg-white/20 rounded-md">
                             <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
@@ -20,10 +20,10 @@
                 <!-- Content area with beautiful styling -->
                 <div class="px-8 py-10">
                     <!-- Terms and Definitions Card -->
-                    <div class="my-8 mx-auto max-w-2xl bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col">
+                    <div class="my-8 mx-auto max-w-2xl bg-white dark:bg-gray-800 rounded-md sm:rounded-md shadow-md sm:shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col">
                         <div class="px-6 pt-6 pb-2 flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full w-8 h-8 flex items-center justify-center text-base sm:text-lg font-bold">1</span>
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-md w-8 h-8 flex items-center justify-center text-base sm:text-lg font-bold">1</span>
                                 <span>ტერმინები და განმარტება</span>
                             </h2>
                         </div>
@@ -158,7 +158,6 @@
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">არქიტექტორთა სერტიფიცირება:</span></b><span lang="GEO/KAT"> GIPC-ის უმთავრესი ამოცანაა, №134 დადგენილებით გათვალისწინებული წესებისა და პროცედურების შესაბამისად, განახორციელოს არქიტექტორთა სერტიფიცირება საქართველოს მასშტაბით. ეს მოიცავს საკვალიფიკაციო მოთხოვნების (განათლება, გამოცდილება) დადგენასა და შემოწმებას, სასერტიფიკაციო გამოცდების ორგანიზებასა და ჩატარებას (ტესტირება, პრაქტიკული ამოცანები ნორმების ცოდნასა და პროექტირების უნარებზე), და წარმატებული კანდიდატებისთვის 5-წლიანი სერტიფიკატების გაცემას.</span></li>
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">პროფესიული ცოდნისა და კეთილსინდისიერების უზრუნველყოფა:</span></b><span lang="GEO/KAT"> სერტიფიცირების პროცესი თავისთავად წარმოადგენს ცოდნის დონის შეფასებას. GIPC, როგორც სერტიფიკაციის ორგანო, ვალდებულია, იმოქმედოს მიუკერძოებლობისა და კეთილსინდისიერების პრინციპებით (დადგენილების წესის მუხლი 2.12). ინსტიტუტის საქმიანობა ხელს შეუწყობს არა მხოლოდ ტექნიკური ცოდნის, არამედ პროფესიული ეთიკის სტანდარტების დამკვიდრებასაც, რაც აუცილებელია საზოგადოებრივი ნდობის მოსაპოვებლად.</span></li>
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">არქიტექტორთა გადამზადება და განვითარება:</span></b><span lang="GEO/KAT"> დადგენილება უფლებას აძლევს სერტიფიკაციის ორგანოებს, დააარსონ ტრენინგცენტრები (დადგენილების წესის მუხლი 3). GIPC-ის მიზანია, უზრუნველყოს არქიტექტორთა გადამზადება. ეს შეიძლება მოიცავდეს სასერტიფიკაციო გამოცდებისთვის მოსამზადებელ კურსებს, ასევე უწყვეტი პროფესიული განვითარების პროგრამებს, რაც განსაკუთრებით მნიშვნელოვანია კანონმდებლობაში, ნორმებსა და ტექნოლოგიებში მუდმივი ცვლილებების პირობებში (რაც, თავის მხრივ, რესერტიფიკაციის საფუძველიც შეიძლება გახდეს, დადგენილების წესის მუხლი 2.10).</span></li>
-                                <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">დარგობრივი სიახლეების მიწოდება:</span></b><span lang="GEO/KAT"> GIPC-ს შეუძლია შეასრულოს საინფორმაციო ჰაბის ფუნქცია, მიაწოდოს არქიტექტორებს აქტუალური ინფორმაცია სამშენებლო რეგულაციების, ახალი მასალების, ტექნოლოგიებისა და საუკეთესო საერთაშორისო პრაქტიკის შესახებ, რაც ხელს შეუწყობს პროფესიონალთა მუდმივ ინფორმირებულობას.</span></li>
                             </ol>
                             <p class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">მოსალოდნელი გავლენა</span></b></p>
                             <p class="MsoNormal" style="text-align:justify;line-height:normal"><span lang="GEO/KAT">GIPC-ის ეფექტურ ფუნქციონირებას შეუძლია მნიშვნელოვანი დადებითი გავლენა მოახდინოს როგორც ცალკეულ არქიტექტორებზე, ისე მთლიანად სამშენებლო სექტორზე:</span></p>
@@ -175,9 +174,7 @@
                             <p class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">უფასო სერვისები:</span></b></p>
                             <p class="MsoNormal" style="text-align:justify;line-height:normal"><span lang="GEO/KAT">ვებგვერდის უფასო რესურსები ხელმისაწვდომია ნებისმიერი დაინტერესებული პირისთვის და მოიცავს:</span></p>
                             <ol start="1" type="1">
-                                <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">სერტიფიცირებულ სპეციალისტთა რეესტრი:</span></b><span lang="GEO/KAT"> ეს არის ვებგვერდის ერთ-ერთი უმნიშვნელოვანესი კომპონენტი. აქ განთავსებულია იმ არქიტექტორთა (და ინჟინერ-მშენებელთა) მონაცემთა ბაზა, რომლებმაც წარმატებით გაიარეს GIPC-ის სერტიფიცირება. მომხმარებლებს შეუძლიათ მოიძიონ სპეციალისტები, ნახონ ინფორმაცია მათი სერტიფიკატის შესახებ, გაეცნონ ინსტიტუტის მიერ მინიჭებულ შეფასებას (რომელიც ასახავს მათ კვალიფიკაციას გამოცდის შედეგების საფუძველზე) და, რაც მთავარია, იხილონ საჯარო კომენტარები და შეფასებები, რომლებიც დატოვებულია წინა დამკვეთების მიერ. ეს ფუნქცია უზრუნველყოფს პროცესის გამჭვირვალობას და ეხმარება მომხმარებლებს ინფორმირებული არჩევანის გაკეთებაში.</span></li>
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">ვაკანსიები არქიტექტორებისთვის:</span></b><span lang="GEO/KAT"> ვებგვერდი ფუნქციონირებს როგორც სპეციალიზებული სამუშაოს ძიების პლატფორმა. დაინტერესებულ კომპანიებს ან კერძო პირებს შეუძლიათ განათავსონ განცხადებები არქიტექტორის ვაკანსიის შესახებ, ხოლო სამუშაოს მაძიებელ არქიტექტორებს შეუძლიათ მოიძიონ აქტუალური შეთავაზებები და დაუკავშირდნენ პოტენციურ დამსაქმებლებს.</span></li>
-                                <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">სიახლეები:</span></b><span lang="GEO/KAT"> ამ სექციაში რეგულარულად ქვეყნდება ინფორმაცია არქიტექტურულ სფეროში არსებული სიახლეების, ტენდენციების, ტექნოლოგიური მიღწევების, მნიშვნელოვანი პროექტების, კონფერენციების, საკანონმდებლო ცვლილებებისა და GIPC-ის საქმიანობასთან დაკავშირებული განცხადებების შესახებ.</span></li>
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">სამშენებლო რეგულაციები:</span></b><span lang="GEO/KAT"> მომხმარებლებისთვის ხელმისაწვდომია ქვეყანაში მოქმედი ძირითადი სამშენებლო რეგულაციები, ნორმები და სტანდარტები. ვებგვერდზე შეიძლება განთავსდეს როგორც უშუალოდ დოკუმენტები, ისე ბმულები შესაბამის ოფიციალურ წყაროებზე, რაც მას აქცევს მოსახერხებელ ცნობარად პროფესიონალებისთვის.</span></li>
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">ინფორმაცია GIPC-სა და სერტიფიცირების შესახებ:</span></b><span lang="GEO/KAT"> ვებგვერდზე დეტალურად არის აღწერილი თავად საქართველოს პროფესიული სერტიფიცირების ინსტიტუტის მისია, მიზნები, სტრუქტურა, ასევე სერტიფიცირების პროცედურა, მოთხოვნები, საფასურები და სხვა დაკავშირებული საკითხები, რომლებიც გამომდინარეობს №134 დადგენილებიდან.</span></li>
                             </ol>
@@ -195,7 +192,7 @@
                                 <li class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">კატეგორიულად დაუშვებელია ფასიანი სერვისების ფარგლებში ხელმისაწვდომი მასალების (ვიდეოგაკვეთილები, საგამოცდო ტესტები, სიმულაციური გამოცდის მასალები) ნებისმიერი ფორმით კოპირება, გადმოწერა, ჩაწერა, გავრცელება, გადაყიდვა ან სხვა პირისთვის გადაცემა.</span></b><span lang="GEO/KAT"> ნებისმიერი ასეთი ქმედება ჩაითვლება საავტორო უფლებების პირდაპირ დარღვევად და გამოიწვევს საქართველოს კანონმდებლობით გათვალისწინებულ პასუხისმგებლობას. ფასიან სერვისებზე წვდომა პერსონალურია და განკუთვნილია მხოლოდ იმ პირისთვის, ვინც გადაიხადა შესაბამისი საფასური.</span></li>
                             </ul>
                             <p class="MsoNormal" style="text-align:justify;line-height:normal"><b><span lang="GEO/KAT">დასკვნა</span></b></p>
-                            <p class="MsoNormal" style="text-align:justify;line-height:normal"><span lang="GEO/KAT">ვებგვერდი gipc.ge წარმოადგენს მძლავრ და მრავალფუნქციურ ინსტრუმენტს საქართველოს არქიტექტურული საზოგადოებისთვის. ის აერთიანებს ინფორმაციულ რესურსებს, პროფესიული განვითარების შესაძლებლობებს, კარიერულ სერვისებსა და სერტიფიცირებულ სპეციალისტთა გამჭვირვალე ბაზას. ამ პლატფორმის სწორად და კეთილსინდისიერად გამოყენება ხელს შეუწყობს სფეროს პროფესიონალების ინფორმირებულობას, კვალიფიკაციის ამაღლებას და საბოლოო ჯამში, საქართველოში არქიტექტურული და სამშენებლო საქმიანობის ხარისხის ზრდას.</span></p>
+                            <p class="MsoNormal" style="text-align:justify;line-height:normal"><span lang="GEO/KAT">ვებგვერდი gipc.ge წარმოადგენს მძლავრ ინსტრუმენტს საქართველოს არქიტექტურული საზოგადოებისთვის. ის აერთიანებს პროფესიული განვითარების შესაძლებლობებს, კარიერულ სერვისებსა და სამშენებლო რეგულაციებზე წვდომას. ამ პლატფორმის სწორად და კეთილსინდისიერად გამოყენება ხელს შეუწყობს სფეროს პროფესიონალების კვალიფიკაციის ამაღლებას და საბოლოო ჯამში, საქართველოში არქიტექტურული და სამშენებლო საქმიანობის ხარისხის ზრდას.</span></p>
                             <p class="MsoNormal" style="text-align:justify;line-height:normal"><span lang="GEO/KAT">&nbsp;</span></p>
                         </div>
                     </div>
@@ -263,7 +260,7 @@
         
         /* Modern card-like sections */
         .prose .WordSection1 > div {
-            @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 mb-6;
+            @apply bg-white dark:bg-gray-800 rounded-md p-6 shadow-md border border-gray-200 dark:border-gray-700 mb-6;
         }
         
         /* Enhanced typography for better readability */

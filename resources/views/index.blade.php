@@ -1,139 +1,92 @@
 <x-layout>
     <!-- Features Section -->
     <section class="py-6 md:py-16 dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
-        <div class="max-w-[125rem] mx-auto">
-            <h1 class="text-2xl md:text-4xl font-bold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full">
-                <!-- Jobs Card -->
-                <a href="{{ route('jobs') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden cursor-pointer h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-2xl md:text-4xl font-semibold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
+            @php
+                $cards = [
+                    [
+                        'route' => route('jobs'),
+                        'title' => 'ვაკანსიები არქიტექტორებისთვის',
+                        'description' => 'შეგიძლიათ მოიძიოთ ან შესთავაზოთ სამუშაო სამშენებლო სფეროს სხვადასხვა დარგის სპეციალისტებს',
+                        'icon' => 'briefcase',
+                        'image' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+                        'premium' => false,
+                    ],
+                    [
+                        'route' => route('regulations'),
+                        'title' => 'სამშენებლო რეგულაციები',
+                        'description' => 'სერტიფიკატის მიღებისთვის საჭირო სამშენებლო რეგულაციების, კანონების დადგენილებებისა და კოდექსების ბაზა',
+                        'icon' => 'book',
+                        'image' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80',
+                        'premium' => false,
+                    ],
+                    [
+                        'route' => route('terms-and-conditions'),
+                        'title' => 'წესები და პირობები',
+                        'description' => 'სერტიფიკატის მიღების წესებისა და პირობების დეტალური განმარტებები და საგამოცდო პირობების აღწერა',
+                        'icon' => 'file-contract',
+                        'image' => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80',
+                        'premium' => false,
+                    ],
+                    [
+                        'route' => route('tutorials'),
+                        'title' => 'ვიდეო გაკვეთილები',
+                        'description' => 'ფასიანი სერვისი, რომელიც წარმოადგენს აუდიო/ვიდეო მასალის კრებულს, არქიტექტორების გადასამზადებლად',
+                        'icon' => 'video',
+                        'image' => 'https://www.thedvigroup.com/wp-content/uploads/2023/08/Benefits-of-Video-Tutorials-Distance-Learner-Watching-Video-166191408_m_normal_none-1.jpg',
+                        'premium' => true,
+                    ],
+                    [
+                        'route' => route('questions'),
+                        'title' => 'საგამოცდო ტესტები',
+                        'description' => 'ფასიანი სერვისი, რომელიც იძლევა საგამოცდო საკითხების შესწავლის საშუალებას, რათა შეძლოთ საგამოცდო ტესტების წარმატებით ჩაბარება',
+                        'icon' => 'clipboard-list',
+                        'image' => 'https://daily.jstor.org/wp-content/uploads/2015/05/standardizedtests.jpg',
+                        'premium' => true,
+                    ],
+                    [
+                        'route' => route('workspace'),
+                        'title' => 'სიმულაციური გამოცდა',
+                        'description' => 'ფასიანი სერვისი, სადაც შეგიძლიათ განსაზღვროთ თქვენი ცოდნის ხარისხი და შესაძლებლობა ოფიციალური გამოცდის ჩაბარებისა',
+                        'icon' => 'user-graduate',
+                        'image' => 'https://admissions.rochester.edu/blog/wp-content/uploads/2015/08/test.png',
+                        'premium' => true,
+                    ],
+                ];
+            @endphp
 
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-briefcase text-lg md:text-2xl"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                @foreach ($cards as $card)
+                    <a href="{{ $card['route'] }}" wire:navigate class="group relative h-full">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-md blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                        <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                            <div class="h-52 sm:h-48 overflow-hidden flex-shrink-0 relative">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent z-10"></div>
+                                <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute top-4 left-4 z-20">
+                                    <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-md flex items-center justify-center">
+                                        <i class="fas fa-{{ $card['icon'] }} text-white text-lg"></i>
+                                    </div>
+                                </div>
+                                @if ($card['premium'])
+                                    <div class="absolute top-4 right-4 z-20 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-md shadow-lg flex items-center gap-1.5">
+                                        <i class="fas fa-crown text-xs"></i>
+                                        <span>ფასიანი</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="p-6 sm:p-5 lg:p-6 flex flex-col flex-grow">
+                                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{{ $card['title'] }}</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed flex-grow text-sm sm:text-base">{{ $card['description'] }}</p>
+                                <div class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md group-hover:from-indigo-600 group-hover:to-purple-700 transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg mt-auto">
+                                    <i class="fas fa-eye mr-2 group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-sm sm:text-base">ნახვა</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">ვაკანსიები არქიტექტორებისთვის</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">შეგიძლიათ მოიძიოთ ან შესთავაზოთ სამუშაო სამშენებლო სფეროს სხვადასხვა დარგის სპეციალისტებს</p>
-                    </div>
-                </a>
-
-                <!-- posts card -->
-                <a href="{{ route('posts.index') }}" class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-newspaper text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სიახლე</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სამშენებლო სექტორში არსებული სიახლეების, რეგულაციებში შეტანილი ცვლილებებისა და განახლებების საინფორმაციო ბაზა</p>
-                    </div>
-                </a>
-
-                <!-- Simulation Exam Card -->
-                <a href="{{ route('regulations') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-book text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სამშენებლო რეგულაციები</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სერტიფიკატის მიღებისთვის საჭირო სამშენებლო რეგულაციების, კანონების დადგენილებებისა და კოდექსების ბაზა</p>
-                    </div>
-                </a>
-
-                <!-- Card 5 -->
-                <a href="{{ route('terms-and-conditions') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-file-contract text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">წესები და პირობები</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სერტიფიკატის მიღების წესებისა და პირობების დეტალური განმარტებები და საგამოცდო პირობების აღწერა</p>
-                    </div>
-                </a>
-
-                <!-- Card 6 -->
-                <a href="{{ route('certificated-specialists') }}" wire:navigate class="group bg-white dark:bg-dark-indigo-200/80 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100 dark:border-dark-indigo-300/50 backdrop-blur-sm relative overflow-hidden h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-500/0 dark:from-dark-indigo-400/20 dark:to-dark-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-primary-600 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-users text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5 md:mb-4 group-hover:text-primary-600 dark:group-hover:text-dark-indigo-200 transition-colors">სერტიფიცირებული სპეციალისტები</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">სპეციალისტების მონაცემთა ბაზა გაძლევთ საშუალებას მოიძიოთ და დაუკავშირდეთ სერტიფიცირებულ არქიტექტორებს</p>
-                    </div>
-                </a>
-                @php
-                    $user = auth()->user();
-                    if($user)
-                    {
-                        $isPremium = $user->hasActiveSubscription();
-                    }
-                    else
-                    {
-                        $isPremium = false;
-                    }
-                @endphp
-                <!-- Video Lessons Card -->
-                <button onclick="{{ true ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <!-- Premium Badge -->
-                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
-                        <i class="fas fa-crown"></i>
-                        <span>ფასიაინი</span>
-                    </div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-purple-100 dark:bg-purple-800/50 text-purple-600 dark:text-pink-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-video text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-purple-600 dark:group-hover:text-pink-300 transition-colors">ვიდეო გაკვეთილები</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც წარმოადგენს აუდიო/ვიდეო მასალის კრებულს, არქიტექტორების გადასამზადებლად</p>
-                    </div>
-                </button>
-
-                <!-- Card 7 -->
-                <button onclick="{{ true ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <!-- Premium Badge -->
-                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
-                        <i class="fas fa-crown"></i>
-                        <span>ფასიაინი</span>
-                    </div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-purple-100 dark:bg-purple-800/50 text-purple-600 dark:text-pink-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-clipboard-list text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-purple-600 dark:group-hover:text-pink-300 transition-colors">საგამოცდო ტესტები</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, რომელიც იძლევა საგამოცდო საკითხების შესწავლის საშუალებას, რათა შეძლოთ საგამოცდო ტესტების წარმატებით ჩაბარება</p>
-                    </div>
-                </button>
-                <!-- Card 8 -->
-                <button onclick="{{ true ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" class="group bg-gradient-to-br from-purple-100 to-pink-200 dark:bg-gradient-to-br dark:from-purple-700/40 dark:to-pink-600/30 p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border border-purple-200 dark:border-pink-600/50 backdrop-blur-sm relative overflow-hidden h-full cursor-pointer text-left">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-600/5 dark:from-purple-400/15 dark:to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-
-                    <!-- Premium Badge -->
-                    <div class="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-medium rounded-full shadow-md flex items-center gap-1.5">
-                        <i class="fas fa-crown"></i>
-                        <span>ფასიაინი</span>
-                    </div>
-
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-purple-100 dark:bg-purple-800/50 text-purple-600 dark:text-pink-300 rounded-xl mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas fa-user-graduate text-lg md:text-2xl"></i>
-                        </div>
-                        <h3 class="text-base md:text-xl font-bold text-gray-900 dark:text-white mb-1.5 md:mb-4 group-hover:text-purple-600 dark:group-hover:text-pink-300 transition-colors">სიმულაციური გამოცდა</h3>
-                        <p class="text-xs md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">ფასიანი სერვისი, სადაც შეგიძლიათ განსაზღვროთ თქვენი ცოდნის ხარისხი და შესაძლებლობა ოფიციალური გამოცდის ჩაბარებისა</p>
-                    </div>
-                </button>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
@@ -147,7 +100,7 @@
 
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-            <div class="inline-block align-bottom bg-white dark:bg-dark-indigo-200/90 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
+            <div class="inline-block align-bottom bg-white dark:bg-dark-indigo-200/90 rounded-md text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
                 <div class="relative">
                     <!-- Animated background effect -->
                     <div class="absolute inset-0 overflow-hidden">
@@ -157,7 +110,7 @@
                     <!-- Premium content -->
                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 relative z-10">
                         <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-purple-400 to-pink-600 sm:mx-0 sm:h-14 sm:w-14 shadow-lg relative overflow-hidden">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-md bg-gradient-to-r from-purple-400 to-pink-600 sm:mx-0 sm:h-14 sm:w-14 shadow-lg relative overflow-hidden">
                                 <div class="absolute inset-0 bg-purple-500 animate-pulse-slow opacity-50"></div>
                                 <div class="crown-container animate-float">
                                     <i class="fas fa-crown text-white text-2xl"></i>
@@ -189,8 +142,8 @@
                     </div>
 
                     <!-- Decorative elements -->
-                    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-purple-300/30 to-transparent rounded-br-full"></div>
-                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-pink-300/30 to-transparent rounded-tl-full"></div>
+                    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-purple-300/30 to-transparent rounded-br-md"></div>
+                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-pink-300/30 to-transparent rounded-tl-md"></div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <x-admin.layout>
-    <div class="bg-white dark:bg-dark-2 rounded-2xl shadow-lg p-8">
+    <div class="bg-white dark:bg-dark-2 rounded-md shadow-lg p-8">
         @if(session('error'))
-            <div class="mb-6 bg-red-50 dark:bg-red-500/10 border-l-4 border-red-500 p-4 rounded-lg">
+            <div class="mb-6 bg-red-50 dark:bg-red-500/10 border-l-4 border-red-500 p-4 rounded-md">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -44,13 +44,13 @@
             </div>
 
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('admin.regulations.regulations') }}" class="px-5 py-2.5 bg-gray-200 dark:bg-dark-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-dark-4 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center">
+                <a href="{{ route('admin.regulations.regulations') }}" class="px-5 py-2.5 bg-gray-200 dark:bg-dark-3 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-dark-4 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                     <span class="font-medium">გაუქმება</span>
                 </a>
-                <button type="submit" class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center">
+                <button type="submit" class="px-5 py-2.5 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-green-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                     </svg>

@@ -13,9 +13,9 @@
             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Your Profile Information') }}</h3>
             <div class="mt-2 flex items-center">
                 @if($this->user->image)
-                    <img src="{{ Storage::url($this->user->image->path) }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover mr-4">
+                    <img src="{{ Storage::url($this->user->image->path) }}" alt="{{ $this->user->name }}" class="rounded-md h-20 w-20 object-cover mr-4">
                 @else
-                    <div class="rounded-full h-20 w-20 bg-gray-200 flex items-center justify-center mr-4">
+                    <div class="rounded-md h-20 w-20 bg-gray-200 flex items-center justify-center mr-4">
                         <span class="text-gray-500 text-lg">{{ substr($this->user->name, 0, 1) }}</span>
                     </div>
                 @endif
@@ -46,9 +46,9 @@
             <!-- Current Profile Photo -->
             <div class="mt-2" x-show="! photoPreview">
                 @if($this->user->image)
-                    <img src="{{ Storage::url($this->user->image->path) }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                    <img src="{{ Storage::url($this->user->image->path) }}" alt="{{ $this->user->name }}" class="rounded-md h-20 w-20 object-cover">
                 @else
-                    <div class="rounded-full h-20 w-20 bg-gray-200 flex items-center justify-center">
+                    <div class="rounded-md h-20 w-20 bg-gray-200 flex items-center justify-center">
                         <span class="text-gray-500 text-lg">{{ substr($this->user->name, 0, 1) }}</span>
                     </div>
                 @endif
@@ -56,7 +56,7 @@
 
             <!-- New Profile Photo Preview -->
             <div class="mt-2" x-show="photoPreview" style="display: none;">
-                <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
+                <span class="block rounded-md w-20 h-20 bg-cover bg-no-repeat bg-center"
                       x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                 </span>
             </div>

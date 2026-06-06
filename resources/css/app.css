@@ -1,6 +1,23 @@
+@import "dejavu-sans-condensed/css/dejavu-sans-condensed.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html,
+    body,
+    button,
+    input,
+    textarea,
+    select {
+        font-family: 'DejaVu Sans Condensed', sans-serif;
+    }
+
+    body :where(:not(i):not(svg):not(path):not([class^="fa"]):not([class*=" fa-"])) {
+        font-family: 'DejaVu Sans Condensed', sans-serif !important;
+    }
+}
 
 /* Dark mode test styles */
 .dark {
@@ -32,4 +49,3 @@
 .dark .border-gray-800 {
     border-color: #374151 !important;
 }
-

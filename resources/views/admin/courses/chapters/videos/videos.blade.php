@@ -30,10 +30,10 @@
                 <!-- Videos List -->
                 <div class="max-w-4xl mx-auto space-y-4">
                     @foreach($chapter->videos as $video)
-                    <div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
-                        <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
+                    <div class="bg-white dark:bg-dark-2 rounded-md shadow-sm flex">
+                        <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-md flex-shrink-0">
                             @if($video->thumbnail)
-                                <img src="{{ Storage::url($video->thumbnail) }}" alt="{{ $video->title }}" class="absolute inset-0 w-full h-full object-cover rounded-l-lg">
+                                <img src="{{ Storage::url($video->thumbnail) }}" alt="{{ $video->title }}" class="absolute inset-0 w-full h-full object-cover rounded-l-md">
                             @else
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <i class="fas fa-video text-gray-400 text-3xl"></i>
@@ -79,7 +79,7 @@
                         <div class="absolute inset-0 flex items-center justify-center animate-pulse">
                             <i class="fas fa-video text-8xl text-primary-400"></i>
                         </div>
-                        <div class="absolute inset-0 border-4 border-t-primary-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                        <div class="absolute inset-0 border-4 border-t-primary-500 border-r-transparent border-b-transparent border-l-transparent rounded-md animate-spin"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">ვიდეოები არ არის დამატებული</h3>
                     <p class="text-gray-500 dark:text-gray-400 text-center max-w-md">

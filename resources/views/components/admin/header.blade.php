@@ -3,7 +3,7 @@
         <div class="flex items-center gap-2 sm:gap-4">
             <!-- Sidebar Toggle -->
             <button @click="toggleSidebar"
-                    class="flex h-9 w-9 items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-dark-4 transition-colors">
+                    class="flex h-9 w-9 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-dark-4 transition-colors">
                 <svg class="text-gray-500 dark:text-white" x-show="!sidebarOpen" x-cloak class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
@@ -20,7 +20,7 @@
                        @keydown.window.escape="searchOpen = false"
                        @keydown.window.cmd.k.prevent="$refs.searchInput?.focus()"
                        x-ref="searchInput"
-                       class="w-[200px] md:w-[250px] lg:w-[400px] rounded-xl border border-gray-300 bg-transparent py-2 pl-10 pr-4 text-sm outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6">
+                       class="w-[200px] md:w-[250px] lg:w-[400px] rounded-md border border-gray-300 bg-transparent py-2 pl-10 pr-4 text-sm outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2">
                     <svg class="fill-gray-500 h-[18px] w-[18px] dark:fill-dark-6" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
@@ -35,7 +35,7 @@
                 <!-- Theme Toggle -->
                 <li>
                     <button @click="toggleDarkMode"
-                            class="flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4 transition-colors">
+                            class="flex h-9 w-9 items-center justify-center rounded-md border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4 transition-colors">
                         <svg x-show="!darkMode" x-cloak class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
                         </svg>
@@ -47,11 +47,11 @@
 
                 <!-- Notifications -->
                 {{-- <li>
-                    <button class="relative flex h-9 w-9 items-center justify-center rounded-xl border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4 transition-colors">
+                    <button class="relative flex h-9 w-9 items-center justify-center rounded-md border-[0.5px] border-gray-300 hover:bg-gray-100 dark:border-dark-4 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-4 transition-colors">
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                         </svg>
-                        <span class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[8px] font-medium text-white">
+                        <span class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-md bg-red-600 text-[8px] font-medium text-white">
                             4
                         </span>
                     </button>
@@ -62,8 +62,8 @@
             <div x-data="{ dropdownOpen: false }" class="relative">
                 <button @click="dropdownOpen = !dropdownOpen" 
                         class="flex items-center gap-2 sm:gap-4">
-                    <span class="h-9 w-9 sm:h-10 sm:w-10 rounded-xl">
-                        <svg class="w-full h-full rounded-full text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                    <span class="h-9 w-9 sm:h-10 sm:w-10 rounded-md">
+                        <svg class="w-full h-full rounded-md text-gray-500" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8c0 2.208-1.79 4-3.998 4-2.208 0-3.998-1.792-3.998-4s1.79-4 3.998-4c2.208 0 3.998 1.792 3.998 4z"/>
                         </svg>
                     </span>
@@ -85,7 +85,7 @@
                      x-transition:leave-start="opacity-100 scale-100"
                      x-transition:leave-end="opacity-0 scale-95"
                      @click.outside="dropdownOpen = false"
-                     class="absolute right-0 mt-4 flex w-62.5 flex-col rounded-xl border border-gray-200/50 bg-white shadow-lg dark:border-dark-4 dark:bg-dark-2">
+                     class="absolute right-0 mt-4 flex w-62.5 flex-col rounded-md border border-gray-200/50 bg-white shadow-lg dark:border-dark-4 dark:bg-dark-2">
                     <ul class="flex flex-col gap-4 px-6 py-5 dark:border-dark-4">
                         <li>
                             <a href="#" wire:navigate

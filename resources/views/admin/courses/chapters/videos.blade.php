@@ -39,7 +39,7 @@
                         <div class="absolute inset-0 flex items-center justify-center animate-pulse">
                             <i class="fas fa-video text-8xl text-primary-400"></i>
                         </div>
-                        <div class="absolute inset-0 border-4 border-t-primary-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                        <div class="absolute inset-0 border-4 border-t-primary-500 border-r-transparent border-b-transparent border-l-transparent rounded-md animate-spin"></div>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">ვიდეოები არ არის დამატებული</h3>
                     <p class="text-gray-500 dark:text-gray-400 text-center max-w-md">

@@ -5,19 +5,19 @@
             @if(!$examRequest->test)
                 @continue
             @endif
-            <div class="bg-white dark:bg-dark-2 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-primary-100 dark:hover:border-primary-400/20 transition-all duration-200 group"
+            <div class="bg-white dark:bg-dark-2 rounded-md border border-gray-100 dark:border-gray-800 hover:border-primary-100 dark:hover:border-primary-400/20 transition-all duration-200 group"
                  onclick="window.location.href = '{{ route('result', $examRequest->test->id) }}'">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center gap-3">
-                            <div class="p-3 rounded-xl bg-primary-50 dark:bg-primary-400/10 group-hover:bg-primary-100 dark:group-hover:bg-primary-400/20 transition-colors duration-200">
+                            <div class="p-3 rounded-md bg-primary-50 dark:bg-primary-400/10 group-hover:bg-primary-100 dark:group-hover:bg-primary-400/20 transition-colors duration-200">
                                 <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
                             <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ტესტი #{{ $examRequest->test->id }}</h3>
                         </div>
-                        <span class="px-3 py-1.5 text-sm font-medium rounded-full {{ $examRequest->test->score >= 50 
+                        <span class="px-3 py-1.5 text-sm font-medium rounded-md {{ $examRequest->test->score >= 50 
                             ? 'bg-green-50 text-green-700 dark:bg-green-400/10 dark:text-green-400' 
                             : 'bg-red-50 text-red-700 dark:bg-red-400/10 dark:text-red-400' }}">
                             {{ $examRequest->test->score }}%

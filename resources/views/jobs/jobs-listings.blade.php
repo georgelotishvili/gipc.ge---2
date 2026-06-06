@@ -2,7 +2,7 @@
     <style>
         .job-card {
             background: white;
-            border-radius: 1rem;
+            border-radius: 0.375rem;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
             border: 1px solid #f3f4f6;
             transition: all 0.2s ease-in-out;
@@ -143,28 +143,28 @@
         .status-dot {
             width: 8px;
             height: 8px;
-            border-radius: 50%;
+            border-radius: 0.375rem;
             background-color: #10b981;
         }
     </style>
     
     <!-- Flash Messages -->
     @if (session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md relative mb-4" role="alert">
             <strong class="font-bold">Success!</strong>
             <span class="block sm:inline">{{ session('success') }}</span>
         </div>
     @endif
 
     @if (session('error'))
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative mb-4" role="alert">
             <strong class="font-bold">Error!</strong>
             <span class="block sm:inline">{{ session('error') }}</span>
         </div>
     @endif
 
     @if ($errors->any())
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative mb-4" role="alert">
             <strong class="font-bold">Validation Error!</strong>
             <ul class="mt-2 list-disc list-inside">
                 @foreach ($errors->all() as $error)
@@ -194,17 +194,17 @@
              
              <!-- Search and Filters -->
              <div class="max-w-6xl mx-auto mb-8 sm:mb-12">
-                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 transition-colors duration-200">
+                 <div class="bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-100 dark:border-gray-700 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 transition-colors duration-200">
                      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
                          <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4">
-                             <a href="{{ route('employees.create') }}" class="group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
+                             <a href="{{ route('employees.create') }}" class="group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-md sm:rounded-md font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
                                  <span class="relative z-10 flex items-center gap-1.5 sm:gap-2 lg:gap-3">
                                      <i class="fas fa-user-plus text-sm sm:text-lg lg:text-xl"></i>
                                      <span>შემოუერთდი</span>
                                  </span>
                                  <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                              </a>
-                             <a href="{{ route('employers.create') }}" class="group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-400 transform hover:scale-105 transition-all duration-300">
+                             <a href="{{ route('employers.create') }}" class="group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-md sm:rounded-md font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-400 transform hover:scale-105 transition-all duration-300">
                                  <i class="fas fa-building text-sm sm:text-lg lg:text-xl"></i>
                                  <span>იპოვე თანამშრომელი</span>
                              </a>
@@ -220,7 +220,7 @@
                              type="text" 
                              x-model="searchQuery"
                              placeholder="ძებნა სამუშაოები, კომპანიები ან უნარები..."
-                             class="w-full pl-10 sm:pl-12 lg:pl-14 pr-3 sm:pr-4 lg:pr-6 py-2.5 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-xl sm:rounded-2xl shadow-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900 focus:outline-none transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500"
+                             class="w-full pl-10 sm:pl-12 lg:pl-14 pr-3 sm:pr-4 lg:pr-6 py-2.5 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-md sm:rounded-md shadow-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900 focus:outline-none transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500"
                          >
                      </div>
 
@@ -228,17 +228,17 @@
                      <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4">
                          <button @click="activeFilter = 'hiring'"
                                  :class="activeFilter === 'hiring' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transform scale-105' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'"
-                                 class="group flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl border-2 border-gray-200 dark:border-gray-600 font-semibold transition-all duration-300 hover:shadow-md">
+                                 class="group flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-md sm:rounded-md border-2 border-gray-200 dark:border-gray-600 font-semibold transition-all duration-300 hover:shadow-md">
                              <i class="fas fa-briefcase text-xs sm:text-sm lg:text-lg"></i>
                              <span class="text-xs sm:text-sm lg:text-base">კომპანიები იქირავებენ</span>
-                             <span class="px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-full bg-white/20 text-white font-bold" x-text="{{$employers->count()}}"></span>
+                             <span class="px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-md bg-white/20 text-white font-bold" x-text="{{$employers->count()}}"></span>
                          </button>
                          <button @click="activeFilter = 'seeking'"
                                  :class="activeFilter === 'seeking' ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg transform scale-105' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'"
-                                 class="group flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl border-2 border-gray-200 dark:border-gray-600 font-semibold transition-all duration-300 hover:shadow-md">
+                                 class="group flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-md sm:rounded-md border-2 border-gray-200 dark:border-gray-600 font-semibold transition-all duration-300 hover:shadow-md">
                              <i class="fas fa-users text-xs sm:text-sm lg:text-lg"></i>
                              <span class="text-xs sm:text-sm lg:text-base">სამუშაოს მაძიებლები</span>
-                             <span class="px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-full bg-white/20 text-white font-bold" x-text="{{$employees->count()}}"></span>
+                             <span class="px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-md bg-white/20 text-white font-bold" x-text="{{$employees->count()}}"></span>
                          </button>
                      </div>
                  </div>
@@ -262,9 +262,9 @@
                                  <!-- Left side -->
                                  <div class="flex items-start sm:items-center space-x-3 sm:space-x-4">
                                      <!-- Company Logo -->
-                                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm border border-gray-200 dark:border-gray-600">
+                                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center flex-shrink-0 shadow-sm border border-gray-200 dark:border-gray-600">
                                          @if($employer->image)
-                                             <img src="{{ asset('storage/' . $employer->image->path) }}" alt="{{ $employer->name }}" class="w-10 h-10 sm:w-14 sm:h-14 rounded-lg object-cover">
+                                             <img src="{{ asset('storage/' . $employer->image->path) }}" alt="{{ $employer->name }}" class="w-10 h-10 sm:w-14 sm:h-14 rounded-md object-cover">
                                          @else
                                              <!-- Real company logos as fallbacks based on company name -->
                                              @php
@@ -328,10 +328,10 @@
                              <!-- Skills -->
                              <div class="mt-3 sm:mt-4 flex flex-wrap gap-1.5 sm:gap-2">
                                  @foreach(array_slice(explode(',', $employer->skills), 0, 4) as $skill)
-                                     <span class="skill-tag px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full">{{ trim($skill) }}</span>
+                                     <span class="skill-tag px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-md">{{ trim($skill) }}</span>
                                  @endforeach
                                  @if(count(explode(',', $employer->skills)) > 4)
-                                     <span class="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+                                     <span class="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-md bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
                                          +{{ count(explode(',', $employer->skills)) - 4 }} სხვა
                                      </span>
                                  @endif
@@ -347,7 +347,7 @@
                                  </div>
                                  
                                  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-                                     <a href="{{ route('employers.show', $employer) }}" class="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
+                                     <a href="{{ route('employers.show', $employer) }}" class="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
                                          <span class="relative z-10 flex items-center gap-1.5 sm:gap-2">
                                              <i class="fas fa-rocket text-xs sm:text-sm"></i>
                                              <span>გაიგე მეტი</span>
@@ -357,14 +357,14 @@
                                      
                                      @if(Auth::check() && (Auth::user()->id == $employer->user_id || Auth::user()->is_admin))
                                      <div class="flex gap-2">
-                                         <a href="{{ route('employers.edit', $employer) }}" class="flex-1 md:flex-none inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-500 hover:border-gray-400 dark:hover:border-gray-400 transition-all duration-200" title="რედაქტირება">
+                                         <a href="{{ route('employers.edit', $employer) }}" class="flex-1 md:flex-none inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500 hover:border-gray-400 dark:hover:border-gray-400 transition-all duration-200" title="რედაქტირება">
                                              <i class="fas fa-edit"></i>
                                              <span class="hidden md:inline ml-1.5 md:ml-2">რედაქტირება</span>
                                          </a>
                                          <form action="{{ route('employers.destroy', $employer) }}" method="POST" class="flex-1 md:flex-none">
                                              @csrf
                                              @method('DELETE')
-                                             <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="w-full inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-xl hover:bg-red-100 dark:hover:bg-red-800 hover:border-red-300 dark:hover:border-red-600 transition-all duration-200" title="წაშლა">
+                                             <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="w-full inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-md hover:bg-red-100 dark:hover:bg-red-800 hover:border-red-300 dark:hover:border-red-600 transition-all duration-200" title="წაშლა">
                                                  <i class="fas fa-trash-alt"></i>
                                                  <span class="hidden md:inline ml-1.5 md:ml-2">წაშლა</span>
                                              </button>
@@ -394,11 +394,11 @@
                                  <!-- Left side -->
                                  <div class="flex items-start sm:items-center space-x-3 sm:space-x-4">
                                      <!-- Profile Picture -->
-                                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm border border-gray-200 dark:border-gray-600">
+                                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center flex-shrink-0 shadow-sm border border-gray-200 dark:border-gray-600">
                                          @if($employee->image)
                                              <img src="{{ asset('storage/' . optional($employee->image()->latest()->first())->path) }}" 
                                                   alt="{{ $employee->name }}" 
-                                                  class="w-10 h-10 sm:w-14 sm:h-14 rounded-lg object-cover">
+                                                  class="w-10 h-10 sm:w-14 sm:h-14 rounded-md object-cover">
                                          @else
                                              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -427,10 +427,10 @@
                              <!-- Skills -->
                              <div class="mt-3 sm:mt-4 flex flex-wrap gap-1.5 sm:gap-2">
                                  @foreach(array_slice(explode(',', $employee->skills), 0, 4) as $skill)
-                                     <span class="skill-tag px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full">{{ trim($skill) }}</span>
+                                     <span class="skill-tag px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-md">{{ trim($skill) }}</span>
                                  @endforeach
                                  @if(count(explode(',', $employee->skills)) > 4)
-                                     <span class="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+                                     <span class="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-md bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
                                          +{{ count(explode(',', $employee->skills)) - 4 }} სხვა
                                      </span>
                                  @endif
@@ -446,7 +446,7 @@
                                  </div>
                                  
                                  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-                                     <a href="{{ route('employees.show', $employee) }}" class="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
+                                     <a href="{{ route('employees.show', $employee) }}" class="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
                                          <span class="relative z-10 flex items-center gap-1.5 sm:gap-2">
                                              <i class="fas fa-user-astronaut text-xs sm:text-sm"></i>
                                              <span>გაიგე მეტი</span>
@@ -457,7 +457,7 @@
                                      @if(Auth::check() && (Auth::user()->id == $employee->user_id || Auth::user()->is_admin))
                                      <div class="flex gap-2">
                                          <a href="{{ route('employees.edit', $employee) }}" 
-                                            class="flex-1 md:flex-none inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-500 hover:border-gray-400 dark:hover:border-gray-400 transition-all duration-200"
+                                            class="flex-1 md:flex-none inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500 hover:border-gray-400 dark:hover:border-gray-400 transition-all duration-200"
                                             onclick="event.stopPropagation()" title="რედაქტირება">
                                              <i class="fas fa-edit"></i>
                                              <span class="hidden md:inline ml-1.5 md:ml-2">რედაქტირება</span>
@@ -466,7 +466,7 @@
                                              @csrf
                                              @method('DELETE')
                                              <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" 
-                                                     class="w-full inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-xl hover:bg-red-100 dark:hover:bg-red-800 hover:border-red-300 dark:hover:border-red-600 transition-all duration-200" title="წაშლა">
+                                                     class="w-full inline-flex items-center justify-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-md hover:bg-red-100 dark:hover:bg-red-800 hover:border-red-300 dark:hover:border-red-600 transition-all duration-200" title="წაშლა">
                                                  <i class="fas fa-trash-alt"></i>
                                                  <span class="hidden md:inline ml-1.5 md:ml-2">წაშლა</span>
                                              </button>

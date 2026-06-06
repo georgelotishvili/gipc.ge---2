@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100 min-h-screen p-6">
     <div class="max-w-2xl mx-auto">
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-md shadow-md overflow-hidden">
             <div class="bg-blue-500 p-4">
                 <h1 class="text-white text-xl font-bold">Send Custom Email</h1>
             </div>

@@ -20,7 +20,7 @@ x-init="
 class="relative max-w-[120rem] mx-auto mb-16">
     
     <!-- Slides Container -->
-    <div class="relative h-[250px] overflow-hidden rounded-3xl">
+    <div class="relative h-[250px] overflow-hidden rounded-md border border-slate-400 dark:border-slate-600">
         <template x-for="(slide, index) in slides" :key="index">
             <div x-show="currentSlide === index"
                 x-transition:enter="transition ease-out duration-500"
@@ -46,7 +46,7 @@ class="relative max-w-[120rem] mx-auto mb-16">
         <template x-for="(slide, index) in slides" :key="index">
             <button @click="currentSlide = index"
                     :class="{ 'bg-primary-600': currentSlide === index, 'bg-gray-300 dark:bg-gray-700': currentSlide !== index }"
-                    class="w-3 h-3 rounded-full transition-colors duration-200">
+                    class="w-3 h-3 rounded-md transition-colors duration-200">
             </button>
         </template>
     </div> -->

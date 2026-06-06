@@ -15,7 +15,7 @@
         <div class="border-b border-gray-200 dark:border-gray-700">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="text-center">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-6">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-md mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
@@ -29,7 +29,7 @@
         <!-- Main Form Container -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             @if ($errors->any())
-                <div class="mb-8 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/30 text-red-800 dark:text-red-200 px-6 py-4 rounded-xl">
+                <div class="mb-8 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/30 text-red-800 dark:text-red-200 px-6 py-4 rounded-md">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
                             <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
@@ -49,7 +49,7 @@
             @endif
 
             @if(session('success'))
-                <div class="mb-8 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 text-green-800 dark:text-green-200 px-6 py-4 rounded-xl">
+                <div class="mb-8 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 text-green-800 dark:text-green-200 px-6 py-4 rounded-md">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
                             <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -74,7 +74,7 @@
                 </div>
                     
                 <!-- Employee Card - Matching Show Page -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-md shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                     <!-- Card Header with Image -->
                     <div class="relative h-48 sm:h-56 md:h-64 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500">
                         <div class="absolute inset-0 bg-gradient-to-br from-black/10 to-black/30"></div>
@@ -82,7 +82,7 @@
                             <div class="flex flex-col md:flex-row items-center md:items-end md:space-y-0 md:space-x-6 text-center md:text-left pt-4 md:pt-0">
                                 <!-- Profile Image -->
                                 <div class="relative flex-shrink-0">
-                                    <div class="w-28 h-28 sm:w-32 sm:h-32 md:w-48 md:h-48 bg-white dark:bg-gray-700 rounded-full border-4 border-white dark:border-gray-600 shadow-2xl overflow-hidden ring-4 ring-white/20 dark:ring-gray-600/20">
+                                    <div class="w-28 h-28 sm:w-32 sm:h-32 md:w-48 md:h-48 bg-white dark:bg-gray-700 rounded-md border-4 border-white dark:border-gray-600 shadow-2xl overflow-hidden ring-4 ring-white/20 dark:ring-gray-600/20">
                                         <img id="preview-image" src="{{ $employee->image ? asset('storage/' . $employee->image->path) : '' }}" alt="Profile" class="w-full h-full object-cover object-center" style="display: {{ $employee->image ? 'block' : 'none' }};">
                                         <div id="preview-image-placeholder" class="w-full h-full flex items-center justify-center" style="display: {{ $employee->image ? 'none' : 'flex' }};">
                                             <svg class="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@
                         <!-- Contact Info -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             <div class="flex items-center space-x-3 sm:space-x-4">
-                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center shadow-sm">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 dark:bg-blue-900/30 rounded-md flex items-center justify-center shadow-sm">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                     </svg>
@@ -117,7 +117,7 @@
                             </div>
                             
                             <div class="flex items-center space-x-3 sm:space-x-4">
-                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center shadow-sm">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 dark:bg-green-900/30 rounded-md flex items-center justify-center shadow-sm">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                     </svg>
@@ -129,7 +129,7 @@
                             </div>
                             
                             <div class="flex items-center space-x-3 sm:space-x-4">
-                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center shadow-sm">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 dark:bg-purple-900/30 rounded-md flex items-center justify-center shadow-sm">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -142,7 +142,7 @@
                             </div>
                             
                             <div class="flex items-center space-x-3 sm:space-x-4">
-                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center shadow-sm">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-md flex items-center justify-center shadow-sm">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
@@ -166,11 +166,11 @@
                                 <div id="preview-skills">
                                     @if($employee->skills)
                                         @foreach(explode(',', $employee->skills) as $skill)
-                                            <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-full text-sm font-medium">{{ trim($skill) }}</span>
+                                            <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-md text-sm font-medium">{{ trim($skill) }}</span>
                                         @endforeach
                                     @else
-                                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-full text-sm font-medium">AutoCAD</span>
-                                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-full text-sm font-medium">Revit</span>
+                                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-md text-sm font-medium">AutoCAD</span>
+                                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-md text-sm font-medium">Revit</span>
                                     @endif
                                 </div>
                             </div>
@@ -195,9 +195,9 @@
                 @method('PATCH')
                 
                 <!-- Personal Information Section -->
-                <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800/30">
+                <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 rounded-md p-8 border border-blue-200 dark:border-blue-800/30">
                     <div class="flex items-center mb-8">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-md flex items-center justify-center mr-4 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
@@ -210,7 +210,7 @@
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             <div class="group">
                                 <div class="relative">
-                                    <input type="text" name="name" id="name" value="{{ old('name', $employee->name) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სახელი და გვარი" required>
+                                    <input type="text" name="name" id="name" value="{{ old('name', $employee->name) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სახელი და გვარი" required>
                                     <label for="name" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,7 +231,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="text" name="position" id="position" value="{{ old('position', $employee->position) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სასურველი პოზიცია" required>
+                                    <input type="text" name="position" id="position" value="{{ old('position', $employee->position) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სასურველი პოზიცია" required>
                                     <label for="position" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,7 +252,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="text" name="city" id="city" value="{{ old('city', $employee->city) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="ქალაქი">
+                                    <input type="text" name="city" id="city" value="{{ old('city', $employee->city) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="ქალაქი">
                                     <label for="city" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,7 +274,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <select name="worktime" id="worktime" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white appearance-none cursor-pointer backdrop-blur-sm peer [&::-ms-expand]:hidden [&::-webkit-select-placeholder]:hidden [&::-webkit-select-arrow]:hidden">
+                                    <select name="worktime" id="worktime" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white appearance-none cursor-pointer backdrop-blur-sm peer [&::-ms-expand]:hidden [&::-webkit-select-placeholder]:hidden [&::-webkit-select-arrow]:hidden">
                                         <option value="">აირჩიეთ სამუშაო დრო</option>
                                         @foreach(\App\Enums\WorkTimeType::cases() as $workTimeType)
                                             <option value="{{ $workTimeType->value }}" {{ old('worktime', $employee->worktime) == $workTimeType->value ? 'selected' : '' }}>
@@ -302,7 +302,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="number" step="0.01" name="salary" id="salary" value="{{ old('salary', $employee->salary) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სასურველი ხელფასი">
+                                    <input type="number" step="0.01" name="salary" id="salary" value="{{ old('salary', $employee->salary) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სასურველი ხელფასი">
                                     <label for="salary" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -324,9 +324,9 @@
                         </div>
                     </div>
                 <!-- Experience & Skills Section -->
-                <div class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-2xl p-8 border border-indigo-200 dark:border-indigo-800/30">
+                <div class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-md p-8 border border-indigo-200 dark:border-indigo-800/30">
                     <div class="flex items-center mb-8">
-                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-md flex items-center justify-center mr-4 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                             </svg>
@@ -339,7 +339,7 @@
                     <div class="space-y-8">
                             <div class="group">
                                 <div class="relative">
-                                    <textarea name="description" id="description" rows="8" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm resize-none" placeholder="თქვენი გამოცდილება და კვალიფიკაცია" required>{{ old('description', $employee->description) }}</textarea>
+                                    <textarea name="description" id="description" rows="8" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm resize-none" placeholder="თქვენი გამოცდილება და კვალიფიკაცია" required>{{ old('description', $employee->description) }}</textarea>
                                     <label for="description" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -361,7 +361,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="text" name="skills" id="skills" value="{{ old('skills', $employee->skills) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="უნარები" required>
+                                    <input type="text" name="skills" id="skills" value="{{ old('skills', $employee->skills) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="უნარები" required>
                                     <label for="skills" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -384,9 +384,9 @@
                         </div>
                     </div>
                 <!-- Contact Information Section -->
-                <div class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-800/30">
+                <div class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-teal-900/20 rounded-md p-8 border border-green-200 dark:border-green-800/30">
                     <div class="flex items-center mb-8">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 rounded-md flex items-center justify-center mr-4 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
@@ -399,7 +399,7 @@
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             <div class="group">
                                 <div class="relative">
-                                    <input type="email" name="email" id="email" value="{{ old('email', $employee->email) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="ელ-ფოსტა" required>
+                                    <input type="email" name="email" id="email" value="{{ old('email', $employee->email) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="ელ-ფოსტა" required>
                                     <label for="email" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-green-600 dark:peer-focus:text-green-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -420,7 +420,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="tel" name="phone" id="phone" value="{{ old('phone', $employee->phone) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="ტელეფონი">
+                                    <input type="tel" name="phone" id="phone" value="{{ old('phone', $employee->phone) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="ტელეფონი">
                                     <label for="phone" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-green-600 dark:peer-focus:text-green-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -441,7 +441,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="url" name="website" id="website" value="{{ old('website', $employee->website) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="პორტფოლიო/ვებსაიტი">
+                                    <input type="url" name="website" id="website" value="{{ old('website', $employee->website) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="პორტფოლიო/ვებსაიტი">
                                     <label for="website" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-green-600 dark:peer-focus:text-green-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -454,7 +454,7 @@
                             </div>
                             <div class="group">
                                 <div class="relative">
-                                    <input type="text" name="social" id="social" value="{{ old('social', $employee->social) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სოციალური ქსელები">
+                                    <input type="text" name="social" id="social" value="{{ old('social', $employee->social) }}" class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-green-500 dark:focus:border-green-400 focus:ring-4 focus:ring-green-500/20 dark:focus:ring-green-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" placeholder="სოციალური ქსელები">
                                     <label for="social" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-green-600 dark:peer-focus:text-green-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                         <span class="flex items-center text-sm">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -469,9 +469,9 @@
                         </div>
                     </div>
                 <!-- File Upload Section -->
-                <div class="bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-800/30">
+                <div class="bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 rounded-md p-8 border border-purple-200 dark:border-purple-800/30">
                     <div class="flex items-center mb-8">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-md flex items-center justify-center mr-4 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
@@ -494,7 +494,7 @@
                             <label for="image" class="cursor-pointer block">
                                 <div 
                                     id="uploadArea" 
-                                    class="border-2 border-dashed rounded-2xl transition-all duration-500 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm relative overflow-hidden group"
+                                    class="border-2 border-dashed rounded-md transition-all duration-500 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm relative overflow-hidden group"
                                     :class="{
                                         'border-purple-400 dark:border-purple-500 bg-purple-50/50 dark:bg-purple-900/20': isDragging,
                                         'border-purple-300 dark:border-purple-600 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-white/70 dark:hover:bg-gray-800/70': !isDragging && !isUploading && !hasImage,
@@ -516,7 +516,7 @@
                                         x-transition:leave-end="opacity-0 scale-95"
                                         class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 dark:from-purple-400/20 dark:to-pink-400/20 backdrop-blur-sm z-10 flex items-center justify-center">
                                         <div class="text-center">
-                                            <div class="w-20 h-20 bg-white/90 dark:bg-gray-800/90 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl animate-bounce">
+                                            <div class="w-20 h-20 bg-white/90 dark:bg-gray-800/90 rounded-md flex items-center justify-center mx-auto mb-4 shadow-2xl animate-bounce">
                                                 <svg class="w-10 h-10 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                                                 </svg>
@@ -536,9 +536,9 @@
                                         x-transition:leave-end="opacity-0 scale-95"
                                         class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 dark:from-blue-400/20 dark:to-indigo-400/20 backdrop-blur-sm z-10 flex items-center justify-center">
                                         <div class="text-center">
-                                            <div class="w-20 h-20 bg-white/90 dark:bg-gray-800/90 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl">
+                                            <div class="w-20 h-20 bg-white/90 dark:bg-gray-800/90 rounded-md flex items-center justify-center mx-auto mb-4 shadow-2xl">
                                                 <!-- Spinning Loader -->
-                                                <div class="w-10 h-10 border-4 border-blue-200 dark:border-blue-700 border-t-blue-600 dark:border-t-blue-400 rounded-full animate-spin"></div>
+                                                <div class="w-10 h-10 border-4 border-blue-200 dark:border-blue-700 border-t-blue-600 dark:border-t-blue-400 rounded-md animate-spin"></div>
                                             </div>
                                             <p class="text-lg font-semibold text-blue-700 dark:text-blue-300">მიმდინარეობს ატვირთვა...</p>
                                             <p class="text-sm text-blue-600 dark:text-blue-400 mt-1" x-text="uploadProgress + '%'"></p>
@@ -552,14 +552,14 @@
                                         x-transition:enter-start="opacity-0 scale-95"
                                         x-transition:enter-end="opacity-100 scale-100"
                                         class="p-8 text-center">
-                                        <div class="w-16 h-16 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-md flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
                                             <svg class="w-8 h-8 text-white group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                                             </svg>
                                         </div>
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">ატვირთეთ ფოტო</h4>
                                         <p class="text-gray-600 dark:text-gray-400 mb-4">დააჭირეთ ან ჩაიტანეთ ფაილი აქ</p>
-                                        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white rounded-xl font-medium hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 group-hover:animate-pulse">
+                                        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white rounded-md font-medium hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 group-hover:animate-pulse">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                             </svg>
@@ -577,14 +577,14 @@
                                         x-transition:leave="transition ease-in duration-300"
                                         x-transition:leave-start="opacity-100 scale-100 rotate-0"
                                         x-transition:leave-end="opacity-0 scale-95 -rotate-2"
-                                        class="relative w-full h-64 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-xl overflow-hidden">
+                                        class="relative w-full h-64 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-md overflow-hidden">
                                         <img 
                                             :src="imagePreview" 
                                             alt="Preview" 
                                             class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
                                             
                                         <!-- Success Badge -->
-                                        <div class="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center animate-pulse">
+                                        <div class="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-md text-xs font-medium flex items-center animate-pulse">
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                             </svg>
@@ -595,7 +595,7 @@
                                         <button 
                                             type="button" 
                                             @click="removeImage()" 
-                                            class="absolute top-3 right-3 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 hover:rotate-12 group">
+                                            class="absolute top-3 right-3 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-md flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 hover:rotate-12 group">
                                             <svg class="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                             </svg>
@@ -612,7 +612,7 @@
                                             <button 
                                                 type="button" 
                                                 @click="document.getElementById('image').click()" 
-                                                class="px-4 py-2 bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-white rounded-lg font-medium hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 transform hover:scale-105">
+                                                class="px-4 py-2 bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-white rounded-md font-medium hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 transform hover:scale-105">
                                                 შეცვლა
                                             </button>
                                         </div>
@@ -624,7 +624,7 @@
                         <!-- Current Image Display -->
                         @if($employee->image)
                             <div class="mt-6 text-center">
-                                <img src="{{ asset('storage/' . optional($employee->image()->latest()->first())->path) }}" alt="Current profile" class="h-20 w-auto object-contain rounded mx-auto shadow-lg">
+                                <img src="{{ asset('storage/' . optional($employee->image()->latest()->first())->path) }}" alt="Current profile" class="h-20 w-auto object-contain rounded-md mx-auto shadow-lg">
                                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">მიმდინარე სურათი (latest here also)</p>
                             </div>
                         @endif
@@ -639,13 +639,13 @@
                     </div>
             <!-- Submit Buttons -->
             <div class="flex flex-col sm:flex-row items-center justify-end gap-6 pt-8 border-t border-gray-200/50 dark:border-gray-700/50">
-                <a href="{{ route('jobs') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 text-gray-700 dark:text-gray-200 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-gray-200/50 dark:border-gray-600/50">
+                <a href="{{ route('jobs') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-700 text-gray-700 dark:text-gray-200 rounded-md font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-gray-200/50 dark:border-gray-600/50">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                     გაუქმება
                 </a>
-                <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white rounded-2xl font-bold text-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:scale-105">
+                <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-600 text-white rounded-md font-bold text-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:scale-105">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                     </svg>

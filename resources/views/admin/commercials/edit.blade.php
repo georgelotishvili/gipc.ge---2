@@ -1,13 +1,13 @@
 <x-admin.layout>
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900 py-6">
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-md shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                     <h3 class="text-2xl font-bold text-gray-800 dark:text-white">რეკლამის რედაქტირება</h3>
                 </div>
                 <div class="p-6">
                     @if(session('error'))
-                        <div class="mb-4 p-4 rounded-lg bg-red-100 dark:bg-red-900/50 border border-red-200 dark:border-red-800">
+                        <div class="mb-4 p-4 rounded-md bg-red-100 dark:bg-red-900/50 border border-red-200 dark:border-red-800">
                             <p class="text-red-700 dark:text-red-300">{{ session('error') }}</p>
                         </div>
                     @endif
@@ -105,7 +105,7 @@
                                 @if($commercial->image_link)
                                     <img src="{{ $commercial->getImageLinkAttribute() }}" 
                                          alt="{{ $commercial->name }}" 
-                                         class="h-32 w-auto object-cover rounded">
+                                         class="h-32 w-auto object-cover rounded-md">
                                 @else
                                     <p class="text-gray-500 dark:text-gray-400">სურათი არ არის</p>
                                 @endif

@@ -2,7 +2,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- Flash Messages -->
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md relative mb-4" role="alert">
                 <strong class="font-bold">Success!</strong>
                 <span class="block sm:inline">{{ session('success') }}</span>
                 <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -15,7 +15,7 @@
         @endif
 
         <!-- Job Details Card -->
-        <div class="bg-white dark:bg-gray-800/50 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm overflow-hidden">
+        <div class="bg-white dark:bg-gray-800/50 rounded-md shadow-lg border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm overflow-hidden">
             <!-- Name and Position -->
             <div class="p-6 border-b border-gray-100 dark:border-gray-700/50">
                 <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $employer->position }}</h1>
@@ -24,11 +24,11 @@
 
             <!-- Company Logo/Image -->
             <div class="p-6">
-                <div class="bg-white dark:bg-gray-800 rounded-xl p-2 shadow-lg border border-gray-100 dark:border-gray-700 inline-block">
+                <div class="bg-white dark:bg-gray-800 rounded-md p-2 shadow-lg border border-gray-100 dark:border-gray-700 inline-block">
                     @if($employer->image)
-                        <img src="{{ asset('storage/' . $employer->image->path) }}" alt="{{ $employer->name }}" class="w-24 h-24 object-cover rounded-lg">
+                        <img src="{{ asset('storage/' . $employer->image->path) }}" alt="{{ $employer->name }}" class="w-24 h-24 object-cover rounded-md">
                     @else
-                        <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                        <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center">
                             <i class="fas fa-building text-gray-400 dark:text-gray-500 text-4xl"></i>
                         </div>
                     @endif
@@ -37,13 +37,13 @@
                 <!-- Action Buttons -->
                 @if(Auth::check() && (Auth::user()->id == $employer->user_id || Auth::user()->is_admin))
                 <div class="flex gap-2 mt-4">
-                    <a href="{{ route('employers.edit', $employer) }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
+                    <a href="{{ route('employers.edit', $employer) }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-all duration-200 shadow-md hover:shadow-lg">
                         <i class="fas fa-edit mr-1"></i> რედაქტირება
                     </a>
                     <form action="{{ route('employers.destroy', $employer) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
+                        <button type="submit" onclick="return confirm('დარწმუნებული ხართ?')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md transition-all duration-200 shadow-md hover:shadow-lg">
                             <i class="fas fa-trash-alt mr-1"></i> წაშლა
                         </button>
                     </form>
@@ -55,9 +55,9 @@
             <div class="p-6">
                 <!-- Job Highlights -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
+                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 rounded-lg">
+                            <div class="p-3 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 rounded-md">
                                 <i class="fas fa-location-dot text-xl"></i>
                             </div>
                             <div>
@@ -66,9 +66,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
+                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 rounded-lg">
+                            <div class="p-3 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 rounded-md">
                                 <i class="fas fa-clock text-xl"></i>
                             </div>
                             <div>
@@ -77,9 +77,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
+                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 rounded-lg">
+                            <div class="p-3 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 rounded-md">
                                 <i class="fas fa-money-bill text-xl"></i>
                             </div>
                             <div>
@@ -103,7 +103,7 @@
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">უნარები</h2>
                     <div class="flex flex-wrap gap-2">
                         @foreach(explode(',', $employer->skills) as $skill)
-                            <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium">
+                            <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-md text-sm font-medium">
                                 {{ trim($skill) }}
                             </span>
                         @endforeach
@@ -115,7 +115,7 @@
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">საკონტაქტო ინფორმაცია</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
+                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-md">
                                 <i class="fas fa-envelope text-xl"></i>
                             </div>
                             <div>
@@ -125,7 +125,7 @@
                         </div>
                         @if($employer->phone)
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
+                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-md">
                                 <i class="fas fa-phone text-xl"></i>
                             </div>
                             <div>
@@ -136,7 +136,7 @@
                         @endif
                         @if($employer->website)
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
+                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-md">
                                 <i class="fas fa-globe text-xl"></i>
                             </div>
                             <div>
@@ -147,7 +147,7 @@
                         @endif
                         @if($employer->social)
                         <div class="flex items-center gap-3">
-                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">
+                            <div class="p-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-md">
                                 <i class="fas fa-share-nodes text-xl"></i>
                             </div>
                             <div>
@@ -174,7 +174,7 @@
 
         <!-- Back Button -->
         <div class="mt-8">
-            <a href="{{ route('jobs') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg transition-colors duration-200">
+            <a href="{{ route('jobs') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-md transition-colors duration-200">
                 <i class="fas fa-arrow-left mr-2"></i> უკან დაბრუნება
             </a>
         </div>

@@ -21,7 +21,7 @@
         <div class="whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-400 w-16">#{{ $user->id }}</div>
         <div class="whitespace-nowrap">
             <div class="flex items-center">
-                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
+                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
                     <span class="text-lg font-bold text-blue-500 dark:text-blue-400">
                         {{ strtoupper(substr($user->name, 0, 1)) }}
                     </span>
@@ -37,7 +37,7 @@
         </div>
         <div class="whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
             @if($subscription)
-                <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 rounded-full text-xs">
+                <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 rounded-md text-xs">
                     {{ $subscription->is_active ? 'გამოწერილი' : 'არ არის გამოწერილი' }}
                 </span>
                 <div class="mt-1 text-xs">
@@ -46,37 +46,37 @@
                     <div>ტიპი: {{ $user->activeSubscriptionName() }}</div>
                 </div>
             @else
-                <span class="px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400 rounded-full text-xs">
+                <span class="px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400 rounded-md text-xs">
                     გამოწერა არ არსებობს
                 </span>
             @endif
         </div>
         <div class="whitespace-nowrap text-right text-sm font-medium">
             <div class="flex justify-end gap-2">
-                <a href="{{ route('admin.subscription.edit', $user->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                <a href="{{ route('admin.subscription.edit', $user->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-md hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                     რედაქტირება
                 </a>
                 <button
                     wire:click="confirmDelete"
-                    class="px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:from-red-700 hover:to-red-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                    class="px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-md hover:from-red-700 hover:to-red-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                     წაშლა
                 </button>
                 <!-- Temporary test button -->
                 <button
                     wire:click="testDelete"
-                    class="px-3 py-1.5 bg-gradient-to-r from-yellow-600 to-yellow-500 text-white rounded-lg hover:from-yellow-700 hover:to-yellow-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                    class="px-3 py-1.5 bg-gradient-to-r from-yellow-600 to-yellow-500 text-white rounded-md hover:from-yellow-700 hover:to-yellow-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                     Test
                 </button>
                 <!-- Simple increment test -->
                 <button
                     wire:click="incrementTest"
-                    class="px-3 py-1.5 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-lg hover:from-purple-700 hover:to-purple-500 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                    class="px-3 py-1.5 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-md hover:from-purple-700 hover:to-purple-500 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                     +1
                 </button>
                 <!-- Simple test -->
                 <button
                     wire:click="simpleTest"
-                    class="px-3 py-1.5 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-lg hover:from-green-700 hover:to-green-500 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                    class="px-3 py-1.5 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-md hover:from-green-700 hover:to-green-500 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                     Test
                 </button>
             </div>
@@ -91,10 +91,10 @@
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <!-- Modal panel -->
-                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-md text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                     <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/30 sm:mx-0 sm:h-10 sm:w-10">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-red-100 dark:bg-red-900/30 sm:mx-0 sm:h-10 sm:w-10">
                                 <svg class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
                                 </svg>

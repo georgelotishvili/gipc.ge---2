@@ -1,9 +1,9 @@
 <x-layout>
-    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="bg-white rounded-md shadow-md overflow-hidden">
         <div class="p-6">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-xl font-semibold text-gray-800">სამუშაო მიმდინარეობს</h3>
-                <span class="px-3 py-1 text-sm font-medium rounded-full bg-yellow-100 text-yellow-800">
+                <span class="px-3 py-1 text-sm font-medium rounded-md bg-yellow-100 text-yellow-800">
                     მალე
                 </span>
             </div>

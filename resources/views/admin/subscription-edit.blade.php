@@ -1,17 +1,17 @@
 <x-admin.layout>
     <div class="max-w-4xl mx-auto">
-        <div class="bg-white dark:bg-dark-2 rounded-2xl shadow-lg p-8">
+        <div class="bg-white dark:bg-dark-2 rounded-md shadow-lg p-8">
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
                     გამოწერის რედაქტირება - {{ $user->name }}
                 </h1>
-                <a href="{{ route('admin.users') }}" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+                <a href="{{ route('admin.users') }}" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
                     უკან
                 </a>
             </div>
 
             @if ($errors->any())
-                <div class="mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-lg">
+                <div class="mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-md">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -97,12 +97,12 @@
 
                 <!-- Current Subscription Info -->
                 @if($user->subscription)
-                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-md">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">მიმდინარე გამოწერა</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                             <div>
                                 <span class="font-medium">სტატუსი:</span>
-                                <span class="px-2 py-1 rounded-full text-xs {{ $user->subscription->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                <span class="px-2 py-1 rounded-md text-xs {{ $user->subscription->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ $user->subscription->is_active ? 'გამოწერილი' : 'არ არის გამოწერილი' }}
                                 </span>
                             </div>
@@ -118,10 +118,10 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-end space-x-4">
-                    <a href="{{ route('admin.users') }}" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+                    <a href="{{ route('admin.users') }}" class="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
                         გაუქმება
                     </a>
-                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                         შენახვა
                     </button>
                 </div>

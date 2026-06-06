@@ -1,13 +1,13 @@
 <x-admin.layout>
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900 py-6">
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-md shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                     <h3 class="text-2xl font-bold text-gray-800 dark:text-white">პარამეტრის დამატება</h3>
                 </div>
                 <div class="p-6">
                     @if(session('success-plan-option'))
-                        <div class="mb-4 p-4 rounded-lg bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
+                        <div class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan-option') }}</p>
                         </div>
                     @endif

@@ -4,11 +4,11 @@
         <!-- Content wrapper with max width and centering -->
         <div class="max-w-4xl mx-auto">
             <!-- Beautiful card container -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg sm:shadow-xl lg:shadow-2xl shadow-blue-100/50 dark:shadow-blue-900/50 overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-md sm:rounded-md lg:rounded-md shadow-lg sm:shadow-xl lg:shadow-2xl shadow-blue-100/50 dark:shadow-blue-900/50 overflow-hidden">
                 <!-- Header with icon -->
                 <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6">
                     <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3">
-                        <div class="p-2 bg-white/20 rounded-lg">
+                        <div class="p-2 bg-white/20 rounded-md">
                             <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
@@ -24,14 +24,14 @@
          
             
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center border-b-2 border-blue-200 dark:border-blue-700 pb-4"><strong><em><u>ვებგვერდის gipc.ge გამოყენების წესები და პირობები</u></em></strong></h1>
-            <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-6 border-l-4 border-blue-500 mb-8">
+            <div class="bg-blue-50 dark:bg-blue-900/30 rounded-md p-6 border-l-4 border-blue-500 mb-8">
                 <h3 class="text-xl font-semibold text-blue-900 dark:text-blue-100 mb-3"><strong>შესავალი</strong></h3>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">კეთილი იყოს თქვენი მობრძანება gipc.ge-ზე, შპს &bdquo;საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი&ldquo; ს/ნ 405773854 (შემდგომში &bdquo;<strong>ინსტიტუტი</strong>&ldquo; ან &bdquo;<strong>GIPC</strong>&ldquo;) ოფიციალურ ვებგვერდზე.</p>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">წინამდებარე წესები და პირობები (შემდგომში &bdquo;<strong>წესები</strong>&ldquo;) არეგულირებს თქვენ მიერ ვებგვერდის (gipc.ge) და მასზე განთავსებული სერვისებისა და ინფორმაციის გამოყენებას. ვებგვერდზე რეგისტრაციით, მასზე წვდომით ან მისი ნებისმიერი სერვისით სარგებლობით, თქვენ (შემდგომში &bdquo;<strong>მომხმარებელი</strong>&ldquo;) ადასტურებთ, რომ ყურადღებით გაეცანით, გესმით და სრულად ეთანხმებით წინამდებარე წესებს. თუ არ ეთანხმებით ამ წესების რომელიმე ნაწილს, გთხოვთ, არ გამოიყენოთ ვებგვერდი ან მისი სერვისები.</p>
             </div>
-            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 mb-8">
+            <div class="bg-white dark:bg-gray-800 rounded-md p-6 shadow-md border border-gray-200 dark:border-gray-700 mb-8">
                 <h3 class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4">
-                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full w-8 h-8 flex items-center justify-center text-base sm:text-lg font-bold">1</span>
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-md w-8 h-8 flex items-center justify-center text-base sm:text-lg font-bold">1</span>
                     <span class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white"><strong><em><u>ტერმინთა განმარტება</u></em></strong></span>
                 </h3>
                 <ul class="space-y-3 text-gray-700 dark:text-gray-300">
@@ -57,7 +57,7 @@
                     </li>
                     <li class="flex items-start gap-2 sm:gap-3 flex-wrap">
                         <span class="mt-1 flex-shrink-0"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-                        <span class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                        <span class="w-2 h-2 bg-green-500 rounded-md mt-2 flex-shrink-0"></span>
                         <span><strong>რეგისტრაცია</strong>: მომხმარებლის მიერ ვებგვერდზე ანგარიშის შექმნის პროცესი.</span>
                     </li>
 
@@ -67,7 +67,7 @@
             <p><strong>2.1.</strong> ვებგვერდის მიზანია იყოს ცენტრალური პლატფორმა არქიტექტორთა სერტიფიცირების პროცესის მხარდასაჭერად, პროფესიული განვითარების ხელშესაწყობად და სფეროში გამჭვირვალობისა და ანგარიშვალდებულების გასაზრდელად.</p>
             <p><strong>2.2.</strong> ინსტიტუტი ვებგვერდის მეშვეობით მომხმარებლებს სთავაზობს:</p>
             <ul>
-            <li><strong>უფასო სერვისებს</strong>: წვდომას სერტიფიცირებულ სპეციალისტთა საჯარო რეესტრზე, ინფორმაციას ინსტიტუტისა და სერტიფიცირების შესახებ, სიახლეებს, წვდომას სამშენებლო რეგულაციებზე, ვაკანსიების პლატფორმას.</li>
+            <li><strong>უფასო სერვისებს</strong>: ინფორმაციას ინსტიტუტისა და სერტიფიცირების შესახებ, წვდომას სამშენებლო რეგულაციებზე, ვაკანსიების პლატფორმას.</li>
             <li><strong>ფასიან სერვისებს</strong>: საგანმანათლებლო ვიდეოგაკვეთილებს, სავარჯიშო ტესტებს, სიმულაციურ გამოცდებს. ფასიანი სერვისებით სარგებლობა მოითხოვს შესაბამისი საფასურის გადახდას.</li>
             </ul>
             <p><strong>2.3.</strong> ინსტიტუტი იტოვებს უფლებას, ნებისმიერ დროს შეცვალოს, შეაჩეროს ან შეწყვიტოს ნებისმიერი სერვისის მიწოდება.</p>
@@ -148,7 +148,7 @@
             <p>მონაცემები მუშავდება:</p>
             <ul>
             <li>სერვისის მიწოდებისთვის (სერტიფიცირება, ტრენინგი, გადახდის დამუშავება).</li>
-            <li>მომხმარებელთან კომუნიკაციისთვის (მოთხოვნების განხილვა, სიახლეების გაგზავნა თანხმობის საფუძველზე).</li>
+            <li>მომხმარებელთან კომუნიკაციისთვის (მოთხოვნების განხილვა და საჭირო შეტყობინებების გაგზავნა).</li>
             <li>სერვისის ხარისხის გასაუმჯობესებლად (ანალიზი, ოპტიმიზაცია).</li>
             </ul>
             <p><strong>9.3. მონაცემთა დაცვა:</strong></p>
@@ -240,14 +240,14 @@
             right: 0;
             height: 3px;
             background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            border-radius: 2px;
+            border-radius: 0.375rem;
             box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
         
         /* Beautiful modern section headers */
         .WordSection1 h3 {
             @apply bg-gradient-to-r from-white via-blue-50 to-purple-50 dark:from-gray-800 dark:via-blue-900/30 dark:to-purple-900/30;
-            @apply rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 mb-8;
+            @apply rounded-md p-6 shadow-lg border border-gray-200 dark:border-gray-700 mb-8;
             @apply text-xl font-bold text-gray-900 dark:text-white;
             position: relative;
             overflow: hidden;
@@ -294,7 +294,7 @@
             height: 32px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            border-radius: 50%;
+            border-radius: 0.375rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -342,7 +342,7 @@
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
             border-left: 4px solid transparent;
             border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
-            border-radius: 0 8px 8px 0;
+            border-radius: 0.375rem;
             margin-bottom: 8px;
             transition: all 0.3s ease;
             display: flex;

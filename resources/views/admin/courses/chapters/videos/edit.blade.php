@@ -13,7 +13,7 @@
 
             @if ($errors->any())
                 <div class="max-w-2xl mx-auto mb-6">
-                    <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                    <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-md p-4">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -39,7 +39,7 @@
 
             @if (session('success'))
                 <div class="max-w-2xl mx-auto mb-6">
-                    <div class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <div class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-md p-4">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -62,7 +62,7 @@
                     @csrf
                     @method('PATCH')
                     
-                    <div class="bg-white dark:bg-dark-2 rounded-xl p-6 shadow-sm">
+                    <div class="bg-white dark:bg-dark-2 rounded-md p-6 shadow-sm">
                         <!-- Video Name -->
                         <div class="mb-6">
                             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -93,7 +93,7 @@
                         <!-- Free (Public) Checkbox -->
                         <div class="mb-6">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" name="free" id="free" value="1" {{ $video->free ? 'checked' : '' }} class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <input type="checkbox" name="free" id="free" value="1" {{ $video->free ? 'checked' : '' }} class="h-4 w-4 text-blue-600 border-gray-300 rounded-md focus:ring-blue-500">
                                 <label for="free" class="text-sm font-medium text-gray-700 dark:text-gray-300">უფასო ვიდეო</label>
                             </div>
                         </div>

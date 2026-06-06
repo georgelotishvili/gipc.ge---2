@@ -2,11 +2,11 @@
     <div class="min-h-screen py-8 mt-12 sm:mt-16 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black">
         <div class="max-w-4xl mx-auto px-4">
             <!-- Score Card -->
-            <div class="bg-white dark:bg-gray-800/50 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700/50 p-8 sm:p-10 mb-10 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur-md rounded-md border border-gray-200 dark:border-gray-700/50 p-8 sm:p-10 mb-10 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div class="flex flex-col items-center">
                     <!-- Result Badge -->
                     <div class="mb-6">
-                        <span class="px-8 py-3 rounded-full text-md font-semibold {{ $score >= 50 
+                        <span class="px-8 py-3 rounded-md text-md font-semibold {{ $score >= 50 
                             ? 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700'
                             : 'bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-700' }}">
                             {{ $score >= 50 ? '✅ გავიდა' : 'სამწუხაროდ თქვენ ვერ ჩააბარეთ' }} <!-- Passed / Failed -->
@@ -96,11 +96,11 @@
                         $userAnswer = $question->answers->find($userAnswerId);
                         $isUserCorrect = $userAnswer?->is_true ?? false;
                     @endphp
-                    <div class="bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700/50 shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                    <div class="bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-md border border-gray-200 dark:border-gray-700/50 shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
                         <!-- Question Header -->
                         <div class="p-5 sm:p-6 border-b border-gray-200 dark:border-gray-700/50 flex items-start gap-4">
                             <div class="flex-shrink-0 mt-1">
-                                <div class="w-10 h-10 rounded-lg flex items-center justify-center {{ $isUserCorrect ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30' }}">
+                                <div class="w-10 h-10 rounded-md flex items-center justify-center {{ $isUserCorrect ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30' }}">
                                     @if($isUserCorrect)
                                         <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -129,7 +129,7 @@
                                         $isTheCorrectAnswer = $answer->is_true;
                                     @endphp
                                     <div @class([
-                                        'flex items-center justify-between p-4 rounded-lg border',
+                                        'flex items-center justify-between p-4 rounded-md border',
                                         'bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-700' => $isSelectedByUser && $isTheCorrectAnswer,
                                         'bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-700' => $isSelectedByUser && !$isTheCorrectAnswer,
                                         'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700/50' => !$isSelectedByUser && $isTheCorrectAnswer, // Highlight correct if user was wrong
@@ -164,7 +164,7 @@
             <!-- Back Button -->
             <div class="mt-10 flex justify-center">
                 <a href="{{ route('test_results') }}" 
-                   class="inline-flex items-center gap-2 text-white bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800 font-medium rounded-lg text-sm px-6 py-3 transition-all duration-200 focus:outline-none shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                   class="inline-flex items-center gap-2 text-white bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800 font-medium rounded-md text-sm px-6 py-3 transition-all duration-200 focus:outline-none shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>

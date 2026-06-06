@@ -10,35 +10,35 @@
             <div class="-mx-4">
                 <div class="px-4 flex flex-col gap-4 justify-center">
                     <button
-                        class="wrong-answer font-semibold py-2 px-4 border border-gray-300 rounded shadow-lg text-left max-w-md">
+                        class="wrong-answer font-semibold py-2 px-4 border border-gray-300 rounded-md shadow-lg text-left max-w-md">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი
                         ვიდრე ნახალოვკაში
                     </button>
                     <button
-                        class="answer font-semibold py-2 px-4 border border-gray-300 rounded shadow-lg text-left max-w-md">
+                        class="answer font-semibold py-2 px-4 border border-gray-300 rounded-md shadow-lg text-left max-w-md">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში
                     </button>
-                    <button class="font-semibold py-2 px-4 border border-gray-300 rounded shadow-md text-left max-w-md">
+                    <button class="font-semibold py-2 px-4 border border-gray-300 rounded-md shadow-md text-left max-w-md">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში
                     </button>
-                    <button class="font-semibold py-2 px-4 border border-gray-300 rounded shadow-md text-left max-w-md">
+                    <button class="font-semibold py-2 px-4 border border-gray-300 rounded-md shadow-md text-left max-w-md">
                         რატომ არის ჯავახეთის სოფელ აიაზმიში უკეთესი ასფალტი ვიდრე
                         ნახალოვკაში
                     </button>
                 </div>
                 <div class="flex justify-between items-center gap-4 px-2">
                     <button type="button"
-                        class="text-white mt-4 ml-1 bg-primary hover:bg-blue-dark focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
+                        class="text-white mt-4 ml-1 bg-primary hover:bg-blue-dark focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
                         <i class="fa-solid fa-chevron-left fa-lg"></i>
                     </button>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div class="bg-primary z-50 h-2.5 rounded-full" style="width: 75%"></div>
+                    <div class="w-full bg-gray-200 rounded-md h-2.5">
+                        <div class="bg-primary z-50 h-2.5 rounded-md" style="width: 75%"></div>
                     </div>
                     <button type="button"
-                        class="text-white mt-4 bg-primary hover:bg-blue-dark focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
+                        class="text-white mt-4 bg-primary hover:bg-blue-dark focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
                         <i class="fa-solid fa-chevron-right fa-lg"></i>
                     </button>
                 </div>

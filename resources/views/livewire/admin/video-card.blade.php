@@ -1,8 +1,8 @@
-<div class="bg-white dark:bg-dark-2 rounded-lg shadow-sm flex">
+<div class="bg-white dark:bg-dark-2 rounded-md shadow-sm flex">
     <a href="{{ route('admin.courses.chapters.videos.show', ['course' => $course, 'chapter' => $chapter, 'video' => $video]) }}" target="_blank">
-        <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-lg flex-shrink-0">
+        <div class="w-48 h-32 relative bg-gray-100 dark:bg-dark-3 rounded-l-md flex-shrink-0">
             @if($video->imageUrl())
-                <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="absolute inset-0 w-full h-full object-cover rounded-l-lg">
+                <img src="{{ $video->imageUrl() }}" alt="{{ $video->name }}" class="absolute inset-0 w-full h-full object-cover rounded-l-md">
             @else
                 <div class="absolute inset-0 flex items-center justify-center">
                     <i class="fas fa-video text-gray-400 text-3xl"></i>
@@ -32,7 +32,7 @@
                         id="weight-{{ $video->id }}" 
                         wire:model="weight" 
                         wire:change="updateWeight"
-                        class="w-28 text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-black dark:text-white"
+                        class="w-28 text-sm border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-black dark:text-white"
                         step="any"
                         min="0"
                     >

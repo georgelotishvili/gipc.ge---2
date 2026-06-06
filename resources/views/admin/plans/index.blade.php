@@ -1,7 +1,7 @@
 <x-admin.layout>
     <div class="min-h-screen py-6">
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-md shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                     <h3 class="text-2xl font-bold text-gray-800 dark:text-white">ტიპი</h3>
                     <a href="{{ route('admin.plan-types.create') }}"
@@ -16,7 +16,7 @@
                 <div class="p-6">
                     @if(session('success-plan-type'))
                         <div
-                            class="mb-4 p-4 rounded-lg bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
+                            class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan-type') }}</p>
                         </div>
                     @endif
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden mt-5">
+            <div class="bg-white dark:bg-gray-800 rounded-md shadow-sm overflow-hidden mt-5">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                     <h3 class="text-2xl font-bold text-gray-800 dark:text-white">ფასები</h3>
                     <a href="{{ route('admin.plans.create') }}"
@@ -110,7 +110,7 @@
                 <div class="p-6">
                     @if(session('success-plan'))
                         <div
-                            class="mb-4 p-4 rounded-lg bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
+                            class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan') }}</p>
                         </div>
                     @endif
@@ -206,7 +206,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden mt-5">
+            <div class="bg-white dark:bg-gray-800 rounded-md shadow-sm overflow-hidden mt-5">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                     <h3 class="text-2xl font-bold text-gray-800 dark:text-white">პარამეტრები</h3>
                     <a href="{{ route('admin.plan-options.create') }}"
@@ -221,7 +221,7 @@
                 <div class="p-6">
                     @if(session('success-plan-option'))
                         <div
-                            class="mb-4 p-4 rounded-lg bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
+                            class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan-option') }}</p>
                         </div>
                     @endif

@@ -17,7 +17,7 @@
         <x-validation-errors class="mb-4 sm:mb-6" />
 
         @session('status')
-            <div class="mb-4 sm:mb-6 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+            <div class="mb-4 sm:mb-6 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
                 <div class="flex items-center">
                     <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
@@ -41,7 +41,7 @@
                         </svg>
                     </div>
                     <x-input id="email" 
-                             class="block w-full pl-10 pr-3 py-2.5 sm:py-3 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base" 
+                             class="block w-full pl-10 pr-3 py-2.5 sm:py-3 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base" 
                              type="email" 
                              name="email" 
                              :value="old('email')" 
@@ -61,7 +61,7 @@
                         </svg>
                     </div>
                     <x-input id="password" 
-                             class="block w-full pl-10 pr-3 py-2.5 sm:py-3 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base" 
+                             class="block w-full pl-10 pr-3 py-2.5 sm:py-3 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base" 
                              type="password" 
                              name="password" 
                              required 
@@ -72,7 +72,7 @@
 
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                 <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" class="rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700" />
+                    <x-checkbox id="remember_me" name="remember" class="rounded-md border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700" />
                     <span class="ml-2 text-sm text-gray-600 dark:text-gray-400 font-medium">{{ __('auth.Remember me') }}</span>
                 </label>
 
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <button type="button" class="w-full max-w-xs inline-flex justify-center items-center py-2.5 sm:py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 hover:shadow-md">
+                    <button type="button" class="w-full max-w-xs inline-flex justify-center items-center py-2.5 sm:py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 hover:shadow-md">
                         <svg class="w-5 h-5 mr-3" viewBox="0 0 24 24">
                             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>

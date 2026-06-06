@@ -2,9 +2,9 @@
     <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-dark dark:to-dark-2 relative overflow-hidden">
         <!-- Animated background elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/10 dark:bg-primary-400/5 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-3xl animate-float-delayed"></div>
-            <div class="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500/10 dark:bg-purple-400/5 rounded-full blur-2xl animate-float-slow"></div>
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/10 dark:bg-primary-400/5 rounded-md blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 dark:bg-blue-400/5 rounded-md blur-3xl animate-float-delayed"></div>
+            <div class="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500/10 dark:bg-purple-400/5 rounded-md blur-2xl animate-float-slow"></div>
         </div>
         
         <div class="relative z-10 max-w-[1920px] mx-auto px-6 py-8">
@@ -20,7 +20,7 @@
 
             @if ($errors->any())
                 <div class="max-w-2xl mx-auto mb-6">
-                    <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-lg p-4 shadow-lg transform transition-all duration-300 hover:scale-[1.01]">
+                    <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-md p-4 shadow-lg transform transition-all duration-300 hover:scale-[1.01]">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -46,7 +46,7 @@
 
             @if (session('success'))
                 <div class="max-w-2xl mx-auto mb-6">
-                    <div class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-lg p-4 shadow-lg transform transition-all duration-300 hover:scale-[1.01]">
+                    <div class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-md p-4 shadow-lg transform transition-all duration-300 hover:scale-[1.01]">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -68,10 +68,10 @@
                 <form action="{{ route('admin.courses.chapters.videos.store', [$course, $chapter]) }}" method="POST" enctype="multipart/form-data" class="space-y-6" id="video-upload-form">
                     @csrf
                     @method('POST')
-                    <div class="bg-white dark:bg-dark-2 rounded-2xl p-8 shadow-2xl border border-gray-100 dark:border-gray-800 backdrop-blur-sm transform transition-all duration-300 hover:shadow-primary-500/20 dark:hover:shadow-primary-400/10 relative overflow-hidden">
+                    <div class="bg-white dark:bg-dark-2 rounded-md p-8 shadow-2xl border border-gray-100 dark:border-gray-800 backdrop-blur-sm transform transition-all duration-300 hover:shadow-primary-500/20 dark:hover:shadow-primary-400/10 relative overflow-hidden">
                         <!-- Decorative elements -->
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-500/10 to-transparent rounded-bl-full"></div>
-                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-tr-full"></div>
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-500/10 to-transparent rounded-bl-md"></div>
+                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-tr-md"></div>
                         
                         <!-- Video Name -->
                         <div class="mb-8 relative">
@@ -82,7 +82,7 @@
                                    name="name" 
                                    id="name" 
                                    required
-                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
+                                   class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
                                    placeholder="შეიყვანეთ ვიდეოს სახელი">
                         </div>
 
@@ -95,7 +95,7 @@
                                       id="description" 
                                       required
                                       rows="4" 
-                                      class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
+                                      class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
                                       placeholder="შეიყვანეთ ვიდეოს აღწერა"></textarea>
                         </div>
 
@@ -111,7 +111,7 @@
                                    step="any"
                                    min="0"
                                    value="{{ $nextWeight }}"
-                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
+                                   class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 text-gray-900 dark:text-white px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-all duration-200"
                                    placeholder="შეიყვანეთ ვიდეოს რიგითი ნომერი">
                         </div>
 
@@ -122,7 +122,7 @@
                             </label>
                             <div class="relative">
                                 <div class="flex items-center justify-center w-full">
-                                    <label for="video" class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl cursor-pointer bg-gray-50 dark:bg-dark-3 hover:bg-gray-100 dark:hover:bg-dark-4 transition-all duration-300 group animate-pulse">
+                                    <label for="video" class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-md cursor-pointer bg-gray-50 dark:bg-dark-3 hover:bg-gray-100 dark:hover:bg-dark-4 transition-all duration-300 group animate-pulse">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg class="w-16 h-16 mb-3 text-primary-500 dark:text-primary-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
@@ -151,31 +151,31 @@
                                     
                                     <!-- Circular progress indicator -->
                                     <div class="relative w-full h-4 mb-2">
-                                        <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                            <div id="upload-progress-bar" class="h-full rounded-full transition-all duration-300 relative" style="width: 0%; background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);">
+                                        <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden">
+                                            <div id="upload-progress-bar" class="h-full rounded-md transition-all duration-300 relative" style="width: 0%; background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);">
                                                 <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
                                             </div>
                                         </div>
                                         <div class="absolute inset-0 flex items-center justify-center">
-                                            <div class="w-full h-1 bg-white/50 dark:bg-dark-2/50 rounded-full"></div>
+                                            <div class="w-full h-1 bg-white/50 dark:bg-dark-2/50 rounded-md"></div>
                                         </div>
                                     </div>
                                     
                                     <!-- Additional upload information -->
                                     <div class="grid grid-cols-3 gap-2 text-xs text-gray-500 dark:text-gray-400 mt-3">
-                                        <div class="flex items-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2">
+                                        <div class="flex items-center bg-blue-50 dark:bg-blue-900/20 rounded-md p-2">
                                             <svg class="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                             </svg>
                                             <span id="upload-speed">0 KB/s</span>
                                         </div>
-                                        <div class="flex items-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2">
+                                        <div class="flex items-center bg-blue-50 dark:bg-blue-900/20 rounded-md p-2">
                                             <svg class="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                             </svg>
                                             <span id="upload-time">დათვლა...</span>
                                         </div>
-                                        <div class="flex items-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2">
+                                        <div class="flex items-center bg-blue-50 dark:bg-blue-900/20 rounded-md p-2">
                                             <svg class="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                             </svg>
@@ -189,7 +189,7 @@
                         <!-- Free (Public) Checkbox -->
                         <div class="mb-8">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" name="free" id="free" value="1" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <input type="checkbox" name="free" id="free" value="1" class="h-4 w-4 text-blue-600 border-gray-300 rounded-md focus:ring-blue-500">
                                 <label for="free" class="text-sm font-medium text-gray-700 dark:text-gray-300">უფასო ვიდეო</label>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                             </label>
                             <div class="relative">
                                 <div class="flex items-center justify-center w-full">
-                                    <label for="thumbnail" class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl cursor-pointer bg-gray-50 dark:bg-dark-3 hover:bg-gray-100 dark:hover:bg-dark-4 transition-all duration-300 group">
+                                    <label for="thumbnail" class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-md cursor-pointer bg-gray-50 dark:bg-dark-3 hover:bg-gray-100 dark:hover:bg-dark-4 transition-all duration-300 group">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg class="w-16 h-16 mb-3 text-primary-500 dark:text-primary-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -225,7 +225,7 @@
                         <div class="flex justify-end">
                             <button type="submit" 
                                     id="submit-btn"
-                                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-sm font-medium rounded-md transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                 <i class="fas fa-save mr-2"></i>
                                 ვიდეოს დამატება
                             </button>

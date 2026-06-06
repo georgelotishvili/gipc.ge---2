@@ -26,13 +26,13 @@
                 
                 <!-- Practice Tests Card -->
                 <div class="group relative h-full">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
-                    <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-md blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                    <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
                         <div class="h-52 sm:h-48 overflow-hidden flex-shrink-0 relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent z-10"></div>
                             <img src="https://daily.jstor.org/wp-content/uploads/2015/05/standardizedtests.jpg" alt="Practice Tests" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 left-4 z-20">
-                                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-md flex items-center justify-center">
                                     <i class="fas fa-clipboard-list text-white text-lg"></i>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                         <div class="p-6 sm:p-5 lg:p-6 flex flex-col flex-grow">
                             <div class="flex items-start justify-between mb-4">
                                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">ტესტები</h3>
-                                <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1.5 flex-shrink-0">
+                                <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-md shadow-lg flex items-center gap-1.5 flex-shrink-0">
                                     <i class="fas fa-crown text-xs"></i>
                                     <span>ფასიაინი</span>
                                 </div>
@@ -49,7 +49,7 @@
                                 მოემზადეთ გამოცდისთვის ჩვენი მრავალფეროვანი ტესტების საშუალებით. პრაქტიკული ტესტები შექმნილია რეალური გამოცდის მსგავსად და მოიცავს ყველა საჭირო თემას.
                             </p>
                             <button onclick="{{ $isPremium ? 'window.location.href=\''.route('questions').'\'' : 'showPremiumAlert()' }}" 
-                                    class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto group/btn">
+                                    class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto group/btn">
                                 <i class="fas fa-play mr-2 group-hover/btn:scale-110 transition-transform"></i>
                                 <span class="text-sm sm:text-base">დაწყება</span>
                             </button>
@@ -59,13 +59,13 @@
 
                 <!-- Exam Simulation Card -->
                 <div class="group relative h-full">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
-                    <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-md blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                    <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
                         <div class="h-52 sm:h-48 overflow-hidden flex-shrink-0 relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent z-10"></div>
                             <img src="https://admissions.rochester.edu/blog/wp-content/uploads/2015/08/test.png" alt="Exam Simulation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 left-4 z-20">
-                                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-md flex items-center justify-center">
                                     <i class="fas fa-graduation-cap text-white text-lg"></i>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                         <div class="p-6 sm:p-5 lg:p-6 flex flex-col flex-grow">
                             <div class="flex items-start justify-between mb-4">
                                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">გამოცდის სიმულაცია</h3>
-                                <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1.5 flex-shrink-0">
+                                <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-md shadow-lg flex items-center gap-1.5 flex-shrink-0">
                                     <i class="fas fa-crown text-xs"></i>
                                     <span>ფასიაინი</span>
                                 </div>
@@ -82,7 +82,7 @@
                                 გაიარეთ სრული გამოცდის სიმულაცია რეალური გამოცდის იდენტურ გარემოში. დროის ლიმიტი, კითხვების რაოდენობა და სირთულე შეესაბამება რეალურ გამოცდას.
                             </p>
                             <button onclick="{{ $isPremium ? 'window.location.href=\''.route('workspace').'\'' : 'showPremiumAlert()' }}" 
-                                    class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto group/btn">
+                                    class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto group/btn">
                                 <i class="fas fa-graduation-cap mr-2 group-hover/btn:scale-110 transition-transform"></i>
                                 <span class="text-sm sm:text-base">სიმულაცია</span>
                             </button>
@@ -92,13 +92,13 @@
 
                 <!-- Video Tutorials Card -->
                 <div class="group relative h-full">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
-                    <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 rounded-md blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                    <div class="relative bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-md shadow-xl overflow-hidden border border-gray-100/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
                         <div class="h-52 sm:h-48 overflow-hidden flex-shrink-0 relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent z-10"></div>
                             <img src="https://www.thedvigroup.com/wp-content/uploads/2023/08/Benefits-of-Video-Tutorials-Distance-Learner-Watching-Video-166191408_m_normal_none-1.jpg" alt="Video Tutorials" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 left-4 z-20">
-                                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-md flex items-center justify-center">
                                     <i class="fas fa-video text-white text-lg"></i>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                         <div class="p-6 sm:p-5 lg:p-6 flex flex-col flex-grow">
                             <div class="flex items-start justify-between mb-4">
                                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">ვიდეო გაკვეთილები</h3>
-                                <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1.5 flex-shrink-0">
+                                <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-md shadow-lg flex items-center gap-1.5 flex-shrink-0">
                                     <i class="fas fa-crown text-xs"></i>
                                     <span>ფასიაინი</span>
                                 </div>
@@ -115,7 +115,7 @@
                                 უყურეთ დეტალურ ვიდეო გაკვეთილებს ნებისმიერ დროს. ჩვენი ექსპერტები გაგიზიარებენ თავიანთ ცოდნას და გამოცდილებას ყველა მნიშვნელოვან თემაზე.
                             </p>
                             <button onclick="{{ $isPremium ? 'window.location.href=\''.route('tutorials').'\'' : 'showPremiumAlert()' }}" 
-                                    class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto group/btn">
+                                    class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto group/btn">
                                 <i class="fas fa-video mr-2 group-hover/btn:scale-110 transition-transform"></i>
                                 <span class="text-sm sm:text-base">ნახვა</span>
                             </button>
@@ -135,7 +135,7 @@
 
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-            <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
+            <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-md text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fadeIn">
                 <div class="relative">
                     <!-- Animated background effect -->
                     <div class="absolute inset-0 overflow-hidden">
@@ -145,7 +145,7 @@
                     <!-- Premium content -->
                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 relative z-10">
                         <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 sm:mx-0 sm:h-14 sm:w-14 shadow-lg relative overflow-hidden">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-md bg-gradient-to-r from-amber-400 to-amber-600 sm:mx-0 sm:h-14 sm:w-14 shadow-lg relative overflow-hidden">
                                 <div class="absolute inset-0 bg-amber-500 animate-pulse-slow opacity-50"></div>
                                 <div class="crown-container animate-float">
                                     <i class="fas fa-crown text-white text-2xl"></i>
@@ -177,8 +177,8 @@
                     </div>
 
                     <!-- Decorative elements -->
-                    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-amber-300/30 to-transparent rounded-br-full"></div>
-                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-amber-300/30 to-transparent rounded-tl-full"></div>
+                    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-amber-300/30 to-transparent rounded-br-md"></div>
+                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-amber-300/30 to-transparent rounded-tl-md"></div>
                 </div>
             </div>
         </div>

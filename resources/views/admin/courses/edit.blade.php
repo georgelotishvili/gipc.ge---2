@@ -13,7 +13,7 @@
 
             @if ($errors->any())
                 <div class="max-w-2xl mx-auto mb-6">
-                    <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                    <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-md p-4">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -39,7 +39,7 @@
 
             @if (session('success'))
                 <div class="max-w-2xl mx-auto mb-6">
-                    <div class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <div class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-md p-4">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -62,7 +62,7 @@
                     @csrf
                     @method('PATCH')
                     
-                    <div class="bg-white dark:bg-dark-2 rounded-xl p-6 shadow-sm">
+                    <div class="bg-white dark:bg-dark-2 rounded-md p-6 shadow-sm">
                         <!-- Course Name -->
                         <div class="mb-6">
                             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -97,7 +97,7 @@
                             </label>
                             @if($course->image)
                                 <div class="mb-4">
-                                    <img src="{{ Storage::url($course->image->path) }}" alt="Current course image" class="w-32 h-32 object-cover rounded-lg">
+                                    <img src="{{ Storage::url($course->image->path) }}" alt="Current course image" class="w-32 h-32 object-cover rounded-md">
                                 </div>
                             @endif
                             <input type="file" 

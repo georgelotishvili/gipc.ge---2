@@ -130,24 +130,6 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     }
 
     /**
-     * Get the certificates for the user.
-     */
-    public function certificates(): HasMany
-    {
-        return $this->hasMany(Certificate::class);
-    }
-
-    /**
-     * Get the comments created by the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    /**
      * Get the user's profile image.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
@@ -155,16 +137,6 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
-    }
-
-    /**
-     * Get the ratings for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function ratings(): HasMany
-    {
-        return $this->hasMany(Rating::class);
     }
 
     /**

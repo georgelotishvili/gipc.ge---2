@@ -29,7 +29,7 @@
             <!-- Video Grid -->
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                 @foreach($chapter->videos as $video)
-                <div class="bg-white dark:bg-dark-2 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
+                <div class="bg-white dark:bg-dark-2 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
                     <div class="aspect-video relative">
                         <video class="w-full h-full object-cover">
                             <source src="{{ Storage::url($video->path) }}" type="video/mp4">
@@ -37,7 +37,7 @@
                         </video>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
+                                <span class="w-14 h-14 rounded-md bg-white/90 flex items-center justify-center">
                                     <i class="fas fa-play text-gray-900 text-xl ml-1"></i>
                                 </span>
                             </div>

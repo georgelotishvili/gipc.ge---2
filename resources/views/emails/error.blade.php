@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-md w-full bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="max-w-md w-full bg-white rounded-md shadow-md overflow-hidden">
         <div class="bg-red-500 p-4">
             <h1 class="text-white text-xl font-bold">Email Sending Failed</h1>
         </div>

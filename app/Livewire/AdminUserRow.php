@@ -53,9 +53,6 @@ class AdminUserRow extends Component
             Log::info('Employers: ' . $this->user->employers()->count());
             Log::info('Payments: ' . $this->user->payments()->count());
             Log::info('Employees: ' . $this->user->employees()->count());
-            Log::info('Certificates: ' . $this->user->certificates()->count());
-            Log::info('Comments: ' . $this->user->comments()->count());
-            Log::info('Ratings: ' . $this->user->ratings()->count());
             Log::info('Subscription exists: ' . ($this->user->subscription()->exists() ? 'Yes' : 'No'));
             Log::info('Image exists: ' . ($this->user->image ? 'Yes' : 'No'));
             
@@ -74,15 +71,6 @@ class AdminUserRow extends Component
             
             Log::info('Deleting employees...');
             $this->user->employees()->delete();
-            
-            Log::info('Deleting certificates...');
-            $this->user->certificates()->delete();
-            
-            Log::info('Deleting comments...');
-            $this->user->comments()->delete();
-            
-            Log::info('Deleting ratings...');
-            $this->user->ratings()->delete();
             
             // Delete profile image if exists
             if ($this->user->image) {

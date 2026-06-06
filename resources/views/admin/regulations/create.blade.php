@@ -1,7 +1,7 @@
 <x-admin.layout>
-    <div class="bg-white dark:bg-dark-2 rounded-2xl shadow-lg p-8">
+    <div class="bg-white dark:bg-dark-2 rounded-md shadow-lg p-8">
         @if(session('error'))
-            <div class="mb-6 bg-red-50 dark:bg-red-500/10 border-l-4 border-red-500 p-4 rounded-lg">
+            <div class="mb-6 bg-red-50 dark:bg-red-500/10 border-l-4 border-red-500 p-4 rounded-md">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -43,10 +43,10 @@
             </div>
 
             <div class="flex justify-end space-x-3">
-                <a href="{{ route('admin.regulations.regulations') }}" class="px-4 py-2 bg-gray-100 dark:bg-dark-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-dark-4 transition-colors duration-200">
+                <a href="{{ route('admin.regulations.regulations') }}" class="px-4 py-2 bg-gray-100 dark:bg-dark-3 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-200 dark:hover:bg-dark-4 transition-colors duration-200">
                     გაუქმება
                 </a>
-                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200">
+                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors duration-200">
                     დამატება
                 </button>
             </div>

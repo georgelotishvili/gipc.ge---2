@@ -6,8 +6,6 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminController;
 // Uncomment when you need the email functionality
 // use App\Http\Controllers\EmailTestController;
-use App\Http\Controllers\CertificateController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommercialController;
 use App\Http\Controllers\EmailTestController;
 use App\Http\Controllers\EmployeeController;
@@ -19,7 +17,6 @@ use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Regulation;
 use App\Models\Video;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -60,10 +57,6 @@ Route::get('/specialists', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
-
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-
-Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/about', function () {
     return view('about');
@@ -158,19 +151,6 @@ Route::middleware(['admin'])->group(function () {
 
     // Settings
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
-
-    Route::get('/admin/certificates/create', [CertificateController::class, 'create'])->name('admin.certificates.create');
-    Route::post('/admin/certificates/store', [CertificateController::class, 'store'])->name('admin.certificates.store');
-    Route::get('/admin/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->name('admin.certificates.edit');
-    Route::put('/admin/certificates/{certificate}/update', [CertificateController::class, 'update'])->name('admin.certificates.update');
-    Route::delete('/admin/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('admin.certificates.destroy');
-
-    // Posts
-    Route::get('admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create');
-    Route::post('admin/posts', [PostController::class, 'store'])->name('admin.posts.store');
-    Route::get('admin/posts/{post:slug}/edit', [PostController::class, 'edit'])->name('admin.posts.edit');
-    Route::patch('admin/posts/{post:slug}', [PostController::class, 'update'])->name('admin.posts.update');
-    Route::delete('admin/posts/{post:slug}', [PostController::class, 'destroy'])->name('admin.posts.destroy');
 
     // Commercials
     Route::get('admin/commercials', [CommercialController::class, 'index'])->name('admin.commercials');
@@ -283,12 +263,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::patch('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
-    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
-    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
-Route::get('/certificated-specialists', [CertificateController::class, 'index'])->name('certificated-specialists');
-Route::get('/certificated-specialists/{certificate}', [CertificateController::class, 'show'])->name('certificated-specialists.show');
 Route::get('/jobs', function () {
     $employers = Employer::all();
     $employees = Employee::all();
@@ -324,5 +300,3 @@ Route::get('/mail', function () {
     Mail::to(request('mail'))->send(new \App\Mail\ZohoMail());
     return 'Email sent!';
 });
-
-

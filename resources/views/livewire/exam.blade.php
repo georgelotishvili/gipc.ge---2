@@ -6,11 +6,11 @@
                 <!-- Header Area -->
                 <header class="absolute top-0 left-0 right-0 p-4 z-20 flex justify-between items-center">
                     <!-- Group Title Tag -->
-                    <span class="text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-900/50 px-2 py-1 rounded-full border border-indigo-200 dark:border-indigo-800 shadow-sm">
+                    <span class="text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-900/50 px-2 py-1 rounded-md border border-indigo-200 dark:border-indigo-800 shadow-sm">
                         {{ $question->groups->first()->title }}
                     </span>
                     <!-- Timer Display -->
-                    <div class="flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg px-4 py-1.5 rounded-full border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg px-4 py-1.5 rounded-md border border-gray-200 dark:border-gray-700">
                         <svg class="h-5 w-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
@@ -22,7 +22,7 @@
                 <main class="flex-grow flex flex-col items-center justify-center px-4 pt-24 pb-40 md:pt-28 md:pb-48 overflow-hidden">
                     <div class="w-full max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col flex-shrink min-h-0">
                         <!-- Question Text Container (Stricter height + scroll for long text) -->
-                        <div class="mb-8 flex-shrink max-h-[40vh] overflow-y-auto p-1 rounded-lg scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
+                        <div class="mb-8 flex-shrink max-h-[40vh] overflow-y-auto p-1 rounded-md scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
                             <h1 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold leading-tight text-center">
                                 {{ $question->text }}
                             </h1>
@@ -44,7 +44,7 @@
                                     wire:click="answer({{ $answer->id }})" 
                                     wire:loading.attr="disabled"
                                     @if($currentAnswer) disabled @endif
-                                    class="w-full group flex items-center py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-6 border rounded-xl shadow-sm text-left transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900
+                                    class="w-full group flex items-center py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-6 border rounded-md shadow-sm text-left transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900
                                     @if($isSelected)
                                         @if($isCorrect)
                                             bg-emerald-500 dark:bg-emerald-600 text-white border-transparent
@@ -60,13 +60,13 @@
                                     <div class="ml-4 flex-shrink-0 transition-opacity duration-300 @if(!$isSelected) opacity-0 group-hover:opacity-100 @endif">
                                         @if($isSelected)
                                             @if($isCorrect)
-                                                <div class="w-7 h-7 rounded-full bg-white/30 flex items-center justify-center">
+                                                <div class="w-7 h-7 rounded-md bg-white/30 flex items-center justify-center">
                                                     <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                                                     </svg>
                                                 </div>
                                             @else
-                                                 <div class="w-7 h-7 rounded-full bg-white/30 flex items-center justify-center">
+                                                 <div class="w-7 h-7 rounded-md bg-white/30 flex items-center justify-center">
                                                     <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
                                                     </svg>
@@ -96,7 +96,7 @@
                             
                             <!-- Expand/Collapse Button -->
                             <button @click="expanded = !expanded" 
-                                    class="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    class="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
                                 <svg class="w-5 h-5 transition-transform duration-200" 
                                      :class="{ 'rotate-180': expanded }"
                                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,7 +121,7 @@
                             <!-- Previous Button -->
                             <button type="button" wire:click="previousQuestion"
                                     wire:loading.attr="disabled"
-                                    class="p-3 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    class="p-3 rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                 </svg>
@@ -130,7 +130,7 @@
                             <!-- Next / Finish Button -->
                             @if ($progress == 100)
                                 <a href="{{ route('result', $test->id) }}" 
-                                    class="p-3 rounded-full text-white bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 dark:focus:ring-offset-gray-800">
+                                    class="p-3 rounded-md text-white bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 dark:focus:ring-offset-gray-800">
                                      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                      </svg>
@@ -138,7 +138,7 @@
                             @else
                                 <button type="button" wire:click="nextQuestion"
                                         wire:loading.attr="disabled"
-                                        class="p-3 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                        class="p-3 rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
@@ -147,7 +147,7 @@
                         </div>
 
                         <!-- Progress Bar -->
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden mb-4">
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-md h-2 overflow-hidden mb-4">
                             <div 
                                 x-data="{ width: 0 }" 
                                 x-init="width = {{ $progress }}"
@@ -166,7 +166,7 @@
                                 @endphp
                                 <span wire:click="goToQuestion({{ $q->id }})" 
                                       title="Question {{ $loop->iteration }}"
-                                      class="w-3 h-3 cursor-pointer transition-all duration-300 ease-in-out hover:scale-125 flex items-center justify-center rounded-sm
+                                      class="w-3 h-3 cursor-pointer transition-all duration-300 ease-in-out hover:scale-125 flex items-center justify-center rounded-md
                                     @if($q->id == $question->id)
                                         transform rotate-45 bg-primary-500 dark:bg-primary-400 scale-110 ring-1 ring-primary-500/50 dark:ring-primary-400/50
                                     @elseif($qAnswer)

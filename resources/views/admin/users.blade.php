@@ -1,7 +1,7 @@
 <x-admin.layout>
     <!-- Success/Error Messages -->
     @if(session('success'))
-        <div class="mb-6 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 rounded-lg">
+        <div class="mb-6 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 rounded-md">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -16,7 +16,7 @@
     @endif
 
     @if(session('error'))
-        <div class="mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-lg">
+        <div class="mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-md">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -30,7 +30,7 @@
         </div>
     @endif
     
-    <div class="bg-white dark:bg-dark-2 rounded-2xl shadow-lg p-8">
+    <div class="bg-white dark:bg-dark-2 rounded-md shadow-lg p-8">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-white">მომხმარებლები</h2>
         </div>
@@ -55,7 +55,7 @@
                                     <div class="whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-400 w-16">#{{ $user->id }}</div>
                                     <div class="whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
                                                 <span class="text-lg font-bold text-blue-500 dark:text-blue-400">
                                                     {{ strtoupper(substr($user->name, 0, 1)) }}
                                                 </span>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                         @if($user->subscription)
-                                            <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 rounded-full text-xs">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 rounded-md text-xs">
                                                 {{ $user->subscription->is_active ? 'გამოწერილი' : 'არ არის გამოწერილი' }}
                                             </span>
                                             <div class="mt-1 text-xs">
@@ -80,14 +80,14 @@
                                                 <div>ტიპი: {{ $user->activeSubscriptionName() }}</div>
                                             </div>
                                         @else
-                                            <span class="px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400 rounded-full text-xs">
+                                            <span class="px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400 rounded-md text-xs">
                                                 გამოწერა არ არსებობს
                                             </span>
                                         @endif
                                     </div>
                                     <div class="whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex justify-end gap-2">
-                                            <a href="{{ route('admin.subscription.edit', $user->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                                            <a href="{{ route('admin.subscription.edit', $user->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-md hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                                                 რედაქტირება
                                             </a>
                                             
@@ -95,7 +95,7 @@
                                             <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('ნამდვილად გსურთ მომხმარებლის წაშლა? ეს ქმედება შეუქცევადია!')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:from-red-700 hover:to-red-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
+                                                <button type="submit" class="px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-md hover:from-red-700 hover:to-red-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
                                                     წაშლა
                                                 </button>
                                             </form>

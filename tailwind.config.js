@@ -27,53 +27,21 @@ export default {
         extend: {
             fontFamily: {
                 'body': [
-                    'Inter',
-                    'ui-sans-serif',
-                    'system-ui',
-                    '-apple-system',
-                    'system-ui',
-                    'Segoe UI',
-                    'Roboto',
-                    'Helvetica Neue',
-                    'Arial',
-                    'Noto Sans',
+                    'DejaVu Sans Condensed',
                     'sans-serif',
-                    'Apple Color Emoji',
-                    'Segoe UI Emoji',
-                    'Segoe UI Symbol',
-                    'Noto Color Emoji'
                 ],
                 'sans': [
-                    'Inter',
-                    'ui-sans-serif',
-                    'system-ui',
-                    '-apple-system',
-                    'system-ui',
-                    'Segoe UI',
-                    'Roboto',
-                    'Helvetica Neue',
-                    'Arial',
-                    'Noto Sans',
+                    'DejaVu Sans Condensed',
                     'sans-serif',
-                    'Apple Color Emoji',
-                    'Segoe UI Emoji',
-                    'Segoe UI Symbol',
-                    'Noto Color Emoji'
                 ],
                 'display': [
-                    'Poppins',
-                    'Inter',
-                    'ui-sans-serif',
-                    'system-ui',
-                    '-apple-system',
-                    'system-ui',
-                    'Segoe UI',
-                    'Roboto',
-                    'Helvetica Neue',
-                    'Arial',
-                    'Noto Sans',
+                    'DejaVu Sans Condensed',
                     'sans-serif'
-                ]
+                ],
+                'mono': [
+                    'DejaVu Sans Condensed',
+                    'sans-serif'
+                ],
             },
             colors: {
                 primary: {
@@ -151,4 +119,3 @@ export default {
     },
     plugins: [forms, typography],
 };
-

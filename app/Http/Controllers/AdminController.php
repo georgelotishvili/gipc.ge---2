@@ -314,9 +314,6 @@ class AdminController extends Controller
             $user->employers()->delete();
             $user->payments()->delete();
             $user->employees()->delete();
-            $user->certificates()->delete();
-            $user->comments()->delete();
-            $user->ratings()->delete();
             
             // Delete profile image if exists
             if ($user->image()->exists()) {
