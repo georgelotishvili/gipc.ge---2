@@ -118,7 +118,7 @@
 
 <body class="bg-gray-200 dark:bg-slate-800" id="body">
     <!-- ====== Navbar Section Start -->
-    <nav class="fixed w-full bg-white/80 dark:bg-dark top-0 z-50 border-b border-gray-100 dark:border-gray-800">
+    <nav class="fixed w-full bg-white dark:bg-dark top-0 z-50 border-b border-gray-100 dark:border-gray-800">
         <div class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
             <div class="flex justify-between h-20 items-center relative">
                 <!-- Three-column flex layout for perfect centering -->

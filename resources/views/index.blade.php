@@ -12,6 +12,7 @@
                         'icon' => 'briefcase',
                         'image' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
                         'premium' => false,
+                        'cta' => 'ვაკანსიებზე გადასვლა',
                     ],
                     [
                         'route' => route('regulations'),
@@ -20,6 +21,7 @@
                         'icon' => 'book',
                         'image' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80',
                         'premium' => false,
+                        'cta' => 'რეგულაციების ბაზა',
                     ],
                     [
                         'route' => route('terms-and-conditions'),
@@ -28,6 +30,7 @@
                         'icon' => 'file-contract',
                         'image' => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80',
                         'premium' => false,
+                        'cta' => 'პირობების გაცნობა',
                     ],
                     [
                         'route' => route('tutorials'),
@@ -36,6 +39,7 @@
                         'icon' => 'video',
                         'image' => 'https://www.thedvigroup.com/wp-content/uploads/2023/08/Benefits-of-Video-Tutorials-Distance-Learner-Watching-Video-166191408_m_normal_none-1.jpg',
                         'premium' => true,
+                        'cta' => 'გაკვეთილების დაწყება',
                     ],
                     [
                         'route' => route('questions'),
@@ -44,6 +48,7 @@
                         'icon' => 'clipboard-list',
                         'image' => 'https://daily.jstor.org/wp-content/uploads/2015/05/standardizedtests.jpg',
                         'premium' => true,
+                        'cta' => 'ტესტების გაცნობა',
                     ],
                     [
                         'route' => route('workspace'),
@@ -52,6 +57,7 @@
                         'icon' => 'user-graduate',
                         'image' => 'https://admissions.rochester.edu/blog/wp-content/uploads/2015/08/test.png',
                         'premium' => true,
+                        'cta' => 'სიმულაციის დაწყება',
                     ],
                 ];
             @endphp
@@ -65,23 +71,24 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent z-10"></div>
                                 <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                                 <div class="absolute top-4 left-4 z-20">
-                                    <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-md flex items-center justify-center">
-                                        <i class="fas fa-{{ $card['icon'] }} text-white text-lg"></i>
+                                    <div class="w-10 h-10 bg-white/75 dark:bg-white/75 backdrop-blur-sm rounded-md flex items-center justify-center border border-white/60 shadow-lg">
+                                        <i class="fas fa-{{ $card['icon'] }} text-black text-lg"></i>
                                     </div>
                                 </div>
-                                @if ($card['premium'])
-                                    <div class="absolute top-4 right-4 z-20 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-md shadow-lg flex items-center gap-1.5">
-                                        <i class="fas fa-crown text-xs"></i>
-                                        <span>ფასიანი</span>
-                                    </div>
-                                @endif
                             </div>
                             <div class="p-6 sm:p-5 lg:p-6 flex flex-col flex-grow">
-                                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{{ $card['title'] }}</h3>
+                                <div class="flex items-start justify-between mb-4">
+                                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{{ $card['title'] }}</h3>
+                                    @if ($card['premium'])
+                                        <div class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-semibold rounded-md shadow-lg flex items-center gap-1.5 flex-shrink-0">
+                                            <i class="fas fa-crown text-xs"></i>
+                                            <span>ფასიანი</span>
+                                        </div>
+                                    @endif
+                                </div>
                                 <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed flex-grow text-sm sm:text-base">{{ $card['description'] }}</p>
                                 <div class="w-full inline-flex items-center justify-center px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md group-hover:from-indigo-600 group-hover:to-purple-700 transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg mt-auto">
-                                    <i class="fas fa-eye mr-2 group-hover:scale-110 transition-transform"></i>
-                                    <span class="text-sm sm:text-base">ნახვა</span>
+                                    <span class="text-sm sm:text-base">{{ $card['cta'] }}</span>
                                 </div>
                             </div>
                         </div>
