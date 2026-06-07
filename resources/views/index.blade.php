@@ -2,7 +2,10 @@
     <!-- Features Section -->
     <section class="pt-6 pb-6 md:pt-8 md:pb-16 dark:bg-gradient-to-br dark:from-dark-indigo-50 dark:via-dark-indigo-100 dark:to-dark-indigo-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl md:text-4xl font-semibold pb-6 text-gray-900 text-center dark:text-gray-100 mb-6">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
+            <h1 class="text-2xl md:text-4xl font-semibold text-gray-900 text-center dark:text-gray-100 mb-4">საქართველოს პროფესიული სერტიფიცირების ინსტიტუტი</h1>
+            <p class="w-full mb-8 text-sm sm:text-base md:text-lg leading-7 md:leading-8 text-gray-600 dark:text-gray-300 text-justify">
+                ვებგვერდი შექმნილია არქიტექტორთა პროფესიული კვალიფიკაციის ამაღლებისთვის. პლატფორმაზე განთავსებულია სასწავლო ვიდეომასალა, რომელიც არქიტექტორებს სამშენებლო რეგულაციების შესწავლაში ეხმარება, ასევე სიმულაციური გამოცდა, რომელიც მაქსიმალურად უახლოვდება სასერტიფიკაციო გამოცდის ფორმატს. ვებგვერდზე წარმოდგენილია საგამოცდო საკითხებიც, რომლებიც შინაარსობრივად ჰგავს სასერტიფიკაციო გამოცდის საკითხებს, თუმცა არ წარმოადგენს მათ ზუსტ ასლს. გამოიწერეთ კურსი, აიმაღლეთ კვალიფიკაცია და დარწმუნდით, რომ მზად ხართ სასერტიფიკაციო გამოცდის ჩასაბარებლად. გისურვებთ წარმატებებს.
+            </p>
             @php
                 $cards = [
                     [

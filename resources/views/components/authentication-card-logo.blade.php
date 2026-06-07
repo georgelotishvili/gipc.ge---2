@@ -1,1 +1,3 @@
-<span class="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-red-300 to-blue-700 bg-clip-text text-transparent animated-background !animate-[gradient_5s_ease-in-out_infinite] transition duration-700">GIPC</span>
+<a href="{{ route('index') }}" wire:navigate class="inline-flex items-center justify-center transition-all duration-300 hover:scale-105 hover:opacity-90">
+    <x-application-logo class="h-16 sm:h-20 w-auto" />
+</a>
