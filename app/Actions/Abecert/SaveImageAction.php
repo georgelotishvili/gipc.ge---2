@@ -13,6 +13,10 @@ class SaveImageAction
 {
     public static function execute(UploadedFile $image, string $path = 'images', int $maxWidth = 1920, int $maxHeight = 1080): Image 
     {
+        if (!extension_loaded('gd')) {
+            return self::storeOriginalImage($image, $path);
+        }
+
         try {
             // Create a new ImageManager instance with GD driver
             $manager = new ImageManager(new Driver());
@@ -63,6 +67,39 @@ class SaveImageAction
             
             // Re-throw the exception with more context
             throw new \Exception('Failed to process image: ' . $e->getMessage(), 0, $e);
+        }
+    }
+
+    private static function storeOriginalImage(UploadedFile $image, string $path): Image
+    {
+        try {
+            $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            DB::beginTransaction();
+
+            if (!Storage::disk('public')->putFileAs($path, $image, $filename)) {
+                throw new \Exception('Failed to store image file');
+            }
+
+            $imageRecord = Image::create([
+                'name' => $filename,
+                'path' => $path . '/' . $filename,
+            ]);
+
+            DB::commit();
+            return $imageRecord;
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            if (isset($filename)) {
+                $fullPath = $path . '/' . $filename;
+
+                if (Storage::disk('public')->exists($fullPath)) {
+                    Storage::disk('public')->delete($fullPath);
+                }
+            }
+
+            throw new \Exception('Failed to store image: ' . $e->getMessage(), 0, $e);
         }
     }
 }

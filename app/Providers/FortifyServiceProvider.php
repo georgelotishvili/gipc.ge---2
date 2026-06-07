@@ -32,6 +32,11 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+        Fortify::loginView(function (Request $request) {
+            $this->storeLoginRedirect($request);
+
+            return view('auth.login');
+        });
 
         // Uncomment the following lines when you want to enable email verification
         /*
@@ -50,5 +55,46 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+    }
+
+    private function storeLoginRedirect(Request $request): void
+    {
+        if ($request->session()->has('url.intended')) {
+            return;
+        }
+
+        $previousUrl = url()->previous();
+
+        if ($this->isSafeLoginRedirect($request, $previousUrl)) {
+            $request->session()->put('url.intended', $previousUrl);
+        }
+    }
+
+    private function isSafeLoginRedirect(Request $request, ?string $url): bool
+    {
+        if (!$url || $url === $request->fullUrl()) {
+            return false;
+        }
+
+        $host = parse_url($url, PHP_URL_HOST);
+        if ($host && $host !== $request->getHost()) {
+            return false;
+        }
+
+        $path = '/' . ltrim(parse_url($url, PHP_URL_PATH) ?: '/', '/');
+        $authPaths = [
+            '/login',
+            '/register',
+            '/forgot-password',
+            '/reset-password',
+            '/two-factor-challenge',
+            '/logout',
+        ];
+
+        if (in_array($path, $authPaths, true) || str_starts_with($path, '/reset-password/')) {
+            return false;
+        }
+
+        return true;
     }
 }

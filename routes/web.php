@@ -39,7 +39,12 @@ Route::get('/home', function () {
     return view('index');
 });
 Route::get('/regulations', function () {
-    $regulations = Regulation::all();
+    $regulations = Regulation::query()
+        ->whereNotNull('link')
+        ->where('link', '!=', '')
+        ->orderBy('name')
+        ->get();
+
     return view('regulations', compact('regulations'));
 })->name('regulations');
 Route::get('/terms-and-conditions', function () {
@@ -81,6 +86,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/admin/users/{userId}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
     Route::get('/admin/users/{userId}/subscription/edit', [AdminController::class, 'editSubscription'])->name('admin.subscription.edit');
     Route::put('/admin/users/{userId}/subscription/update', [AdminController::class, 'updateSubscription'])->name('admin.subscription.update');
+    Route::delete('/admin/users/{userId}/subscriptions/{subscription}', [AdminController::class, 'destroyUserSubscription'])->name('admin.users.subscriptions.destroy');
 
     // Regulations
     Route::get('/admin/regulations', [AdminController::class, 'regulations'])->name('admin.regulations.regulations');

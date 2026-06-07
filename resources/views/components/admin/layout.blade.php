@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="font-family: 'DejaVu Sans Condensed', sans-serif;"
  x-data="{ 
-          sidebarOpen: localStorage.getItem('sidebarOpen') === 'true', 
+          sidebarOpen: localStorage.getItem('sidebarOpen') !== 'false',
+          sidebarExpandedWidth: 320,
+          sidebarCollapsedWidth: 80,
+          isDesktop: window.innerWidth >= 960,
           darkMode: localStorage.getItem('darkMode') === 'true',
+          searchOpen: false,
+          updateViewport() {
+              this.isDesktop = window.innerWidth >= 960;
+          },
+          sidebarOffset() {
+              if (!this.isDesktop) {
+                  return '0px';
+              }
+
+              return `${this.sidebarOpen ? this.sidebarExpandedWidth : this.sidebarCollapsedWidth}px`;
+          },
+          sidebarWidth() {
+              return `${this.sidebarOpen ? this.sidebarExpandedWidth : this.sidebarCollapsedWidth}px`;
+          },
           toggleSidebar() { 
               this.sidebarOpen = !this.sidebarOpen;
               localStorage.setItem('sidebarOpen', this.sidebarOpen);
@@ -17,6 +34,8 @@
               }
           }
       }" 
+      x-init="updateViewport()"
+      @resize.window="updateViewport()"
       :class="{ 'dark': darkMode }"
       class="bg-gray-50 dark:bg-dark">
     <head>
@@ -41,19 +60,17 @@
         
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-gray-200 dark:bg-slate-800">
-        <div class="flex min-h-screen">
+    <body class="font-sans antialiased bg-gray-100 dark:bg-slate-900">
+        <div class="min-h-screen">
             <x-admin.sidebar />
 
             <!-- Main Content -->
-            <div class="flex-1 flex flex-col"
-                 :class="{ 
-                     'lg:pl-64': sidebarOpen,
-                     'lg:pl-20': !sidebarOpen
-                 }">
+            <div class="flex min-h-screen flex-col"
+                 style="transition: margin-left 300ms ease-in-out;"
+                 :style="{ marginLeft: sidebarOffset() }">
                 <x-admin.header />
                 
-                <main class="flex-1 p-4 lg:p-6 2xl:p-10">
+                <main class="flex-1 px-4 py-6 sm:px-6 lg:px-8">
                     {{ $slot }}
                 </main>
             </div>

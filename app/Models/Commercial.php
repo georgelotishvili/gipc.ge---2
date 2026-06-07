@@ -31,12 +31,18 @@ class Commercial extends Model
 
     public function getImageLinkAttribute()
     {
-        if (!$this->image)
-        {
-            return $this->img_link;
+        if ($this->image) {
+            return Storage::url($this->image->path);
+        }
+
+        if (!$this->img_link) {
             return null;
         }
 
-        return Storage::url($this->image->path);
+        if (str_starts_with($this->img_link, 'http://') || str_starts_with($this->img_link, 'https://') || str_starts_with($this->img_link, '/')) {
+            return $this->img_link;
+        }
+
+        return Storage::url($this->img_link);
     }
 }

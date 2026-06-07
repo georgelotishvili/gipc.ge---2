@@ -44,18 +44,14 @@
                                 @enderror
                             </div>
 
-                            <!-- Is Free -->
+                            <!-- Payment Type -->
                             <div>
                                 <label for="is_free" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    უფასო
+                                    გადახდის ტიპი
                                 </label>
                                 <select name="is_free" id="is_free" class="w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-dark-3 px-4 py-2 focus:border-primary-500 focus:ring-primary-500">
-                                    <option disabled
-                                        {{ old('is_free', $planType->is_free) ? '' : 'selected' }}>იყოს
-                                        უფასო?
-                                    </option>
-                                    <option value="1" {{ old('is_free', $planType->is_free) == '1' ? 'selected' : '' }}>დიახ</option>
-                                    <option value="0" {{ old('is_free', $planType->is_free) == '0' ? 'selected' : '' }}>არა</option>
+                                    <option value="0" {{ old('is_free', $planType->is_free ? '1' : '0') == '0' ? 'selected' : '' }}>ფასიანი</option>
+                                    <option value="1" {{ old('is_free', $planType->is_free ? '1' : '0') == '1' ? 'selected' : '' }}>უფასო</option>
                                 </select>
                                 @error('is_free')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>

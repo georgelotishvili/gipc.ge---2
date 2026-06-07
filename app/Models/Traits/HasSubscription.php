@@ -15,29 +15,46 @@ trait HasSubscription
 
     public function hasActiveSubscription(): bool
     {
-        if (!$this->subscription) {
+        $subscription = $this->activeSubscription();
+
+        if (!$subscription) {
             return false;
         }
 
-        // If ends_at is set, use it
-        if ($this->subscription->ends_at) {
-            $endDate = Carbon::parse($this->subscription->ends_at);
-            return $endDate->greaterThan(now());
+        if ($subscription->starts_at && Carbon::parse($subscription->starts_at)->isFuture()) {
+            return false;
         }
 
-        // If ends_at is not set but starts_at is, calculate it
-        if ($this->subscription->starts_at && $this->subscription->planType) {
-            $startDate = Carbon::parse($this->subscription->starts_at);
-            $endDate = $startDate->copy()->addDays($this->subscription->planType->type_duration);
+        if ($subscription->ends_at) {
+            return Carbon::parse($subscription->ends_at)->greaterThan(now());
+        }
+
+        if ($subscription->starts_at && $subscription->planType) {
+            $startDate = Carbon::parse($subscription->starts_at);
+            $endDate = $startDate->copy()->addDays($subscription->planType->type_duration);
             
-            // Update the database with calculated end date
-            $this->subscription->ends_at = $endDate;
-            $this->subscription->save();
+            $subscription->ends_at = $endDate;
+            $subscription->save();
             
             return $endDate->greaterThan(now());
         }
 
         return false;
+    }
+
+    public function activeSubscription(): ?Subscription
+    {
+        return $this->subscriptions()
+            ->where('is_active', true)
+            ->where(function ($query) {
+                $query->whereNull('starts_at')->orWhere('starts_at', '<=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('ends_at')->orWhere('ends_at', '>', now());
+            })
+            ->orderByDesc('ends_at')
+            ->orderByDesc('id')
+            ->first();
     }
 
     public function createOrUpdateSubscription(array $data)
@@ -50,8 +67,8 @@ trait HasSubscription
 
     public function activeSubscriptionType(): int|bool
     {
-        if($this->hasActiveSubscription()){
-            return $this->subscription?->plan_id;
+        if($subscription = $this->activeSubscription()){
+            return $subscription->plan_id;
         }
         return false;
 
@@ -61,8 +78,8 @@ trait HasSubscription
 
     public function activeSubscriptionName(): string
     {
-        if($this->hasActiveSubscription()){
-            return $this->subscription?->plan?->plan_name ?: 'არ აქვს გამოწერილი';
+        if($subscription = $this->activeSubscription()){
+            return $subscription->plan?->plan_name ?: 'არ აქვს გამოწერილი';
         }
         return 'არ აქვს გამოწერილი';
     }

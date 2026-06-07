@@ -121,6 +121,30 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         return $this->hasMany(Payment::class);
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function currentSubscriptionRecord(): ?Subscription
+    {
+        return $this->subscriptions()
+            ->where('is_active', true)
+            ->where(function ($query) {
+                $query->whereNull('starts_at')->orWhere('starts_at', '<=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('ends_at')->orWhere('ends_at', '>', now());
+            })
+            ->orderByDesc('ends_at')
+            ->orderByDesc('id')
+            ->first()
+            ?? $this->subscriptions()
+                ->orderByDesc('ends_at')
+                ->orderByDesc('id')
+                ->first();
+    }
+
     /**
      * Get the employees for the user.
      */

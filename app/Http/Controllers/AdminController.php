@@ -17,11 +17,14 @@ use App\Models\Plan;
 use App\Models\PlanType;
 use App\Models\PlanOption;
 use App\Models\Regulation;
+use App\Models\Subscription;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Intervention\Image\ImageManager;
 
 class AdminController extends Controller
@@ -67,18 +70,23 @@ class AdminController extends Controller
     public function storePlan(Request $request)
     {
         $attributes = $request->validate([
-            'plan_name' => 'required|unique:plans,plan_name',
-            'plan_description' => 'required',
-            'plan_price' => 'required|numeric',
-            'plan_discount' => 'numeric|nullable',
-            'plan_recommended' => 'required|boolean',
-            'plan_order' => 'required|numeric',
-            'plan_type_id' => 'required|exists:plan_types,id|unique:plans,plan_type_id',
-            'is_active' => 'required|boolean',
+            'plan_name' => ['required', Rule::unique('plans', 'plan_name')->whereNull('deleted_at')],
+            'plan_description' => ['required'],
+            'plan_price' => ['required', 'numeric', 'min:1'],
+            'plan_discount' => ['nullable', 'numeric', 'min:0'],
+            'plan_recommended' => ['required', 'boolean'],
+            'plan_order' => ['required', 'integer', 'min:1'],
+            'plan_type_id' => ['required', 'exists:plan_types,id', Rule::unique('plans', 'plan_type_id')->whereNull('deleted_at')],
+            'is_active' => ['required', 'boolean'],
         ]);
 
+        DB::transaction(function () use ($attributes) {
+            if ((bool) $attributes['plan_recommended']) {
+                Plan::where('plan_recommended', true)->update(['plan_recommended' => false]);
+            }
 
-        Plan::create($attributes);
+            Plan::create($attributes);
+        });
 
         return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით დამატებულია');
     }
@@ -96,17 +104,25 @@ class AdminController extends Controller
     public function updatePlan(Request $request, Plan $plan)
     {
         $attributes = $request->validate([
-            'plan_name' => 'required|unique:plans,plan_name,' . $plan->id,
-            'plan_description' => 'required',
-            'plan_price' => 'required|numeric',
-            'plan_discount' => 'numeric|nullable',
-            'plan_recommended' => 'required|boolean',
-            'plan_order' => 'required|numeric',
-            'plan_type_id' => 'required|exists:plan_types,id|unique:plans,plan_type_id,' . $plan->id,
-            'is_active' => 'required|boolean',
+            'plan_name' => ['required', Rule::unique('plans', 'plan_name')->ignore($plan->id)->whereNull('deleted_at')],
+            'plan_description' => ['required'],
+            'plan_price' => ['required', 'numeric', 'min:1'],
+            'plan_discount' => ['nullable', 'numeric', 'min:0'],
+            'plan_recommended' => ['required', 'boolean'],
+            'plan_order' => ['required', 'integer', 'min:1'],
+            'plan_type_id' => ['required', 'exists:plan_types,id', Rule::unique('plans', 'plan_type_id')->ignore($plan->id)->whereNull('deleted_at')],
+            'is_active' => ['required', 'boolean'],
         ]);
 
-        $plan->update($attributes);
+        DB::transaction(function () use ($attributes, $plan) {
+            if ((bool) $attributes['plan_recommended']) {
+                Plan::where('id', '!=', $plan->id)
+                    ->where('plan_recommended', true)
+                    ->update(['plan_recommended' => false]);
+            }
+
+            $plan->update($attributes);
+        });
 
         return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით განახლდა');
     }
@@ -114,6 +130,12 @@ class AdminController extends Controller
 
     public function destroyPlan(Plan $plan)
     {
+        if (Subscription::withTrashed()->where('plan_id', $plan->id)->exists()) {
+            return redirect()
+                ->route('admin.plans')
+                ->with('error-plan', 'ეს ფასი უკვე გამოყენებულია გამოწერის ისტორიაში. წაშლის ნაცვლად გაათიშეთ აქტიურობა.');
+        }
+
         $plan->delete();
         return redirect()->route('admin.plans')->with('success-plan', 'სახეობა წარმატებით წაიშალა');
     }
@@ -160,6 +182,15 @@ class AdminController extends Controller
 
     public function destroyPlanType(PlanType $planType)
     {
+        if (
+            Plan::withTrashed()->where('plan_type_id', $planType->id)->exists()
+            || Subscription::withTrashed()->where('plan_type_id', $planType->id)->exists()
+        ) {
+            return redirect()
+                ->route('admin.plans')
+                ->with('error-plan-type', 'ეს ტიპი დაკავშირებულია ფასებთან ან გამოწერის ისტორიასთან. ჯერ გამოიყენეთ ფასის გათიშვა.');
+        }
+
         $planType->delete();
         return redirect()->route('admin.plans')->with('success-plan-type', 'სახეობა წარმატებით წაიშალა');
     }
@@ -295,7 +326,16 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::latest()->paginate(15);
+        $users = User::with([
+            'subscription.planType',
+            'subscription.plan.planType',
+            'subscriptions.planType',
+            'subscriptions.plan.planType',
+            'subscriptions.payments',
+            'payments.subscription.planType',
+            'payments.subscription.plan.planType',
+        ])->latest()->paginate(15);
+
         return view('admin.users', [
             'users' => $users
         ]);
@@ -340,25 +380,44 @@ class AdminController extends Controller
 
     public function editSubscription($userId)
     {
-        $user = User::findOrFail($userId);
+        $user = User::with([
+            'subscriptions.planType',
+            'subscriptions.plan.planType',
+            'subscriptions.payments',
+            'payments',
+        ])->findOrFail($userId);
         $plans = Plan::with('planType')->get();
+        $currentSubscription = $user->currentSubscriptionRecord();
         
         return view('admin.subscription-edit', [
             'user' => $user,
-            'plans' => $plans
+            'plans' => $plans,
+            'currentSubscription' => $currentSubscription,
         ]);
     }
 
     public function updateSubscription(Request $request, $userId)
     {
-        $user = User::findOrFail($userId);
+        $user = User::with('subscriptions')->findOrFail($userId);
         
         $request->validate([
-            'is_active' => 'required|boolean',
-            'plan_id' => 'required|exists:plans,id',
-            'starts_at' => 'required|date',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id)->whereNull('deleted_at'),
+            ],
+            'subscription_action' => ['required', Rule::in(['none', 'grant', 'stop'])],
+            'plan_id' => ['nullable', 'required_if:subscription_action,grant', 'exists:plans,id'],
+            'starts_at' => ['nullable', 'required_if:subscription_action,grant', 'date'],
             'ends_at' => 'nullable|date|after:starts_at',
         ], [
+            'name.required' => 'სახელი და გვარი აუცილებელია',
+            'email.required' => 'ელ-ფოსტა აუცილებელია',
+            'email.email' => 'ელ-ფოსტის ფორმატი არასწორია',
+            'email.unique' => 'ეს ელ-ფოსტა უკვე გამოყენებულია',
             'plan_id.required' => 'გამოწერის ტიპი აუცილებელია',
             'plan_id.exists' => 'არჩეული გამოწერის ტიპი არ არსებობს',
             'starts_at.required' => 'დაწყების თარიღი აუცილებელია',
@@ -367,20 +426,83 @@ class AdminController extends Controller
             'ends_at.after' => 'დასრულების თარიღი უნდა იყოს დაწყების თარიღის შემდეგ',
         ]);
 
-        $plan = Plan::findOrFail($request->plan_id);
-        
-        $data = [
-            'plan_type_id' => $plan->plan_type_id,
-            'plan_id' => $plan->id,
-            'is_active' => (bool) $request->is_active,
-            'starts_at' => \Carbon\Carbon::parse($request->starts_at)->startOfDay(),
-            'ends_at' => $request->ends_at ? \Carbon\Carbon::parse($request->ends_at)->endOfDay() : \Carbon\Carbon::now()->addDays($plan->planType->type_duration),
-            'recToken' => md5(time() . $user->id),
-        ];
+        DB::transaction(function () use ($request, $user) {
+            $user->update([
+                'name' => $request->name,
+                'email' => Str::lower($request->email),
+            ]);
 
-        $user->createOrUpdateSubscription($data);
+            if ($request->subscription_action === 'stop') {
+                $stopTime = now();
 
-        return redirect()->route('admin.users')->with('success', 'Subscription updated successfully!');
+                $user->subscriptions()
+                    ->where('is_active', true)
+                    ->get()
+                    ->each(function ($subscription) use ($stopTime) {
+                        $subscription->is_active = false;
+
+                        if (! $subscription->ends_at || $subscription->ends_at->greaterThan($stopTime)) {
+                            $subscription->ends_at = $stopTime;
+                        }
+
+                        $subscription->save();
+                    });
+
+                return;
+            }
+
+            if ($request->subscription_action === 'grant') {
+                $plan = Plan::with('planType')->findOrFail($request->plan_id);
+                $startsAt = \Carbon\Carbon::parse($request->starts_at)->startOfDay();
+                $endsAt = $request->ends_at
+                    ? \Carbon\Carbon::parse($request->ends_at)->endOfDay()
+                    : $startsAt->copy()->addDays($plan->planType->type_duration)->endOfDay();
+
+                $user->subscriptions()
+                    ->where('is_active', true)
+                    ->get()
+                    ->each(function ($subscription) use ($startsAt) {
+                        $subscription->is_active = false;
+
+                        if (! $subscription->ends_at || $subscription->ends_at->greaterThan($startsAt)) {
+                            $subscription->ends_at = $startsAt->copy()->subSecond();
+                        }
+
+                        $subscription->save();
+                    });
+
+                $user->subscriptions()->create([
+                    'plan_type_id' => $plan->plan_type_id,
+                    'plan_id' => $plan->id,
+                    'is_active' => true,
+                    'recToken' => 'admin-' . $user->id . '-' . Str::uuid(),
+                    'starts_at' => $startsAt,
+                    'ends_at' => $endsAt,
+                ]);
+            }
+        });
+
+        return redirect()->route('admin.subscription.edit', $user->id)->with('success', 'მომხმარებლის მონაცემები განახლდა');
+    }
+
+    public function destroyUserSubscription($userId, Subscription $subscription)
+    {
+        $user = User::findOrFail($userId);
+
+        abort_unless((int) $subscription->user_id === (int) $user->id, 404);
+
+        DB::transaction(function () use ($subscription) {
+            $subscription->payments()
+                ->withTrashed()
+                ->get()
+                ->each(fn ($payment) => $payment->forceDelete());
+
+            $subscription->forceDelete();
+        });
+
+        return redirect()
+            ->route('admin.subscription.edit', $user->id)
+            ->with('success', 'გამოწერის ისტორიის ჩანაწერი წაიშალა');
     }
 
     public function codes()
@@ -434,7 +556,10 @@ class AdminController extends Controller
 
     public function regulations()
     {
-        $regulations = Regulation::all();
+        $regulations = Regulation::query()
+            ->orderBy('name')
+            ->get();
+
         return view('admin.regulations.regulations', [
             'regulations' => $regulations
         ]);
@@ -447,12 +572,16 @@ class AdminController extends Controller
 
     public function storeRegulation(Request $request)
     {
-        Regulation::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'link' => $request->input('link'),
-            'date_applied' => $request->input('date_applied')
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'link' => ['required', 'url', 'max:2000'],
         ]);
+
+        Regulation::create($validated + [
+            'description' => null,
+            'date_applied' => null,
+        ]);
+
         return redirect()->route('admin.regulations.regulations')->with('success', 'დადგენილება წარმატებით დამატებულია');
     }
 
@@ -465,12 +594,16 @@ class AdminController extends Controller
 
     public function updateRegulation(Request $request, Regulation $regulation)
     {
-        $regulation->update([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'link' => $request->input('link'),
-            'date_applied' => $request->input('date_applied')
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'link' => ['required', 'url', 'max:2000'],
         ]);
+
+        $regulation->update($validated + [
+            'description' => null,
+            'date_applied' => null,
+        ]);
+
         return redirect()->route('admin.regulations.regulations')->with('success', 'დადგენილება წარმატებით განახლდა');
     }
 

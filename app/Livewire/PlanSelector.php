@@ -18,11 +18,10 @@ class PlanSelector extends Component
             $q->where('is_included', true)->where('is_active', true);
         }])
         ->where('is_active', true)
+        ->whereHas('planType')
         ->orderBy('plan_order')
+        ->orderBy('id')
         ->get()
-        ->filter(function ($plan) {
-            return $plan->planType !== null;
-        })
         ->mapWithKeys(function ($plan) {
             return [
                 $plan->planType->type_name => [

@@ -19,7 +19,7 @@ return [
 
     // Login page translations
     'Welcome back' => 'ანგარიშში შესვლა',
-    'Sign in to your account' => 'გაიარეთ ავტორიზაცია ვებგვერდით სარგებლობისთვის',
+    'Sign in to your account' => 'გაიარეთ ავტორიზაცია გვერდით სარგებლობისთვის',
     'Email' => 'ელ-ფოსტა',
     'Password' => 'პაროლი',
     'Enter your email' => 'შეიყვანეთ თქვენი ელ-ფოსტა',

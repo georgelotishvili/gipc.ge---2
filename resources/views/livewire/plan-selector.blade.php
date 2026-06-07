@@ -1,4 +1,14 @@
 <div>
+    @if(empty($plans))
+        <section class="px-4 py-16 dark:bg-dark">
+            <div class="mx-auto max-w-3xl rounded-md border border-blue-100 bg-white p-8 text-center shadow-[0_10px_30px_rgba(37,99,235,0.08)] dark:border-slate-700 dark:bg-slate-900">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">აქტიური პაკეტები ამჟამად არ არის</h2>
+                <p class="mt-3 text-sm leading-6 text-gray-600 dark:text-slate-300">
+                    გთხოვთ მოგვიანებით სცადოთ ან დაგვიკავშირდეთ ადმინისტრაციასთან.
+                </p>
+            </div>
+        </section>
+    @else
     <section class="dark:bg-dark"
         x-data='{
             selectedPlan: "{{ array_key_first($plans) }}",
@@ -178,5 +188,6 @@
         </div>
     </div>
 </section>
+    @endif
 
 </div>

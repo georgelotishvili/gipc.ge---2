@@ -4,18 +4,24 @@
     slides: [
         @foreach($commercials as $commercial)
             { 
-                image: '{{ $commercial->getImageLinkAttribute() }}', 
-                title: '{{ $commercial->name }}', 
-                subtitle: '{{ $commercial->description }}' 
+                image: @js($commercial->getImageLinkAttribute()), 
+                title: @js($commercial->name), 
+                subtitle: @js($commercial->description) 
             }@if(!$loop->last),@endif
         @endforeach
     ]
 }"
 x-init="
-    setInterval(() => { 
-        currentSlide = (currentSlide + 1) % slides.length;
+    if (!slides.length || currentSlide >= slides.length) {
+        currentSlide = 0;
         localStorage.setItem('currentSlide', currentSlide);
-    }, 4000);
+    }
+    if (slides.length > 1) {
+        setInterval(() => { 
+            currentSlide = (currentSlide + 1) % slides.length;
+            localStorage.setItem('currentSlide', currentSlide);
+        }, 4000);
+    }
     $watch('currentSlide', value => localStorage.setItem('currentSlide', value));"
 class="relative left-1/2 w-screen -translate-x-1/2 mb-8">
     

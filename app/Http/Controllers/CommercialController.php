@@ -34,13 +34,8 @@ class CommercialController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'link' => 'nullable|url',
             'expiration_date' => 'nullable|date',
-            'weight' => 'nullable|numeric',
-            'duration_weight' => 'nullable|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -49,17 +44,28 @@ class CommercialController extends Controller
                 ->withInput();
         }
 
-        $data = $request->except('image');
+        $data = $validator->validated();
+        unset($data['image']);
+        $data['name'] = 'თქვენი რეკლამა';
+        $data['description'] = 'რეკლამის განსათავსებლად დაგვიკავშირდით';
+        $data['weight'] = 1;
+        $data['duration_weight'] = 1;
+
+        $image = null;
 
         if ($request->hasFile('image')) {
             $image = SaveImageAction::execute($request->file('image'), 'commercials');
-            $data['image_link'] = $image->path;
+            $data['img_link'] = $image->path;
         }
 
-        Commercial::create($data);
+        $commercial = Commercial::create($data);
+
+        if ($image) {
+            $commercial->image()->save($image);
+        }
 
         return redirect()->route('admin.commercials')
-            ->with('success', 'Commercial created successfully.');
+            ->with('success', 'რეკლამა წარმატებით დაემატა.');
     }
 
     /**
@@ -84,12 +90,7 @@ class CommercialController extends Controller
     public function update(Request $request, Commercial $commercial)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'link' => 'nullable|url',
             'expiration_date' => 'nullable|date',
-            'weight' => 'nullable|numeric',
-            'duration_weight' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -99,22 +100,25 @@ class CommercialController extends Controller
                 ->withInput();
         }
 
-        $data = $request->except('image');
+        $data = $validator->validated();
+        unset($data['image']);
+
+        $image = null;
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($commercial->image_link && Storage::disk('public')->exists($commercial->image_link)) {
-                Storage::disk('public')->delete($commercial->image_link);
-            }
-
+            $this->deleteStoredImage($commercial);
             $image = SaveImageAction::execute($request->file('image'), 'commercials');
-            $data['image_link'] = $image->path;
+            $data['img_link'] = $image->path;
         }
 
         $commercial->update($data);
 
+        if ($image) {
+            $commercial->image()->save($image);
+        }
+
         return redirect()->route('admin.commercials')
-            ->with('success', 'Commercial updated successfully.');
+            ->with('success', 'რეკლამა წარმატებით განახლდა.');
     }
 
     /**
@@ -122,21 +126,37 @@ class CommercialController extends Controller
      */
     public function destroy(Commercial $commercial)
     {
-        // Delete image if exists
-        if ($commercial->image_link && Storage::disk('public')->exists($commercial->image_link)) {
-            Storage::disk('public')->delete($commercial->image_link);
-        }
-
-        // Delete image if exists
-        if ($commercial->image)
-        {
-            DeleteImageAction::execute($commercial->image);
-        }
+        $this->deleteStoredImage($commercial);
 
         // Delete commercial
         $commercial->delete();
 
         return redirect()->route('admin.commercials')
-            ->with('success', 'Commercial deleted successfully.');
+            ->with('success', 'რეკლამა წარმატებით წაიშალა.');
+    }
+
+    private function deleteStoredImage(Commercial $commercial): void
+    {
+        $relatedImagePath = $commercial->image?->path;
+
+        if ($commercial->image) {
+            DeleteImageAction::execute($commercial->image);
+        }
+
+        if (
+            $commercial->img_link
+            && $commercial->img_link !== $relatedImagePath
+            && $this->isLocalStoragePath($commercial->img_link)
+            && Storage::disk('public')->exists($commercial->img_link)
+        ) {
+            Storage::disk('public')->delete($commercial->img_link);
+        }
+    }
+
+    private function isLocalStoragePath(string $path): bool
+    {
+        return !str_starts_with($path, 'http://')
+            && !str_starts_with($path, 'https://')
+            && !str_starts_with($path, '/');
     }
 }

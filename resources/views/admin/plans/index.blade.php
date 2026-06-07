@@ -20,6 +20,12 @@
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan-type') }}</p>
                         </div>
                     @endif
+                    @if(session('error-plan-type'))
+                        <div
+                            class="mb-4 p-4 rounded-md bg-red-100 dark:bg-red-900/50 border border-red-200 dark:border-red-800">
+                            <p class="text-red-700 dark:text-red-300">{{ session('error-plan-type') }}</p>
+                        </div>
+                    @endif
 
                     <div class="overflow-x-auto w-full">
                         <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -33,7 +39,7 @@
                                         ვადა</th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        უფასო</th>
+                                        გადახდის ტიპი</th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         მოქმედება</th>
@@ -52,7 +58,7 @@
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ $planType->is_free ? 'დიახ' : 'არა' }}
+                                            {{ $planType->is_free ? 'უფასო' : 'ფასიანი' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                                             <a href="{{ route('admin.plan-types.edit', $planType) }}"
@@ -112,6 +118,12 @@
                         <div
                             class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan') }}</p>
+                        </div>
+                    @endif
+                    @if(session('error-plan'))
+                        <div
+                            class="mb-4 p-4 rounded-md bg-red-100 dark:bg-red-900/50 border border-red-200 dark:border-red-800">
+                            <p class="text-red-700 dark:text-red-300">{{ session('error-plan') }}</p>
                         </div>
                     @endif
 
@@ -223,6 +235,12 @@
                         <div
                             class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
                             <p class="text-green-700 dark:text-green-300">{{ session('success-plan-option') }}</p>
+                        </div>
+                    @endif
+                    @if(session('error-plan-option'))
+                        <div
+                            class="mb-4 p-4 rounded-md bg-red-100 dark:bg-red-900/50 border border-red-200 dark:border-red-800">
+                            <p class="text-red-700 dark:text-red-300">{{ session('error-plan-option') }}</p>
                         </div>
                     @endif
 

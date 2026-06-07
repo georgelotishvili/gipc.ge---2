@@ -1,32 +1,32 @@
-<aside class="fixed left-0 top-0 z-50 flex h-screen flex-col overflow-y-hidden bg-white ease-linear dark:bg-dark-2"
+<aside class="fixed left-0 top-0 z-50 flex h-screen flex-col overflow-y-hidden border-r border-gray-200 bg-white shadow-sm transition-[width,transform] duration-300 ease-in-out dark:border-slate-700 dark:bg-slate-900"
+       :style="{ width: sidebarWidth() }"
        :class="{ 
            '-translate-x-full lg:translate-x-0': !sidebarOpen,
-           'w-[260px]': sidebarOpen,
-           'w-[80px]': !sidebarOpen
+           'translate-x-0': sidebarOpen
        }" x-cloak>
     
     <!-- Logo -->
-    <div class="flex h-20 items-center justify-center border-b -mt-2 border-gray-200 dark:border-dark-4">
+    <div class="flex h-20 shrink-0 items-center justify-center border-b border-gray-200 px-3 dark:border-slate-700">
         <template x-if="sidebarOpen">
-            <a href="{{ route('index') }}" wire:navigate class="inline-flex items-center justify-center transition-all duration-300 hover:scale-105 hover:opacity-90">
+            <a href="{{ route('index') }}" class="inline-flex items-center justify-center transition-all duration-300 hover:scale-105 hover:opacity-90">
                 <x-application-logo class="h-10 w-auto" />
             </a>
         </template>
         <template x-if="!sidebarOpen">
-            <a href="{{ route('index') }}" wire:navigate class="inline-flex w-14 items-center justify-center overflow-hidden transition-all duration-300 hover:scale-105 hover:opacity-90">
+            <a href="{{ route('index') }}" class="inline-flex w-14 items-center justify-center overflow-hidden transition-all duration-300 hover:scale-105 hover:opacity-90">
                 <x-application-logo class="h-7 w-auto max-w-none" />
             </a>
         </template>
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-1 overflow-y-auto overflow-x-hidden py-4" x-data="{ active: 'dashboard' }">
+    <nav class="flex-1 overflow-y-auto overflow-x-hidden px-3 py-4" x-data="{ active: 'dashboard' }">
         <!-- Menu Group -->
         <div class="mb-6">
-            <h3 x-show="sidebarOpen" class="mb-4 ml-4 text-sm font-medium text-gray-500 dark:text-dark-6">MENU</h3>
-            <ul class="mb-6 flex flex-col gap-1.5" :class="{ 'items-center': !sidebarOpen }">
+            <h3 x-show="sidebarOpen" class="mb-3 px-3 text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-slate-500">MENU</h3>
+            <ul class="mb-6 flex flex-col gap-1" :class="{ 'items-center': !sidebarOpen }">
                 <li>
-                    <a href="{{ route('admin.index') }}" wire:navigate
+                    <a href="{{ route('admin.index') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.index') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.questions') }}" wire:navigate
+                    <a href="{{ route('admin.questions') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.questions') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.codes') }}" wire:navigate
+                    <a href="{{ route('admin.codes') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.codes') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.regulations.regulations') }}" wire:navigate
+                    <a href="{{ route('admin.regulations.regulations') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.regulations.regulations') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.courses') }}" wire:navigate
+                    <a href="{{ route('admin.courses') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.courses') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.users') }}" wire:navigate
+                    <a href="{{ route('admin.users') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.users') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                 <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.commercials') }}" wire:navigate
+                    <a href="{{ route('admin.commercials') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.commercials') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                 <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,9 +100,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.plans') }}" wire:navigate
+                    <a href="{{ route('admin.plans') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
-                       {{ Route::is('admin.pricing') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
+                       {{ Route::is('admin.plans') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                        <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M3 11l10 10 8-8-10-10H5a2 2 0 00-2 2v4z" />
                       </svg>
@@ -111,7 +111,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.settings') }}" wire:navigate
+                    <a href="{{ route('admin.settings') }}"
                        class="group relative flex items-center gap-2.5 rounded-md px-4 py-2 font-medium duration-100 ease-in-out hover:bg-primary/[0.08] dark:hover:bg-primary/[0.03]
                        {{ Route::is('admin.settings') ? 'text-primary-600 bg-primary/[0.08] dark:bg-primary/[0.03] border-r-4 border-primary-600' : 'text-gray-700 dark:text-dark-6' }}">
                                <svg class="w-6 h-6 text-gray-500 group-hover:text-primary-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">

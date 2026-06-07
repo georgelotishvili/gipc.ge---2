@@ -170,11 +170,7 @@
                         <div x-data="{ dropdownOpen: false }" class="relative hidden lg:flex">
                             <button @click="dropdownOpen = !dropdownOpen" 
                                     class="flex items-center gap-2">
-                                <span class="h-10 w-10 rounded-md">
-                                    <img src="{{ auth()->user()->profile_photo_url }}"
-                                         alt="{{ auth()->user()->name }}"
-                                         class="rounded-md object-cover object-center">
-                                </span>
+                                <x-user-avatar :user="auth()->user()" class="h-10 w-10" />
                                 <svg :class="dropdownOpen && 'rotate-180'" class="fill-current" width="12" height="8" viewBox="0 0 12 8">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"/>
                                 </svg>
@@ -194,9 +190,7 @@
                                 <div class="p-4 border-b border-gray-100/50 dark:border-gray-800/50">
                                     <div class="flex items-center space-x-3">
                                         <div class="flex-shrink-0">
-                                            <img src="{{ auth()->user()->profile_photo_url }}"
-                                                 alt="{{ auth()->user()->name }}"
-                                                 class="h-12 w-12 rounded-md object-cover ring-2 ring-gray-100 dark:ring-gray-800">
+                                            <x-user-avatar :user="auth()->user()" class="h-12 w-12 ring-2 ring-gray-100 dark:ring-gray-800" icon-class="h-6 w-6" />
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">
@@ -213,7 +207,7 @@
                                 <div class="p-2">
                                     @if(auth()->user()->is_admin)
                                     <div class="mb-2">
-                                        <a href="/admin" wire:navigate @click="mobileMenuOpen = false"
+                                        <a href="/admin" @click="mobileMenuOpen = false"
                                            class="flex items-center space-x-4 text-lg font-medium text-white bg-gradient-to-r from-blue-500 via-indigo-600 to-indigo-700 hover:from-blue-600 hover:via-indigo-700 hover:to-indigo-800 transition-all duration-200 py-3 px-6 rounded-md shadow-lg shadow-indigo-500/20 group">
                                             <div class="flex items-center justify-center w-10 h-10 rounded-md bg-white/20 backdrop-blur-sm ring-2 ring-white/30 group-hover:ring-white/50 transition-all duration-200">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -416,17 +410,7 @@
                                     <div x-data="{ open: false }" class="">
                                         <button @click="open = !open" class="flex items-center w-full space-x-4 p-4 rounded-md bg-gray-50 dark:bg-dark-2 border border-gray-200 dark:border-gray-700 focus:outline-none">
                                             <div class="flex-shrink-0">
-                                                @if(auth()->user()->profile_photo_path)
-                                                    <img class="w-12 h-12 rounded-md object-cover border-2 border-gray-200 dark:border-gray-600" 
-                                                         src="{{ Storage::url(auth()->user()->profile_photo_path) }}" 
-                                                         alt="{{ auth()->user()->name }}">
-                                                @else
-                                                    <div class="w-12 h-12 rounded-md bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center border-2 border-gray-200 dark:border-gray-600">
-                                                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                                        </svg>
-                                                    </div>
-                                                @endif
+                                                <x-user-avatar :user="auth()->user()" class="w-12 h-12 border-2 border-gray-200 dark:border-gray-600" icon-class="w-6 h-6" />
                                             </div>
                                             <div class="flex-1 min-w-0 text-left">
                                                 <p class="text-lg font-semibold text-gray-900 dark:text-white truncate">
@@ -442,7 +426,7 @@
                                         </button>
                                         <div x-show="open" x-transition class="mt-2 space-y-2">
                                             @if(auth()->user()->is_admin)
-                                            <a href="/admin" wire:navigate @click="mobileMenuOpen = false"
+                                            <a href="/admin" @click="mobileMenuOpen = false"
                                                class="flex items-center space-x-4 text-lg font-medium text-white bg-gradient-to-r from-blue-500 via-indigo-600 to-indigo-700 hover:from-blue-600 hover:via-indigo-700 hover:to-indigo-800 transition-all duration-200 py-3 px-6 rounded-md shadow-lg shadow-indigo-500/20 group">
                                                 <div class="flex items-center justify-center w-10 h-10 rounded-md bg-white/20 backdrop-blur-sm ring-2 ring-white/30 group-hover:ring-white/50 transition-all duration-200">
                                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -547,13 +531,8 @@
         <livewire:banners />
     </section>
     
-    <!-- Workspace Sidebar for authenticated users -->
-    @auth
-        <x-workspace-sidebar />
-    @endauth
-    
     <!-- Rest of your layout -->
-    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 @auth lg:ml-16 @endauth">
+    <main class="max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12">
         {{ $slot }}
     </main>
 

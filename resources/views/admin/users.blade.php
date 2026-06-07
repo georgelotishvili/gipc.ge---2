@@ -1,115 +1,224 @@
 <x-admin.layout>
-    <!-- Success/Error Messages -->
-    @if(session('success'))
-        <div class="mb-6 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 rounded-md">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-green-700 dark:text-green-300">{{ session('success') }}</p>
-                </div>
+    <div class="mx-auto max-w-7xl space-y-6">
+        @if(session('success'))
+            <div class="rounded-md border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800 dark:bg-green-950/30 dark:text-green-300">
+                {{ session('success') }}
             </div>
-        </div>
-    @endif
+        @endif
 
-    @if(session('error'))
-        <div class="mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-md">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-red-700 dark:text-red-300">{{ session('error') }}</p>
-                </div>
+        @if(session('error'))
+            <div class="rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-300">
+                {{ session('error') }}
             </div>
-        </div>
-    @endif
-    
-    <div class="bg-white dark:bg-dark-2 rounded-md shadow-lg p-8">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">მომხმარებლები</h2>
+        @endif
+
+        <div class="flex flex-col gap-2">
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">რეგისტრირებული მომხმარებლები</h1>
+            <p class="max-w-3xl text-sm leading-6 text-gray-500 dark:text-slate-400">
+                ბარათზე ჩანს რეგისტრაციისას შეყვანილი ინფორმაცია და გამოწერის ისტორია. პაროლი უსაფრთხოების გამო არ ჩანს.
+            </p>
         </div>
 
-        <div class="overflow-hidden">
-            <div class="w-full overflow-x-auto">
-                <div class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <div class="bg-gray-50 dark:bg-dark-3">
-                        <div class="grid grid-cols-6 px-6 py-3">
-                            <div class="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-16">ID</div>
-                            <div class="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">მომხმარებელი</div>
-                            <div class="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">ელ-ფოსტა</div>
-                            <div class="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">რეგისტრაციის თარიღი</div>
-                            <div class="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">გამოწერები</div>
-                            <div class="text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">მოქმედებები</div>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-dark-2 divide-y divide-gray-200 dark:divide-gray-700">
-                        @foreach($users as $user)
-                            <div class="hover:bg-gray-50 dark:hover:bg-dark-3/50 transition-colors duration-200">
-                                <div class="grid grid-cols-6 px-6 py-4 items-center">
-                                    <div class="whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-400 w-16">#{{ $user->id }}</div>
-                                    <div class="whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
-                                                <span class="text-lg font-bold text-blue-500 dark:text-blue-400">
-                                                    {{ strtoupper(substr($user->name, 0, 1)) }}
-                                                </span>
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $user->name }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{{ $user->email }}</div>
-                                    <div class="whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                        {{ $user->created_at ? $user->created_at->format('d.m.Y') : 'N/A' }}
-                                    </div>
-                                    <div class="whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                        @if($user->subscription)
-                                            <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 rounded-md text-xs">
-                                                {{ $user->subscription->is_active ? 'გამოწერილი' : 'არ არის გამოწერილი' }}
-                                            </span>
-                                            <div class="mt-1 text-xs">
-                                                <div>დაწყება: {{ $user->subscription->starts_at ?? 'N/A' }}</div>
-                                                <div>დასრულება: {{ $user->subscription->ends_at ?? 'N/A' }}</div>
-                                                <div>ტიპი: {{ $user->activeSubscriptionName() }}</div>
-                                            </div>
-                                        @else
-                                            <span class="px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400 rounded-md text-xs">
-                                                გამოწერა არ არსებობს
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end gap-2">
-                                            <a href="{{ route('admin.subscription.edit', $user->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-md hover:from-blue-700 hover:to-blue-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
-                                                რედაქტირება
-                                            </a>
-                                            
-                                            <!-- Delete Button with Confirmation -->
-                                            <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('ნამდვილად გსურთ მომხმარებლის წაშლა? ეს ქმედება შეუქცევადია!')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="px-3 py-1.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-md hover:from-red-700 hover:to-red-600 transition-all duration-200 text-xs font-medium shadow-sm hover:shadow-md">
-                                                    წაშლა
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
+        <div class="space-y-4">
+            @foreach($users as $user)
+                @php
+                    $approvedPayments = $user->payments
+                        ->where('order_status', 'approved')
+                        ->sortByDesc(fn ($payment) => $payment->order_time ?? $payment->created_at)
+                        ->values();
+                    $subscriptionHistory = $user->subscriptions
+                        ->sortByDesc(function ($subscription) {
+                            $isActive = $subscription->is_active
+                                && (! $subscription->starts_at || $subscription->starts_at->isPast())
+                                && (! $subscription->ends_at || $subscription->ends_at->isFuture());
+                            $timestamp = $subscription->starts_at?->timestamp ?? $subscription->created_at?->timestamp ?? 0;
+
+                            return ($isActive ? 10_000_000_000 : 0) + $timestamp;
+                        })
+                        ->values();
+
+                    $currentSubscription = $user->subscriptions
+                        ->sortByDesc(function ($subscription) {
+                            $isActive = $subscription->is_active
+                                && (! $subscription->starts_at || $subscription->starts_at->isPast())
+                                && (! $subscription->ends_at || $subscription->ends_at->isFuture());
+                            $timestamp = $subscription->ends_at?->timestamp ?? $subscription->created_at?->timestamp ?? 0;
+
+                            return ($isActive ? 10_000_000_000 : 0) + $timestamp;
+                        })
+                        ->first() ?? $user->subscription;
+                    $currentPlanType = $currentSubscription?->planType ?? $currentSubscription?->plan?->planType;
+                    $currentPlanName = $currentPlanType?->type_name ?? $currentSubscription?->plan?->plan_name ?? 'ვადა უცნობია';
+                    $hasActiveSubscription = (bool) (
+                        $currentSubscription?->is_active
+                        && (! $currentSubscription->starts_at || $currentSubscription->starts_at->isPast())
+                        && (! $currentSubscription->ends_at || $currentSubscription->ends_at->isFuture())
+                    );
+                    $subscriptionDotCount = max($subscriptionHistory->count(), $approvedPayments->count(), $currentSubscription ? 1 : 0);
+                    $visibleSubscriptionDots = min($subscriptionDotCount, 5);
+                    $hiddenSubscriptionDots = max($subscriptionDotCount - $visibleSubscriptionDots, 0);
+                @endphp
+
+                <section x-data="{ open: false }" class="w-full overflow-hidden rounded-md border border-gray-200 bg-white shadow-[0_10px_30px_rgba(37,99,235,0.08)] transition hover:border-blue-200 hover:shadow-[0_18px_45px_rgba(37,99,235,0.14)] dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-500/30">
+                    <div class="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div class="flex min-w-0 items-start gap-4">
+                            <x-user-avatar :user="$user" class="h-12 w-12 shrink-0" icon-class="h-6 w-6" />
+
+                            <div class="min-w-0">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <h2 class="break-words text-lg font-semibold text-gray-900 dark:text-white">{{ $user->name }}</h2>
+                                    <span class="rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-slate-800 dark:text-slate-300">
+                                        #{{ $user->id }}
+                                    </span>
+                                    <span class="rounded-md px-2 py-1 text-xs font-medium {{ $user->is_admin ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300' }}">
+                                        {{ $user->is_admin ? 'ადმინისტრატორი' : 'რეგისტრირებული პირი' }}
+                                    </span>
+                                </div>
+                                <a href="mailto:{{ $user->email }}" class="mt-1 block break-all text-sm text-blue-600 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200">
+                                    {{ $user->email }}
+                                </a>
+                                <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-slate-400">
+                                    <span>რეგისტრაცია: {{ $user->created_at ? $user->created_at->format('d.m.Y') : 'N/A' }}</span>
+                                    <span class="hidden text-gray-300 dark:text-slate-600 sm:inline">|</span>
+                                    @if($subscriptionDotCount > 0)
+                                        <span class="inline-flex items-center gap-1.5" title="{{ $hasActiveSubscription ? 'აქტიური გამოწერა' : 'წარსული გამოწერა' }}">
+                                            @for($dotIndex = 1; $dotIndex <= $visibleSubscriptionDots; $dotIndex++)
+                                                <span class="rounded-full {{ $hasActiveSubscription && $dotIndex === $visibleSubscriptionDots ? 'h-3.5 w-3.5 bg-green-500 shadow-[0_0_0_4px_rgba(34,197,94,0.2)]' : 'h-2.5 w-2.5 bg-blue-500 shadow-[0_0_0_3px_rgba(59,130,246,0.14)]' }}"></span>
+                                            @endfor
+
+                                            @if($hiddenSubscriptionDots > 0)
+                                                <span class="text-xs font-medium text-blue-600 dark:text-blue-300">+{{ $hiddenSubscriptionDots }}</span>
+                                            @endif
+                                        </span>
+                                    @else
+                                        <span class="rounded-md bg-gray-100 px-2 py-1 font-medium text-gray-600 dark:bg-slate-800 dark:text-slate-300">
+                                            გამოწერის გარეშე
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+
+                        <div class="flex shrink-0 flex-wrap gap-2 sm:justify-end">
+                            <a href="{{ route('admin.subscription.edit', $user->id) }}" class="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700">
+                                გამოწერის რედაქტირება
+                            </a>
+
+                            <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" onsubmit="return confirm('ნამდვილად გსურთ მომხმარებლის წაშლა? ეს ქმედება შეუქცევადია!')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="inline-flex h-10 items-center justify-center rounded-md bg-red-50 px-4 text-sm font-medium text-red-700 transition hover:bg-red-100 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/50">
+                                    წაშლა
+                                </button>
+                            </form>
+
+                            <button type="button"
+                                    @click="open = !open"
+                                    :aria-expanded="open.toString()"
+                                    :aria-label="open ? 'აკეცვა' : 'გაშლა'"
+                                    class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+                                <svg :class="{ 'rotate-180': open }" class="h-4 w-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </div>
+
+                    <div x-show="open"
+                         x-cloak
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 -translate-y-2"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 -translate-y-2"
+                         class="border-t border-gray-100 p-5 dark:border-slate-700">
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                        <div class="rounded-md border border-gray-100 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800/60">
+                            <p class="text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-slate-500">სახელი</p>
+                            <p class="mt-1 break-words text-sm font-medium text-gray-900 dark:text-white">{{ $user->name }}</p>
+                        </div>
+
+                        <div class="rounded-md border border-gray-100 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800/60">
+                            <p class="text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-slate-500">ელ-ფოსტა</p>
+                            <p class="mt-1 break-all text-sm font-medium text-gray-900 dark:text-white">{{ $user->email }}</p>
+                        </div>
+
+                        <div class="rounded-md border border-gray-100 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800/60">
+                            <p class="text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-slate-500">რეგისტრაციის თარიღი</p>
+                            <p class="mt-1 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ $user->created_at ? $user->created_at->format('d.m.Y H:i') : 'N/A' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 rounded-md border border-gray-100 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800/60">
+                        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                            <p class="text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-slate-500">გამოწერის ისტორია</p>
+                        </div>
+
+                        @if($subscriptionHistory->isNotEmpty())
+                            <div class="mt-3 space-y-2">
+                                @foreach($subscriptionHistory->take(5) as $historySubscription)
+                                    @php
+                                        $historyPlanType = $historySubscription?->planType ?? $historySubscription?->plan?->planType;
+                                        $historyPlanName = $historyPlanType?->type_name ?? $historySubscription?->plan?->plan_name ?? 'ვადა უცნობია';
+                                        $historyPayment = $historySubscription->payments
+                                            ->where('order_status', 'approved')
+                                            ->sortByDesc(fn ($payment) => $payment->order_time ?? $payment->created_at)
+                                            ->first();
+                                        $historyDate = $historyPayment?->order_time ?? $historySubscription->starts_at ?? $historySubscription->created_at;
+                                        $historyIsActive = (bool) (
+                                            $historySubscription?->is_active
+                                            && (! $historySubscription->starts_at || $historySubscription->starts_at->isPast())
+                                            && (! $historySubscription->ends_at || $historySubscription->ends_at->isFuture())
+                                        );
+                                    @endphp
+
+                                    <div class="grid grid-cols-1 gap-3 rounded-md border border-gray-200 bg-white p-3 text-sm text-gray-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 md:grid-cols-6 md:items-center">
+                                        <div>
+                                            <span class="block text-xs text-gray-400 dark:text-slate-500">ჩანაწერის თარიღი</span>
+                                            <span class="font-medium">{{ $historyDate ? $historyDate->format('d.m.Y H:i') : 'N/A' }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs text-gray-400 dark:text-slate-500">პაკეტი</span>
+                                            <span class="font-medium">{{ $historyPlanName }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs text-gray-400 dark:text-slate-500">დაწყება</span>
+                                            <span class="font-medium">{{ $historySubscription?->starts_at ? $historySubscription->starts_at->format('d.m.Y') : 'N/A' }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs text-gray-400 dark:text-slate-500">დასრულება</span>
+                                            <span class="font-medium">{{ $historySubscription?->ends_at ? $historySubscription->ends_at->format('d.m.Y') : 'N/A' }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs text-gray-400 dark:text-slate-500">თანხა</span>
+                                            <span class="font-medium">{{ $historyPayment ? number_format($historyPayment->actual_amount, 2) . ' ლარი' : 'გადახდის გარეშე' }}</span>
+                                        </div>
+                                        <div class="flex items-end justify-start md:justify-end">
+                                            <span class="rounded-full {{ $historyIsActive ? 'h-3.5 w-3.5 bg-green-500 shadow-[0_0_0_4px_rgba(34,197,94,0.2)]' : 'h-2.5 w-2.5 bg-blue-500 shadow-[0_0_0_3px_rgba(59,130,246,0.14)]' }}"
+                                                  title="{{ $historyIsActive ? 'აქტიური გამოწერა' : 'ძველი გამოწერა' }}"></span>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                @if($subscriptionHistory->count() > 5)
+                                    <p class="text-xs text-gray-500 dark:text-slate-400">
+                                        კიდევ {{ $subscriptionHistory->count() - 5 }} ჩანაწერია.
+                                    </p>
+                                @endif
+                            </div>
+                        @else
+                            <p class="mt-2 text-sm text-gray-600 dark:text-slate-300">ამ მომხმარებელს გამოწერა ჯერ არ ჰქონია.</p>
+                        @endif
+                    </div>
+                    </div>
+                </section>
+            @endforeach
         </div>
 
-        <div class="mt-8">
+        <div>
             {{ $users->links() }}
         </div>
     </div>

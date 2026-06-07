@@ -27,7 +27,22 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('index', absolute: false));
+    }
+
+    public function test_users_return_to_the_previous_page_after_login(): void
+    {
+        $user = User::factory()->create();
+
+        $this->withHeader('Referer', url('/pricing'))->get('/login');
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertRedirect('/pricing');
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
