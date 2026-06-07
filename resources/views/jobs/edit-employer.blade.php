@@ -101,7 +101,7 @@
                         <div class="flex items-center mb-6">
                             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-md flex items-center justify-center mr-4 shadow-lg">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3m10-5h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5.75A2.75 2.75 0 0110.75 3h2.5A2.75 2.75 0 0116 5.75V7m-9.5 0h13A2.5 2.5 0 0122 9.5v9A2.5 2.5 0 0119.5 21h-13A2.5 2.5 0 014 18.5v-9A2.5 2.5 0 016.5 7zm2.5 6h6"/>
                                 </svg>
                             </div>
                             <div>
@@ -124,7 +124,7 @@
                                     <img id="preview-logo" src="{{ $employer->image ? $employer->image->url : '' }}" alt="Company Logo" class="w-24 h-24 object-cover rounded-md" style="display: {{ $employer->image ? 'block' : 'none' }};">
                                     <div id="preview-logo-placeholder" class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center" style="display: {{ $employer->image ? 'none' : 'flex' }};">
                                         <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3m10-5h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5.75A2.75 2.75 0 0110.75 3h2.5A2.75 2.75 0 0116 5.75V7m-9.5 0h13A2.5 2.5 0 0122 9.5v9A2.5 2.5 0 0119.5 21h-13A2.5 2.5 0 014 18.5v-9A2.5 2.5 0 016.5 7zm2.5 6h6"/>
                                         </svg>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                     <div class="flex items-center mb-8">
                         <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-md flex items-center justify-center mr-4 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3m10-5h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5.75A2.75 2.75 0 0110.75 3h2.5A2.75 2.75 0 0116 5.75V7m-9.5 0h13A2.5 2.5 0 0122 9.5v9A2.5 2.5 0 0119.5 21h-13A2.5 2.5 0 014 18.5v-9A2.5 2.5 0 016.5 7zm2.5 6h6"/>
                             </svg>
                         </div>
                         <div>
@@ -257,7 +257,7 @@
                                 <label for="name" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                     <span class="flex items-center text-sm">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3m10-5h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5.75A2.75 2.75 0 0110.75 3h2.5A2.75 2.75 0 0116 5.75V7m-9.5 0h13A2.5 2.5 0 0122 9.5v9A2.5 2.5 0 0119.5 21h-13A2.5 2.5 0 014 18.5v-9A2.5 2.5 0 016.5 7zm2.5 6h6"/>
                                         </svg>
                                         კომპანიის სახელი *
                                     </span>
@@ -303,14 +303,14 @@
                             <div class="relative">
                                 <input type="text" name="city" id="city" value="{{ old('city', $employer->city) }}" 
                                     class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" 
-                                    placeholder="ქალაქი" required>
+                                    placeholder="ქალაქი">
                                 <label for="city" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                     <span class="flex items-center text-sm">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                         </svg>
-                                        ქალაქი *
+                                        ქალაქი
                                     </span>
                                 </label>
                             </div>
@@ -505,13 +505,13 @@
                             <div class="relative">
                                 <input type="tel" name="phone" id="phone" value="{{ old('phone', $employer->phone) }}" 
                                     class="w-full px-6 pt-6 pb-2 bg-white/70 dark:bg-gray-800/70 border-2 border-gray-200 dark:border-gray-700 rounded-md focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-transparent peer backdrop-blur-sm" 
-                                    placeholder="ტელეფონი" required>
+                                    placeholder="ტელეფონი">
                                 <label for="phone" class="absolute left-6 top-2 text-gray-500 dark:text-gray-400 transition-all duration-300 peer-focus:text-purple-600 dark:peer-focus:text-purple-400 peer-focus:-translate-y-1 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-1 peer-[:not(:placeholder-shown)]:scale-75 pointer-events-none">
                                     <span class="flex items-center text-sm">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                         </svg>
-                                        ტელეფონი *
+                                        ტელეფონი
                                     </span>
                                 </label>
                             </div>

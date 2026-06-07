@@ -8,10 +8,14 @@
     <!-- Logo -->
     <div class="flex h-20 items-center justify-center border-b -mt-2 border-gray-200 dark:border-dark-4">
         <template x-if="sidebarOpen">
-            <x-application-logo/>
+            <a href="{{ route('index') }}" wire:navigate class="inline-flex items-center justify-center transition-all duration-300 hover:scale-105 hover:opacity-90">
+                <x-application-logo class="h-10 w-auto" />
+            </a>
         </template>
-        <template x-if="!sidebarOpen">image.png
-            <x-admin.sidebar-logo/>
+        <template x-if="!sidebarOpen">
+            <a href="{{ route('index') }}" wire:navigate class="inline-flex w-14 items-center justify-center overflow-hidden transition-all duration-300 hover:scale-105 hover:opacity-90">
+                <x-application-logo class="h-7 w-auto max-w-none" />
+            </a>
         </template>
     </div>
 

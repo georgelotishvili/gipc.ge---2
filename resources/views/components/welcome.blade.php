@@ -1,5 +1,7 @@
 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-    <x-application-logo class="block h-12 w-auto" />
+    <a href="{{ route('index') }}" wire:navigate class="inline-flex transition-all duration-300 hover:scale-105 hover:opacity-90">
+        <x-application-logo class="block h-12 w-auto" />
+    </a>
 
     <h1 class="mt-8 text-2xl font-medium text-gray-900">
         Welcome to your Jetstream application!

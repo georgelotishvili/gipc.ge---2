@@ -2,13 +2,8 @@
     <x-authentication-card>
         <x-slot name="logo">
             <div class="flex flex-col items-center space-y-3 sm:space-y-4">
-                <a href="{{ route('index') }}" wire:navigate class="transition-all duration-300 hover:scale-105 hover:opacity-90">
-                    <x-application-logo class="w-20 h-20 sm:w-24 sm:h-24" />
-                </a>
+                <x-authentication-card-logo />
                 <div class="text-center px-2">
-                    <h1 class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white tracking-tight">
-                        {{ __('auth.Welcome back') }}
-                    </h1>
                     <p class="text-gray-600 dark:text-gray-400 mt-1 sm:mt-2 text-base sm:text-lg font-light">
                         {{ __('auth.Sign in to your account') }}
                     </p>

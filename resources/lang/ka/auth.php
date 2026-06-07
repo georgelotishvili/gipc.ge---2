@@ -13,13 +13,13 @@ return [
     |
     */
 
-    'failed' => 'ეს ფასადები არ ემთხვევა ჩვენს ჩანაწერებს.',
+    'failed' => 'ელ-ფოსტა ან პაროლი არასწორია.',
     'password' => 'მოწოდებული პაროლი არასწორია.',
     'throttle' => 'ძალიან ბევრი შესვლის მცდელობა. გთხოვთ, სცადოთ :seconds წამის შემდეგ.',
 
     // Login page translations
-    'Welcome back' => 'კეთილი იყოს თქვენი დაბრუნება',
-    'Sign in to your account' => 'შედით თქვენს ანგარიშში',
+    'Welcome back' => 'ანგარიშში შესვლა',
+    'Sign in to your account' => 'გაიარეთ ავტორიზაცია ვებგვერდით სარგებლობისთვის',
     'Email' => 'ელ-ფოსტა',
     'Password' => 'პაროლი',
     'Enter your email' => 'შეიყვანეთ თქვენი ელ-ფოსტა',
@@ -31,8 +31,8 @@ return [
     'Continue with Google' => 'გააგრძელეთ Google-ით',
     "Don't have an account?" => 'არ გაქვთ ანგარიში?',
     'Sign up' => 'რეგისტრაცია',
-    'Create account' => 'ანგარიშის შექმნა',
-    'Join us today' => 'შემოგვიერთდით ჩვენ დღეს',
+    'Create account' => 'რეგისტრაცია',
+    'Join us today' => 'შექმენით ანგარიში ვებგვერდით სარგებლობისთვის',
     'Name' => 'სახელი',
     'Enter your name' => 'შეიყვანეთ თქვენი სახელი',
     'Confirm password' => 'გაიმეორეთ პაროლი',

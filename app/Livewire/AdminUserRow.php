@@ -64,13 +64,13 @@ class AdminUserRow extends Component
             $this->user->tokens()->delete();
             
             Log::info('Deleting employers...');
-            $this->user->employers()->delete();
+            $this->user->employers()->get()->each->delete();
             
             Log::info('Deleting payments...');
             $this->user->payments()->delete();
             
             Log::info('Deleting employees...');
-            $this->user->employees()->delete();
+            $this->user->employees()->get()->each->delete();
             
             // Delete profile image if exists
             if ($this->user->image) {

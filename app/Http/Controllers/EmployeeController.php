@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Abecert\SaveImageAction;
 use App\Models\Employee;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
@@ -47,7 +45,7 @@ class EmployeeController extends Controller
         $user = Auth::user();
         // Check if the user already has 5 or more employees
         if ($user->employees()->count() >= 5) {
-            return redirect()->route('jobs')
+            return redirect()->route('jobs', ['tab' => 'seeking'])
                 ->with('error', 'თქვენ უკვე გაქვთ 5 ან მეტი რეზიუმე. გთხოვთ წაშალოთ ძველი რეზიუმე ახლის დამატებამდე.');
         }
         $employee = $user->employees()->create($validated);
@@ -58,8 +56,8 @@ class EmployeeController extends Controller
             $employee->image()->save($image);
         }
         
-        return redirect()->route('jobs')
-            ->with('success', 'თანამშრომელი წარმატებით დაემატა');
+        return redirect()->route('jobs', ['tab' => 'seeking'])
+            ->with('success', 'რეზიუმე წარმატებით დაემატა');
     }
 
     /**
@@ -81,8 +79,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        // Check if the current user is the owner of this job listing
-        if (Auth::user()->id !== $employee->user_id) {
+        if (!$this->canManageListing($employee->user_id)) {
             return redirect()->route('jobs')->with('error', 'Unauthorized action.');
         }
 
@@ -98,6 +95,10 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeRequest $request, Employee $employee)
     {
+        if (!$this->canManageListing($employee->user_id)) {
+            return redirect()->route('jobs')->with('error', 'Unauthorized action.');
+        }
+
         // The request is already validated
         $validated = $request->validated();
         
@@ -106,13 +107,14 @@ class EmployeeController extends Controller
         
         // Handle image upload if present
         if ($request->hasFile('image')) {
+            $employee->deleteImages();
             $image = SaveImageAction::execute($request->file('image'));
             
             $employee->image()->save($image);
         }
         
-        return redirect()->route('jobs')
-            ->with('success', 'თანამშრომელი წარმატებით განახლდა');
+        return redirect()->route('jobs', ['tab' => 'seeking'])
+            ->with('success', 'რეზიუმე წარმატებით განახლდა');
     }
 
     /**
@@ -123,17 +125,18 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        // Check if the current user is the owner of this job listing
-        if (Auth::user()->id !== $employee->user_id) {
+        if (!$this->canManageListing($employee->user_id)) {
             return redirect()->route('jobs')->with('error', 'Unauthorized action.');
         }
 
-        // Delete image if exists
-        if ($employee->image) {
-            Storage::delete('public/' . $employee->image);
-        }
-
         $employee->delete();
-        return redirect()->route('jobs')->with('success', 'Job listing deleted successfully!');
+        return redirect()->route('jobs', ['tab' => 'seeking'])->with('success', 'რეზიუმე წარმატებით წაიშალა');
+    }
+
+    private function canManageListing(int $ownerId): bool
+    {
+        $user = Auth::user();
+
+        return $user && ($user->id === $ownerId || (bool) $user->is_admin);
     }
 }

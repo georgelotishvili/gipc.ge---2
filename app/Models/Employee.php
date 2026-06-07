@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Actions\Abecert\DeleteImageAction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use App\Enums\WorkTimeType;
 
@@ -29,6 +31,13 @@ class Employee extends Model
         'salary' => 'decimal:2',
     ];
 
+    protected static function booted(): void
+    {
+        static::deleting(function (Employee $employee) {
+            $employee->deleteImages();
+        });
+    }
+
     /**
      * Get the user that owns the employee.
      *
@@ -41,6 +50,18 @@ class Employee extends Model
 
     public function image(): MorphOne
     {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable')->latestOfMany();
+    }
+
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function deleteImages(): void
+    {
+        $this->images()->get()->each(function (Image $image) {
+            DeleteImageAction::execute($image);
+        });
     }
 }

@@ -14,6 +14,8 @@ class DeleteUser implements DeletesUsers
     {
         $user->deleteProfilePhoto();
         $user->tokens->each->delete();
+        $user->employers()->get()->each->delete();
+        $user->employees()->get()->each->delete();
         $user->forceDelete();
     }
 }

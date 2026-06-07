@@ -179,7 +179,7 @@
         <div class="w-full px-3 sm:px-4 lg:px-6 xl:px-8 py-6 sm:py-8 lg:py-12"
              x-data="{ 
                 searchQuery: '',
-                activeFilter: 'hiring'
+                activeFilter: '{{ request('tab') === 'seeking' ? 'seeking' : 'hiring' }}'
              }">
              
              <!-- Header -->
@@ -200,13 +200,13 @@
                              <a href="{{ route('employees.create') }}" class="group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-md sm:rounded-md font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
                                  <span class="relative z-10 flex items-center gap-1.5 sm:gap-2 lg:gap-3">
                                      <i class="fas fa-user-plus text-sm sm:text-lg lg:text-xl"></i>
-                                     <span>შემოუერთდი</span>
+                                     <span>რეზიუმეს დამატება</span>
                                  </span>
                                  <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                              </a>
                              <a href="{{ route('employers.create') }}" class="group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-md sm:rounded-md font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-400 transform hover:scale-105 transition-all duration-300">
                                  <i class="fas fa-building text-sm sm:text-lg lg:text-xl"></i>
-                                 <span>იპოვე თანამშრომელი</span>
+                                 <span>ვაკანსიის დამატება</span>
                              </a>
                          </div>
                      </div>
